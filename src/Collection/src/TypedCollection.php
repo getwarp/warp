@@ -53,7 +53,7 @@ class TypedCollection extends BaseCollection
         foreach ($result as $item) {
             $type = gettype($item);
 
-            if (($type === 'object') && !class_exists($this->type)) {
+            if ($type === 'object' && !class_exists($this->type) && !interface_exists($this->type)) {
                 throw new RuntimeException('Class ' . $this->type . ' does not exist');
             }
 
