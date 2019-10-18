@@ -7,6 +7,27 @@ namespace spaceonfire\Collection;
 use RuntimeException;
 use stdClass;
 
+/**
+ * Class `TypedCollection` allows you to create collection witch items are the same type.
+ *
+ * For testing scalar types provide type name from
+ * [return values of `gettype` function](https://www.php.net/manual/en/function.gettype.php):
+ *
+ * ```php
+ * $integers = new TypedCollection($items, 'integer');
+ * $strings = new TypedCollection($items, 'string');
+ * $floats = new TypedCollection($items, 'double');
+ * ```
+ *
+ * If you want to test values are objects than provide class or interface name:
+ *
+ * ```php
+ * $dateTime = new TypedCollection($items, \DateTime::class);
+ * $jsonSerializable = new TypedCollection($items, \JsonSerializable::class);
+ * ```
+ *
+ * @package spaceonfire\Collection
+ */
 class TypedCollection extends BaseCollection
 {
     /**
@@ -17,7 +38,7 @@ class TypedCollection extends BaseCollection
     /**
      * TypedCollection constructor.
      * @param array $items
-     * @param string $type Full qualified name of type
+     * @param string $type Scalar type name or Full qualified name of object class
      */
     public function __construct($items = [], string $type = stdClass::class)
     {

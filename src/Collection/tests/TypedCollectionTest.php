@@ -11,6 +11,7 @@ class TypedCollectionTest extends TestCase
     public function testScalar()
     {
         new TypedCollection([0, 1, 2], 'integer');
+        $this->addToAssertionCount(1);
     }
 
     public function testScalarException()
@@ -22,6 +23,7 @@ class TypedCollectionTest extends TestCase
     public function testObject()
     {
         new TypedCollection($this->getObjectsArray(), \stdClass::class);
+        $this->addToAssertionCount(1);
     }
 
     public function testObjectException()

@@ -22,9 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
-## [Unreleased]
+## [1.1.0] - 2019-10-18
 ### Added
 - Add TypedCollection
+- Documentation generated
 
 ## [1.0.0] - 2019-10-03
 ### Added
