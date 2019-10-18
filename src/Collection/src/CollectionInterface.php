@@ -26,10 +26,17 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Filter items from the collection.
-     * @param callable|null $callable the callback function to decide which items to remove.
+     * @param callable|null $callback the callback function to decide which items to remove.
      * @return CollectionInterface
      */
-    public function filter(callable $callable = null);
+    public function filter(callable $callback = null);
+
+    /**
+     * Find item in the collection
+     * @param callable $callback Testing function
+     * @return mixed|null First element that satisfies provided `$callback` or `null`
+     */
+    public function find(callable $callback);
 
     /**
      * Reduce the collection to a single value.

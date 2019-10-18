@@ -384,16 +384,27 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     }
 
     /**
-     * Filter items from the collection.
+     * {@inheritDoc}
      *
      * The original collection will not be changed, a new collection with modified data is returned.
      *
-     * @param callable|null $callable the callback function to decide which items to remove.
      * @return static a new collection containing the filtered items.
      */
-    public function filter(callable $callable = null)
+    public function filter(callable $callback = null)
     {
-        return new static(array_filter($this->all(), $callable, ARRAY_FILTER_USE_BOTH));
+        return new static(array_filter($this->all(), $callback, ARRAY_FILTER_USE_BOTH));
+    }
+
+    /** {@inheritDoc} */
+    public function find(callable $callback)
+    {
+        foreach ($this->all() as $key => $item) {
+            if ($callback($item, $key) === true) {
+                return $item;
+            }
+        }
+
+        return null;
     }
 
     /**
