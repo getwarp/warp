@@ -12,7 +12,9 @@ use JsonSerializable;
 use Traversable;
 
 /**
- * Class BaseCollection
+ * Abstract class `BaseCollection` contains base implementation of `CollectionInterface`.
+ * Use it for building your custom collection classes.
+ *
  * @package spaceonfire\Collection
  */
 abstract class BaseCollection implements CollectionInterface, JsonSerializable
