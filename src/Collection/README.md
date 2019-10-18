@@ -4,23 +4,15 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Framework agnostic PHP collections
 
 ## Structure
 
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
 ```
-bin/
-build/
-docs/
-config/
-src/
-tests/
-vendor/
+docs/         API documentation
+src/          Source code
+tests/        Unit tests
 ```
-
 
 ## Install
 
@@ -33,9 +25,11 @@ $ composer require spaceonfire/collection
 ## Usage
 
 ``` php
-$skeleton = new spaceonfire\Collection();
-echo $skeleton->echoPhrase('Hello, League!');
+$collection = new spaceonfire\Collection([0, 1, 2, 3]);
+//$collection->sum() === 6
 ```
+
+Read [documentation](./docs/README.md) for more.
 
 ## Change log
 
