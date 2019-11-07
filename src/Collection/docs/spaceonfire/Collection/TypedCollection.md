@@ -53,7 +53,7 @@ Convert the collection to its string representation.
 public function BaseCollection::__toString(): mixed
 ```
 
-File location: `src/BaseCollection.php:484`
+File location: `src/BaseCollection.php:494`
 
 ### all()
 
@@ -67,7 +67,7 @@ Get all of the items in the collection.
 public function BaseCollection::all(): array
 ```
 
-File location: `src/BaseCollection.php:63`
+File location: `src/BaseCollection.php:73`
 
 ### contains()
 
@@ -86,7 +86,7 @@ Defaults to `false`.|
 public function BaseCollection::contains(mixed $item, mixed $strict = false): bool
 ```
 
-File location: `src/BaseCollection.php:337`
+File location: `src/BaseCollection.php:347`
 
 ### count()
 
@@ -95,7 +95,21 @@ File location: `src/BaseCollection.php:337`
 public function BaseCollection::count(): mixed
 ```
 
-File location: `src/BaseCollection.php:158`
+File location: `src/BaseCollection.php:168`
+
+### downgrade()
+
+Converts current collection to lower level collection without type check
+
+|Param|Type|Description|
+|---|---|---|
+|**Return**|*\spaceonfire\Collection\CollectionInterface*||
+
+```php
+public function TypedCollection::downgrade(): \spaceonfire\Collection\spaceonfire\Collection\CollectionInterface
+```
+
+File location: `src/TypedCollection.php:101`
 
 ### each()
 
@@ -110,7 +124,7 @@ Execute a callback over each item.
 public function BaseCollection::each(callable $callback): mixed
 ```
 
-File location: `src/BaseCollection.php:69`
+File location: `src/BaseCollection.php:79`
 
 ### filter()
 
@@ -121,13 +135,13 @@ The original collection will not be changed, a new collection with modified data
 |Param|Type|Description|
 |---|---|---|
 |`$callback`|*callable&#124;null*|the callback function to decide which items to remove.|
-|**Return**|*static*|a new collection containing the filtered items.|
+|**Return**|*\spaceonfire\Collection\CollectionInterface*|a new collection containing the filtered items.|
 
 ```php
 public function BaseCollection::filter(callable $callback = null): mixed
 ```
 
-File location: `src/BaseCollection.php:395`
+File location: `src/BaseCollection.php:405`
 
 ### find()
 
@@ -142,7 +156,7 @@ Find item in the collection
 public function BaseCollection::find(callable $callback): mixed
 ```
 
-File location: `src/BaseCollection.php:401`
+File location: `src/BaseCollection.php:411`
 
 ### flip()
 
@@ -155,10 +169,10 @@ The original collection will not be changed, a new collection will be returned i
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::flip(): mixed
+public function TypedCollection::flip(): mixed
 ```
 
-File location: `src/BaseCollection.php:265`
+File location: `src/TypedCollection.php:113`
 
 ### getIterator()
 
@@ -167,7 +181,7 @@ File location: `src/BaseCollection.php:265`
 public function BaseCollection::getIterator(): mixed
 ```
 
-File location: `src/BaseCollection.php:447`
+File location: `src/BaseCollection.php:457`
 
 ### groupBy()
 
@@ -183,10 +197,10 @@ This can be a closure that returns such a value.|
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::groupBy(mixed $groupField, mixed $preserveKeys = true): mixed
+public function TypedCollection::groupBy(mixed $groupField, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/BaseCollection.php:311`
+File location: `src/TypedCollection.php:134`
 
 ### indexBy()
 
@@ -201,10 +215,10 @@ This can be a closure that returns such a value.|
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::indexBy(mixed $key): mixed
+public function TypedCollection::indexBy(mixed $key): mixed
 ```
 
-File location: `src/BaseCollection.php:291`
+File location: `src/TypedCollection.php:128`
 
 ### isEmpty()
 
@@ -218,7 +232,7 @@ Determine if the collection is empty or not.
 public function BaseCollection::isEmpty(): bool
 ```
 
-File location: `src/BaseCollection.php:152`
+File location: `src/BaseCollection.php:162`
 
 ### jsonSerialize()
 
@@ -227,7 +241,7 @@ File location: `src/BaseCollection.php:152`
 public function BaseCollection::jsonSerialize(): mixed
 ```
 
-File location: `src/BaseCollection.php:500`
+File location: `src/BaseCollection.php:510`
 
 ### keys()
 
@@ -240,14 +254,15 @@ The original collection will not be changed, a new collection will be returned i
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::keys(): mixed
+public function TypedCollection::keys(): mixed
 ```
 
-File location: `src/BaseCollection.php:256`
+File location: `src/TypedCollection.php:107`
 
 ### map()
 
 Run a map over each of the items
+Also collection will be downgraded
 
 |Param|Type|Description|
 |---|---|---|
@@ -255,10 +270,10 @@ Run a map over each of the items
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::map(callable $callback): mixed
+public function TypedCollection::map(callable $callback): mixed
 ```
 
-File location: `src/BaseCollection.php:430`
+File location: `src/TypedCollection.php:147`
 
 ### max()
 
@@ -274,7 +289,7 @@ This will be passed to [[ArrayHelper::getValue()]].|
 public function BaseCollection::max(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:111`
+File location: `src/BaseCollection.php:121`
 
 ### merge()
 
@@ -292,7 +307,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::merge(mixed ...$collections): mixed
 ```
 
-File location: `src/BaseCollection.php:277`
+File location: `src/BaseCollection.php:287`
 
 ### min()
 
@@ -308,7 +323,7 @@ This will be passed to [[ArrayHelper::getValue()]].|
 public function BaseCollection::min(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:134`
+File location: `src/BaseCollection.php:144`
 
 ### offsetExists()
 
@@ -317,7 +332,7 @@ File location: `src/BaseCollection.php:134`
 public function BaseCollection::offsetExists(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:453`
+File location: `src/BaseCollection.php:463`
 
 ### offsetGet()
 
@@ -326,16 +341,16 @@ File location: `src/BaseCollection.php:453`
 public function BaseCollection::offsetGet(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:459`
+File location: `src/BaseCollection.php:469`
 
 ### offsetSet()
 
 
 ```php
-public function BaseCollection::offsetSet(mixed $offset, mixed $value): mixed
+public function TypedCollection::offsetSet(mixed $offset, mixed $value): mixed
 ```
 
-File location: `src/BaseCollection.php:465`
+File location: `src/TypedCollection.php:91`
 
 ### offsetUnset()
 
@@ -344,7 +359,7 @@ File location: `src/BaseCollection.php:465`
 public function BaseCollection::offsetUnset(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:475`
+File location: `src/BaseCollection.php:485`
 
 ### reduce()
 
@@ -360,7 +375,7 @@ Reduce the collection to a single value.
 public function BaseCollection::reduce(callable $callback, mixed $initialValue = null): mixed
 ```
 
-File location: `src/BaseCollection.php:100`
+File location: `src/BaseCollection.php:110`
 
 ### remap()
 
@@ -369,6 +384,7 @@ Convert collection data by selecting a new key and a new value for each item.
 Builds a map (key-value pairs) from a multidimensional array or an array of objects.
 The `$from` and `$to` parameters specify the key names or property names to set up the map.
 The original collection will not be changed, a new collection will be returned instead.
+Also collection will be downgraded
 
 |Param|Type|Description|
 |---|---|---|
@@ -379,10 +395,10 @@ This can be a closure that returns such a value.|
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::remap(mixed $from, mixed $to): mixed
+public function TypedCollection::remap(mixed $from, mixed $to): mixed
 ```
 
-File location: `src/BaseCollection.php:302`
+File location: `src/TypedCollection.php:122`
 
 ### remove()
 
@@ -397,13 +413,13 @@ The closure will be called on each item and in case it returns `true`, the item 
 In case a closure is passed, `$strict` parameter has no effect.|
 |`$strict`|*bool*|whether comparison should be compared strict (`===`) or not (`==`).
 Defaults to `false`.|
-|**Return**|*static*|a new collection containing the filtered items.|
+|**Return**|*\spaceonfire\Collection\CollectionInterface*|a new collection containing the filtered items.|
 
 ```php
 public function BaseCollection::remove(mixed $item, mixed $strict = false): mixed
 ```
 
-File location: `src/BaseCollection.php:369`
+File location: `src/BaseCollection.php:379`
 
 ### replace()
 
@@ -419,10 +435,10 @@ The original collection will not be changed, a new collection will be returned i
 |**Return**|*\spaceonfire\Collection\CollectionInterface*||
 
 ```php
-public function BaseCollection::replace(mixed $item, mixed $replacement, mixed $strict = false): mixed
+public function TypedCollection::replace(mixed $item, mixed $replacement, mixed $strict = true): mixed
 ```
 
-File location: `src/BaseCollection.php:418`
+File location: `src/TypedCollection.php:153`
 
 ### reverse()
 
@@ -438,7 +454,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::reverse(): mixed
 ```
 
-File location: `src/BaseCollection.php:238`
+File location: `src/BaseCollection.php:248`
 
 ### slice()
 
@@ -457,7 +473,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::slice(mixed $offset, mixed $limit = null, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/BaseCollection.php:441`
+File location: `src/BaseCollection.php:451`
 
 ### sort()
 
@@ -479,7 +495,7 @@ for details.|
 public function BaseCollection::sort(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:169`
+File location: `src/BaseCollection.php:179`
 
 ### sortBy()
 
@@ -509,7 +525,7 @@ for more details. When sorting by multiple keys with different sort flags, use a
 public function BaseCollection::sortBy(mixed $key, mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:227`
+File location: `src/BaseCollection.php:237`
 
 ### sortByKey()
 
@@ -530,7 +546,7 @@ for details.|
 public function BaseCollection::sortByKey(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:186`
+File location: `src/BaseCollection.php:196`
 
 ### sortNatural()
 
@@ -548,7 +564,7 @@ The original collection will not be changed, a new collection with sorted data i
 public function BaseCollection::sortNatural(mixed $caseSensitive = false): mixed
 ```
 
-File location: `src/BaseCollection.php:203`
+File location: `src/BaseCollection.php:213`
 
 ### sum()
 
@@ -564,7 +580,7 @@ This will be passed to [[ArrayHelper::getValue()]].|
 public function BaseCollection::sum(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:86`
+File location: `src/BaseCollection.php:96`
 
 ### toJson()
 
@@ -579,7 +595,7 @@ Get the collection of items as JSON.
 public function BaseCollection::toJson(mixed $options): string
 ```
 
-File location: `src/BaseCollection.php:494`
+File location: `src/BaseCollection.php:504`
 
 ### values()
 
@@ -595,7 +611,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::values(): mixed
 ```
 
-File location: `src/BaseCollection.php:247`
+File location: `src/BaseCollection.php:257`
 
 ---
 
