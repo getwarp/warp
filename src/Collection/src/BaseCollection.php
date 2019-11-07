@@ -59,6 +59,16 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         return (array)$items;
     }
 
+    /**
+     * Creates new instance of collection
+     * @param array $items
+     * @return CollectionInterface
+     */
+    protected function newStatic(array $items = []): CollectionInterface
+    {
+        return new static($items);
+    }
+
     /** {@inheritDoc} */
     public function all(): array
     {
@@ -174,7 +184,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         } else {
             arsort($items, $sortFlag);
         }
-        return new static($items);
+        return $this->newStatic($items);
     }
 
     /**
@@ -191,7 +201,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         } else {
             krsort($items, $sortFlag);
         }
-        return new static($items);
+        return $this->newStatic($items);
     }
 
     /**
@@ -208,7 +218,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         } else {
             natcasesort($items);
         }
-        return new static($items);
+        return $this->newStatic($items);
     }
 
     /**
@@ -228,7 +238,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     {
         $items = $this->all();
         ArrayHelper::multisort($items, $key, $direction, $sortFlag);
-        return new static($items);
+        return $this->newStatic($items);
     }
 
     /**
@@ -237,7 +247,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function reverse()
     {
-        return new static(array_reverse($this->all(), true));
+        return $this->newStatic(array_reverse($this->all(), true));
     }
 
     /**
@@ -246,7 +256,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function values()
     {
-        return new static(array_values($this->all()));
+        return $this->newStatic(array_values($this->all()));
     }
 
     /**
@@ -255,7 +265,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function keys()
     {
-        return new static(array_keys($this->all()));
+        return $this->newStatic(array_keys($this->all()));
     }
 
     /**
@@ -264,7 +274,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function flip()
     {
-        return new static(array_flip($this->all()));
+        return $this->newStatic(array_flip($this->all()));
     }
 
     /**
@@ -276,7 +286,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function merge(...$collections)
     {
-        return new static(array_merge(
+        return $this->newStatic(array_merge(
             $this->all(),
             ...array_map(function ($collection) {
                 return $this->getItems($collection);
@@ -301,7 +311,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function remap($from, $to)
     {
-        return new static(ArrayHelper::map($this->all(), $from, $to));
+        return $this->newStatic(ArrayHelper::map($this->all(), $from, $to));
     }
 
     /**
@@ -320,8 +330,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
             }
         }
 
-        return new static(array_map(static function ($groupItems) {
-            return new static($groupItems);
+        return $this->newStatic(array_map(function ($groupItems) {
+            return $this->newStatic($groupItems);
         }, $result));
     }
 
@@ -363,7 +373,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      * In case a closure is passed, `$strict` parameter has no effect.
      * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
      * Defaults to `false`.
-     * @return static a new collection containing the filtered items.
+     * @return CollectionInterface a new collection containing the filtered items.
      * @see filter()
      */
     public function remove($item, $strict = false)
@@ -390,11 +400,11 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      *
      * The original collection will not be changed, a new collection with modified data is returned.
      *
-     * @return static a new collection containing the filtered items.
+     * @return CollectionInterface a new collection containing the filtered items.
      */
     public function filter(callable $callback = null)
     {
-        return new static(array_filter($this->all(), $callback, ARRAY_FILTER_USE_BOTH));
+        return $this->newStatic(array_filter($this->all(), $callback, ARRAY_FILTER_USE_BOTH));
     }
 
     /** {@inheritDoc} */
@@ -431,7 +441,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     {
         $keys = array_keys($this->items);
         $items = array_map($callback, $this->items, $keys);
-        return new static(array_combine($keys, $items));
+        return $this->newStatic(array_combine($keys, $items));
     }
 
     /**
@@ -440,7 +450,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function slice($offset, $limit = null, $preserveKeys = true)
     {
-        return new static(array_slice($this->all(), $offset, $limit, $preserveKeys));
+        return $this->newStatic(array_slice($this->all(), $offset, $limit, $preserveKeys));
     }
 
     /** {@inheritDoc} */

@@ -46,22 +46,114 @@ class TypedCollection extends BaseCollection
         parent::__construct($items);
     }
 
+    /**
+     * Check that item are the same type as collection requires
+     * @param $item
+     * @return bool
+     */
+    protected function checkType($item): bool
+    {
+        $type = gettype($item);
+
+        if ($type === 'object' && !class_exists($this->type) && !interface_exists($this->type)) {
+            throw new RuntimeException('Class ' . $this->type . ' does not exist');
+        }
+
+        if (($type === 'object' && !($item instanceof $this->type)) ||
+            ($type !== 'object' && $type !== $this->type)) {
+            throw new RuntimeException(static::class . ' accept only instances of ' . $this->type);
+        }
+
+        return true;
+    }
+
     /** {@inheritDoc} */
     protected function getItems($items): array
     {
         $result = parent::getItems($items);
         foreach ($result as $item) {
-            $type = gettype($item);
-
-            if ($type === 'object' && !class_exists($this->type) && !interface_exists($this->type)) {
-                throw new RuntimeException('Class ' . $this->type . ' does not exist');
-            }
-
-            if (($type === 'object' && !($item instanceof $this->type)) ||
-                ($type !== 'object' && $type !== $this->type)) {
-                throw new RuntimeException(static::class . ' accept only instances of ' . $this->type);
-            }
+            $this->checkType($item);
         }
         return $result;
+    }
+
+    /** {@inheritDoc} */
+    protected function newStatic(array $items = []): CollectionInterface
+    {
+        if (static::class === __CLASS__) {
+            return new static($items, $this->type);
+        }
+
+        return parent::newStatic($items);
+    }
+
+    /** {@inheritDoc} */
+    public function offsetSet($offset, $value)
+    {
+        $this->checkType($value);
+        parent::offsetSet($offset, $value);
+    }
+
+    /**
+     * Converts current collection to lower level collection without type check
+     * @return CollectionInterface
+     */
+    public function downgrade(): CollectionInterface
+    {
+        return new Collection($this->all());
+    }
+
+    /** {@inheritDoc} */
+    public function keys()
+    {
+        return $this->downgrade()->keys();
+    }
+
+    /** {@inheritDoc} */
+    public function flip()
+    {
+        return $this->downgrade()->flip();
+    }
+
+    /**
+     * {@inheritDoc}
+     * Also collection will be downgraded
+     */
+    public function remap($from, $to)
+    {
+        return $this->downgrade()->remap($from, $to);
+    }
+
+    /** {@inheritDoc} */
+    public function indexBy($key)
+    {
+        return $this->newStatic(parent::indexBy($key)->all());
+    }
+
+    /** {@inheritDoc} */
+    public function groupBy($groupField, $preserveKeys = true)
+    {
+        return $this->downgrade()
+            ->groupBy($groupField, $preserveKeys)
+            ->map(function (CollectionInterface $group) {
+                return $this->newStatic($group->all());
+            });
+    }
+
+    /**
+     * {@inheritDoc}
+     * Also collection will be downgraded
+     */
+    public function map(callable $callback)
+    {
+        return $this->downgrade()->map($callback);
+    }
+
+    /** {@inheritDoc} */
+    public function replace($item, $replacement, $strict = true)
+    {
+        $this->checkType($item);
+        $this->checkType($replacement);
+        return $this->newStatic(parent::replace($item, $replacement, $strict)->all());
     }
 }
