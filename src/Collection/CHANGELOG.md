@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.1] - 2019-11-09
+### Fixed
+- Fix `BaseCollection::filter` call with empty callback
+
 ## [1.2.0] - 2019-11-08
 ### Added
 - Huge update for `TypedCollection`:
