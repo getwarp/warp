@@ -192,6 +192,12 @@ class CollectionTest extends TestCase
 
     public function testFilter()
     {
+        $collection = new Collection([1, 2, 3, 4, 5, 6, 0]);
+        $this->assertEquals([1, 2, 3, 4, 5, 6], $collection->filter()->all());
+    }
+
+    public function testFilterWithCallback()
+    {
         $collection = new Collection([1, 2, 3, 4, 5, 6]);
         $this->assertEquals([1 => 2, 3 => 4, 5 => 6], $collection->filter(static function ($item) {
             return $item % 2 === 0;

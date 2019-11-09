@@ -404,6 +404,10 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      */
     public function filter(callable $callback = null)
     {
+        if ($callback === null) {
+            return new static(array_filter($this->all()));
+        }
+
         return $this->newStatic(array_filter($this->all(), $callback, ARRAY_FILTER_USE_BOTH));
     }
 
