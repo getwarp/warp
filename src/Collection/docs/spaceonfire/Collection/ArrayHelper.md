@@ -16,7 +16,7 @@ Convert a multi-dimensional array into a single-dimensional array
 | **Return**   | _array_  | single-dimensional array                     |
 
 ```php
-public static function ArrayHelper::flatten(array $array, mixed $separator = ., mixed $prefix): array
+public static function ArrayHelper::flatten(array $array, mixed $separator = '.', mixed $prefix = ''): array
 ```
 
 File location: `src/ArrayHelper.php:17`
@@ -280,7 +280,7 @@ Convert single-dimensional associative array to multi-dimensional by splitting k
 | **Return**   | _array_  | multi-dimensional array         |
 
 ```php
-public static function ArrayHelper::unflatten(array $array, mixed $separator = .): array
+public static function ArrayHelper::unflatten(array $array, mixed $separator = '.'): array
 ```
 
 File location: `src/ArrayHelper.php:63`

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ReturnTypeCanBeDeclaredInspection */
 
 declare(strict_types=1);
 
@@ -228,9 +228,191 @@ class CollectionTest extends TestCase
         $this->assertEquals([1 => '2', 2 => 3], $collection->slice(1)->all());
     }
 
+    public function testUnique()
+    {
+        $collection = new Collection([1, 2, 2, 3, 3, 3]);
+        $this->assertEquals([0 => 1, 1 => 2, 3 => 3], $collection->unique()->all());
+    }
+
+    public function testImplodeStrings()
+    {
+        $collection = new Collection(['hello', 'world']);
+        $this->assertEquals('hello world', $collection->implode(' '));
+    }
+
+    public function testImplodeObjects()
+    {
+        $stringableFactory = function (string $value) {
+            return new class($value) {
+                private $value;
+
+                public function __construct($value)
+                {
+                    $this->value = $value;
+                }
+
+                public function __toString(): string
+                {
+                    return $this->value;
+                }
+            };
+        };
+        $collection = new Collection([
+            $stringableFactory('hello'),
+            $stringableFactory('world'),
+        ]);
+        $this->assertEquals('hello world', $collection->implode(' '));
+    }
+
+    public function testImplodeWihField()
+    {
+        $objectFactory = function (string $value) {
+            return new class($value) {
+                public $value;
+
+                public function __construct($value)
+                {
+                    $this->value = $value;
+                }
+            };
+        };
+
+        $collection = new Collection([
+            $objectFactory('hello'),
+            $objectFactory('world'),
+        ]);
+
+        $this->assertEquals('hello world', $collection->implode(' ', 'value'));
+    }
+
+    public function testImplodeFail()
+    {
+        $objectFactory = function (string $value) {
+            return new class($value) {
+                public $value;
+
+                public function __construct($value)
+                {
+                    $this->value = $value;
+                }
+            };
+        };
+        $this->expectException(BadMethodCallException::class);
+        $collection = new Collection([
+            $objectFactory('hello'),
+            $objectFactory('world'),
+        ]);
+        $collection->implode(' ');
+    }
+
+    public function testJoinAlias()
+    {
+        $collection = new Collection(['hello', 'world']);
+        $this->assertEquals('hello world', $collection->join(' '));
+    }
+
+    public function testFirst()
+    {
+        $collection = new Collection([1, '2', 3]);
+        $this->assertEquals(1, $collection->first());
+    }
+
+    public function testFirstEmpty()
+    {
+        $collection = new Collection();
+        $this->assertEquals(null, $collection->first());
+    }
+
+    public function testFirstKey()
+    {
+        $collection = new Collection(['one' => 1, 'two' => '2', 'three' => 3]);
+        $this->assertEquals('one', $collection->firstKey());
+    }
+
+    public function testFirstKeyEmpty()
+    {
+        $collection = new Collection();
+        $this->assertEquals(null, $collection->firstKey());
+    }
+
+    public function testLast()
+    {
+        $collection = new Collection([1, '2', 3]);
+        $this->assertEquals(3, $collection->last());
+    }
+
+    public function testLastEmpty()
+    {
+        $collection = new Collection();
+        $this->assertEquals(null, $collection->last());
+    }
+
+    public function testLastKey()
+    {
+        $collection = new Collection(['one' => 1, 'two' => '2', 'three' => 3]);
+        $this->assertEquals('three', $collection->lastKey());
+    }
+
+    public function testLastKeyEmpty()
+    {
+        $collection = new Collection();
+        $this->assertEquals(null, $collection->lastKey());
+    }
+
+    public function testAverage()
+    {
+        $collection = new Collection([1, '2', 3]);
+        $this->assertEqualsWithDelta(2, $collection->average(), 0.01);
+    }
+
+    public function testAverageWithField()
+    {
+        $collection = new Collection([
+            ['field' => 1],
+            ['field' => 2],
+            ['field' => 3],
+        ]);
+        $this->assertEqualsWithDelta(2, $collection->average('field'), 0.01);
+    }
+
+    public function testAvgAlias()
+    {
+        $collection = new Collection([1, '2', 3]);
+        $this->assertEqualsWithDelta(2, $collection->avg(), 0.01);
+    }
+
+    public function testMedian()
+    {
+        $dataSet = [12, 21, 34, 34, 44, 54, 55, 77];
+        shuffle($dataSet);
+        $collection = new Collection($dataSet);
+        $this->assertEqualsWithDelta(39, $collection->median(), 0.01);
+    }
+
+    public function testMedianEmpty()
+    {
+        $collection = new Collection();
+        $this->assertEquals(null, $collection->median());
+    }
+
     public function testToJson()
     {
         $collection = new Collection([1, '2', 3]);
         $this->assertJson($collection->toJson());
+    }
+
+    public function testStringify()
+    {
+        $collection = new Collection([1, '2', 3]);
+        $this->assertJson((string)$collection);
+    }
+
+    public function testCallUndefinedMethod()
+    {
+        $this->expectException(BadMethodCallException::class);
+        $collection = new Collection([1, '2', 3]);
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $collection->undefindeMethod();
     }
 }

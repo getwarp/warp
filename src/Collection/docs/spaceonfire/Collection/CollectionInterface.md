@@ -22,23 +22,39 @@ public function CollectionInterface::all(): array
 
 File location: `src/CollectionInterface.php:18`
 
+### average()
+
+Calculate the average value of items in the collection
+
+| Param      | Type             | Description                                                      |
+| ---------- | ---------------- | ---------------------------------------------------------------- |
+| `$field`   | _mixed_          | the name of the field to calculate.                              |
+| **Return** | _int&#124;float_ | the calculated average value. `null` if the collection is empty. |
+
+```php
+public function CollectionInterface::average(mixed $field = null): mixed
+```
+
+File location: `src/CollectionInterface.php:61`
+
 ### contains()
 
 Check whether the collection contains a specific item.
 
-| Param   | Type                  | Description                                                                 |
-| ------- | --------------------- | --------------------------------------------------------------------------- |
-| `$item` | _mixed&#124;\Closure_ | the item to search for. You may also pass a closure that returns a boolean. |
+| Param   | Type                  | Description                                                      |
+| ------- | --------------------- | ---------------------------------------------------------------- |
+| `$item` | _mixed&#124;\Closure_ | the item to search for. You may also pass a closure that returns |
 
-The closure will be called on each item and in case it returns `true`, the item will be considered to
-be found.|
-|**Return**|_bool_|`true` if the collection contains at least one item that matches, `false` if not.|
+a boolean. The closure will be called on each item and in case it returns `true`, the
+item will be considered to be found.|
+|**Return**|_bool_|`true` if the collection contains at least one item that matches, `false` if
+not.|
 
 ```php
 public function CollectionInterface::contains(mixed $item): bool
 ```
 
-File location: `src/CollectionInterface.php:203`
+File location: `src/CollectionInterface.php:225`
 
 ### each()
 
@@ -85,6 +101,34 @@ public function CollectionInterface::find(callable $callback): mixed
 
 File location: `src/CollectionInterface.php:39`
 
+### first()
+
+Returns first item of the collection
+
+| Param      | Type    | Description |
+| ---------- | ------- | ----------- |
+| **Return** | _mixed_ |             |
+
+```php
+public function CollectionInterface::first(): mixed
+```
+
+File location: `src/CollectionInterface.php:274`
+
+### firstKey()
+
+Returns first key of the collection
+
+| Param      | Type    | Description |
+| ---------- | ------- | ----------- |
+| **Return** | _mixed_ |             |
+
+```php
+public function CollectionInterface::firstKey(): mixed
+```
+
+File location: `src/CollectionInterface.php:280`
+
 ### flip()
 
 Flip keys and values of all collection items.
@@ -97,7 +141,7 @@ Flip keys and values of all collection items.
 public function CollectionInterface::flip(): mixed
 ```
 
-File location: `src/CollectionInterface.php:156`
+File location: `src/CollectionInterface.php:177`
 
 ### groupBy()
 
@@ -114,7 +158,23 @@ Group items by a specified field.
 public function CollectionInterface::groupBy(mixed $groupField, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/CollectionInterface.php:194`
+File location: `src/CollectionInterface.php:215`
+
+### implode()
+
+Join collection elements with string
+
+| Param      | Type               | Description                    |
+| ---------- | ------------------ | ------------------------------ |
+| `$glue`    | _string&#124;null_ | glue string                    |
+| `$field`   | _mixed_            | the name of the field to join. |
+| **Return** | _string_           |                                |
+
+```php
+public function CollectionInterface::implode(?string $glue = null, mixed $field = null): string
+```
+
+File location: `src/CollectionInterface.php:268`
 
 ### indexBy()
 
@@ -130,7 +190,7 @@ Assign a new key to each item in the collection.
 public function CollectionInterface::indexBy(mixed $key): mixed
 ```
 
-File location: `src/CollectionInterface.php:185`
+File location: `src/CollectionInterface.php:206`
 
 ### isEmpty()
 
@@ -144,7 +204,7 @@ Determine if the collection is empty or not.
 public function CollectionInterface::isEmpty(): bool
 ```
 
-File location: `src/CollectionInterface.php:74`
+File location: `src/CollectionInterface.php:88`
 
 ### keys()
 
@@ -158,7 +218,35 @@ Return keys of all collection items.
 public function CollectionInterface::keys(): mixed
 ```
 
-File location: `src/CollectionInterface.php:150`
+File location: `src/CollectionInterface.php:171`
+
+### last()
+
+Returns last item of the collection
+
+| Param      | Type    | Description |
+| ---------- | ------- | ----------- |
+| **Return** | _mixed_ |             |
+
+```php
+public function CollectionInterface::last(): mixed
+```
+
+File location: `src/CollectionInterface.php:286`
+
+### lastKey()
+
+Returns last key of the collection
+
+| Param      | Type    | Description |
+| ---------- | ------- | ----------- |
+| **Return** | _mixed_ |             |
+
+```php
+public function CollectionInterface::lastKey(): mixed
+```
+
+File location: `src/CollectionInterface.php:292`
 
 ### map()
 
@@ -173,11 +261,11 @@ Run a map over each of the items
 public function CollectionInterface::map(callable $callback): mixed
 ```
 
-File location: `src/CollectionInterface.php:81`
+File location: `src/CollectionInterface.php:95`
 
 ### max()
 
-Calculate the maximum value of a field of the models in the collection.
+Calculate the maximum value of items in the collection.
 
 | Param      | Type                       | Description                                                      |
 | ---------- | -------------------------- | ---------------------------------------------------------------- |
@@ -188,7 +276,22 @@ Calculate the maximum value of a field of the models in the collection.
 public function CollectionInterface::max(mixed $field = null): mixed
 ```
 
-File location: `src/CollectionInterface.php:61`
+File location: `src/CollectionInterface.php:75`
+
+### median()
+
+Calculate the median value of items in the collection
+
+| Param      | Type             | Description                                                     |
+| ---------- | ---------------- | --------------------------------------------------------------- |
+| `$field`   | _mixed_          | the name of the field to calculate.                             |
+| **Return** | _int&#124;float_ | the calculated median value. `null` if the collection is empty. |
+
+```php
+public function CollectionInterface::median(mixed $field = null): mixed
+```
+
+File location: `src/CollectionInterface.php:68`
 
 ### merge()
 
@@ -203,11 +306,11 @@ Merge one or more arrays or collections with current collection.
 public function CollectionInterface::merge(mixed ...$collections): mixed
 ```
 
-File location: `src/CollectionInterface.php:163`
+File location: `src/CollectionInterface.php:184`
 
 ### min()
 
-Calculate the minimum value of a field of the models in the collection
+Calculate the minimum value of items in the collection
 
 | Param      | Type                       | Description                                                      |
 | ---------- | -------------------------- | ---------------------------------------------------------------- |
@@ -218,7 +321,7 @@ Calculate the minimum value of a field of the models in the collection
 public function CollectionInterface::min(mixed $field = null): mixed
 ```
 
-File location: `src/CollectionInterface.php:68`
+File location: `src/CollectionInterface.php:82`
 
 ### reduce()
 
@@ -255,23 +358,25 @@ The `$from` and `$to` parameters specify the key names or property names to set 
 public function CollectionInterface::remap(mixed $from, mixed $to): mixed
 ```
 
-File location: `src/CollectionInterface.php:177`
+File location: `src/CollectionInterface.php:198`
 
 ### remove()
 
 Remove a specific item from the collection.
 
-| Param                                                                                            | Type                                          | Description                                                                 |
-| ------------------------------------------------------------------------------------------------ | --------------------------------------------- | --------------------------------------------------------------------------- |
-| `$item`                                                                                          | _mixed&#124;\Closure_                         | the item to search for. You may also pass a closure that returns a boolean. |
-| The closure will be called on each item and in case it returns `true`, the item will be removed. |
-| **Return**                                                                                       | _\spaceonfire\Collection\CollectionInterface_ |                                                                             |
+| Param   | Type                  | Description                                                      |
+| ------- | --------------------- | ---------------------------------------------------------------- |
+| `$item` | _mixed&#124;\Closure_ | the item to search for. You may also pass a closure that returns |
+
+a boolean. The closure will be called on each item and in case it returns `true`, the
+item will be removed.|
+|**Return**|_\spaceonfire\Collection\CollectionInterface_||
 
 ```php
 public function CollectionInterface::remove(mixed $item): mixed
 ```
 
-File location: `src/CollectionInterface.php:212`
+File location: `src/CollectionInterface.php:235`
 
 ### replace()
 
@@ -287,7 +392,7 @@ Replace a specific item in the collection with another one.
 public function CollectionInterface::replace(mixed $item, mixed $replacement): mixed
 ```
 
-File location: `src/CollectionInterface.php:221`
+File location: `src/CollectionInterface.php:244`
 
 ### reverse()
 
@@ -301,7 +406,7 @@ Reverse the order of items.
 public function CollectionInterface::reverse(): mixed
 ```
 
-File location: `src/CollectionInterface.php:138`
+File location: `src/CollectionInterface.php:159`
 
 ### slice()
 
@@ -318,7 +423,7 @@ Slice the set of elements by an offset and number of items to return.
 public function CollectionInterface::slice(mixed $offset, mixed $limit = null, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/CollectionInterface.php:230`
+File location: `src/CollectionInterface.php:253`
 
 ### sort()
 
@@ -326,13 +431,16 @@ Sort collection data by value.
 
 If the collection values are not scalar types, use `sortBy()` instead.
 
-| Param        | Type  | Description                                                               |
-| ------------ | ----- | ------------------------------------------------------------------------- |
-| `$direction` | _int_ | sort direction, either `SORT_ASC` or `SORT_DESC`.                         |
-| `$sortFlag`  | _int_ | type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, |
+| Param        | Type  | Description                                                |
+| ------------ | ----- | ---------------------------------------------------------- |
+| `$direction` | _int_ | sort direction, either `SORT_ASC` or `SORT_DESC`.          |
+| `$sortFlag`  | _int_ | type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, |
+
+    `SORT_STRING`,
 
 `SORT_LOCALE_STRING`, `SORT_NATURAL` or `SORT_FLAG_CASE`.
-See [the PHP manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
+See [the PHP
+manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
 for details.|
 |**Return**|_\spaceonfire\Collection\CollectionInterface_||
 
@@ -340,44 +448,49 @@ for details.|
 public function CollectionInterface::sort(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/CollectionInterface.php:95`
+File location: `src/CollectionInterface.php:111`
 
 ### sortBy()
 
 Sort collection data by one or multiple values.
 
-| Param  | Type                              | Description                                                            |
-| ------ | --------------------------------- | ---------------------------------------------------------------------- |
-| `$key` | _string&#124;\Closure&#124;array_ | the key(s) to be sorted by. This refers to a key name of the sub-array |
+| Param  | Type                              | Description                                              |
+| ------ | --------------------------------- | -------------------------------------------------------- |
+| `$key` | _string&#124;\Closure&#124;array_ | the key(s) to be sorted by. This refers to a key name of |
 
-elements, a property name of the objects, or an anonymous function returning the values for comparison
-purpose. The anonymous function signature should be: `function($item)`.
-To sort by multiple keys, provide an array of keys here.|
-|`$direction`|_int&#124;array_|the sorting direction. It can be either `SORT_ASC` or `SORT_DESC`.
-When sorting by multiple keys with different sorting directions, use an array of sorting directions.|
+the sub-array elements, a property name of the objects, or an anonymous function
+returning the values for comparison purpose. The anonymous function signature should be:
+`function($item)`. To sort by multiple keys, provide an array of keys here.|
+|`$direction`|_int&#124;array_|the sorting direction. It can be either `SORT_ASC` or
+`SORT_DESC`. When sorting by multiple keys with different sorting directions, use an
+array of sorting directions.|
 |`$sortFlag`|_int&#124;array_|the PHP sort flag. Valid values include
-`SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and `SORT_FLAG_CASE`.
-Please refer to the [PHP manual](http://php.net/manual/en/function.sort.php)
-for more details. When sorting by multiple keys with different sort flags, use an array of sort flags.|
+`SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and
+`SORT_FLAG_CASE`. Please refer to the [PHP
+manual](http://php.net/manual/en/function.sort.php) for more details. When sorting by
+multiple keys with different sort flags, use an array of sort flags.|
 |**Return**|_static_|a new collection containing the sorted items.|
 
 ```php
 public function CollectionInterface::sortBy(mixed $key, mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/CollectionInterface.php:132`
+File location: `src/CollectionInterface.php:153`
 
 ### sortByKey()
 
 Sort collection data by key.
 
-| Param        | Type  | Description                                                               |
-| ------------ | ----- | ------------------------------------------------------------------------- |
-| `$direction` | _int_ | sort direction, either `SORT_ASC` or `SORT_DESC`.                         |
-| `$sortFlag`  | _int_ | type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, |
+| Param        | Type  | Description                                                |
+| ------------ | ----- | ---------------------------------------------------------- |
+| `$direction` | _int_ | sort direction, either `SORT_ASC` or `SORT_DESC`.          |
+| `$sortFlag`  | _int_ | type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, |
+
+    `SORT_STRING`,
 
 `SORT_LOCALE_STRING`, `SORT_NATURAL` or `SORT_FLAG_CASE`.
-See [the PHP manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
+See [the PHP
+manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
 for details.|
 |**Return**|_\spaceonfire\Collection\CollectionInterface_||
 
@@ -385,7 +498,7 @@ for details.|
 public function CollectionInterface::sortByKey(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/CollectionInterface.php:106`
+File location: `src/CollectionInterface.php:124`
 
 ### sortNatural()
 
@@ -393,20 +506,21 @@ Sort collection data by value using natural sort comparison.
 
 If the collection values are not scalar types, use `sortBy()` instead.
 
-| Param            | Type                                          | Description                                                                        |
-| ---------------- | --------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `$caseSensitive` | _bool_                                        | whether comparison should be done in a case-sensitive manner. Defaults to `false`. |
-| **Return**       | _\spaceonfire\Collection\CollectionInterface_ |                                                                                    |
+| Param                | Type                                          | Description                                                   |
+| -------------------- | --------------------------------------------- | ------------------------------------------------------------- |
+| `$caseSensitive`     | _bool_                                        | whether comparison should be done in a case-sensitive manner. |
+| Defaults to `false`. |
+| **Return**           | _\spaceonfire\Collection\CollectionInterface_ |                                                               |
 
 ```php
 public function CollectionInterface::sortNatural(mixed $caseSensitive = false): mixed
 ```
 
-File location: `src/CollectionInterface.php:116`
+File location: `src/CollectionInterface.php:135`
 
 ### sum()
 
-Calculate the sum of a field of the models in the collection.
+Calculate the sum of items in the collection.
 
 | Param      | Type             | Description                         |
 | ---------- | ---------------- | ----------------------------------- |
@@ -418,6 +532,21 @@ public function CollectionInterface::sum(mixed $field = null): mixed
 ```
 
 File location: `src/CollectionInterface.php:54`
+
+### unique()
+
+Removes duplicate values from the collection
+
+| Param        | Type                                          | Description                                                             |
+| ------------ | --------------------------------------------- | ----------------------------------------------------------------------- |
+| `$sortFlags` | _int_                                         | sort flags argument for array_unique. **SORT_REGULAR** used by default. |
+| **Return**   | _\spaceonfire\Collection\CollectionInterface_ |                                                                         |
+
+```php
+public function CollectionInterface::unique(int $sortFlags = SORT_REGULAR): mixed
+```
+
+File location: `src/CollectionInterface.php:260`
 
 ### values()
 
@@ -431,7 +560,7 @@ Return items without keys.
 public function CollectionInterface::values(): mixed
 ```
 
-File location: `src/CollectionInterface.php:144`
+File location: `src/CollectionInterface.php:165`
 
 ---
 

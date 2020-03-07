@@ -16,6 +16,9 @@ use Traversable;
  * Use it for building your custom collection classes.
  *
  * @package spaceonfire\Collection
+ *
+ * @method string join(string|null $glue = null, $field = null) alias to implode()
+ * @method int|float avg($field = null) alias to average()
  */
 abstract class BaseCollection implements CollectionInterface, JsonSerializable
 {
@@ -104,6 +107,43 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
             return $accum + $value;
         }, 0);
+    }
+
+    /** {@inheritDoc} */
+    public function average($field = null)
+    {
+        return $this->sum($field) / $this->count();
+    }
+
+    /** {@inheritDoc} */
+    public function median($field = null)
+    {
+        $items = [];
+
+        foreach ($this->items as $item) {
+            $value = $field === null ? $item : ArrayHelper::getValue($item, $field);
+
+            if (!is_numeric($value)) {
+                throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
+            }
+
+            $items[] = $value;
+        }
+
+        if (empty($items)) {
+            return null;
+        }
+
+        $count = count($items);
+        $middleIndex = floor(($count - 1) / 2);
+
+        sort($items, SORT_NATURAL);
+
+        if ($count % 2) {
+            return $items[$middleIndex];
+        }
+
+        return ($items[$middleIndex] + $items[$middleIndex + 1]) / 2;
     }
 
     /** {@inheritDoc} */
@@ -280,7 +320,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     /**
      * {@inheritDoc}
      *
-     * Data in this collection will be overwritten if non-integer keys exist in the merged collection.
+     * Data in this collection will be overwritten if non-integer keys exist in the merged
+     * collection.
      *
      * The original collection will not be changed, a new collection will be returned instead.
      */
@@ -337,12 +378,14 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * Check whether the collection contains a specific item.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns a boolean.
-     * The closure will be called on each item and in case it returns `true`, the item will be considered to
-     * be found. In case a closure is passed, `$strict` parameter has no effect.
+     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
+     *     a boolean. The closure will be called on each item and in case it returns `true`, the
+     *     item will be considered to be found. In case a closure is passed, `$strict` parameter
+     *     has no effect.
      * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
      * Defaults to `false`.
-     * @return bool `true` if the collection contains at least one item that matches, `false` if not.
+     * @return bool `true` if the collection contains at least one item that matches, `false` if
+     *     not.
      */
     public function contains($item, $strict = false): bool
     {
@@ -367,10 +410,11 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     /**
      * Remove a specific item from the collection.
      *
-     * The original collection will not be changed, a new collection with modified data is returned.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns a boolean.
-     * The closure will be called on each item and in case it returns `true`, the item will be removed.
-     * In case a closure is passed, `$strict` parameter has no effect.
+     * The original collection will not be changed, a new collection with modified data is
+     * returned.
+     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
+     *     a boolean. The closure will be called on each item and in case it returns `true`, the
+     *     item will be removed. In case a closure is passed, `$strict` parameter has no effect.
      * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
      * Defaults to `false`.
      * @return CollectionInterface a new collection containing the filtered items.
@@ -457,6 +501,58 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         return $this->newStatic(array_slice($this->all(), $offset, $limit, $preserveKeys));
     }
 
+    /**
+     * {@inheritDoc}
+     * The original collection will not be changed, a new collection will be returned instead.
+     */
+    public function unique(int $sortFlags = SORT_REGULAR)
+    {
+        return $this->newStatic(array_unique($this->items, $sortFlags));
+    }
+
+    /** {@inheritDoc} */
+    public function implode(?string $glue = null, $field = null): string
+    {
+        $items = [];
+
+        foreach ($this->items as $item) {
+            $value = $field === null ? $item : ArrayHelper::getValue($item, $field);
+
+            if (is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
+                $items[] = $value;
+                continue;
+            }
+
+            throw new BadMethodCallException('Value that could not be converted to string used in ' . __METHOD__);
+        }
+
+        return $glue === null ? implode($items) : implode($glue, $items);
+    }
+
+    /** {@inheritDoc} */
+    public function first()
+    {
+        return $this->items[$this->firstKey()] ?? null;
+    }
+
+    /** {@inheritDoc} */
+    public function firstKey()
+    {
+        return array_key_first($this->items);
+    }
+
+    /** {@inheritDoc} */
+    public function last()
+    {
+        return $this->items[$this->lastKey()] ?? null;
+    }
+
+    /** {@inheritDoc} */
+    public function lastKey()
+    {
+        return array_key_last($this->items);
+    }
+
     /** {@inheritDoc} */
     public function getIterator()
     {
@@ -520,5 +616,19 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
             return $value;
         })->all();
+    }
+
+    public function __call($name, $arguments)
+    {
+        $aliases = [
+            'join' => 'implode',
+            'avg' => 'average',
+        ];
+
+        if (isset($aliases[$name])) {
+            return call_user_func_array([$this, $aliases[$name]], $arguments);
+        }
+
+        throw new BadMethodCallException('Call to undefined method ' . static::class . '::' . $name . '()');
     }
 }
