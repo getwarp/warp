@@ -1,13 +1,13 @@
 # spaceonfire/collection API Documentation
 
-- [\spaceonfire\Collection](./spaceonfire/Collection)
-    - Classes
-        - [ArrayHelper](./spaceonfire/Collection/ArrayHelper.md)
-        - [BaseCollection](./spaceonfire/Collection/BaseCollection.md)
-        - [Collection](./spaceonfire/Collection.md/Collection.md)
-        - [TypedCollection](./spaceonfire/Collection/TypedCollection.md)
-    - Interfaces
-        - [CollectionInterface](./spaceonfire/Collection/CollectionInterface.md)
+-   [\spaceonfire\Collection](./spaceonfire/Collection)
+    -   Classes
+        -   [ArrayHelper](./spaceonfire/Collection/ArrayHelper.md)
+        -   [BaseCollection](./spaceonfire/Collection/BaseCollection.md)
+        -   [Collection](./spaceonfire/Collection.md/Collection.md)
+        -   [TypedCollection](./spaceonfire/Collection/TypedCollection.md)
+    -   Interfaces
+        -   [CollectionInterface](./spaceonfire/Collection/CollectionInterface.md)
 
 ---
 
