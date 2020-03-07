@@ -157,9 +157,10 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Merge one or more arrays or collections with current collection.
+     * @param iterable[] $collections
      * @return CollectionInterface
      */
-    public function merge();
+    public function merge(...$collections);
 
     /**
      * Convert collection data by selecting a new key and a new value for each item.

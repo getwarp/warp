@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.2] - 2020-03-07
+### Fixed
+- Declare `CollectionInterface::merge` attributes
+- Fix example in README.md
+
 ## [1.2.1] - 2019-11-09
 ### Fixed
 - Fix `BaseCollection::filter` call with empty callback

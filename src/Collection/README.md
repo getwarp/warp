@@ -25,7 +25,7 @@ $ composer require spaceonfire/collection
 ## Usage
 
 ``` php
-$collection = new spaceonfire\Collection([0, 1, 2, 3]);
+$collection = new spaceonfire\Collection\Collection([0, 1, 2, 3]);
 //$collection->sum() === 6
 ```
 
