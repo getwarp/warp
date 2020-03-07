@@ -22,6 +22,21 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.3.0] - 2020-03-07
+### Added
+- New methods added:
+    - `CollectionInterface::unique()`
+    - `CollectionInterface::implode()`
+    - `CollectionInterface::first()`
+    - `CollectionInterface::last()`
+    - `CollectionInterface::firstKey()`
+    - `CollectionInterface::lastKey()`
+    - `CollectionInterface::average()`
+    - `CollectionInterface::median()`
+- Method aliases adde:
+    - `BaseCollection::avg()` alias to `BaseCollection::average()`
+    - `BaseCollection::join()` alias to `BaseCollection::implode()`
+
 ## [1.2.2] - 2020-03-07
 ### Fixed
 - Declare `CollectionInterface::merge` attributes
