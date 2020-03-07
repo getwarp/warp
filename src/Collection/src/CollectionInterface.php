@@ -47,21 +47,35 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
     public function reduce(callable $callback, $initialValue = null);
 
     /**
-     * Calculate the sum of a field of the models in the collection.
+     * Calculate the sum of items in the collection.
      * @param mixed $field the name of the field to calculate.
      * @return int|float the calculated sum.
      */
     public function sum($field = null);
 
     /**
-     * Calculate the maximum value of a field of the models in the collection.
+     * Calculate the average value of items in the collection
+     * @param mixed $field the name of the field to calculate.
+     * @return int|float the calculated average value. `null` if the collection is empty.
+     */
+    public function average($field = null);
+
+    /**
+     * Calculate the median value of items in the collection
+     * @param mixed $field the name of the field to calculate.
+     * @return int|float the calculated median value. `null` if the collection is empty.
+     */
+    public function median($field = null);
+
+    /**
+     * Calculate the maximum value of items in the collection.
      * @param mixed $field the name of the field to calculate.
      * @return int|float|null the calculated maximum value. `null` if the collection is empty.
      */
     public function max($field = null);
 
     /**
-     * Calculate the minimum value of a field of the models in the collection
+     * Calculate the minimum value of items in the collection
      * @param mixed $field the name of the field to calculate.
      * @return int|float|null the calculated minimum value. `null` if the collection is empty.
      */
@@ -86,10 +100,12 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
      * If the collection values are not scalar types, use `sortBy()` instead.
      *
      * @param int $direction sort direction, either `SORT_ASC` or `SORT_DESC`.
-     * @param int $sortFlag type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`,
+     * @param int $sortFlag type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`,
+     *     `SORT_STRING`,
      * `SORT_LOCALE_STRING`, `SORT_NATURAL` or `SORT_FLAG_CASE`.
-     * See [the PHP manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
-     * for details.
+     * See [the PHP
+     *     manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
+     *     for details.
      * @return CollectionInterface
      */
     public function sort($direction = SORT_ASC, $sortFlag = SORT_REGULAR);
@@ -97,10 +113,12 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
     /**
      * Sort collection data by key.
      * @param int $direction sort direction, either `SORT_ASC` or `SORT_DESC`.
-     * @param int $sortFlag type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`,
+     * @param int $sortFlag type of comparison, either `SORT_REGULAR`, `SORT_NUMERIC`,
+     *     `SORT_STRING`,
      * `SORT_LOCALE_STRING`, `SORT_NATURAL` or `SORT_FLAG_CASE`.
-     * See [the PHP manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
-     * for details.
+     * See [the PHP
+     *     manual](http://php.net/manual/en/function.sort.php#refsect1-function.sort-parameters)
+     *     for details.
      * @return CollectionInterface
      */
     public function sortByKey($direction = SORT_ASC, $sortFlag = SORT_REGULAR);
@@ -110,23 +128,26 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
      *
      * If the collection values are not scalar types, use `sortBy()` instead.
      *
-     * @param bool $caseSensitive whether comparison should be done in a case-sensitive manner. Defaults to `false`.
+     * @param bool $caseSensitive whether comparison should be done in a case-sensitive manner.
+     *     Defaults to `false`.
      * @return CollectionInterface
      */
     public function sortNatural($caseSensitive = false);
 
     /**
      * Sort collection data by one or multiple values.
-     * @param string|Closure|array $key the key(s) to be sorted by. This refers to a key name of the sub-array
-     * elements, a property name of the objects, or an anonymous function returning the values for comparison
-     * purpose. The anonymous function signature should be: `function($item)`.
-     * To sort by multiple keys, provide an array of keys here.
-     * @param int|array $direction the sorting direction. It can be either `SORT_ASC` or `SORT_DESC`.
-     * When sorting by multiple keys with different sorting directions, use an array of sorting directions.
+     * @param string|Closure|array $key the key(s) to be sorted by. This refers to a key name of
+     *     the sub-array elements, a property name of the objects, or an anonymous function
+     *     returning the values for comparison purpose. The anonymous function signature should be:
+     *     `function($item)`. To sort by multiple keys, provide an array of keys here.
+     * @param int|array $direction the sorting direction. It can be either `SORT_ASC` or
+     *     `SORT_DESC`. When sorting by multiple keys with different sorting directions, use an
+     *     array of sorting directions.
      * @param int|array $sortFlag the PHP sort flag. Valid values include
-     * `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and `SORT_FLAG_CASE`.
-     * Please refer to the [PHP manual](http://php.net/manual/en/function.sort.php)
-     * for more details. When sorting by multiple keys with different sort flags, use an array of sort flags.
+     * `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and
+     *     `SORT_FLAG_CASE`. Please refer to the [PHP
+     *     manual](http://php.net/manual/en/function.sort.php) for more details. When sorting by
+     *     multiple keys with different sort flags, use an array of sort flags.
      * @return static a new collection containing the sorted items.
      */
     public function sortBy($key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR);
@@ -195,17 +216,19 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Check whether the collection contains a specific item.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns a boolean.
-     * The closure will be called on each item and in case it returns `true`, the item will be considered to
-     * be found.
-     * @return bool `true` if the collection contains at least one item that matches, `false` if not.
+     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
+     *     a boolean. The closure will be called on each item and in case it returns `true`, the
+     *     item will be considered to be found.
+     * @return bool `true` if the collection contains at least one item that matches, `false` if
+     *     not.
      */
     public function contains($item): bool;
 
     /**
      * Remove a specific item from the collection.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns a boolean.
-     * The closure will be called on each item and in case it returns `true`, the item will be removed.
+     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
+     *     a boolean. The closure will be called on each item and in case it returns `true`, the
+     *     item will be removed.
      * @return CollectionInterface
      * @see filter()
      */
@@ -228,4 +251,43 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate
      * @return CollectionInterface
      */
     public function slice($offset, $limit = null, $preserveKeys = true);
+
+    /**
+     * Removes duplicate values from the collection
+     * @param int $sortFlags sort flags argument for array_unique. **SORT_REGULAR** used by default.
+     * @return CollectionInterface
+     */
+    public function unique(int $sortFlags = SORT_REGULAR);
+
+    /**
+     * Join collection elements with string
+     * @param string|null $glue glue string
+     * @param mixed $field the name of the field to join.
+     * @return string
+     */
+    public function implode(?string $glue = null, $field = null): string;
+
+    /**
+     * Returns first item of the collection
+     * @return mixed
+     */
+    public function first();
+
+    /**
+     * Returns first key of the collection
+     * @return mixed
+     */
+    public function firstKey();
+
+    /**
+     * Returns last item of the collection
+     * @return mixed
+     */
+    public function last();
+
+    /**
+     * Returns last key of the collection
+     * @return mixed
+     */
+    public function lastKey();
 }
