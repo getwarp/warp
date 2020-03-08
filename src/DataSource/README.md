@@ -31,10 +31,7 @@ $ composer require spaceonfire/data-source
 
 ## Usage
 
-```php
-$uri = new spaceonfire\DataSource\ValueObject\UriValueObject('https://www.onfire.space/');
-echo $uri->value(); // Returns instance of psr UriInterface
-```
+**TODO:** add usage examples
 
 ## Change log
 
