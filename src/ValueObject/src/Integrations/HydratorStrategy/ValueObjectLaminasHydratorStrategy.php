@@ -31,7 +31,7 @@ final class ValueObjectLaminasHydratorStrategy implements StrategyInterface
      */
     public function extract($value, ?object $object = null)
     {
-        Assert::isInstanceOf($value, BaseValueObject::class);
+        Assert::isInstanceOf($value, $this->valueObjectClass);
         return $value->value();
     }
 
