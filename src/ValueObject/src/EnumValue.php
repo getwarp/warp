@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
 
+use InvalidArgumentException;
 use Jawira\CaseConverter\Convert;
 use ReflectionClass;
 
@@ -38,7 +39,10 @@ abstract class EnumValue extends BaseValueObject
         return (string)$this;
     }
 
-    abstract protected function throwExceptionForInvalidValue($value);
+    protected function throwExceptionForInvalidValue($value)
+    {
+        throw new InvalidArgumentException(sprintf('Value "%s" is not allowed for "%s"', $value, static::class));
+    }
 
     public static function __callStatic(string $name, $args)
     {
