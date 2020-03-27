@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.0.1] - 2020-03-27
+### Fixed
+- Support input value validation and casting for all value objects
+
 ## [1.0.0] - 2020-03-25
 ### Added
 - Value objects for scalars (`IntValue`, `StringValue`)

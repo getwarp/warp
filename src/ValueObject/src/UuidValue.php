@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
+ */
+
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
@@ -9,10 +13,9 @@ use Ramsey\Uuid\Uuid;
 
 abstract class UuidValue extends StringValue
 {
-    public function __construct(string $value)
+    protected function validate($value): bool
     {
-        $this->ensureIsValidUuid($value);
-        parent::__construct($value);
+        return parent::validate($value) && Uuid::isValid($value);
     }
 
     public static function random(): self
@@ -20,12 +23,14 @@ abstract class UuidValue extends StringValue
         return new static(Uuid::uuid4()->toString());
     }
 
-    private function ensureIsValidUuid($id): void
+    protected function throwExceptionForInvalidValue(?string $value): void
     {
-        if (!Uuid::isValid($id)) {
+        if ($value !== null) {
             throw new InvalidArgumentException(
-                sprintf('<%s> does not allow the value <%s>.', static::class, is_scalar($id) ? $id : gettype($id))
+                sprintf('Expected a value to be a valid uuid. Got "%s"', $value)
             );
         }
-    }
+
+        parent::throwExceptionForInvalidValue($value);
+    } // @codeCoverageIgnore
 }

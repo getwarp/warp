@@ -28,4 +28,10 @@ class UriValueTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         new UriValue('http://:80');
     }
+
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new UriValue(new \stdClass());
+    }
 }

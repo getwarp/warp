@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
+ */
+
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
@@ -7,23 +11,31 @@ namespace spaceonfire\ValueObject;
 use InvalidArgumentException;
 use Jawira\CaseConverter\Convert;
 use ReflectionClass;
+use spaceonfire\ValueObject\Helpers\StringHelper;
 
 abstract class EnumValue extends BaseValueObject
 {
     protected static $cache = [];
 
-    public function __construct($value)
+    protected function validate($value): bool
     {
-        $this->ensureIsBetweenAcceptedValues($value);
-        parent::__construct($value);
+        return in_array($value, static::values(), true);
     }
 
-    private function ensureIsBetweenAcceptedValues($value): void
+    protected function throwExceptionForInvalidValue(?string $value): void
     {
-        if (!in_array($value, static::values(), true)) {
-            $this->throwExceptionForInvalidValue($value);
+        if ($value !== null) {
+            $valuesAsString = StringHelper::stringify(array_values(static::values()));
+            $suggestion = StringHelper::getSuggestion(static::values(), $value);
+
+            throw new InvalidArgumentException(
+                sprintf('The value is outside the allowable range of values: %s. Got: \'%s\'', $valuesAsString, $value)
+                . ($suggestion ? ', did you mean \'' . $suggestion . '\'?' : '')
+            );
         }
-    }
+
+        parent::throwExceptionForInvalidValue($value);
+    } // @codeCoverageIgnore
 
     public function equals(EnumValue $other): bool
     {
@@ -37,11 +49,6 @@ abstract class EnumValue extends BaseValueObject
     public function jsonSerialize()
     {
         return (string)$this;
-    }
-
-    protected function throwExceptionForInvalidValue($value)
-    {
-        throw new InvalidArgumentException(sprintf('Value "%s" is not allowed for "%s"', $value, static::class));
     }
 
     public static function __callStatic(string $name, $args)

@@ -41,11 +41,17 @@ class DateTimeValueTest extends TestCase
         new DateTimeValue('19/10/2016 14:48:21');
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.JSON.phpt
+     */
     public function testJson()
     {
         $this->assertEquals('"1978-01-23T10:40:00+00:00"', json_encode(DateTimeValue::from(254400000)));
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
+     */
     public function testCreateFromFormat()
     {
         $this->assertInstanceOf(
@@ -62,6 +68,9 @@ class DateTimeValueTest extends TestCase
         $this->assertNull(DateTimeValue::createFromFormat('Y-m-d', '2014-10'));
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
+     */
     public function testCreateFromFormatTimezone()
     {
         $this->assertInstanceOf(
@@ -83,12 +92,18 @@ class DateTimeValueTest extends TestCase
         );
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
+     */
     public function testCreateFromFormatTimezoneException()
     {
         $this->expectException(InvalidArgumentException::class);
         DateTimeValue::createFromFormat('Y-m-d H:i:s', '2050-08-13 10:40:00', 5);
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.from.phpt
+     */
     public function testFrom()
     {
         $this->assertEquals(
@@ -144,6 +159,9 @@ class DateTimeValueTest extends TestCase
         );
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.fromParts.phpt
+     */
     public function testFromParts()
     {
         $this->assertEquals(
@@ -180,6 +198,9 @@ class DateTimeValueTest extends TestCase
         );
     }
 
+    /**
+     * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.fromParts.phpt
+     */
     public function testFromPartsExceptions()
     {
         $this->expectException(InvalidArgumentException::class);

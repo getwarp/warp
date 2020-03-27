@@ -22,6 +22,12 @@ class UuidValueTest extends TestCase
         $this->assertEquals('"42779f6d-e7c7-4572-8497-2d43bd9c1677"', json_encode($val));
     }
 
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->factory(new \stdClass());
+    }
+
     public function testConstructorException()
     {
         $this->expectException(\InvalidArgumentException::class);

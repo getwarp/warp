@@ -6,9 +6,14 @@ namespace spaceonfire\ValueObject;
 
 abstract class StringValue extends BaseValueObject
 {
-    public function __construct(string $value)
+    protected function validate($value): bool
     {
-        parent::__construct($value);
+        return is_scalar($value) || (is_object($value) && method_exists($value, '__toString'));
+    }
+
+    protected function cast($value): string
+    {
+        return (string)$value;
     }
 
     public function value(): string

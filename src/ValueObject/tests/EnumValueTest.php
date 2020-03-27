@@ -32,6 +32,12 @@ class EnumValueTest extends TestCase
         $this->factory(4);
     }
 
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->factory(new \stdClass());
+    }
+
     public function testEquals()
     {
         $a = $this->factory(1);

@@ -19,4 +19,10 @@ class IpValueTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         new IpValue('just string');
     }
+
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new IpValue(new \stdClass());
+    }
 }

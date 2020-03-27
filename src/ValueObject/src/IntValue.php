@@ -6,9 +6,14 @@ namespace spaceonfire\ValueObject;
 
 abstract class IntValue extends BaseValueObject
 {
-    public function __construct(int $value)
+    protected function validate($value): bool
     {
-        parent::__construct($value);
+        return is_int($value) || (is_string($value) && preg_match('/^[+-]?\d+$/D', $value));
+    }
+
+    protected function cast($value)
+    {
+        return (int)$value;
     }
 
     public function value(): int

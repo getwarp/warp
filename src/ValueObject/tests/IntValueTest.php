@@ -14,11 +14,24 @@ class IntValueTest extends TestCase
         };
     }
 
-    public function testConstructor()
+    public function testConstructFromInt()
     {
         $val = $this->factory(5);
         $this->assertEquals(5, $val->value());
         $this->assertEquals('5', (string)$val);
+    }
+
+    public function testConstructFromString()
+    {
+        $val = $this->factory('5');
+        $this->assertEquals(5, $val->value());
+        $this->assertEquals('5', (string)$val);
+    }
+
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->factory(new \stdClass());
     }
 
     public function testEqualsTo()

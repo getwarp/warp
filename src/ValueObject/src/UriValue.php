@@ -1,29 +1,39 @@
 <?php
 
+/**
+ * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
+ */
+
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
 
 use GuzzleHttp\Psr7\Uri;
+use InvalidArgumentException;
 use Psr\Http\Message\UriInterface;
-use Webmozart\Assert\Assert;
 
 class UriValue extends BaseValueObject
 {
-    /**
-     * UriValueObject constructor.
-     * @param UriInterface|string $value
-     */
-    public function __construct($value)
+    protected function validate($value): bool
     {
-        if (is_string($value)) {
-            $value = new Uri($value);
+        return (is_string($value) && parse_url($value) !== false) || $value instanceof UriInterface;
+    }
+
+    protected function cast($value)
+    {
+        return !$value instanceof UriInterface ? new Uri($value) : $value;
+    }
+
+    protected function throwExceptionForInvalidValue(?string $value): void
+    {
+        if ($value !== null) {
+            throw new InvalidArgumentException(
+                sprintf('Expected a value to be a valid uri. Got "%s"', $value)
+            );
         }
 
-        Assert::isInstanceOf($value, UriInterface::class);
-
-        parent::__construct($value);
-    }
+        parent::throwExceptionForInvalidValue($value);
+    } // @codeCoverageIgnore
 
     /**
      * @inheritDoc

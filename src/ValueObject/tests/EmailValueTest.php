@@ -14,9 +14,15 @@ class EmailValueTest extends TestCase
         $this->assertEquals('test@test.test', $val->value());
     }
 
-    public function testConstructorException()
+    public function testConstructFail()
     {
         $this->expectException(\InvalidArgumentException::class);
         new EmailValue('just string');
+    }
+
+    public function testConstructFailWithObject()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        new EmailValue(new \stdClass());
     }
 }
