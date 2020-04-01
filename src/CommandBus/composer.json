@@ -1,0 +1,50 @@
+{
+  "name": "spaceonfire/command-bus",
+  "type": "library",
+  "description": "",
+  "keywords": [
+    "spaceonfire",
+    "command-bus"
+  ],
+  "homepage": "https://github.com/spaceonfire/command-bus",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "psr/container": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=7.0",
+    "squizlabs/php_codesniffer": "^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\CommandBus\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\CommandBus\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "check-style": "phpcs",
+    "fix-style": "phpcbf"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
