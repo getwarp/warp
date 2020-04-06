@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus;
 
+use Closure;
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 use spaceonfire\CommandBus\Mapping\CommandToHandlerMapping;
@@ -120,5 +121,13 @@ class CommandBus
         return $this->container
             ? $this->container->get($handlerClassName)
             : new $handlerClassName();
+    }
+
+    /**
+     * Clone command bus
+     */
+    public function __clone()
+    {
+        $this->middlewareChain = Closure::bind($this->middlewareChain, $this);
     }
 }
