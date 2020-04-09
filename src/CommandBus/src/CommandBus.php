@@ -29,6 +29,10 @@ class CommandBus
      * @var ContainerInterface
      */
     private $container;
+    /**
+     * @var bool
+     */
+    private $isClone = false;
 
     /**
      * CommandBus constructor.
@@ -77,7 +81,8 @@ class CommandBus
         };
 
         while ($middleware = array_pop($middlewareList)) {
-            $lastCallable = static function ($command) use ($middleware, $lastCallable) {
+            $lastCallable = function ($command) use ($middleware, $lastCallable) {
+                $lastCallable = $this->isClone ? Closure::bind($lastCallable, $this) : $lastCallable;
                 return $middleware->execute($command, $lastCallable);
             };
         }
@@ -129,5 +134,6 @@ class CommandBus
     public function __clone()
     {
         $this->middlewareChain = Closure::bind($this->middlewareChain, $this);
+        $this->isClone = true;
     }
 }
