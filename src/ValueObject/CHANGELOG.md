@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.0.2] - 2020-04-13
+### Fixed
+- Support `ramsey/uuid@^4.0`
+
 ## [1.0.1] - 2020-03-27
 ### Fixed
 - Support input value validation and casting for all value objects

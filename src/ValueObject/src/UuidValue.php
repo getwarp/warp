@@ -15,7 +15,7 @@ abstract class UuidValue extends StringValue
 {
     protected function validate($value): bool
     {
-        return parent::validate($value) && Uuid::isValid($value);
+        return parent::validate($value) && Uuid::isValid((string)$value);
     }
 
     public static function random(): self
