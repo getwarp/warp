@@ -7,46 +7,48 @@ namespace spaceonfire\Criteria;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 
-class Criteria
+class Criteria implements CriteriaInterface
 {
     /**
      * @var Expression|null
      */
-    private $expression;
+    protected $expression;
     /**
      * @var array<string,int>
      */
-    private $orderBy = [];
+    protected $orderBy = [];
     /**
      * @var int|null
      */
-    private $offset;
+    protected $offset;
     /**
      * @var int|null
      */
-    private $limit;
+    protected $limit;
+    /**
+     * @var mixed[]
+     */
+    protected $include = [];
 
     /**
-     * Getter for `expression` property
-     * @return Expression|null
+     * @inheritDoc
      */
-    public function getExpression(): ?Expression
+    public function getWhere(): ?Expression
     {
         return $this->expression;
     }
 
     /**
-     * Setter for `expression` property
-     * @param Expression|null $expression
+     * @inheritDoc
      */
-    public function setExpression(?Expression $expression): void
+    public function where(?Expression $expression): CriteriaInterface
     {
         $this->expression = $expression;
+        return $this;
     }
 
     /**
-     * Getter for `orderBy` property
-     * @return array<string,int>
+     * @inheritDoc
      */
     public function getOrderBy(): array
     {
@@ -54,38 +56,36 @@ class Criteria
     }
 
     /**
-     * Setter for `orderBy` property
-     * @param array<string,int> $orderBy
+     * @inheritDoc
      */
-    public function setOrderBy(array $orderBy): void
+    public function orderBy(array $orderBy): CriteriaInterface
     {
         $invalidMessage = 'Argument $orderBy must be an array where string keys mapped to `SORT_ASC` or `SORT_DESC` constants.';
         Assert::allString(array_keys($orderBy), $invalidMessage);
         Assert::allOneOf($orderBy, [SORT_ASC, SORT_DESC], $invalidMessage);
         $this->orderBy = $orderBy;
+        return $this;
     }
 
     /**
-     * Getter for `offset` property
-     * @return int|null
+     * @inheritDoc
      */
-    public function getOffset(): ?int
+    public function getOffset(): int
     {
-        return $this->offset;
+        return $this->offset ?? 0;
     }
 
     /**
-     * Setter for `offset` property
-     * @param int|null $offset
+     * @inheritDoc
      */
-    public function setOffset(?int $offset): void
+    public function offset(?int $offset): CriteriaInterface
     {
         $this->offset = $offset;
+        return $this;
     }
 
     /**
-     * Getter for `limit` property
-     * @return int|null
+     * @inheritDoc
      */
     public function getLimit(): ?int
     {
@@ -93,11 +93,28 @@ class Criteria
     }
 
     /**
-     * Setter for `limit` property
-     * @param int|null $limit
+     * @inheritDoc
      */
-    public function setLimit(?int $limit): void
+    public function limit(?int $limit): CriteriaInterface
     {
         $this->limit = $limit;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInclude(): array
+    {
+        return $this->include;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function include(array $include): CriteriaInterface
+    {
+        $this->include = $include;
+        return $this;
     }
 }

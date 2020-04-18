@@ -11,8 +11,12 @@ parameters:
     - tests/
   skip:
     Unused variable $_.: ~
+    SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
+      - src/Adapter/Pagination/PaginableCriteria.php
 
 services:
+  Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~
+
   # Types
   # SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff: ~
   # SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff: ~

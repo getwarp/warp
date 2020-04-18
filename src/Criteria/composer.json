@@ -1,7 +1,7 @@
 {
   "name": "spaceonfire/criteria",
   "type": "library",
-  "description": "",
+  "description": "Criteria help you to declare rules to filter datasets",
   "keywords": [
     "spaceonfire",
     "criteria"
@@ -25,7 +25,11 @@
     "phpunit/phpunit": "^9.0",
     "phpstan/phpstan": "^0.12",
     "roave/security-advisories": "dev-master",
+    "spiral/pagination": "^2.2",
     "symplify/easy-coding-standard-prefixed": "^7.2"
+  },
+  "suggest": {
+    "spiral/pagination": ""
   },
   "autoload": {
     "psr-4": {
