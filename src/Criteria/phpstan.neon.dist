@@ -1,0 +1,14 @@
+# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
+parameters:
+	level: max
+	inferPrivatePropertyTypeFromConstructor: true
+	paths:
+		- src/
+		- tests/
+	autoload_files:
+		- vendor/autoload.php
+	ignoreErrors:
+		- /^Cannot instantiate interface /
