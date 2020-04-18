@@ -6,6 +6,7 @@ namespace spaceonfire\Criteria\Adapter\Pagination;
 
 use spaceonfire\Criteria\AbstractCriteriaTest;
 use spaceonfire\Criteria\Criteria;
+use spaceonfire\Criteria\CriteriaInterface;
 
 class PaginableCriteriaTest extends AbstractCriteriaTest
 {
@@ -14,9 +15,9 @@ class PaginableCriteriaTest extends AbstractCriteriaTest
      */
     protected $criteria;
 
-    protected function setUp(): void
+    protected function createCriteria(): CriteriaInterface
     {
-        $this->criteria = new PaginableCriteria();
+        return new PaginableCriteria();
     }
 
     public function testExport(): void

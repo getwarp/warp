@@ -72,4 +72,11 @@ interface CriteriaInterface
      * @return $this
      */
     public function include(array $include): CriteriaInterface;
+
+    /**
+     * Merges parameters from current criteria and provided one
+     * @param CriteriaInterface $criteria
+     * @return CriteriaInterface
+     */
+    public function merge(CriteriaInterface $criteria): CriteriaInterface;
 }

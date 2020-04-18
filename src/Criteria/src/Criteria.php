@@ -117,4 +117,34 @@ class Criteria implements CriteriaInterface
         $this->include = $include;
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     * The original criteria will not be changed, a new one will be returned instead.
+     */
+    public function merge(CriteriaInterface $criteria): CriteriaInterface
+    {
+        $clone = clone $this;
+
+        if (!empty($criteria->getOrderBy())) {
+            $clone->orderBy($criteria->getOrderBy());
+        }
+
+        if (!empty($criteria->getInclude())) {
+            $clone->include($criteria->getInclude());
+        }
+
+        if ($criteria->getLimit() !== null) {
+            $clone->limit($criteria->getLimit());
+            $clone->offset($criteria->getOffset());
+        } elseif ($criteria->getOffset() > 0) {
+            $clone->offset($criteria->getOffset());
+        }
+
+        if ($criteria->getWhere() !== null) {
+            $clone->where($criteria->getWhere());
+        }
+
+        return $clone;
+    }
 }

@@ -139,4 +139,15 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
         $this->proxyCall(__FUNCTION__, func_get_args());
         return $this;
     }
+
+    /**
+     * @inheritDoc
+     * The original criteria will not be changed, a new one will be returned instead.
+     */
+    public function merge(CriteriaInterface $criteria): CriteriaInterface
+    {
+        $clone = clone $this;
+        $clone->criteria = $clone->proxyCall(__FUNCTION__, func_get_args());
+        return $clone;
+    }
 }

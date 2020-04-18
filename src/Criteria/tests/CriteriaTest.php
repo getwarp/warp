@@ -6,8 +6,8 @@ namespace spaceonfire\Criteria;
 
 class CriteriaTest extends AbstractCriteriaTest
 {
-    protected function setUp(): void
+    protected function createCriteria(): CriteriaInterface
     {
-        $this->criteria = new Criteria();
+        return new Criteria();
     }
 }
