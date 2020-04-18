@@ -1,0 +1,18 @@
+# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
+parameters:
+	level: max
+	inferPrivatePropertyTypeFromConstructor: true
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	paths:
+		- src/
+		- tests/
+	autoload_files:
+		- vendor/autoload.php
+	ignoreErrors:
+		- '/^Method (.*)::offset(Exists|Get|Set|Unset)\(\) has parameter (.*) with no typehint specified.$/'
+		- '/^Method (.*)::offset(Exists|Get|Set|Unset)\(\) has no return typehint specified.$/'

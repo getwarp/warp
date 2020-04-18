@@ -17,23 +17,31 @@
       "role": "Maintainer"
     }
   ],
+  "repositories": [
+    {
+      "type": "github",
+      "url": "https://github.com/spaceonfire/criteria.git"
+    }
+  ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.3",
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6.1",
     "jawira/case-converter": "^3.4.1",
     "spaceonfire/collection": "^1.2.1",
+    "spaceonfire/criteria": "dev-master",
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
-    "phpunit/phpunit": ">=7.0",
-    "squizlabs/php_codesniffer": "^3.0",
-    "doctrine/collections": "^1.6.4",
+    "phpunit/phpunit": "^9.0",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "roave/security-advisories": "dev-master",
+    "symplify/easy-coding-standard-prefixed": "^7.2",
     "spiral/pagination": "^2.2.2"
   },
   "suggest": {
-    "doctrine/collections": "Needed for Criteria",
-    "spiral/pagination": "Needed for Criteria and QueryInterface"
+    "spiral/pagination": "Needed for QueryInterface"
   },
   "autoload": {
     "psr-4": {
@@ -47,13 +55,8 @@
   },
   "scripts": {
     "test": "phpunit",
-    "check-style": "phpcs src tests",
-    "fix-style": "phpcbf src tests"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
-    }
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
   "config": {
     "sort-packages": true

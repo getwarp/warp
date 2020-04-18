@@ -6,16 +6,17 @@ namespace spaceonfire\DataSource;
 
 use Countable;
 use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\DataSource\Criteria\Criteria;
+use spaceonfire\Criteria\CriteriaInterface;
+use spaceonfire\Criteria\FilterableInterface;
 use Spiral\Pagination\PaginableInterface;
 
-interface QueryInterface extends PaginableInterface, Countable
+interface QueryInterface extends Countable, PaginableInterface, FilterableInterface
 {
     /**
-     * Fetch next element
+     * Fetch one element
      * @return EntityInterface
      */
-    public function fetch(): EntityInterface;
+    public function fetchOne(): EntityInterface;
 
     /**
      * Fetch all elements
@@ -24,9 +25,9 @@ interface QueryInterface extends PaginableInterface, Countable
     public function fetchAll(): CollectionInterface;
 
     /**
-     * Filter query
-     * @param Criteria $criteria
+     * Filter query with provided criteria
+     * @param CriteriaInterface $criteria
      * @return QueryInterface
      */
-    public function matching(Criteria $criteria): QueryInterface;
+    public function matching(CriteriaInterface $criteria): self;
 }

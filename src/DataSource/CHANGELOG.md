@@ -1,11 +1,11 @@
 # Changelog
 
-All notable changes to `DataSource` will be documented in this file.
+All notable changes to `criteria` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - YYYY-MM-DD
-
+<!--
+## [X.Y.Z] - YYYY-MM-DD
 ### Added
 - Nothing
 
@@ -20,3 +20,4 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Security
 - Nothing
+-->

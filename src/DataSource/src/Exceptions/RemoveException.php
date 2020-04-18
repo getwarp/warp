@@ -6,6 +6,6 @@ namespace spaceonfire\DataSource\Exceptions;
 
 use DomainException;
 
-class NotFoundException extends DomainException
+class RemoveException extends DomainException
 {
 }

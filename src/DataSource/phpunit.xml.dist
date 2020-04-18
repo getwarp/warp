@@ -17,6 +17,7 @@
 	<filter>
 		<whitelist>
 			<directory suffix=".php">src/</directory>
+			<directory suffix=".php">tests/Fixtures/</directory>
 		</whitelist>
 	</filter>
 	<logging>
