@@ -35,4 +35,11 @@ class PaginableCriteriaTest extends AbstractCriteriaTest
         self::assertEquals(50, $paginator->getLimit());
         self::assertEquals(3, $paginator->getPage());
     }
+
+    public function testMakePaginatorWithEmptyCriteria(): void
+    {
+        $paginator = $this->criteria->makePaginator()->withCount(150);
+        self::assertEquals(25, $paginator->getLimit());
+        self::assertEquals(1, $paginator->getPage());
+    }
 }

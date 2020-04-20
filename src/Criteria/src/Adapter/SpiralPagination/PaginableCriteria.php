@@ -41,8 +41,12 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
      */
     public function makePaginator(): PaginatorInterface
     {
-        $page = (int)($this->getOffset() / $this->getLimit()) + 1;
-        return (new Paginator($this->getLimit() ?? 25))->withPage($page);
+        if ($this->getLimit() > 0) {
+            $page = (int)($this->getOffset() / $this->getLimit()) + 1;
+            return (new Paginator($this->getLimit()))->withPage($page);
+        }
+
+        return new Paginator();
     }
 
     /**
