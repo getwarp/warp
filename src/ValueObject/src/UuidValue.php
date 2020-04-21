@@ -11,7 +11,7 @@ namespace spaceonfire\ValueObject;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
-abstract class UuidValue extends StringValue
+class UuidValue extends StringValue
 {
     protected function validate($value): bool
     {

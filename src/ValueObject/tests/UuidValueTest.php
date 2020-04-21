@@ -10,8 +10,7 @@ class UuidValueTest extends TestCase
 {
     private function factory($val): UuidValue
     {
-        return new class ($val) extends UuidValue {
-        };
+        return new UuidValue($val);
     }
 
     public function testConstructor(): void
