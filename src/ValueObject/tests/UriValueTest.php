@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 
 class UriValueTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $val = new UriValue('http://localhost');
         $this->assertInstanceOf(UriInterface::class, $val->value());
@@ -23,13 +23,13 @@ class UriValueTest extends TestCase
         $this->assertEquals('"http:\/\/localhost"', json_encode($val));
     }
 
-    public function testConstructorException()
+    public function testConstructorException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         new UriValue('http://:80');
     }
 
-    public function testConstructFailWithObject()
+    public function testConstructFailWithObject(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         new UriValue(new \stdClass());

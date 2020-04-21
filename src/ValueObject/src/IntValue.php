@@ -6,26 +6,47 @@ namespace spaceonfire\ValueObject;
 
 abstract class IntValue extends BaseValueObject
 {
+    /**
+     * @inheritDoc
+     */
     protected function validate($value): bool
     {
         return is_int($value) || (is_string($value) && preg_match('/^[+-]?\d+$/D', $value));
     }
 
-    protected function cast($value)
+    /**
+     * @inheritDoc
+     * @return int
+     */
+    protected function cast($value): int
     {
         return (int)$value;
     }
 
+    /**
+     * @inheritDoc
+     * @return int
+     */
     public function value(): int
     {
         return parent::value();
     }
 
+    /**
+     * Checks that current VO equals to provided one.
+     * @param IntValue $other
+     * @return bool
+     */
     public function equalsTo(IntValue $other): bool
     {
         return $this->value() === $other->value();
     }
 
+    /**
+     * Checks that current VO is bigger than provided one.
+     * @param IntValue $other
+     * @return bool
+     */
     public function isBiggerThan(IntValue $other): bool
     {
         return $this->value() > $other->value();
@@ -33,8 +54,9 @@ abstract class IntValue extends BaseValueObject
 
     /**
      * @inheritDoc
+     * @return int
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): int
     {
         return $this->value();
     }

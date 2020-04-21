@@ -22,6 +22,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.0] - 2020-04-21
+### Added
+- Added phpDoc comments as possible
+- Updated code style checks
+- Added PHPStan linter
+- Make `UuidValue` non abstract class
+
 ## [1.0.2] - 2020-04-13
 ### Fixed
 - Support `ramsey/uuid@^4.0`

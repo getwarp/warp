@@ -15,7 +15,11 @@ abstract class BaseValueObject implements JsonSerializable
      */
     protected $value;
 
-    public function __construct($value)
+    /**
+     * VO constructor
+     * @param mixed $value
+     */
+    final public function __construct($value)
     {
         if (!$this->validate($value)) {
             $this->throwExceptionForInvalidValue(StringHelper::stringify($value));
@@ -24,13 +28,19 @@ abstract class BaseValueObject implements JsonSerializable
         $this->value = $this->cast($value);
     }
 
+    /**
+     * Cast input value to supported type by class
+     * @param mixed $value input value
+     * @return mixed casted value
+     */
     protected function cast($value)
     {
         return $value;
     }
 
     /**
-     * @param $value
+     * Validate input value
+     * @param mixed $value
      * @return bool
      * @noinspection PhpUnusedParameterInspection
      * @codeCoverageIgnore
@@ -40,6 +50,11 @@ abstract class BaseValueObject implements JsonSerializable
         return true;
     }
 
+    /**
+     * Throws exception for invalid input value
+     * @param string|null $value stringified input value
+     * @throws InvalidArgumentException
+     */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
         throw new InvalidArgumentException(
@@ -49,17 +64,30 @@ abstract class BaseValueObject implements JsonSerializable
         );
     }
 
+    /**
+     * Returns inner value of VO
+     * @return mixed
+     */
     public function value()
     {
         return $this->value;
     }
 
     /**
-     * Cast value object to string
+     * Cast VO to string
      * @return string
      */
     public function __toString()
     {
         return (string)$this->value();
+    }
+
+    /**
+     * @inheritDoc
+     * @return mixed|string
+     */
+    public function jsonSerialize()
+    {
+        return (string)$this;
     }
 }

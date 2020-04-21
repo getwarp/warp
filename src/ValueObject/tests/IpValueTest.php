@@ -8,19 +8,19 @@ use PHPUnit\Framework\TestCase;
 
 class IpValueTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $val = new IpValue('127.0.0.1');
         $this->assertEquals('127.0.0.1', $val->value());
     }
 
-    public function testConstructorException()
+    public function testConstructorException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         new IpValue('just string');
     }
 
-    public function testConstructFailWithObject()
+    public function testConstructFailWithObject(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         new IpValue(new \stdClass());

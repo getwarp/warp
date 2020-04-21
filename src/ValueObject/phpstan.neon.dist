@@ -1,0 +1,21 @@
+# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
+parameters:
+	level: max
+	inferPrivatePropertyTypeFromConstructor: true
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	paths:
+		- src/
+	autoload_files:
+		- vendor/autoload.php
+	ignoreErrors:
+		- '/^PHPDoc tag \@param for parameter (.*) with type (.*)\|string is not subtype of native type string.$/'
+		- '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
+		- '/^Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)$/'
+		-
+			message: '/^Instantiated class (.*) is abstract.$/'
+			path: src/Integrations/HydratorStrategy/*

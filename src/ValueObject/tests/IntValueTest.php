@@ -10,31 +10,31 @@ class IntValueTest extends TestCase
 {
     private function factory($val): IntValue
     {
-        return new class ($val) extends IntValue {
+        return new class($val) extends IntValue {
         };
     }
 
-    public function testConstructFromInt()
+    public function testConstructFromInt(): void
     {
         $val = $this->factory(5);
         $this->assertEquals(5, $val->value());
         $this->assertEquals('5', (string)$val);
     }
 
-    public function testConstructFromString()
+    public function testConstructFromString(): void
     {
         $val = $this->factory('5');
         $this->assertEquals(5, $val->value());
         $this->assertEquals('5', (string)$val);
     }
 
-    public function testConstructFailWithObject()
+    public function testConstructFailWithObject(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->factory(new \stdClass());
     }
 
-    public function testEqualsTo()
+    public function testEqualsTo(): void
     {
         $a = $this->factory(5);
         $b = $this->factory(5);
@@ -43,7 +43,7 @@ class IntValueTest extends TestCase
         $this->assertFalse($a->equalsTo($c));
     }
 
-    public function testIsBiggerThat()
+    public function testIsBiggerThat(): void
     {
         $a = $this->factory(5);
         $b = $this->factory(1);
@@ -52,7 +52,7 @@ class IntValueTest extends TestCase
         $this->assertFalse($a->isBiggerThan($c));
     }
 
-    public function testJson()
+    public function testJson(): void
     {
         $val = $this->factory(5);
         $this->assertEquals(5, json_encode($val));

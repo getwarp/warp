@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
- */
-
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
@@ -14,6 +10,9 @@ use Webmozart\Assert\Assert;
 
 class IpValue extends StringValue
 {
+    /**
+     * @inheritDoc
+     */
     protected function validate($value): bool
     {
         $isValid = parent::validate($value);
@@ -30,12 +29,13 @@ class IpValue extends StringValue
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
         if ($value !== null) {
-            throw new InvalidArgumentException(
-                sprintf('Expected a value to be an IP. Got "%s"', $value)
-            );
+            throw new InvalidArgumentException(sprintf('Expected a value to be an IP. Got "%s"', $value));
         }
 
         parent::throwExceptionForInvalidValue($value);

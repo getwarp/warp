@@ -6,8 +6,8 @@ namespace spaceonfire\ValueObject\Date;
 
 use DateTimeInterface;
 use DateTimeZone;
-use Exception;
 use InvalidArgumentException;
+use Throwable;
 
 /**
  * Trait DateTimeTrait
@@ -24,22 +24,18 @@ trait DateTimeTrait
      * @param string $time
      * @param DateTimeZone|null $timezone
      */
-    public function __construct($time = 'now', DateTimeZone $timezone = null)
+    final public function __construct($time = 'now', ?DateTimeZone $timezone = null)
     {
         try {
             parent::__construct($time, $timezone);
-        } catch (Exception $exception) {
-            throw new DateException(
-                $exception->getMessage(),
-                $exception->getCode(),
-                $exception->getPrevious()
-            );
+        } catch (Throwable $exception) {
+            throw new DateException($exception->getMessage(), $exception->getCode(), $exception->getPrevious());
         }
     }
 
     /**
      * DateTime object factory.
-     * @param string|int|DateTimeInterface $time
+     * @param string|int|DateTimeInterface|null $time
      * @return static
      */
     public static function from($time)
@@ -49,6 +45,7 @@ trait DateTimeTrait
         }
 
         if (is_numeric($time)) {
+            $time = (int)$time;
             if ($time <= DateTimeValueInterface::YEAR) {
                 $time += time();
             }

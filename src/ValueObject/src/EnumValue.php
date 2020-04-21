@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
- */
-
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
@@ -11,17 +7,27 @@ namespace spaceonfire\ValueObject;
 use InvalidArgumentException;
 use Jawira\CaseConverter\Convert;
 use ReflectionClass;
+use ReflectionException;
 use spaceonfire\ValueObject\Helpers\StringHelper;
 
 abstract class EnumValue extends BaseValueObject
 {
+    /**
+     * @var string[][]
+     */
     protected static $cache = [];
 
+    /**
+     * @inheritDoc
+     */
     protected function validate($value): bool
     {
         return in_array($value, static::values(), true);
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
         if ($value !== null) {
@@ -37,6 +43,11 @@ abstract class EnumValue extends BaseValueObject
         parent::throwExceptionForInvalidValue($value);
     } // @codeCoverageIgnore
 
+    /**
+     * Checks that current VO is bigger than provided one.
+     * @param EnumValue $other
+     * @return bool
+     */
     public function equals(EnumValue $other): bool
     {
         /** @noinspection TypeUnsafeComparisonInspection PhpNonStrictObjectEqualityInspection */
@@ -44,39 +55,54 @@ abstract class EnumValue extends BaseValueObject
     }
 
     /**
-     * @inheritDoc
+     * Support for magic methods
+     * @param string $name
+     * @param array $args
+     * @return static
      */
-    public function jsonSerialize()
-    {
-        return (string)$this;
-    }
-
     public static function __callStatic(string $name, $args)
     {
         return new static(self::values()[$name]);
     }
 
+    /**
+     * Returns random value for this enum class.
+     * @return mixed|string
+     */
     public static function randomValue()
     {
         return self::values()[array_rand(self::values())];
     }
 
+    /**
+     * Creates new enum VO with random value.
+     * @return static
+     */
     public static function random(): self
     {
         return new static(self::randomValue());
     }
 
+    /**
+     * Returns values array for this enum class.
+     * @return mixed[]
+     */
     public static function values(): array
     {
         $class = static::class;
 
-        if (!isset(self::$cache[$class])) {
-            /** @noinspection PhpUnhandledExceptionInspection */
-            $reflected = new ReflectionClass($class);
-            self::$cache[$class] = [];
-            foreach ($reflected->getConstants() as $key => $value) {
-                self::$cache[$class][self::keysFormatter($key)] = $value;
+        try {
+            if (!isset(self::$cache[$class])) {
+                $reflected = new ReflectionClass($class);
+                self::$cache[$class] = [];
+                foreach ($reflected->getConstants() as $key => $value) {
+                    self::$cache[$class][self::keysFormatter($key)] = $value;
+                }
             }
+            // @codeCoverageIgnoreStart
+        } catch (ReflectionException $e) {
+            return [];
+            // @codeCoverageIgnoreEnd
         }
 
         return self::$cache[$class];

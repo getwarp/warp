@@ -10,7 +10,7 @@ class StringHelperTest extends TestCase
 {
     private function stringableObjectFactory(string $value)
     {
-        return new class ($value) {
+        return new class($value) {
             private $value;
 
             public function __construct(string $value)
@@ -25,7 +25,7 @@ class StringHelperTest extends TestCase
         };
     }
 
-    public function testStringify()
+    public function testStringify(): void
     {
         $this->assertEquals('"a"', StringHelper::stringify('a'));
         $this->assertEquals('null', StringHelper::stringify(null));
@@ -43,7 +43,7 @@ class StringHelperTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/Helpers.getSuggestion().phpt
      */
-    public function testGetSuggestion()
+    public function testGetSuggestion(): void
     {
         $this->assertEquals(null, StringHelper::getSuggestion([], ''));
         $this->assertEquals(null, StringHelper::getSuggestion([], 'a'));

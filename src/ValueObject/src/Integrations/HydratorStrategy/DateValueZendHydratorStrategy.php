@@ -11,6 +11,11 @@ use spaceonfire\ValueObject\Date\DateTimeValueInterface;
 use Webmozart\Assert\Assert;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
+/**
+ * Class DateValueZendHydratorStrategy
+ * @package spaceonfire\ValueObject\Integrations\HydratorStrategy
+ * @codeCoverageIgnore
+ */
 final class DateValueZendHydratorStrategy implements StrategyInterface
 {
     /**
@@ -36,10 +41,7 @@ final class DateValueZendHydratorStrategy implements StrategyInterface
 
     private function validateDateClass(string $dateClass): void
     {
-        $allowedClasses = [
-            DateTimeImmutableValue::class,
-            DateTimeValue::class,
-        ];
+        $allowedClasses = [DateTimeImmutableValue::class, DateTimeValue::class];
 
         foreach ($allowedClasses as $allowedClass) {
             if ($dateClass === $allowedClass || is_subclass_of($dateClass, $allowedClass)) {

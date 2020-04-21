@@ -8,6 +8,11 @@ use spaceonfire\ValueObject\BaseValueObject;
 use Webmozart\Assert\Assert;
 use Zend\Hydrator\Strategy\StrategyInterface;
 
+/**
+ * Class ValueObjectZendHydratorStrategy
+ * @package spaceonfire\ValueObject\Integrations\HydratorStrategy
+ * @codeCoverageIgnore
+ */
 final class ValueObjectZendHydratorStrategy implements StrategyInterface
 {
     /**

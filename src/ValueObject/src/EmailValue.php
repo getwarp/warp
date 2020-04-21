@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @phpcs:disable PSR12.Classes.ClosingBrace.StatementAfter
- */
-
 declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
@@ -14,6 +10,9 @@ use Webmozart\Assert\Assert;
 
 class EmailValue extends StringValue
 {
+    /**
+     * @inheritDoc
+     */
     protected function validate($value): bool
     {
         $isValid = parent::validate($value);
@@ -30,6 +29,9 @@ class EmailValue extends StringValue
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
         if ($value !== null) {

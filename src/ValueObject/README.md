@@ -21,7 +21,6 @@ tests/
 vendor/
 ```
 
-
 ## Install
 
 Via Composer

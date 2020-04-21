@@ -13,6 +13,9 @@ use spaceonfire\ValueObject\Date\DateTimeValue;
 
 class DateTimeValueTest extends TestCase
 {
+    /**
+     * @var string
+     */
     private static $oldTZ;
 
     public static function setUpBeforeClass(): void
@@ -26,7 +29,7 @@ class DateTimeValueTest extends TestCase
         date_default_timezone_set(self::$oldTZ);
     }
 
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $this->assertEquals((new DateTime())->getTimestamp(), (new DateTimeValue())->getTimestamp());
         $this->assertEquals(
@@ -35,7 +38,7 @@ class DateTimeValueTest extends TestCase
         );
     }
 
-    public function testConstructorException()
+    public function testConstructorException(): void
     {
         $this->expectException(DateException::class);
         new DateTimeValue('19/10/2016 14:48:21');
@@ -44,7 +47,7 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.JSON.phpt
      */
-    public function testJson()
+    public function testJson(): void
     {
         $this->assertEquals('"1978-01-23T10:40:00+00:00"', json_encode(DateTimeValue::from(254400000)));
     }
@@ -52,7 +55,7 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
      */
-    public function testCreateFromFormat()
+    public function testCreateFromFormat(): void
     {
         $this->assertInstanceOf(
             DateTimeValue::class,
@@ -71,21 +74,14 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
      */
-    public function testCreateFromFormatTimezone()
+    public function testCreateFromFormatTimezone(): void
     {
         $this->assertInstanceOf(
             DateTimeValue::class,
-            DateTimeValue::createFromFormat(
-                'Y-m-d H:i:s',
-                '2050-08-13 10:40:00',
-                new DateTimeZone('UTC')
-            )
+            DateTimeValue::createFromFormat('Y-m-d H:i:s', '2050-08-13 10:40:00', new DateTimeZone('UTC'))
         );
 
-        $this->assertEquals(
-            'UTC',
-            DateTimeValue::createFromFormat('Y', '2050')->getTimezone()->getName()
-        );
+        $this->assertEquals('UTC', DateTimeValue::createFromFormat('Y', '2050')->getTimezone()->getName());
         $this->assertEquals(
             'Europe/Moscow',
             DateTimeValue::createFromFormat('Y', '2050', 'Europe/Moscow')->getTimezone()->getName()
@@ -95,7 +91,7 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.createFromFormat.phpt
      */
-    public function testCreateFromFormatTimezoneException()
+    public function testCreateFromFormatTimezoneException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         DateTimeValue::createFromFormat('Y-m-d H:i:s', '2050-08-13 10:40:00', 5);
@@ -104,54 +100,30 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.from.phpt
      */
-    public function testFrom()
+    public function testFrom(): void
     {
-        $this->assertEquals(
-            '1978-01-23 10:40:00',
-            (string)DateTimeValue::from(254400000)
-        );
-        $this->assertEquals(
-            '1978-01-23 10:40:00',
-            (string)(new DateTimeValue())->setTimestamp(254400000)
-        );
-        $this->assertEquals(
-            254400000,
-            DateTimeValue::from(254400000)->getTimestamp()
-        );
+        $this->assertEquals('1978-01-23 10:40:00', (string)DateTimeValue::from(254400000));
+        $this->assertEquals('1978-01-23 10:40:00', (string)(new DateTimeValue())->setTimestamp(254400000));
+        $this->assertEquals(254400000, DateTimeValue::from(254400000)->getTimestamp());
 
         // 64 bit
-        $this->assertEquals(
-            '2050-08-13 10:40:00',
-            (string)DateTimeValue::from(2544000000)
-        );
-        $this->assertEquals(
-            '2050-08-13 10:40:00',
-            (string)(new DateTimeValue())->setTimestamp(2544000000)
-        );
+        $this->assertEquals('2050-08-13 10:40:00', (string)DateTimeValue::from(2544000000));
+        $this->assertEquals('2050-08-13 10:40:00', (string)(new DateTimeValue())->setTimestamp(2544000000));
         $this->assertSame(
             is_int(2544000000) ? 2544000000 : '2544000000',
             DateTimeValue::from(2544000000)->getTimestamp()
         );
 
-        $this->assertEquals(
-            '1978-05-05 00:00:00',
-            (string)DateTimeValue::from('1978-05-05')
-        );
+        $this->assertEquals('1978-05-05 00:00:00', (string)DateTimeValue::from('1978-05-05'));
 
-        $this->assertEquals(
-            (new DateTime())->format('Y-m-d H:i:s'),
-            (string)DateTimeValue::from(null)
-        );
+        $this->assertEquals((new DateTime())->format('Y-m-d H:i:s'), (string)DateTimeValue::from(null));
 
         $this->assertEquals(
             (new DateTime())->modify('+1 day')->format('Y-m-d H:i:s'),
             (string)DateTimeValue::from(86400)
         );
 
-        $this->assertInstanceOf(
-            DateTimeValue::class,
-            DateTimeValue::from(new DateTime('1978-05-05'))
-        );
+        $this->assertInstanceOf(DateTimeValue::class, DateTimeValue::from(new DateTime('1978-05-05')));
 
         $this->assertEquals(
             '1978-05-05 12:00:00.123450',
@@ -162,7 +134,7 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.fromParts.phpt
      */
-    public function testFromParts()
+    public function testFromParts(): void
     {
         $this->assertEquals(
             '0001-12-09 00:00:00.000000',
@@ -201,7 +173,7 @@ class DateTimeValueTest extends TestCase
     /**
      * @see https://github.com/nette/utils/blob/master/tests/Utils/DateTime.fromParts.phpt
      */
-    public function testFromPartsExceptions()
+    public function testFromPartsExceptions(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid date '1985-02-29 00:00:0.00000'");

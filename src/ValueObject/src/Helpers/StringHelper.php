@@ -40,12 +40,12 @@ abstract class StringHelper
             $value = (string)$value;
         }
 
-        return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: null;
     }
 
     /**
      * Finds the best suggestion (for 8-bit encoding).
-     * @param string[] $possibilities
+     * @param string[]|mixed[] $possibilities
      * @param string $value
      * @return string|null
      * @see https://github.com/nette/utils/blob/master/src/Utils/Helpers.php#L58
