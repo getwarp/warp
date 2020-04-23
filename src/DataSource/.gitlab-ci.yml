@@ -13,6 +13,7 @@ stages:
 .composer-job:
   extends: .php-job
   before_script:
+    - composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
     - composer install
   cache:
     paths:

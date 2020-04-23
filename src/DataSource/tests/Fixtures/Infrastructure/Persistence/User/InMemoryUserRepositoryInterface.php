@@ -2,23 +2,28 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence;
+namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User;
 
 use spaceonfire\Collection\Collection;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Criteria\CriteriaInterface;
 use spaceonfire\DataSource\EntityInterface;
-use spaceonfire\DataSource\Fixtures\Domain\Exceptions\PostNotFoundException;
-use spaceonfire\DataSource\Fixtures\Domain\Post;
-use spaceonfire\DataSource\Fixtures\Domain\PostRepositoryInterface;
+use spaceonfire\DataSource\Fixtures\Domain\User\Exceptions\UserNotFoundException;
+use spaceonfire\DataSource\Fixtures\Domain\User\User;
+use spaceonfire\DataSource\Fixtures\Domain\User\UserRepositoryInterface;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
 use spaceonfire\DataSource\MapperInterface;
 use Webmozart\Assert\Assert;
 
-class InMemoryPostRepository implements PostRepositoryInterface
+/**
+ * Class InMemoryUserRepositoryInterface
+ * @package spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User
+ * @codeCoverageIgnore
+ */
+class InMemoryUserRepositoryInterface implements UserRepositoryInterface
 {
     /**
-     * @var Post[]
+     * @var User[]
      */
     private $storage;
     /**
@@ -27,17 +32,12 @@ class InMemoryPostRepository implements PostRepositoryInterface
     private $mapper;
 
     /**
-     * InMemoryPostRepository constructor.
-     * @param array<int,Post>|null $posts
+     * InMemoryUserRepository constructor.
+     * @param User[] $users
      */
-    public function __construct(?array $posts = null)
+    public function __construct(array $users)
     {
-        // @codeCoverageIgnoreStart
-        $this->storage = $posts ?? [
-                1 => new Post(1, 'Hello, World!'),
-                2 => new Post(2, 'Hello, World!'),
-            ];
-        // @codeCoverageIgnoreEnd
+        $this->storage = (new Collection($users))->indexBy('id')->all();
 
         $this->mapper = new StubMapper();
     }
@@ -45,9 +45,17 @@ class InMemoryPostRepository implements PostRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function getMapper(): MapperInterface
+    {
+        return $this->mapper;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function save($entity): void
     {
-        Assert::isInstanceOf($entity, Post::class);
+        Assert::isInstanceOf($entity, User::class);
         $this->storage[$entity['id']] = $entity;
     }
 
@@ -56,22 +64,22 @@ class InMemoryPostRepository implements PostRepositoryInterface
      */
     public function remove($entity): void
     {
-        Assert::isInstanceOf($entity, Post::class);
+        Assert::isInstanceOf($entity, User::class);
         unset($this->storage[$entity['id']]);
     }
 
     /**
      * @inheritDoc
      */
-    public function findByPrimary($primary): Post
+    public function findByPrimary($primary): User
     {
-        Assert::integer($primary);
+        Assert::uuid($primary);
 
         if (isset($this->storage[$primary])) {
             return $this->storage[$primary];
         }
 
-        throw new PostNotFoundException();
+        throw new UserNotFoundException();
     }
 
     /**
@@ -85,7 +93,7 @@ class InMemoryPostRepository implements PostRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function findOne(?CriteriaInterface $criteria = null): ?Post
+    public function findOne(?CriteriaInterface $criteria = null): ?User
     {
         return $this->findAll($criteria)->first();
     }
@@ -93,9 +101,9 @@ class InMemoryPostRepository implements PostRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getMapper(): MapperInterface
+    public function count(?CriteriaInterface $criteria = null): int
     {
-        return $this->mapper;
+        return count($this->findAll($criteria));
     }
 
     /**
@@ -111,7 +119,7 @@ class InMemoryPostRepository implements PostRepositoryInterface
 
     /**
      * @param mixed $criteria
-     * @return CollectionInterface|Post[]
+     * @return CollectionInterface|User[]
      * @deprecated
      * @codeCoverageIgnore
      */

@@ -1,7 +1,7 @@
 {
   "name": "spaceonfire/data-source",
   "type": "library",
-  "description": "",
+  "description": "Useful interfaces and abstracts to design your domain model",
   "keywords": [
     "spaceonfire",
     "DataSource",
@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^7.2",
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6.1",
     "jawira/case-converter": "^3.4.1",
@@ -33,15 +33,25 @@
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.0",
+    "cycle/orm": "^1.2",
+    "cycle/schema-builder": "^1.1",
+    "nette/utils": "^3.0",
+    "phpunit/phpunit": "^8.5",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "roave/security-advisories": "dev-master",
     "symplify/easy-coding-standard-prefixed": "^7.2",
+    "spaceonfire/value-object": "^1.0",
+    "ramsey/uuid": "^4.0",
     "spiral/pagination": "^2.2.2"
   },
   "suggest": {
-    "spiral/pagination": "Needed for QueryInterface"
+    "spaceonfire/value-object": "",
+    "ramsey/uuid": "",
+    "spiral/pagination": "Needed for QueryInterface",
+    "cycle/orm": "There are adapters available to use with Cycle ORM",
+    "cycle/schema-builder": "There are adapters available to use with Cycle ORM",
+    "nette/utils": ""
   },
   "autoload": {
     "psr-4": {

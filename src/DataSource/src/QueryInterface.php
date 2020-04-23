@@ -14,9 +14,9 @@ interface QueryInterface extends Countable, PaginableInterface, FilterableInterf
 {
     /**
      * Fetch one element
-     * @return EntityInterface
+     * @return EntityInterface|null
      */
-    public function fetchOne(): EntityInterface;
+    public function fetchOne(): ?EntityInterface;
 
     /**
      * Fetch all elements

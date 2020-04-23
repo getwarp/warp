@@ -2,43 +2,43 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Domain;
+namespace spaceonfire\DataSource\Fixtures\Domain\User;
 
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Criteria\CriteriaInterface;
 use spaceonfire\DataSource\RepositoryInterface;
 
-interface PostRepositoryInterface extends RepositoryInterface
+interface UserRepositoryInterface extends RepositoryInterface
 {
     /**
      * @inheritDoc
-     * @param Post $entity
+     * @param User $entity
      */
     public function save($entity): void;
 
     /**
      * @inheritDoc
-     * @param Post $entity
+     * @param User $entity
      */
     public function remove($entity): void;
 
     /**
      * @inheritDoc
      * @param mixed $primary
-     * @return Post
-     * @throws Exceptions\PostNotFoundException
+     * @return User
+     * @throws Exceptions\UserNotFoundException
      */
-    public function findByPrimary($primary): Post;
+    public function findByPrimary($primary): User;
 
     /**
      * @inheritDoc
-     * @return CollectionInterface|Post[]
+     * @return CollectionInterface|User[]
      */
     public function findAll(?CriteriaInterface $criteria = null): CollectionInterface;
 
     /**
      * @inheritDoc
-     * @return Post|null
+     * @return User|null
      */
-    public function findOne(?CriteriaInterface $criteria = null): ?Post;
+    public function findOne(?CriteriaInterface $criteria = null): ?User;
 }

@@ -13,6 +13,14 @@ parameters:
     Unused variable $_.: ~
     SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
       - tests/Fixtures/*
+      - src/Adapters/CycleOrm/Repository/AbstractCycleRepository.php
+      - src/Adapters/CycleOrm/Mapper/Hydrator/Strategy/CollectionExtractorStrategy.php
+    PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer:
+      - tests/Fixtures/*
+    Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer:
+      - tests/Adapters/CycleOrm/Query/CycleQueryExpressionVisitorTest.php
+    Useless variable $repository.:
+      - tests/Adapters/CycleOrm/CycleOrmTestCompanion.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~

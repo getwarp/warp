@@ -53,6 +53,13 @@ interface RepositoryInterface
     public function findOne(?CriteriaInterface $criteria = null);
 
     /**
+     * Counts entities matching provided criteria
+     * @param CriteriaInterface|null $criteria
+     * @return int
+     */
+    public function count(?CriteriaInterface $criteria = null): int;
+
+    /**
      * Returns mapper for repository's entity
      * @return MapperInterface
      */

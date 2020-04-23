@@ -10,9 +10,11 @@ parameters:
 	checkGenericClassInNonGenericObjectType: false
 	paths:
 		- src/
-		- tests/
 	autoload_files:
 		- vendor/autoload.php
 	ignoreErrors:
-		- '/^Method (.*)::offset(Exists|Get|Set|Unset)\(\) has parameter (.*) with no typehint specified.$/'
-		- '/^Method (.*)::offset(Exists|Get|Set|Unset)\(\) has no return typehint specified.$/'
+		- '/^PHPDoc tag \@return with type (.*)\|string is not subtype of native type string\.$/'
+		- '/^Method spaceonfire\\DataSource\\Adapters\\CycleOrm\\Repository\\AbstractCycleRepository::findByPrimary\(\) should return spaceonfire\\DataSource\\EntityInterface but returns object\.$/'
+		- '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
+		- '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
+		- '/^Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)$/'
