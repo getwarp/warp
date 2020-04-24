@@ -78,6 +78,30 @@ class Criteria implements CriteriaInterface
     /**
      * @inheritDoc
      */
+    public function andWhere(Expression $expression): CriteriaInterface
+    {
+        if ($this->expression === null) {
+            return $this->where($expression);
+        }
+
+        return $this->where(self::expr()->andX([$this->expression, $expression]));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function orWhere(Expression $expression): CriteriaInterface
+    {
+        if ($this->expression === null) {
+            return $this->where($expression);
+        }
+
+        return $this->where(self::expr()->orX([$this->expression, $expression]));
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getOrderBy(): array
     {
         return $this->orderBy;

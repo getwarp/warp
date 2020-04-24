@@ -23,6 +23,20 @@ interface CriteriaInterface
     public function where(?Expression $expression): CriteriaInterface;
 
     /**
+     * Joins provided expression with current one using conjunction.
+     * @param Expression $expression
+     * @return $this
+     */
+    public function andWhere(Expression $expression): CriteriaInterface;
+
+    /**
+     * Joins provided expression with current one using disjunction.
+     * @param Expression $expression
+     * @return $this
+     */
+    public function orWhere(Expression $expression): CriteriaInterface;
+
+    /**
      * Getter for `orderBy` property
      * @return array<string,int>
      */

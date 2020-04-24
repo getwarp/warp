@@ -80,6 +80,24 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
     /**
      * @inheritDoc
      */
+    public function andWhere(Expression $expression): CriteriaInterface
+    {
+        $this->proxyCall(__FUNCTION__, func_get_args());
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function orWhere(Expression $expression): CriteriaInterface
+    {
+        $this->proxyCall(__FUNCTION__, func_get_args());
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getOrderBy(): array
     {
         return $this->proxyCall(__FUNCTION__, func_get_args());

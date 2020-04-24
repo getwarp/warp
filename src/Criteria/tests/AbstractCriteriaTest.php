@@ -6,7 +6,8 @@ namespace spaceonfire\Criteria;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Webmozart\Expression\Expr;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 
 abstract class AbstractCriteriaTest extends TestCase
 {
@@ -57,14 +58,45 @@ abstract class AbstractCriteriaTest extends TestCase
     public function testWhere(): void
     {
         self::assertEquals(null, $this->criteria->getWhere());
-        $expression = Expr::property('fieldName', Expr::equals('test'));
+        $expression = Criteria::expr()->property('fieldName', Criteria::expr()->equals('test'));
         $this->criteria->where($expression);
         self::assertEquals($expression, $this->criteria->getWhere());
+
+        $this->criteria->where(null);
+        self::assertEquals(null, $this->criteria->getWhere());
+    }
+
+    public function testAndWhere(): void
+    {
+        self::assertEquals(null, $this->criteria->getWhere());
+        $expressionA = Criteria::expr()->property('field1', Criteria::expr()->equals('test'));
+        $this->criteria->andWhere($expressionA);
+        self::assertEquals($expressionA, $this->criteria->getWhere());
+
+        $expressionB = Criteria::expr()->property('field2', Criteria::expr()->greaterThan(10));
+        $this->criteria->andWhere($expressionB);
+
+        self::assertInstanceOf(AndX::class, $this->criteria->getWhere());
+        self::assertTrue($this->criteria->getWhere()->equivalentTo(new AndX([$expressionA, $expressionB])));
+    }
+
+    public function testOrWhere(): void
+    {
+        self::assertEquals(null, $this->criteria->getWhere());
+        $expressionA = Criteria::expr()->property('field1', Criteria::expr()->equals('test'));
+        $this->criteria->orWhere($expressionA);
+        self::assertEquals($expressionA, $this->criteria->getWhere());
+
+        $expressionB = Criteria::expr()->property('field2', Criteria::expr()->greaterThan(10));
+        $this->criteria->orWhere($expressionB);
+
+        self::assertInstanceOf(OrX::class, $this->criteria->getWhere());
+        self::assertTrue($this->criteria->getWhere()->equivalentTo(new OrX([$expressionA, $expressionB])));
     }
 
     public function testMergeOverrideAll(): void
     {
-        $expression = Expr::property('fieldName', Expr::equals('test'));
+        $expression = Criteria::expr()->property('fieldName', Criteria::expr()->equals('test'));
 
         $newCriteria = $this->createCriteria()
             ->limit(50)
