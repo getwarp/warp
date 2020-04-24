@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria;
 
+use spaceonfire\Criteria\Expression\ExpressionBuilder;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 
@@ -29,6 +30,33 @@ class Criteria implements CriteriaInterface
      * @var mixed[]
      */
     protected $include = [];
+    /**
+     * @var ExpressionBuilder
+     */
+    private static $expressionBuilder;
+
+    /**
+     * Criteria constructor.
+     * @param Expression $where
+     * @param array<string,int> $orderBy
+     * @param int|null $offset
+     * @param int|null $limit
+     * @param mixed[] $include
+     */
+    public function __construct(
+        ?Expression $where = null,
+        array $orderBy = [],
+        ?int $offset = null,
+        ?int $limit = null,
+        array $include = []
+    ) {
+        $this
+            ->where($where)
+            ->orderBy($orderBy)
+            ->offset($offset)
+            ->limit($limit)
+            ->include($include);
+    }
 
     /**
      * @inheritDoc
@@ -146,5 +174,17 @@ class Criteria implements CriteriaInterface
         }
 
         return $clone;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function expr(): ExpressionBuilder
+    {
+        if (self::$expressionBuilder === null) {
+            self::$expressionBuilder = new ExpressionBuilder();
+        }
+
+        return self::$expressionBuilder;
     }
 }

@@ -96,4 +96,10 @@ abstract class AbstractCriteriaTest extends TestCase
         self::assertEquals($this->criteria->getOrderBy(), $mergedCriteria->getOrderBy());
         self::assertEquals($this->criteria->getWhere(), $mergedCriteria->getWhere());
     }
+
+    public function testExpr(): void
+    {
+        $this->criteria::expr();
+        self::assertTrue(true);
+    }
 }

@@ -24,7 +24,7 @@ class CriteriaBuilder
      */
     protected $pageSizeRange = [10, 250];
     /**
-     * @var array|null
+     * @var array<string,int>|null
      */
     protected $orderings;
     /**
@@ -48,6 +48,10 @@ class CriteriaBuilder
         return $builder;
     }
 
+    /**
+     * @param int[] $pageSizeRange
+     * @return $this
+     */
     public function withPageSizeRange(array $pageSizeRange): self
     {
         Assert::allInteger($pageSizeRange);
@@ -88,6 +92,10 @@ class CriteriaBuilder
         return $builder;
     }
 
+    /**
+     * @param mixed[] $include
+     * @return $this
+     */
     public function withInclude(array $include): self
     {
         $builder = clone $this;
@@ -97,6 +105,7 @@ class CriteriaBuilder
 
     private function buildPaginator(): PaginatorInterface
     {
+        /** @var int $pageSize */
         $pageSize = $this->pageSize;
         if ($pageSize < $this->pageSizeRange[0]) {
             $pageSize = $this->pageSizeRange[0];
@@ -107,7 +116,7 @@ class CriteriaBuilder
 
         $paginator = new Paginator($pageSize);
 
-        if ($this->page > 1) {
+        if ($this->page !== null && $this->page > 1) {
             $paginator = $paginator->withPage($this->page)->withCount($this->page * $pageSize);
         }
 
@@ -120,7 +129,7 @@ class CriteriaBuilder
 
         $this->buildPaginator()->paginate($criteria);
 
-        if ($this->orderings) {
+        if (is_array($this->orderings)) {
             // TODO: filter order fields in allowed range in build stage
             $criteria->orderBy($this->orderings);
         }

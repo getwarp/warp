@@ -6,6 +6,7 @@ services:
     environment:
       - SOF_PRESET=default
       - APPLICATION_ENV=test
+      - WEBROOT=/dev/null
       - ENABLE_XDEBUG=1
       - XDEBUG_IDEKEY=criteria
       - PAGER=more

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria;
 
+use spaceonfire\Criteria\Expression\ExpressionBuilder;
 use Webmozart\Expression\Expression;
 
 interface CriteriaInterface
@@ -79,4 +80,10 @@ interface CriteriaInterface
      * @return CriteriaInterface
      */
     public function merge(CriteriaInterface $criteria): CriteriaInterface;
+
+    /**
+     * Returns expression builder
+     * @return ExpressionBuilder
+     */
+    public static function expr(): ExpressionBuilder;
 }

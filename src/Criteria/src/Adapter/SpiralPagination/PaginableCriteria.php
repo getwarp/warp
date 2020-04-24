@@ -6,6 +6,7 @@ namespace spaceonfire\Criteria\Adapter\SpiralPagination;
 
 use spaceonfire\Criteria\Criteria;
 use spaceonfire\Criteria\CriteriaInterface;
+use spaceonfire\Criteria\Expression\ExpressionBuilder;
 use Spiral\Pagination\PaginableInterface;
 use Spiral\Pagination\Paginator;
 use Spiral\Pagination\PaginatorInterface;
@@ -41,7 +42,7 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
      */
     public function makePaginator(): PaginatorInterface
     {
-        if ($this->getLimit() > 0) {
+        if ($this->getLimit() !== null && $this->getLimit() > 0) {
             $page = (int)($this->getOffset() / $this->getLimit()) + 1;
             return (new Paginator($this->getLimit()))->withPage($page);
         }
@@ -153,5 +154,13 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
         $clone = clone $this;
         $clone->criteria = $clone->proxyCall(__FUNCTION__, func_get_args());
         return $clone;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function expr(): ExpressionBuilder
+    {
+        return Criteria::expr();
     }
 }

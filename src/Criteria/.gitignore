@@ -46,6 +46,5 @@ phpunit.xml
 vendor
 phpstan.neon
 docker-compose.override.yml
-index.html
 auth.json
 .phpunit.result.cache

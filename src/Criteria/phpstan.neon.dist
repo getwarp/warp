@@ -5,13 +5,16 @@ includes:
 parameters:
 	level: max
 	inferPrivatePropertyTypeFromConstructor: true
+	checkMissingIterableValueType: false
 	paths:
 		- src/
-		- tests/
 	autoload_files:
 		- vendor/autoload.php
 	ignoreErrors:
 		-
-			message: '/^Parameter #1 \$function of function call_user_func_array expects callable/'
-			path: src/Adapter/Pagination/PaginableCriteria.php
+			message: '/^Parameter \#1 \$function of function call_user_func_array expects callable/'
+			paths:
+				- src/Adapter/SpiralPagination/PaginableCriteria.php
+				- src/Expression/ExpressionBuilder.php
 		- '/^Static method Webmozart\\Assert\\Assert::allOneOf\(\) invoked with 3 parameters, 1-2 required.$/'
+		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
