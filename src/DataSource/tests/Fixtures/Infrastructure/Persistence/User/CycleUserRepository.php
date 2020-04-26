@@ -55,9 +55,9 @@ class CycleUserRepository extends AbstractCycleRepository implements UserReposit
         return $e;
     }
 
-    protected static function makeNotFoundException($primary): NotFoundException
+    protected static function makeNotFoundException($primary = null): NotFoundException
     {
-        return new Exceptions\UserNotFoundException();
+        return new Exceptions\UserNotFoundException(null, compact('primary'));
     }
 
     /**

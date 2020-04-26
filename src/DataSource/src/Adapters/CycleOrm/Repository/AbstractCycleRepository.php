@@ -240,13 +240,13 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     }
 
     /**
-     * @param mixed $primary
+     * @param mixed|null $primary
      * @return NotFoundException
      * @codeCoverageIgnore
      */
-    protected static function makeNotFoundException($primary): NotFoundException
+    protected static function makeNotFoundException($primary = null): NotFoundException
     {
-        return new NotFoundException();
+        return new NotFoundException(null, compact('primary'));
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      */
     protected static function makeRemoveException(Throwable $e): RemoveException
     {
-        return new RemoveException('Remove Exception', 0, $e);
+        return new RemoveException(null, [], 0, $e);
     }
 
     /**
@@ -266,6 +266,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      */
     protected static function makeSaveException(Throwable $e): SaveException
     {
-        return new SaveException('Save Exception', 0, $e);
+        return new SaveException(null, [], 0, $e);
     }
 }

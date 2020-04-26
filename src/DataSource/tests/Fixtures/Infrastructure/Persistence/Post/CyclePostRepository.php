@@ -59,9 +59,9 @@ class CyclePostRepository extends AbstractCycleRepository implements PostReposit
         return $e;
     }
 
-    protected static function makeNotFoundException($primary): NotFoundException
+    protected static function makeNotFoundException($primary = null): NotFoundException
     {
-        return new Exceptions\PostNotFoundException();
+        return new Exceptions\PostNotFoundException(null, compact('primary'));
     }
 
     /**

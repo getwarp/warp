@@ -11,6 +11,8 @@ parameters:
     - tests/
   skip:
     Unused variable $_.: ~
+    Unused parameter $parameters.:
+      - src/Exceptions/*
     SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
       - tests/Fixtures/*
       - src/Adapters/CycleOrm/Repository/AbstractCycleRepository.php
