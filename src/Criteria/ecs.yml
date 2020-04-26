@@ -12,7 +12,7 @@ parameters:
   skip:
     Unused variable $_.: ~
     SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
-      - src/Adapter/SpiralPagination/PaginableCriteria.php
+      - src/AbstractCriteriaAdapter.php
     Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer:
       - tests/Adapter/SpiralPagination/CriteriaBuilderTest.php
       - tests/Expression/SelectorTest.php

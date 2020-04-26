@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Expr\ExpressionVisitor;
 use Doctrine\Common\Collections\Expr\Value;
 use InvalidArgumentException;
 use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionBuilder;
+use spaceonfire\Criteria\Expression\ExpressionFactory;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 
@@ -35,7 +35,7 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
         $this->comparisonMethod = $comparisonMethod;
     }
 
-    private function getExpressionBuilder(): ExpressionBuilder
+    private function getExpressionFactory(): ExpressionFactory
     {
         return Criteria::expr();
     }
@@ -53,10 +53,10 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
 
         switch ($expr->getType()) {
             case CompositeExpression::TYPE_AND:
-                return $this->getExpressionBuilder()->andX($expressionList);
+                return $this->getExpressionFactory()->andX($expressionList);
 
             case CompositeExpression::TYPE_OR:
-                return $this->getExpressionBuilder()->orX($expressionList);
+                return $this->getExpressionFactory()->orX($expressionList);
 
             default:
                 throw new InvalidArgumentException(sprintf(
@@ -78,47 +78,47 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
         switch ($comparison->getOperator()) {
             case Comparison::EQ:
             case Comparison::IS:
-                $innerExpression = $this->getExpressionBuilder()->same($value);
+            $innerExpression = $this->getExpressionFactory()->same($value);
                 break;
 
             case Comparison::NEQ:
-                $innerExpression = $this->getExpressionBuilder()->notSame($value);
+                $innerExpression = $this->getExpressionFactory()->notSame($value);
                 break;
 
             case Comparison::IN:
-                $innerExpression = $this->getExpressionBuilder()->in($value);
+                $innerExpression = $this->getExpressionFactory()->in($value);
                 break;
 
             case Comparison::NIN:
-                $innerExpression = $this->getExpressionBuilder()->not($this->getExpressionBuilder()->in($value));
+                $innerExpression = $this->getExpressionFactory()->not($this->getExpressionFactory()->in($value));
                 break;
 
             case Comparison::CONTAINS:
-                $innerExpression = $this->getExpressionBuilder()->contains($value);
+                $innerExpression = $this->getExpressionFactory()->contains($value);
                 break;
 
             case Comparison::STARTS_WITH:
-                $innerExpression = $this->getExpressionBuilder()->startsWith($value);
+                $innerExpression = $this->getExpressionFactory()->startsWith($value);
                 break;
 
             case Comparison::ENDS_WITH:
-                $innerExpression = $this->getExpressionBuilder()->endsWith($value);
+                $innerExpression = $this->getExpressionFactory()->endsWith($value);
                 break;
 
             case Comparison::LT:
-                $innerExpression = $this->getExpressionBuilder()->lessThan($value);
+                $innerExpression = $this->getExpressionFactory()->lessThan($value);
                 break;
 
             case Comparison::LTE:
-                $innerExpression = $this->getExpressionBuilder()->lessThanEqual($value);
+                $innerExpression = $this->getExpressionFactory()->lessThanEqual($value);
                 break;
 
             case Comparison::GT:
-                $innerExpression = $this->getExpressionBuilder()->greaterThan($value);
+                $innerExpression = $this->getExpressionFactory()->greaterThan($value);
                 break;
 
             case Comparison::GTE:
-                $innerExpression = $this->getExpressionBuilder()->greaterThanEqual($value);
+                $innerExpression = $this->getExpressionFactory()->greaterThanEqual($value);
                 break;
         }
 
@@ -129,7 +129,7 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
             ));
         }
 
-        return $this->getExpressionBuilder()->{$this->comparisonMethod}($field, $innerExpression);
+        return $this->getExpressionFactory()->{$this->comparisonMethod}($field, $innerExpression);
     }
 
     /**

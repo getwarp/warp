@@ -7,32 +7,32 @@ namespace spaceonfire\Criteria\Expression;
 use PHPUnit\Framework\TestCase;
 use Webmozart\Expression\Constraint\Same;
 
-class ExpressionBuilderTest extends TestCase
+class ExpressionFactoryTest extends TestCase
 {
-    private $builder;
+    private $factory;
 
     protected function setUp(): void
     {
-        $this->builder = new ExpressionBuilder();
+        $this->factory = new ExpressionFactory();
     }
 
     public function testKey(): void
     {
-        $expression = $this->builder->key('key', $innerExpr = $this->builder->null());
+        $expression = $this->factory->key('key', $innerExpr = $this->factory->null());
         self::assertEquals('[key]', (string)$expression->getPropertyPath());
         self::assertEquals($innerExpr, $expression->getExpression());
     }
 
     public function testProperty(): void
     {
-        $expression = $this->builder->property('key.chain', $innerExpr = $this->builder->null());
+        $expression = $this->factory->property('key.chain', $innerExpr = $this->factory->null());
         self::assertEquals('key.chain', (string)$expression->getPropertyPath());
         self::assertEquals($innerExpr, $expression->getExpression());
     }
 
     public function testMagicCall(): void
     {
-        $expression = $this->builder->null();
+        $expression = $this->factory->null();
         self::assertInstanceOf(Same::class, $expression);
         self::assertNull($expression->getComparedValue());
     }
@@ -41,8 +41,8 @@ class ExpressionBuilderTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Call to undefined method spaceonfire\Criteria\Expression\ExpressionBuilder::unknown()'
+            'Call to an undefined method spaceonfire\Criteria\Expression\ExpressionFactory::unknown()'
         );
-        $this->builder->unknown();
+        $this->factory->unknown();
     }
 }

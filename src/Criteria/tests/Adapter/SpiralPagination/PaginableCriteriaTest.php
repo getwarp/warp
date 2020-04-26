@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Criteria\Adapter\SpiralPagination;
 
 use spaceonfire\Criteria\AbstractCriteriaTest;
-use spaceonfire\Criteria\Criteria;
 use spaceonfire\Criteria\CriteriaInterface;
+use Spiral\Pagination\Paginator;
 
 class PaginableCriteriaTest extends AbstractCriteriaTest
 {
@@ -20,26 +20,39 @@ class PaginableCriteriaTest extends AbstractCriteriaTest
         return new PaginableCriteria();
     }
 
-    public function testExport(): void
+    public function testConstructWithPaginator(): void
     {
-        $originalCriteria = new Criteria();
-        $paginableCriteria = new PaginableCriteria($originalCriteria);
-        self::assertEquals($originalCriteria, $paginableCriteria->export());
+        $paginator = (new Paginator(50))->withCount(150)->withPage(2);
+        $criteria = new PaginableCriteria(null, $paginator);
+
+        self::assertEquals(50, $criteria->getLimit());
+        self::assertEquals(50, $criteria->getOffset());
+        self::assertEquals($paginator, $criteria->getPaginator());
     }
 
-    public function testMakePaginator(): void
+    public function testOffset(): void
     {
-        $this->criteria->limit(50)->offset(100);
+        self::assertEquals(1, $this->criteria->getPaginator()->getPage());
+        self::assertEquals(25, $this->criteria->getPaginator()->getLimit());
+        self::assertEquals(0, $this->criteria->getPaginator()->getOffset());
 
-        $paginator = $this->criteria->makePaginator()->withCount(150);
-        self::assertEquals(50, $paginator->getLimit());
-        self::assertEquals(3, $paginator->getPage());
+        parent::testOffset();
+
+        self::assertEquals(2, $this->criteria->getPaginator()->getPage());
+        self::assertEquals(25, $this->criteria->getPaginator()->getLimit());
+        self::assertEquals(25, $this->criteria->getPaginator()->getOffset());
     }
 
-    public function testMakePaginatorWithEmptyCriteria(): void
+    public function testLimit(): void
     {
-        $paginator = $this->criteria->makePaginator()->withCount(150);
-        self::assertEquals(25, $paginator->getLimit());
-        self::assertEquals(1, $paginator->getPage());
+        self::assertEquals(1, $this->criteria->getPaginator()->getPage());
+        self::assertEquals(25, $this->criteria->getPaginator()->getLimit());
+        self::assertEquals(0, $this->criteria->getPaginator()->getOffset());
+
+        parent::testLimit();
+
+        self::assertEquals(1, $this->criteria->getPaginator()->getPage());
+        self::assertEquals(25, $this->criteria->getPaginator()->getLimit());
+        self::assertEquals(0, $this->criteria->getPaginator()->getOffset());
     }
 }

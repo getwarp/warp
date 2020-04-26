@@ -25,6 +25,7 @@
   "require-dev": {
     "doctrine/collections": "^1.6.4",
     "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
     "phpunit/phpunit": "^8.0",
     "roave/security-advisories": "dev-master",
     "spiral/pagination": "^2.2",

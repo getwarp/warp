@@ -73,7 +73,7 @@ use Webmozart\Expression\Selector\Method;
  * @method KeyExists keyExists(string $keyName)
  * @method KeyNotExists keyNotExists(string $keyName)
  */
-class ExpressionBuilder
+class ExpressionFactory
 {
     /**
      * Check that the value of an array key matches an expression.
@@ -177,6 +177,8 @@ class ExpressionBuilder
             return call_user_func_array([Expr::class, $magicMethodName], $arguments);
         }
 
-        throw new BadMethodCallException('Call to undefined method ' . static::class . '::' . $magicMethodName . '()');
+        throw new BadMethodCallException(
+            'Call to an undefined method ' . static::class . '::' . $magicMethodName . '()'
+        );
     }
 }

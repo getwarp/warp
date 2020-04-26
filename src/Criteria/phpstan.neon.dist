@@ -2,6 +2,7 @@
 
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
+	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
 parameters:
 	level: max
 	inferPrivatePropertyTypeFromConstructor: true
@@ -14,7 +15,7 @@ parameters:
 		-
 			message: '/^Parameter \#1 \$function of function call_user_func_array expects callable/'
 			paths:
-				- src/Adapter/SpiralPagination/PaginableCriteria.php
-				- src/Expression/ExpressionBuilder.php
+				- src/AbstractCriteriaAdapter.php
+				- src/Expression/ExpressionFactory.php
 		- '/^Static method Webmozart\\Assert\\Assert::allOneOf\(\) invoked with 3 parameters, 1-2 required.$/'
 		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'

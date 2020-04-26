@@ -4,137 +4,67 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria\Adapter\SpiralPagination;
 
+use spaceonfire\Criteria\AbstractCriteriaAdapter;
 use spaceonfire\Criteria\Criteria;
 use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\Expression\ExpressionBuilder;
 use Spiral\Pagination\PaginableInterface;
 use Spiral\Pagination\Paginator;
 use Spiral\Pagination\PaginatorInterface;
-use Webmozart\Expression\Expression;
+use Webmozart\Assert\Assert;
 
-class PaginableCriteria implements CriteriaInterface, PaginableInterface
+class PaginableCriteria extends AbstractCriteriaAdapter implements PaginableInterface
 {
     /**
-     * @var CriteriaInterface
+     * @var PaginatorInterface|Paginator|null
      */
-    private $criteria;
+    private $paginator;
 
     /**
      * PaginableCriteria constructor.
      * @param CriteriaInterface|null $criteria original criteria to proxy
+     * @param PaginatorInterface|null $paginator
      */
-    public function __construct(?CriteriaInterface $criteria = null)
+    public function __construct(?CriteriaInterface $criteria = null, ?PaginatorInterface $paginator = null)
     {
-        $this->criteria = $criteria ?? new Criteria();
+        parent::__construct($criteria ?? new Criteria());
+
+        if ($paginator !== null) {
+            $this->paginator = $paginator;
+            $paginator->paginate($this);
+        } else {
+            $this->resetPaginator();
+        }
     }
 
     /**
-     * Export original criteria
-     * @return CriteriaInterface
+     * Getter for `paginator` property
+     * @return PaginatorInterface|Paginator
      */
-    public function export(): CriteriaInterface
+    public function getPaginator(): PaginatorInterface
     {
-        return $this->criteria;
+        Assert::notNull($this->paginator);
+        return $this->paginator;
     }
 
     /**
      * @return PaginatorInterface|Paginator
      */
-    public function makePaginator(): PaginatorInterface
+    private function makePaginator(): PaginatorInterface
     {
-        if ($this->getLimit() !== null && $this->getLimit() > 0) {
-            $page = (int)($this->getOffset() / $this->getLimit()) + 1;
-            return (new Paginator($this->getLimit()))->withPage($page);
-        }
+        $paginator = $this->paginator ?? new Paginator();
 
-        return new Paginator();
+        Assert::isInstanceOf($paginator, Paginator::class);
+
+        $limit = $this->getLimit() ?? 25;
+        $tmpCount = $limit + $this->getOffset();
+        $page = (int)($this->getOffset() / $limit) + 1;
+
+        return $paginator->withCount(max($tmpCount, $paginator->count()))->withLimit($limit)->withPage($page);
     }
 
-    /**
-     * @param string $methodName
-     * @param mixed[] $arguments
-     * @return mixed
-     */
-    private function proxyCall(string $methodName, array $arguments = [])
+    private function resetPaginator(): void
     {
-        return call_user_func_array([$this->criteria, $methodName], $arguments);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getWhere(): ?Expression
-    {
-        return $this->proxyCall(__FUNCTION__, func_get_args());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function where(?Expression $expression): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function andWhere(Expression $expression): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function orWhere(Expression $expression): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOrderBy(): array
-    {
-        return $this->proxyCall(__FUNCTION__, func_get_args());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function orderBy(array $orderBy): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getOffset(): int
-    {
-        return $this->proxyCall(__FUNCTION__, func_get_args());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offset(?int $offset): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getLimit(): ?int
-    {
-        return $this->proxyCall(__FUNCTION__, func_get_args());
+        $this->paginator = $this->makePaginator();
     }
 
     /**
@@ -142,43 +72,28 @@ class PaginableCriteria implements CriteriaInterface, PaginableInterface
      */
     public function limit(?int $limit): CriteriaInterface
     {
-        $this->proxyCall(__FUNCTION__, func_get_args());
+        parent::limit($limit);
+        $this->resetPaginator();
         return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getInclude(): array
+    public function offset(?int $offset): CriteriaInterface
     {
-        return $this->proxyCall(__FUNCTION__, func_get_args());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function include(array $include): CriteriaInterface
-    {
-        $this->proxyCall(__FUNCTION__, func_get_args());
+        parent::offset($offset);
+        $this->resetPaginator();
         return $this;
     }
 
     /**
-     * @inheritDoc
-     * The original criteria will not be changed, a new one will be returned instead.
+     * Clone criteria
      */
-    public function merge(CriteriaInterface $criteria): CriteriaInterface
+    public function __clone()
     {
-        $clone = clone $this;
-        $clone->criteria = $clone->proxyCall(__FUNCTION__, func_get_args());
-        return $clone;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function expr(): ExpressionBuilder
-    {
-        return Criteria::expr();
+        if ($this->paginator !== null) {
+            $this->paginator = clone $this->paginator;
+        }
     }
 }

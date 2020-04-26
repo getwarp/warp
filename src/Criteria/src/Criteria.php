@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria;
 
-use spaceonfire\Criteria\Expression\ExpressionBuilder;
+use spaceonfire\Criteria\Expression\ExpressionFactory;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 
@@ -31,7 +31,7 @@ class Criteria implements CriteriaInterface
      */
     protected $include = [];
     /**
-     * @var ExpressionBuilder
+     * @var ExpressionFactory
      */
     private static $expressionBuilder;
 
@@ -203,10 +203,10 @@ class Criteria implements CriteriaInterface
     /**
      * @inheritDoc
      */
-    public static function expr(): ExpressionBuilder
+    public static function expr(): ExpressionFactory
     {
         if (self::$expressionBuilder === null) {
-            self::$expressionBuilder = new ExpressionBuilder();
+            self::$expressionBuilder = new ExpressionFactory();
         }
 
         return self::$expressionBuilder;
