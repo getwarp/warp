@@ -8,6 +8,7 @@ namespace spaceonfire\DataSource\Adapters\CycleOrm\Query;
 
 use Cycle\ORM\Select\QueryBuilder;
 use InvalidArgumentException;
+use spaceonfire\Criteria\Expression\AbstractExpressionAdapter;
 use spaceonfire\Criteria\Expression\Selector;
 use spaceonfire\DataSource\MapperInterface;
 use Spiral\Database\Injection\Parameter;
@@ -40,6 +41,7 @@ class CycleQueryExpressionVisitor
     public function dispatch(Expression $expression): callable
     {
         $methodsMap = [
+            AbstractExpressionAdapter::class => 'visitExpressionAdapter',
             Logic\AndX::class => 'visitConjunction',
             Logic\OrX::class => 'visitDisjunction',
             SelectorNS\Key::class => 'visitSelector',
@@ -72,6 +74,16 @@ class CycleQueryExpressionVisitor
         return new InvalidArgumentException(
             sprintf($message ?? 'Not supported expression class: "%s"', get_class($expression))
         );
+    }
+
+    /**
+     * Visit inner expression for expression adapter
+     * @param AbstractExpressionAdapter $expr
+     * @return callable
+     */
+    public function visitExpressionAdapter(AbstractExpressionAdapter $expr): callable
+    {
+        return $this->dispatch($expr->getInnerExpression());
     }
 
     /**

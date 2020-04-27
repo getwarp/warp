@@ -7,6 +7,7 @@ namespace spaceonfire\DataSource\Adapters\CycleOrm\Query;
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\RootLoader;
 use InvalidArgumentException;
+use spaceonfire\Criteria\Expression\AbstractExpressionAdapter;
 use spaceonfire\DataSource\Adapters\CycleOrm\AbstractCycleOrmTest;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
 use Spiral\Database\Query\SelectQuery;
@@ -156,6 +157,11 @@ class CycleQueryExpressionVisitorTest extends AbstractCycleOrmTest
                 'SELECT * FROM "table" WHERE "key" > 1',
             ],
             [
+                new class(Expr::property('key', Expr::not(Expr::lessThanEqual(1)))) extends AbstractExpressionAdapter {
+                },
+                'SELECT * FROM "table" WHERE "key" > 1',
+            ],
+            [
                 Expr::andX([
                     Expr::key('key', Expr::greaterThan(10)),
                     Expr::key('key', Expr::lessThan(100)),
@@ -176,6 +182,8 @@ class CycleQueryExpressionVisitorTest extends AbstractCycleOrmTest
     {
         return [
             [Expr::true()],
+            [new class(Expr::true()) extends AbstractExpressionAdapter {
+            }],
             [new class() extends AlwaysTrue {
             }],
             [Expr::property('key', Expr::not(Expr::true()))],
