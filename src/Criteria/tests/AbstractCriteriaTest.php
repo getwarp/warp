@@ -131,6 +131,11 @@ abstract class AbstractCriteriaTest extends TestCase
 
     public function testExpr(): void
     {
+        $refl = new \ReflectionClass(Criteria::class);
+        $exprProp = $refl->getProperty('expressionFactory');
+        $exprProp->setAccessible(true);
+        $exprProp->setValue(null);
+
         $this->criteria::expr();
         self::assertTrue(true);
     }

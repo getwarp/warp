@@ -33,7 +33,7 @@ class Criteria implements CriteriaInterface
     /**
      * @var ExpressionFactory
      */
-    private static $expressionBuilder;
+    private static $expressionFactory;
 
     /**
      * Criteria constructor.
@@ -205,10 +205,10 @@ class Criteria implements CriteriaInterface
      */
     public static function expr(): ExpressionFactory
     {
-        if (self::$expressionBuilder === null) {
-            self::$expressionBuilder = new ExpressionFactory();
+        if (self::$expressionFactory === null) {
+            self::$expressionFactory = new ExpressionFactory();
         }
 
-        return self::$expressionBuilder;
+        return self::$expressionFactory;
     }
 }

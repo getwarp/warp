@@ -17,5 +17,6 @@ parameters:
 			paths:
 				- src/AbstractCriteriaAdapter.php
 				- src/Expression/ExpressionFactory.php
+				- src/Expression/AbstractExpressionAdapter.php
 		- '/^Static method Webmozart\\Assert\\Assert::allOneOf\(\) invoked with 3 parameters, 1-2 required.$/'
 		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'

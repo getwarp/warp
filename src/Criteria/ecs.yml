@@ -16,6 +16,7 @@ parameters:
     Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer:
       - tests/Adapter/SpiralPagination/CriteriaBuilderTest.php
       - tests/Expression/SelectorTest.php
+      - tests/Expression/AbstractExpressionAdapterTest.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~

@@ -98,7 +98,7 @@ class ExpressionFactory
     }
 
     /**
-     * @param string $magicMethodName
+     * @param string $name
      * @param mixed[] $arguments
      * @return mixed
      * @see Expr::all()
@@ -116,7 +116,6 @@ class ExpressionFactory
      * @see Expr::in()
      * @see Expr::isEmpty()
      * @see Expr::isInstanceOf()
-     * @see Expr::key()
      * @see Expr::keyExists()
      * @see Expr::keyNotExists()
      * @see Expr::lessThan()
@@ -130,12 +129,11 @@ class ExpressionFactory
      * @see Expr::notSame()
      * @see Expr::null()
      * @see Expr::orX()
-     * @see Expr::property()
      * @see Expr::same()
      * @see Expr::startsWith()
      * @see Expr::true()
      */
-    public function __call(string $magicMethodName, array $arguments = [])
+    public function __call(string $name, array $arguments = [])
     {
         $proxyMethods = array_flip([
             'all',
@@ -153,7 +151,6 @@ class ExpressionFactory
             'in',
             'isEmpty',
             'isInstanceOf',
-            'key',
             'keyExists',
             'keyNotExists',
             'lessThan',
@@ -167,18 +164,15 @@ class ExpressionFactory
             'notSame',
             'null',
             'orX',
-            'property',
             'same',
             'startsWith',
             'true',
         ]);
 
-        if (array_key_exists($magicMethodName, $proxyMethods)) {
-            return call_user_func_array([Expr::class, $magicMethodName], $arguments);
+        if (array_key_exists($name, $proxyMethods)) {
+            return call_user_func_array([Expr::class, $name], $arguments);
         }
 
-        throw new BadMethodCallException(
-            'Call to an undefined method ' . static::class . '::' . $magicMethodName . '()'
-        );
+        throw new BadMethodCallException('Call to an undefined method ' . static::class . '::' . $name . '()');
     }
 }
