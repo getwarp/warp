@@ -13,6 +13,7 @@ use spaceonfire\DataSource\Adapters\CycleOrm\Repository\AbstractCycleRepository;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Domain\User\User;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;
+use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Tag\CycleTagRepository;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User\CycleUserRepository;
 use Spiral\Database;
 use Spiral\Database\Config\DatabaseConfig;
@@ -107,7 +108,7 @@ class CycleOrmTestCompanion
             return;
         }
 
-        $this->repositories = [CyclePostRepository::class, CycleUserRepository::class];
+        $this->repositories = [CyclePostRepository::class, CycleUserRepository::class, CycleTagRepository::class];
 
         $this->repositoriesCache = [];
 

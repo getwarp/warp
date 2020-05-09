@@ -13,8 +13,7 @@ parameters:
 	autoload_files:
 		- vendor/autoload.php
 	ignoreErrors:
-		- '/^PHPDoc tag \@return with type (.*)\|string is not subtype of native type string\.$/'
-		- '/^Method spaceonfire\\DataSource\\Adapters\\CycleOrm\\Repository\\AbstractCycleRepository::findByPrimary\(\) should return spaceonfire\\DataSource\\EntityInterface but returns object\.$/'
+		- '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
 		- '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
 		- '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
 		- '/^Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)$/'

@@ -30,7 +30,7 @@ class CyclePostRepository extends AbstractCycleRepository implements PostReposit
     /**
      * @inheritDoc
      */
-    public static function getEntityClass(): string
+    public static function getEntityClass(): ?string
     {
         return Post::class;
     }

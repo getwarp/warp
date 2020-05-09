@@ -6,9 +6,11 @@ namespace spaceonfire\DataSource\Adapters\CycleOrm\Repository;
 
 use Cycle\ORM;
 use Cycle\Schema\Definition\Entity;
+use RuntimeException;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Criteria\CriteriaInterface;
 use spaceonfire\DataSource\Adapters\CycleOrm\Mapper\BasicCycleMapper;
+use spaceonfire\DataSource\Adapters\CycleOrm\Mapper\StdClassCycleMapper;
 use spaceonfire\DataSource\Adapters\CycleOrm\Query\CycleQuery;
 use spaceonfire\DataSource\EntityInterface;
 use spaceonfire\DataSource\Exceptions\NotFoundException;
@@ -17,11 +19,16 @@ use spaceonfire\DataSource\Exceptions\SaveException;
 use spaceonfire\DataSource\MapperInterface;
 use spaceonfire\DataSource\QueryInterface;
 use spaceonfire\DataSource\RepositoryInterface;
+use stdClass;
 use Throwable;
 use Webmozart\Assert\Assert;
 
 abstract class AbstractCycleRepository implements RepositoryInterface
 {
+    /**
+     * @var string[]
+     */
+    private static $roles = [];
     /**
      * @var ORM\RepositoryInterface|ORM\Select\Repository
      */
@@ -55,15 +62,37 @@ abstract class AbstractCycleRepository implements RepositoryInterface
 
     /**
      * Returns entity class name
-     * @return string|EntityInterface
+     * @return string|EntityInterface|null
      */
-    abstract public static function getEntityClass(): string;
+    abstract public static function getEntityClass(): ?string;
 
     /**
      * Returns Cycle entity definition
      * @return Entity
      */
     abstract protected static function defineInternal(): Entity;
+
+    /**
+     * Returns entity role for current repository
+     * @return string
+     */
+    private static function getRole(): string
+    {
+        if (!isset(self::$roles[static::class])) {
+            throw new RuntimeException('Role is not defined for ' . static::class); // @codeCoverageIgnore
+        }
+
+        return self::$roles[static::class];
+    }
+
+    /**
+     * Sets entity role of current repository
+     * @param string $role
+     */
+    private static function setRole(string $role): void
+    {
+        self::$roles[static::class] = $role;
+    }
 
     /**
      * Returns Cycle entity definition
@@ -73,12 +102,22 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $e = static::defineInternal();
 
-        if (!$e->getClass()) {
-            $e->setClass(static::getEntityClass());
+        if (!$e->getClass() && null !== $class = static::getEntityClass()) {
+            $e->setClass($class);
         }
 
+        if (!$e->getRole() && $class = $e->getClass()) {
+            $e->setRole($class); // @codeCoverageIgnore
+        }
+
+        if (null === $role = $e->getRole()) {
+            throw new RuntimeException('Entity must define role or class name'); // @codeCoverageIgnore
+        }
+
+        static::setRole($role);
+
         if (!$e->getMapper()) {
-            $e->setMapper(BasicCycleMapper::class); // @codeCoverageIgnore
+            $e->setMapper($e->getClass() === null ? StdClassCycleMapper::class : BasicCycleMapper::class);
         }
 
         return $e;
@@ -228,13 +267,19 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     public function getMapper(): MapperInterface
     {
         /** @var MapperInterface $mapper */
-        $mapper = $this->orm->getMapper(static::getEntityClass());
+        $mapper = $this->orm->getMapper(static::getRole());
         return $mapper;
     }
 
     protected static function assertEntity(object $entity): void
     {
-        foreach ([EntityInterface::class, static::getEntityClass()] as $class) {
+        // @codeCoverageIgnoreStart
+        $entityClasses = static::getEntityClass() === null
+            ? [stdClass::class]
+            : [EntityInterface::class, static::getEntityClass()];
+        // @codeCoverageIgnoreEnd
+
+        foreach ($entityClasses as $class) {
             Assert::isInstanceOf($entity, $class, 'Associated with repository class must implement %2$s. Got: %s');
         }
     }

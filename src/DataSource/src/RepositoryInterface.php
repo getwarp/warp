@@ -18,14 +18,14 @@ interface RepositoryInterface
 {
     /**
      * Persist entity in storage
-     * @param EntityInterface $entity
+     * @param mixed|EntityInterface $entity
      * @throws Exceptions\SaveException
      */
     public function save($entity): void;
 
     /**
      * Removes entity from storage
-     * @param EntityInterface $entity
+     * @param mixed|EntityInterface $entity
      * @throws Exceptions\RemoveException
      */
     public function remove($entity): void;
@@ -33,7 +33,7 @@ interface RepositoryInterface
     /**
      * Returns entity by its primary field
      * @param mixed $primary
-     * @return mixed&EntityInterface
+     * @return mixed|EntityInterface
      * @throws Exceptions\NotFoundException
      */
     public function findByPrimary($primary);

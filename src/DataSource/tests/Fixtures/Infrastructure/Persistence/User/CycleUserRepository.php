@@ -32,7 +32,7 @@ class CycleUserRepository extends AbstractCycleRepository implements UserReposit
     /**
      * @inheritDoc
      */
-    public static function getEntityClass(): string
+    public static function getEntityClass(): ?string
     {
         return User::class;
     }

@@ -23,7 +23,7 @@ class CollectionExtractorStrategy implements StrategyInterface
      *
      * Convert spaceonfire collection to doctrine collection for proper relations handling by Cycle ORM
      *
-     * @param CollectionInterface $value
+     * @param CollectionInterface|null|mixed $value
      * @return DoctrineCollection|mixed
      * @see HasMany::extract()
      * @see ManyToMany::extract()
