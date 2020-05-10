@@ -126,4 +126,11 @@ class CommandBusTest extends TestCase
             throw $exception;
         }
     }
+
+    public function testClone(): void
+    {
+        $commandBus = $this->commandBusFactory();
+        $commandBusClone = clone $commandBus;
+        self::assertTrue(true);
+    }
 }

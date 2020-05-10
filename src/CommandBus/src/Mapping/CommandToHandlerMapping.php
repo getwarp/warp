@@ -4,19 +4,6 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus\Mapping;
 
-interface CommandToHandlerMapping
+interface CommandToHandlerMapping extends ClassName\ClassNameMappingInterface, Method\MethodNameMappingInterface
 {
-    /**
-     * Returns handler class name for given command class name
-     * @param string $commandClassName
-     * @return string
-     */
-    public function getClassName(string $commandClassName): string;
-
-    /**
-     * Returns handler method name for given command class name
-     * @param string $commandClassName
-     * @return string
-     */
-    public function getMethodName(string $commandClassName): string;
 }

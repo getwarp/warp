@@ -22,6 +22,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.0] - 2020-05-10
+### Added
+- Added more flexible ways to declare command to handler mapping
+- Split `CommandToHandlerMapping` interface into `ClassNameMappingInterface` and `MethodNameMappingInterface`
+- Added next method name mappings: `StaticMethodNameMapping`
+- Added next class name mappings: `ReplacementClassNameMapping`, `SuffixClassNameMapping`, `ClassNameMappingChain`
+- Added `CompositeMapping`
+
 ## [1.0.2] - 2020-04-06
 ### Fixed
 - Cloning command bus: Rebind nested middleware callbacks for cloned command bus
