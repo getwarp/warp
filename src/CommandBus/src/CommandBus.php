@@ -22,11 +22,11 @@ class CommandBus
      */
     private $mapping;
     /**
-     * @var callable
+     * @var Closure
      */
     private $middlewareChain;
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface|null
      */
     private $container;
     /**
@@ -72,9 +72,9 @@ class CommandBus
 
     /**
      * @param Middleware[] $middlewareList
-     * @return callable
+     * @return Closure
      */
-    private function createExecutionChain(array $middlewareList): callable
+    private function createExecutionChain(array $middlewareList): Closure
     {
         $lastCallable = function (object $command) {
             return $this->createCommandHandler($command)($command);
@@ -105,7 +105,7 @@ class CommandBus
         if (!is_callable([$handler, $methodName])) {
             throw CanNotInvokeHandler::forCommand(
                 $command,
-                'Method ' . $methodName . ' does not exist on handler'
+                sprintf('Method "%s" does not exist on handler', $methodName)
             );
         }
 

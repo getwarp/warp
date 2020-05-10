@@ -41,6 +41,9 @@ nbproject
 
 # Project folders and files to ignore
 build
-phpcs.xml
 phpunit.xml
 vendor
+phpstan.neon
+docker-compose.override.yml
+auth.json
+.phpunit.result.cache

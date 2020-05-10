@@ -24,16 +24,13 @@ final class CanNotInvokeHandler extends BadMethodCallException implements Except
     {
         $type = get_class($command);
 
-        $exception = new self(
-            'Could not invoke handler for command ' . $type .
-            ' for reason: ' . $reason
-        );
+        $exception = new self(sprintf('Could not invoke handler for command %s for reason: %s', $type, $reason));
         $exception->command = $command;
 
         return $exception;
     }
 
-    private function __construct(string $message = '', $code = 0, Throwable $previous = null)
+    private function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
