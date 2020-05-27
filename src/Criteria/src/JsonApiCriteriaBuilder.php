@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Adapter\SpiralPagination;
+namespace spaceonfire\Criteria;
 
-use spaceonfire\Criteria\CriteriaInterface;
-use Spiral\Pagination\Paginator;
-use Spiral\Pagination\PaginatorInterface;
 use Webmozart\Assert\Assert;
 
-class CriteriaBuilder
+/**
+ * Class JsonApiCriteriaBuilder
+ *
+ * Provides a way to build criteria for JSON API request
+ *
+ * TODO: support parsing filter
+ *
+ * @package spaceonfire\Criteria
+ */
+class JsonApiCriteriaBuilder
 {
     /**
      * @var int|null
@@ -28,10 +34,19 @@ class CriteriaBuilder
      */
     protected $orderings;
     /**
+     * @var array|null
+     */
+    protected $allowedOrderByFields;
+    /**
      * @var mixed[]
      */
     protected $include = [];
 
+    /**
+     * Set page number
+     * @param int $page
+     * @return $this
+     */
     public function withPage(int $page): self
     {
         Assert::natural($page);
@@ -40,6 +55,11 @@ class CriteriaBuilder
         return $builder;
     }
 
+    /**
+     * Set page size
+     * @param int $pageSize
+     * @return $this
+     */
     public function withPageSize(int $pageSize): self
     {
         Assert::natural($pageSize);
@@ -49,12 +69,12 @@ class CriteriaBuilder
     }
 
     /**
+     * Set allowed page size range
      * @param int[] $pageSizeRange
      * @return $this
      */
     public function withPageSizeRange(array $pageSizeRange): self
     {
-        Assert::allInteger($pageSizeRange);
         Assert::allNatural($pageSizeRange);
         Assert::count($pageSizeRange, 2);
 
@@ -68,6 +88,11 @@ class CriteriaBuilder
         return $builder;
     }
 
+    /**
+     * Set sort fields
+     * @param string $sort
+     * @return $this
+     */
     public function withSort(string $sort): self
     {
         $builder = clone $this;
@@ -93,6 +118,20 @@ class CriteriaBuilder
     }
 
     /**
+     * Set fields that allowed to use for sorting
+     * @param array $allowedOrderByFields
+     * @return $this
+     */
+    public function withAllowedOrderByFields(array $allowedOrderByFields): self
+    {
+        Assert::allString($allowedOrderByFields);
+        $builder = clone $this;
+        $builder->allowedOrderByFields = $allowedOrderByFields;
+        return $builder;
+    }
+
+    /**
+     * Set include relations
      * @param mixed[] $include
      * @return $this
      */
@@ -103,36 +142,24 @@ class CriteriaBuilder
         return $builder;
     }
 
-    private function buildPaginator(): PaginatorInterface
-    {
-        /** @var int $pageSize */
-        $pageSize = $this->pageSize;
-        if ($pageSize < $this->pageSizeRange[0]) {
-            $pageSize = $this->pageSizeRange[0];
-        }
-        if ($pageSize > $this->pageSizeRange[1]) {
-            $pageSize = $this->pageSizeRange[1];
-        }
-
-        $paginator = new Paginator($pageSize);
-
-        if ($this->page !== null && $this->page > 1) {
-            $paginator = $paginator->withPage($this->page)->withCount($this->page * $pageSize);
-        }
-
-        return $paginator;
-    }
-
+    /**
+     * Build criteria
+     * @return CriteriaInterface
+     */
     public function build(): CriteriaInterface
     {
-        $criteria = new PaginableCriteria();
-
-        $this->buildPaginator()->paginate($criteria);
+        $criteria = new Criteria();
 
         if (is_array($this->orderings)) {
-            // TODO: filter order fields in allowed range in build stage
+            if ($this->allowedOrderByFields !== null) {
+                $this->orderings = array_intersect_key($this->orderings, array_flip($this->allowedOrderByFields));
+            }
+
             $criteria->orderBy($this->orderings);
         }
+
+        $pageSize = min(max($this->pageSize, $this->pageSizeRange[0]), $this->pageSizeRange[1]);
+        $criteria->limit($pageSize)->offset($pageSize * ($this->page - 1));
 
         $criteria->include($this->include);
 

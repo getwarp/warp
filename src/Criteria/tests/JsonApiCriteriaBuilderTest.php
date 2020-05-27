@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Adapter\SpiralPagination;
+namespace spaceonfire\Criteria;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-class CriteriaBuilderTest extends TestCase
+class JsonApiCriteriaBuilderTest extends TestCase
 {
     /**
      * @dataProvider buildProvider
@@ -21,7 +21,7 @@ class CriteriaBuilderTest extends TestCase
             $this->expectException($exception);
         }
 
-        $builder = new CriteriaBuilder();
+        $builder = new JsonApiCriteriaBuilder();
 
         foreach ($methods as $method => $attributes) {
             $builder = call_user_func_array([$builder, $method], $attributes);
@@ -107,6 +107,16 @@ class CriteriaBuilderTest extends TestCase
                 ],
                 [
                     ['assertEquals', 250, 'getLimit'],
+                ],
+                [],
+            ],
+            [
+                [
+                    'withSort' => ['-testDesc,testAsc'],
+                    'withAllowedOrderByFields' => [['testAsc']],
+                ],
+                [
+                    ['assertEquals', ['testAsc' => SORT_ASC], 'getOrderBy'],
                 ],
                 [],
             ],

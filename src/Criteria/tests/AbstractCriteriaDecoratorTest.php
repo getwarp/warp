@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria;
 
-class AbstractCriteriaAdapterTest extends AbstractCriteriaTest
+class AbstractCriteriaDecoratorTest extends AbstractCriteriaTest
 {
-    private function factory(?CriteriaInterface $criteria = null): AbstractCriteriaAdapter
+    private function factory(?CriteriaInterface $criteria = null): AbstractCriteriaDecorator
     {
-        return new class($criteria ?? new Criteria()) extends AbstractCriteriaAdapter {
+        return new class($criteria ?? new Criteria()) extends AbstractCriteriaDecorator {
         };
     }
 
@@ -24,6 +24,6 @@ class AbstractCriteriaAdapterTest extends AbstractCriteriaTest
         $outerCriteriaAdapter = $this->factory($middleCriteriaAdapter);
 
         self::assertEquals($innerCriteria, $outerCriteriaAdapter->getInnerCriteria());
-        self::assertInstanceOf(AbstractCriteriaAdapter::class, $outerCriteriaAdapter->getInnerCriteria(false));
+        self::assertInstanceOf(AbstractCriteriaDecorator::class, $outerCriteriaAdapter->getInnerCriteria(false));
     }
 }

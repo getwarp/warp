@@ -10,11 +10,11 @@ use spaceonfire\Criteria\Criteria;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
 
-class AbstractExpressionAdapterTest extends TestCase
+class AbstractExpressionDecoratorTest extends TestCase
 {
-    protected function factory(Expression $expression): AbstractExpressionAdapter
+    protected function factory(Expression $expression): AbstractExpressionDecorator
     {
-        return new class($expression) extends AbstractExpressionAdapter {
+        return new class($expression) extends AbstractExpressionDecorator {
         };
     }
 

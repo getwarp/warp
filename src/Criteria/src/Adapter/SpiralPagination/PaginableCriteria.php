@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria\Adapter\SpiralPagination;
 
-use spaceonfire\Criteria\AbstractCriteriaAdapter;
+use spaceonfire\Criteria\AbstractCriteriaDecorator;
 use spaceonfire\Criteria\Criteria;
 use spaceonfire\Criteria\CriteriaInterface;
 use Spiral\Pagination\PaginableInterface;
@@ -12,7 +12,7 @@ use Spiral\Pagination\Paginator;
 use Spiral\Pagination\PaginatorInterface;
 use Webmozart\Assert\Assert;
 
-class PaginableCriteria extends AbstractCriteriaAdapter implements PaginableInterface
+class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableInterface
 {
     /**
      * @var PaginatorInterface|Paginator|null

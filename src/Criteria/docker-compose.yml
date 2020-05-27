@@ -12,4 +12,4 @@ services:
       - PAGER=more
       - PUID=1000
     volumes:
-      - ./:/var/www/html:Z
+      - ./:/var/www/html

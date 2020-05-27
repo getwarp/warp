@@ -8,15 +8,10 @@ parameters:
   cache_directory: ._ecs_cache
   paths:
     - src/
-    - tests/
   skip:
     Unused variable $_.: ~
     SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
-      - src/AbstractCriteriaAdapter.php
-    Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer:
-      - tests/Adapter/SpiralPagination/CriteriaBuilderTest.php
-      - tests/Expression/SelectorTest.php
-      - tests/Expression/AbstractExpressionAdapterTest.php
+      - src/AbstractCriteriaDecorator.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~

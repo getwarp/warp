@@ -7,7 +7,7 @@ namespace spaceonfire\Criteria;
 use spaceonfire\Criteria\Expression\ExpressionFactory;
 use Webmozart\Expression\Expression;
 
-abstract class AbstractCriteriaAdapter implements CriteriaInterface
+abstract class AbstractCriteriaDecorator implements CriteriaInterface
 {
     /**
      * @var CriteriaInterface

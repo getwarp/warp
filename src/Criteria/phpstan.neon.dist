@@ -15,8 +15,8 @@ parameters:
 		-
 			message: '/^Parameter \#1 \$function of function call_user_func_array expects callable/'
 			paths:
-				- src/AbstractCriteriaAdapter.php
+				- src/AbstractCriteriaDecorator.php
 				- src/Expression/ExpressionFactory.php
-				- src/Expression/AbstractExpressionAdapter.php
+				- src/Expression/AbstractExpressionDecorator.php
 		- '/^Static method Webmozart\\Assert\\Assert::allOneOf\(\) invoked with 3 parameters, 1-2 required.$/'
 		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
