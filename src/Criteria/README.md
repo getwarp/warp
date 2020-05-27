@@ -6,20 +6,6 @@
 
 Criteria help you to declare rules to filter datasets
 
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
-```
-bin/
-build/
-docs/
-config/
-src/
-tests/
-vendor/
-```
-
 ## Install
 
 Via Composer
@@ -31,8 +17,12 @@ $ composer require spaceonfire/criteria
 ## Usage
 
 ```php
-$skeleton = new spaceonfire\Criteria\Criteria();
-echo $skeleton->echoPhrase('Hello, League!');
+use spaceonfire\Criteria\Criteria;
+$criteria = new Criteria();
+$criteria->where(Criteria::expr()->property('name', Criteria::expr()->equals('Ben')))
+    ->orderBy(['lastName' => SORT_ASC])
+    ->offset(50)
+    ->limit(25);
 ```
 
 ## Change log
