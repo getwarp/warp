@@ -17,19 +17,13 @@
       "role": "Maintainer"
     }
   ],
-  "repositories": [
-    {
-      "type": "github",
-      "url": "https://github.com/spaceonfire/criteria.git"
-    }
-  ],
   "require": {
     "php": "^7.2",
     "ext-json": "*",
-    "guzzlehttp/psr7": "^1.6.1",
-    "jawira/case-converter": "^3.4.1",
-    "spaceonfire/collection": "^1.2.1",
-    "spaceonfire/criteria": "dev-master",
+    "guzzlehttp/psr7": "^1.6",
+    "jawira/case-converter": "^3.4",
+    "spaceonfire/collection": "^2.0",
+    "spaceonfire/criteria": "^1.0",
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
@@ -40,7 +34,7 @@
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^7.2",
+    "symplify/easy-coding-standard-prefixed": "7.3.17",
     "spaceonfire/value-object": "^1.0",
     "ramsey/uuid": "^4.0",
     "spiral/pagination": "^2.2.2"
