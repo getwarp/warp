@@ -19,7 +19,7 @@ Convert a multi-dimensional array into a single-dimensional array
 public static function ArrayHelper::flatten(array $array, mixed $separator = '.', mixed $prefix = ''): array
 ```
 
-File location: `src/ArrayHelper.php:17`
+File location: `src/ArrayHelper.php:42`
 
 ### getColumn()
 
@@ -41,7 +41,7 @@ $result = ArrayHelper::getColumn($array, 'id');
 | Param       | Type                            | Description |
 | ----------- | ------------------------------- | ----------- |
 | `$array`    | _array_                         |             |
-| `$name`     | _int&#124;string&#124;\Closure_ |             |
+| `$name`     | _int&#124;string&#124;callable_ |             |
 | `$keepKeys` | _bool_                          |             |
 | **Return**  | _array_                         |             |
 
@@ -49,7 +49,7 @@ $result = ArrayHelper::getColumn($array, 'id');
 public static function ArrayHelper::getColumn(mixed $array, mixed $name, mixed $keepKeys = true): array
 ```
 
-File location: `src/ArrayHelper.php:392`
+File location: `src/ArrayHelper.php:411`
 
 ### getValue()
 
@@ -83,12 +83,13 @@ $street = ArrayHelper::getValue($users, 'address.street');
 $value = ArrayHelper::getValue($versions, ['1.0', 'date']);
 ```
 
-| Param    | Type                              | Description                                                                     |
-| -------- | --------------------------------- | ------------------------------------------------------------------------------- |
-| `$array` | _array&#124;object_               | array or object to extract value from                                           |
-| `$key`   | _string&#124;\Closure&#124;array_ | key name of the array element, an array of keys or property name of the object, |
+| Param    | Type                                       | Description                                                             |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------- |
+| `$array` | _array&#124;object_                        | array or object to extract value from                                   |
+| `$key`   | _string&#124;int&#124;callable&#124;array_ | key name of the array element, an array of keys or property name of the |
 
-or an anonymous function returning the value. The anonymous function signature should be:
+    object, or an anonymous function returning the value. The anonymous function signature should be:
+
 `function($array, $defaultValue)`.|
 |`$default`|_mixed_|the default value to be returned if the specified array key does not exist. Not used when
 getting value from an object.|
@@ -98,7 +99,7 @@ getting value from an object.|
 public static function ArrayHelper::getValue(mixed $array, mixed $key, mixed $default = null): mixed
 ```
 
-File location: `src/ArrayHelper.php:285`
+File location: `src/ArrayHelper.php:295`
 
 ### isArrayAssoc()
 
@@ -113,7 +114,7 @@ Check that array is associative (have at least one string key)
 public static function ArrayHelper::isArrayAssoc(mixed $var): bool
 ```
 
-File location: `src/ArrayHelper.php:40`
+File location: `src/ArrayHelper.php:18`
 
 ### map()
 
@@ -155,16 +156,16 @@ $result = ArrayHelper::map($array, 'id', 'name', 'class');
 | Param      | Type                   | Description |
 | ---------- | ---------------------- | ----------- |
 | `$array`   | _array_                |             |
-| `$from`    | _string&#124;\Closure_ |             |
-| `$to`      | _string&#124;\Closure_ |             |
-| `$group`   | _string&#124;\Closure_ |             |
+| `$from`    | _string&#124;callable_ |             |
+| `$to`      | _string&#124;callable_ |             |
+| `$group`   | _string&#124;callable_ |             |
 | **Return** | _array_                |             |
 
 ```php
 public static function ArrayHelper::map(mixed $array, mixed $from, mixed $to, mixed $group = null): mixed
 ```
 
-File location: `src/ArrayHelper.php:231`
+File location: `src/ArrayHelper.php:241`
 
 ### merge()
 
@@ -179,7 +180,7 @@ Recursive merge multiple arrays
 public static function ArrayHelper::merge(mixed ...$arrays): array
 ```
 
-File location: `src/ArrayHelper.php:86`
+File location: `src/ArrayHelper.php:98`
 
 ### multisort()
 
@@ -188,7 +189,7 @@ Sorts an array of objects or arrays (with the same structure) by one or several 
 | Param    | Type                                 | Description                                                                   |
 | -------- | ------------------------------------ | ----------------------------------------------------------------------------- |
 | `$array` | _array_                              | the array to be sorted. The array will be modified after calling this method. |
-| `$key`   | _string&#124;\Closure&#124;string[]_ | the key(s) to be sorted by. This refers to a key name of the sub-array        |
+| `$key`   | _string&#124;callable&#124;string[]_ | the key(s) to be sorted by. This refers to a key name of the sub-array        |
 
 elements, a property name of the objects, or an anonymous function returning the values for comparison
 purpose. The anonymous function signature should be: `function($item)`.
@@ -199,12 +200,13 @@ When sorting by multiple keys with different sorting directions, use an array of
 `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and `SORT_FLAG_CASE`.
 Please refer to [PHP manual](https://secure.php.net/manual/en/function.sort.php)
 for more details. When sorting by multiple keys with different sort flags, use an array of sort flags.|
+|**Return**|_void_||
 
 ```php
 public static function ArrayHelper::multisort(mixed &$array, mixed $key, mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/ArrayHelper.php:337`
+File location: `src/ArrayHelper.php:356`
 
 ### setValue()
 
@@ -262,12 +264,13 @@ the path can be described by a string when each key should be separated by a dot
 you can also describe the path as an array of keys
 if the path is null then `$array` will be assigned the `$value`|
 |`$value`|_mixed_|the value to be written|
+|**Return**|_void_||
 
 ```php
 public static function ArrayHelper::setValue(mixed &$array, mixed $path, mixed $value): mixed
 ```
 
-File location: `src/ArrayHelper.php:167`
+File location: `src/ArrayHelper.php:177`
 
 ### unflatten()
 
@@ -283,7 +286,7 @@ Convert single-dimensional associative array to multi-dimensional by splitting k
 public static function ArrayHelper::unflatten(array $array, mixed $separator = '.'): array
 ```
 
-File location: `src/ArrayHelper.php:63`
+File location: `src/ArrayHelper.php:68`
 
 ---
 

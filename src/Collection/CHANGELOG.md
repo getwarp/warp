@@ -22,8 +22,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
-## UNRELEASED
+## [1.4.0] - 2020-05-31
 ### Added
+- Update `CollectionInterface`:
+    - update method signatures according to `BaseCollection`
+    - update phpDoc comments
+- Replace Closure with callable type
+- Move collection aliases to trait
 - Implement FilterableInterface from `spaceonfire/criteria` by collection
 
 ### Fixed
