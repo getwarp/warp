@@ -33,7 +33,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - `CollectionInterface::lastKey()`
     - `CollectionInterface::average()`
     - `CollectionInterface::median()`
-- Method aliases adde:
+- Method aliases added:
     - `BaseCollection::avg()` alias to `BaseCollection::average()`
     - `BaseCollection::join()` alias to `BaseCollection::implode()`
 

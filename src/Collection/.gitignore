@@ -45,3 +45,4 @@ nbproject
 .directory
 *.sql
 *.tar*
+docker-compose.override.yml
