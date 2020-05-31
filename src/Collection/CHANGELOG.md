@@ -23,6 +23,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 -->
 
 ## UNRELEASED
+### Added
+- Implement FilterableInterface from `spaceonfire/criteria` by collection
+
 ### Fixed
 - Fixed `ArrayHelper::unflatten()` method.
 

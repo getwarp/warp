@@ -9,6 +9,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
+use spaceonfire\Criteria\CriteriaInterface;
 use Traversable;
 
 /**
@@ -489,6 +490,29 @@ abstract class BaseCollection implements CollectionInterface
     public function slice($offset, $limit = null, $preserveKeys = true)
     {
         return $this->newStatic(array_slice($this->all(), $offset, $limit, $preserveKeys));
+    }
+
+    /**
+     * {@inheritDoc}
+     * The original collection will not be changed, a new collection will be returned instead.
+     */
+    public function matching(CriteriaInterface $criteria): CollectionInterface
+    {
+        $result = $this->newStatic($this->items);
+
+        if (null !== $expression = $criteria->getWhere()) {
+            $result = $result->filter(static function ($item) use ($expression) {
+                return $expression->evaluate($item);
+            });
+        }
+
+        if ([] !== $orderBy = $criteria->getOrderBy()) {
+            foreach ($orderBy as $key => $direction) {
+                $result = $result->sortBy($key, $direction);
+            }
+        }
+
+        return $result->slice($criteria->getOffset(), $criteria->getLimit());
     }
 
     /**

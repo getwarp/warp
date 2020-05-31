@@ -8,6 +8,8 @@ use ArrayAccess;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
+use spaceonfire\Criteria\CriteriaInterface;
+use spaceonfire\Criteria\FilterableInterface;
 use Traversable;
 
 /**
@@ -17,7 +19,7 @@ use Traversable;
  * @method string join(string|null $glue = null, $field = null) alias to implode()
  * @method int|float avg($field = null) alias to average()
  */
-interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
+interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable, FilterableInterface
 {
     public const ALIASES = [
         'join' => 'implode',
@@ -261,6 +263,13 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate,
      * @return CollectionInterface
      */
     public function slice($offset, $limit = null, $preserveKeys = true);
+
+    /**
+     * Filter collection matching given criteria.
+     * @param CriteriaInterface $criteria
+     * @return self
+     */
+    public function matching(CriteriaInterface $criteria): self;
 
     /**
      * Removes duplicate values from the collection
