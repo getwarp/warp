@@ -22,6 +22,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.4.0] - 2020-05-31
+### Added
+- Update `CollectionInterface`:
+    - update method signatures according to `BaseCollection`
+    - update phpDoc comments
+- Replace Closure with callable type
+- Move collection aliases to trait
+- Implement FilterableInterface from `spaceonfire/criteria` by collection
+
+### Fixed
+- Fixed `ArrayHelper::unflatten()` method.
+
 ## [1.3.0] - 2020-03-07
 ### Added
 - New methods added:
@@ -33,7 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - `CollectionInterface::lastKey()`
     - `CollectionInterface::average()`
     - `CollectionInterface::median()`
-- Method aliases adde:
+- Method aliases added:
     - `BaseCollection::avg()` alias to `BaseCollection::average()`
     - `BaseCollection::join()` alias to `BaseCollection::implode()`
 

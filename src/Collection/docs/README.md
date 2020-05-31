@@ -8,6 +8,8 @@
         -   [TypedCollection](./spaceonfire/Collection/TypedCollection.md)
     -   Interfaces
         -   [CollectionInterface](./spaceonfire/Collection/CollectionInterface.md)
+    -   Traits
+        -   [CollectionAliasesTrait](./spaceonfire/Collection/CollectionAliasesTrait.md)
 
 ---
 

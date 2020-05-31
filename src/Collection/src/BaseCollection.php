@@ -6,9 +6,10 @@ namespace spaceonfire\Collection;
 
 use ArrayIterator;
 use BadMethodCallException;
-use Closure;
 use InvalidArgumentException;
 use JsonSerializable;
+use RuntimeException;
+use spaceonfire\Criteria\CriteriaInterface;
 use Traversable;
 
 /**
@@ -20,8 +21,10 @@ use Traversable;
  * @method string join(string|null $glue = null, $field = null) alias to implode()
  * @method int|float avg($field = null) alias to average()
  */
-abstract class BaseCollection implements CollectionInterface, JsonSerializable
+abstract class BaseCollection implements CollectionInterface
 {
+    use CollectionAliasesTrait;
+
     /**
      * @var array The items contained in the collection.
      */
@@ -29,7 +32,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * BaseCollection constructor.
-     * @param array $items
+     * @param array|iterable|mixed $items
      */
     public function __construct($items = [])
     {
@@ -51,12 +54,12 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
             return $items->all();
         }
 
-        if ($items instanceof JsonSerializable) {
-            return $items->jsonSerialize();
-        }
-
         if ($items instanceof Traversable) {
             return iterator_to_array($items);
+        }
+
+        if ($items instanceof JsonSerializable) {
+            return $items->jsonSerialize();
         }
 
         return (array)$items;
@@ -65,7 +68,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     /**
      * Creates new instance of collection
      * @param array $items
-     * @return CollectionInterface
+     * @return static
      */
     protected function newStatic(array $items = []): CollectionInterface
     {
@@ -76,6 +79,13 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     public function all(): array
     {
         return $this->items;
+    }
+
+    /** {@inheritDoc} */
+    public function clear(): CollectionInterface
+    {
+        $this->items = [];
+        return $this;
     }
 
     /** {@inheritDoc} */
@@ -92,8 +102,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * Calculate the sum of a field of the models in the collection.
-     * @param string|Closure|array|null $field the name of the field to calculate.
-     * This will be passed to [[ArrayHelper::getValue()]].
+     * @param string|callable|array|null $field the name of the field to calculate. This will be passed to
+     *     `ArrayHelper::getValue()`.
      * @return int|float the calculated sum.
      */
     public function sum($field = null)
@@ -127,7 +137,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
                 throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
             }
 
-            $items[] = $value;
+            /** @noinspection TypeUnsafeComparisonInspection */
+            $items[] = (int)$value == $value ? (int)$value : (float)$value;
         }
 
         if (empty($items)) {
@@ -154,8 +165,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * Calculate the maximum value of a field of the models in the collection.
-     * @param string|Closure|array $field the name of the field to calculate.
-     * This will be passed to [[ArrayHelper::getValue()]].
+     * @param string|callable|array $field the name of the field to calculate. This will be passed to
+     *     `ArrayHelper::getValue()`.
      * @return int|float|null the calculated maximum value. `null` if the collection is empty.
      */
     public function max($field = null)
@@ -177,8 +188,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * Calculate the minimum value of a field of the models in the collection
-     * @param string|Closure|array $field the name of the field to calculate.
-     * This will be passed to [[ArrayHelper::getValue()]].
+     * @param string|callable|array $field the name of the field to calculate. This will be passed to
+     *     `ArrayHelper::getValue()`.
      * @return int|float|null the calculated minimum value. `null` if the collection is empty.
      */
     public function min($field = null)
@@ -204,7 +215,10 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         return $this->count() === 0;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @return int
+     */
     public function count()
     {
         return count($this->items);
@@ -270,8 +284,8 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
      *
      * The original collection will not be changed, a new collection with sorted data is returned.
      *
-     * @throws InvalidArgumentException if the $direction or $sortFlag parameters do not have
-     * correct number of elements as that of $key.
+     * @throws InvalidArgumentException if the $direction or $sortFlag parameters do not have correct number of
+     *     elements as that of $key.
      * @see ArrayHelper::multisort()
      */
     public function sortBy($key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
@@ -320,8 +334,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     /**
      * {@inheritDoc}
      *
-     * Data in this collection will be overwritten if non-integer keys exist in the merged
-     * collection.
+     * Data in this collection will be overwritten if non-integer keys exist in the merged collection.
      *
      * The original collection will not be changed, a new collection will be returned instead.
      */
@@ -377,19 +390,11 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     }
 
     /**
-     * Check whether the collection contains a specific item.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
-     *     a boolean. The closure will be called on each item and in case it returns `true`, the
-     *     item will be considered to be found. In case a closure is passed, `$strict` parameter
-     *     has no effect.
-     * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
-     * Defaults to `false`.
-     * @return bool `true` if the collection contains at least one item that matches, `false` if
-     *     not.
+     * {@inheritDoc}
      */
     public function contains($item, $strict = false): bool
     {
-        if ($item instanceof Closure) {
+        if (is_callable($item)) {
             $test = $item;
         } else {
             $test = static function ($i) use ($strict, $item) {
@@ -408,21 +413,12 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     }
 
     /**
-     * Remove a specific item from the collection.
-     *
-     * The original collection will not be changed, a new collection with modified data is
-     * returned.
-     * @param mixed|Closure $item the item to search for. You may also pass a closure that returns
-     *     a boolean. The closure will be called on each item and in case it returns `true`, the
-     *     item will be removed. In case a closure is passed, `$strict` parameter has no effect.
-     * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
-     * Defaults to `false`.
-     * @return CollectionInterface a new collection containing the filtered items.
-     * @see filter()
+     * {@inheritDoc}
+     * The original collection will not be changed, a new collection with modified data is returned.
      */
     public function remove($item, $strict = false)
     {
-        if ($item instanceof Closure) {
+        if (is_callable($item)) {
             $fun = static function ($i) use ($item) {
                 return !$item($i);
             };
@@ -441,12 +437,9 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * {@inheritDoc}
-     *
      * The original collection will not be changed, a new collection with modified data is returned.
-     *
-     * @return CollectionInterface a new collection containing the filtered items.
      */
-    public function filter(callable $callback = null)
+    public function filter(?callable $callback = null)
     {
         if ($callback === null) {
             return $this->newStatic(array_filter($this->all()));
@@ -469,8 +462,6 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
 
     /**
      * {@inheritDoc}
-     * @param bool $strict whether comparison should be compared strict (`===`) or not (`==`).
-     * Defaults to `false`.
      * The original collection will not be changed, a new collection will be returned instead.
      */
     public function replace($item, $replacement, $strict = false)
@@ -489,7 +480,7 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     {
         $keys = array_keys($this->items);
         $items = array_map($callback, $this->items, $keys);
-        return $this->newStatic(array_combine($keys, $items));
+        return $this->newStatic(array_combine($keys, $items) ?: $items);
     }
 
     /**
@@ -499,6 +490,29 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     public function slice($offset, $limit = null, $preserveKeys = true)
     {
         return $this->newStatic(array_slice($this->all(), $offset, $limit, $preserveKeys));
+    }
+
+    /**
+     * {@inheritDoc}
+     * The original collection will not be changed, a new collection will be returned instead.
+     */
+    public function matching(CriteriaInterface $criteria): CollectionInterface
+    {
+        $result = $this->newStatic($this->items);
+
+        if (null !== $expression = $criteria->getWhere()) {
+            $result = $result->filter(static function ($item) use ($expression) {
+                return $expression->evaluate($item);
+            });
+        }
+
+        if ([] !== $orderBy = $criteria->getOrderBy()) {
+            foreach ($orderBy as $key => $direction) {
+                $result = $result->sortBy($key, $direction);
+            }
+        }
+
+        return $result->slice($criteria->getOffset(), $criteria->getLimit());
     }
 
     /**
@@ -559,19 +573,30 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         return new ArrayIterator($this->items);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param mixed $offset
+     */
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->items);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param mixed $offset
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
         return $this->items[$offset];
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param mixed|null $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
         if ($offset === null) {
@@ -581,15 +606,36 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     * @param mixed $offset
+     */
     public function offsetUnset($offset)
     {
         unset($this->items[$offset]);
     }
 
     /**
-     * Convert the collection to its string representation.
-     * @return string
+     * {@inheritDoc}
+     */
+    public function toJson(int $options = 0): string
+    {
+        $json = json_encode($this->jsonSerialize(), $options);
+
+        if ($json === false) {
+            // @codeCoverageIgnoreStart
+            throw new RuntimeException(
+                'Error while encoding collection to JSON: ' . json_last_error_msg(),
+                json_last_error()
+            );
+            // @codeCoverageIgnoreEnd
+        }
+
+        return $json;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function __toString()
     {
@@ -597,38 +643,11 @@ abstract class BaseCollection implements CollectionInterface, JsonSerializable
     }
 
     /**
-     * Get the collection of items as JSON.
-     * @param int $options
-     * @return string
+     * {@inheritDoc}
+     * @return array|mixed
      */
-    public function toJson($options = 0): string
-    {
-        return json_encode($this->jsonSerialize(), $options);
-    }
-
-    /** {@inheritDoc} */
     public function jsonSerialize()
     {
-        return $this->map(static function ($value) {
-            if ($value instanceof JsonSerializable) {
-                return $value->jsonSerialize();
-            }
-
-            return $value;
-        })->all();
-    }
-
-    public function __call($name, $arguments)
-    {
-        $aliases = [
-            'join' => 'implode',
-            'avg' => 'average',
-        ];
-
-        if (isset($aliases[$name])) {
-            return call_user_func_array([$this, $aliases[$name]], $arguments);
-        }
-
-        throw new BadMethodCallException('Call to undefined method ' . static::class . '::' . $name . '()');
+        return $this->all();
     }
 }
