@@ -12,6 +12,10 @@ parameters:
     Unused variable $_.: ~
     PhpCsFixer\Fixer\Strict\StrictComparisonFixer:
       - src/BaseCollection.php
+    PhpCsFixer\Fixer\FunctionNotation\VoidReturnFixer:
+      - src/BaseCollection.php
+      - src/TypedCollection.php
+      - src/ArrayHelper.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~
