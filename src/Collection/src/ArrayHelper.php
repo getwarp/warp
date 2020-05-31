@@ -1,37 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spaceonfire\Collection;
 
-use Closure;
+use ArrayAccess;
 use InvalidArgumentException;
+use Webmozart\Assert\Assert;
 
 class ArrayHelper
 {
-    /**
-     * Convert a multi-dimensional array into a single-dimensional array
-     * @param array $array Source multi-dimensional array
-     * @param string $separator Glue string for imploding keys
-     * @param string $prefix Key prefix, mostly needed for recursive call
-     * @return array single-dimensional array
-     */
-    public static function flatten(array $array, $separator = '.', $prefix = ''): array
-    {
-        $result = [];
-        foreach ($array as $key => $item) {
-            $prefixedKey = ($prefix ? $prefix . $separator : '') . $key;
-
-            if (static::isArrayAssoc($item)) {
-                $childFlaten = self::flatten($item, $separator, $prefixedKey);
-                foreach ($childFlaten as $childKey => $childValue) {
-                    $result[$childKey] = $childValue;
-                }
-            } else {
-                $result[$prefixedKey] = $item;
-            }
-        }
-        return $result;
-    }
-
     /**
      * Check that array is associative (have at least one string key)
      * @param mixed $var variable to check
@@ -44,7 +22,7 @@ class ArrayHelper
         }
 
         $i = 0;
-        foreach ($var as $k => $v) {
+        foreach ($var as $k => $_) {
             if ('' . $k !== '' . $i) {
                 return true;
             }
@@ -55,6 +33,33 @@ class ArrayHelper
     }
 
     /**
+     * Convert a multi-dimensional array into a single-dimensional array
+     * @param array $array Source multi-dimensional array
+     * @param string $separator Glue string for imploding keys
+     * @param string $prefix Key prefix, mostly needed for recursive call
+     * @return array single-dimensional array
+     */
+    public static function flatten(array $array, $separator = '.', $prefix = ''): array
+    {
+        Assert::stringNotEmpty($separator);
+        Assert::string($prefix);
+        $result = [];
+        foreach ($array as $key => $item) {
+            $prefixedKey = ($prefix ? $prefix . $separator : '') . $key;
+
+            if (static::isArrayAssoc($item)) {
+                $childFlatten = self::flatten($item, $separator, $prefixedKey);
+                foreach ($childFlatten as $childKey => $childValue) {
+                    $result[$childKey] = $childValue;
+                }
+            } else {
+                $result[$prefixedKey] = $item;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Convert single-dimensional associative array to multi-dimensional by splitting keys with separator
      * @param array $array Source single-dimensional array
      * @param string $separator Glue string for exploding keys
@@ -62,20 +67,27 @@ class ArrayHelper
      */
     public static function unflatten(array $array, $separator = '.'): array
     {
-        $nestedKeys = array_filter(array_keys($array), function ($key) use ($separator) {
-            return strpos($key, $separator) !== false;
-        });
-        if (!count($nestedKeys)) {
-            return $array;
+        Assert::stringNotEmpty($separator);
+        $result = [];
+
+        foreach ($array as $key => $value) {
+            /** @var string[] $keysChain */
+            $keysChain = explode($separator, (string)$key);
+            /** @var array $subArray */
+            $subArray = &$result;
+            while (count($keysChain) > 1) {
+                /** @var string $subKey */
+                $subKey = array_shift($keysChain);
+                if (!isset($subArray[$subKey])) {
+                    $subArray[$subKey] = [];
+                }
+                $subArray = &$subArray[$subKey];
+            }
+            $subKey = array_shift($keysChain);
+            $subArray[$subKey] = $value;
         }
-        foreach ($nestedKeys as $key) {
-            $prefix = explode($separator, $key);
-            $field = array_pop($prefix);
-            $prefix = implode($separator, $prefix);
-            $array[$prefix][$field] = $array[$key];
-            unset($array[$key]);
-        }
-        return self::unflatten($array, $separator);
+
+        return $result;
     }
 
     /**
@@ -85,12 +97,9 @@ class ArrayHelper
      */
     public static function merge(...$arrays): array
     {
-        foreach ($arrays as $array) {
-            if (!is_array($array)) {
-                throw new InvalidArgumentException('');
-            }
-        }
+        Assert::allIsArray($arrays);
 
+        /** @var array $ret */
         $ret = array_shift($arrays);
 
         while (!empty($arrays)) {
@@ -163,6 +172,7 @@ class ArrayHelper
      * you can also describe the path as an array of keys
      * if the path is null then `$array` will be assigned the `$value`
      * @param mixed $value the value to be written
+     * @return void
      */
     public static function setValue(&$array, $path, $value)
     {
@@ -223,9 +233,9 @@ class ArrayHelper
      * ```
      *
      * @param array $array
-     * @param string|Closure $from
-     * @param string|Closure $to
-     * @param string|Closure $group
+     * @param string|callable $from
+     * @param string|callable $to
+     * @param string|callable $group
      * @return array
      */
     public static function map($array, $from, $to, $group = null)
@@ -275,8 +285,8 @@ class ArrayHelper
      * ```
      *
      * @param array|object $array array or object to extract value from
-     * @param string|Closure|array $key key name of the array element, an array of keys or property name of the object,
-     * or an anonymous function returning the value. The anonymous function signature should be:
+     * @param string|int|callable|array $key key name of the array element, an array of keys or property name of the
+     *     object, or an anonymous function returning the value. The anonymous function signature should be:
      * `function($array, $defaultValue)`.
      * @param mixed $default the default value to be returned if the specified array key does not exist. Not used when
      * getting value from an object.
@@ -284,7 +294,7 @@ class ArrayHelper
      */
     public static function getValue($array, $key, $default = null)
     {
-        if ($key instanceof Closure) {
+        if (is_callable($key)) {
             return $key($array, $default);
         }
 
@@ -300,9 +310,21 @@ class ArrayHelper
             return $array[$key];
         }
 
-        if (($pos = strrpos($key, '.')) !== false) {
+        if ($array instanceof ArrayAccess && (isset($array[$key]) || $array->offsetExists($key))) {
+            return $array[$key];
+        }
+
+        if (false !== $pos = strrpos($key, '.')) {
             $array = static::getValue($array, substr($key, 0, $pos), $default);
             $key = substr($key, $pos + 1);
+        }
+
+        if (is_array($array)) {
+            return isset($array[$key]) || array_key_exists($key, $array) ? $array[$key] : $default;
+        }
+
+        if ($array instanceof ArrayAccess) {
+            return isset($array[$key]) || $array->offsetExists($key) ? $array[$key] : $default;
         }
 
         if (is_object($array)) {
@@ -311,17 +333,13 @@ class ArrayHelper
             return $array->$key;
         }
 
-        if (is_array($array)) {
-            return (isset($array[$key]) || array_key_exists($key, $array)) ? $array[$key] : $default;
-        }
-
         return $default;
     }
 
     /**
      * Sorts an array of objects or arrays (with the same structure) by one or several keys.
      * @param array $array the array to be sorted. The array will be modified after calling this method.
-     * @param string|Closure|string[] $key the key(s) to be sorted by. This refers to a key name of the sub-array
+     * @param string|callable|string[] $key the key(s) to be sorted by. This refers to a key name of the sub-array
      * elements, a property name of the objects, or an anonymous function returning the values for comparison
      * purpose. The anonymous function signature should be: `function($item)`.
      * To sort by multiple keys, provide an array of keys here.
@@ -331,6 +349,7 @@ class ArrayHelper
      * `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, `SORT_LOCALE_STRING`, `SORT_NATURAL` and `SORT_FLAG_CASE`.
      * Please refer to [PHP manual](https://secure.php.net/manual/en/function.sort.php)
      * for more details. When sorting by multiple keys with different sort flags, use an array of sort flags.
+     * @return void
      * @throws InvalidArgumentException if the $direction or $sortFlag parameters do not have
      * correct number of elements as that of $key.
      */
@@ -385,7 +404,7 @@ class ArrayHelper
      * ```
      *
      * @param array $array
-     * @param int|string|Closure $name
+     * @param int|string|callable $name
      * @param bool $keepKeys
      * @return array
      */

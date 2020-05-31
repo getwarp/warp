@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## UNRELEASED
+### Fixed
+- Fixed `ArrayHelper::unflatten()` method.
+
 ## [1.3.0] - 2020-03-07
 ### Added
 - New methods added:
