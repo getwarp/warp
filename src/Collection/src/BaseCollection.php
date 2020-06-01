@@ -89,7 +89,7 @@ abstract class BaseCollection implements CollectionInterface
     }
 
     /** {@inheritDoc} */
-    public function each(callable $callback)
+    public function each(callable $callback): CollectionInterface
     {
         foreach ($this->items as $key => $item) {
             if ($callback($item, $key) === false) {
@@ -234,7 +234,7 @@ abstract class BaseCollection implements CollectionInterface
      * @see http://php.net/manual/en/function.asort.php
      * @see http://php.net/manual/en/function.arsort.php
      */
-    public function sort($direction = SORT_ASC, $sortFlag = SORT_REGULAR)
+    public function sort(int $direction = SORT_ASC, int $sortFlag = SORT_REGULAR): CollectionInterface
     {
         $items = $this->all();
         if ($direction === SORT_ASC) {
@@ -251,7 +251,7 @@ abstract class BaseCollection implements CollectionInterface
      * @see http://php.net/manual/en/function.ksort.php
      * @see http://php.net/manual/en/function.krsort.php
      */
-    public function sortByKey($direction = SORT_ASC, $sortFlag = SORT_REGULAR)
+    public function sortByKey(int $direction = SORT_ASC, int $sortFlag = SORT_REGULAR): CollectionInterface
     {
         $items = $this->all();
         if ($direction === SORT_ASC) {
@@ -268,7 +268,7 @@ abstract class BaseCollection implements CollectionInterface
      * @see http://php.net/manual/en/function.natsort.php
      * @see http://php.net/manual/en/function.natcasesort.php
      */
-    public function sortNatural($caseSensitive = false)
+    public function sortNatural(bool $caseSensitive = false): CollectionInterface
     {
         $items = $this->all();
         if ($caseSensitive) {
@@ -292,7 +292,7 @@ abstract class BaseCollection implements CollectionInterface
      *     elements as that of $key.
      * @see ArrayHelper::multisort()
      */
-    public function sortBy($key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
+    public function sortBy($key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR): CollectionInterface
     {
         $items = $this->all();
         ArrayHelper::multisort($items, $key, $direction, $sortFlag);
@@ -303,7 +303,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function reverse()
+    public function reverse(): CollectionInterface
     {
         return $this->newStatic(array_reverse($this->all(), true));
     }
@@ -312,7 +312,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function values()
+    public function values(): CollectionInterface
     {
         return $this->newStatic(array_values($this->all()));
     }
@@ -321,7 +321,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function keys()
+    public function keys(): CollectionInterface
     {
         return $this->newStatic(array_keys($this->all()));
     }
@@ -330,7 +330,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function flip()
+    public function flip(): CollectionInterface
     {
         return $this->newStatic(array_flip($this->all()));
     }
@@ -342,7 +342,7 @@ abstract class BaseCollection implements CollectionInterface
      *
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function merge(...$collections)
+    public function merge(...$collections): CollectionInterface
     {
         return $this->newStatic(array_merge(
             $this->all(),
@@ -356,7 +356,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function indexBy($key)
+    public function indexBy($key): CollectionInterface
     {
         return $this->remap($key, static function ($item) {
             return $item;
@@ -367,7 +367,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function remap($from, $to)
+    public function remap($from, $to): CollectionInterface
     {
         return $this->newStatic(ArrayHelper::map($this->all(), $from, $to));
     }
@@ -376,7 +376,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function groupBy($groupField, $preserveKeys = true)
+    public function groupBy($groupField, bool $preserveKeys = true): CollectionInterface
     {
         $result = [];
 
@@ -396,7 +396,7 @@ abstract class BaseCollection implements CollectionInterface
     /**
      * {@inheritDoc}
      */
-    public function contains($item, $strict = false): bool
+    public function contains($item, bool $strict = false): bool
     {
         if (is_callable($item)) {
             $test = $item;
@@ -420,7 +420,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection with modified data is returned.
      */
-    public function remove($item, $strict = false)
+    public function remove($item, bool $strict = false): CollectionInterface
     {
         if (is_callable($item)) {
             $fun = static function ($i) use ($item) {
@@ -443,7 +443,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection with modified data is returned.
      */
-    public function filter(?callable $callback = null)
+    public function filter(?callable $callback = null): CollectionInterface
     {
         if ($callback === null) {
             return $this->newStatic(array_filter($this->all()));
@@ -468,7 +468,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function replace($item, $replacement, $strict = false)
+    public function replace($item, $replacement, bool $strict = false): CollectionInterface
     {
         return $this->map(static function ($i) use ($item, $replacement, $strict) {
             /** @noinspection TypeUnsafeComparisonInspection */
@@ -480,7 +480,7 @@ abstract class BaseCollection implements CollectionInterface
     }
 
     /** {@inheritDoc} */
-    public function map(callable $callback)
+    public function map(callable $callback): CollectionInterface
     {
         $keys = array_keys($this->items);
         $items = array_map($callback, $this->items, $keys);
@@ -491,7 +491,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function slice($offset, $limit = null, $preserveKeys = true)
+    public function slice(int $offset, ?int $limit = null, bool $preserveKeys = true): CollectionInterface
     {
         return $this->newStatic(array_slice($this->all(), $offset, $limit, $preserveKeys));
     }
@@ -523,7 +523,7 @@ abstract class BaseCollection implements CollectionInterface
      * {@inheritDoc}
      * The original collection will not be changed, a new collection will be returned instead.
      */
-    public function unique(int $sortFlags = SORT_REGULAR)
+    public function unique(int $sortFlags = SORT_REGULAR): CollectionInterface
     {
         return $this->newStatic(array_unique($this->items, $sortFlags));
     }
@@ -572,7 +572,7 @@ abstract class BaseCollection implements CollectionInterface
     }
 
     /** {@inheritDoc} */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
     }
@@ -641,7 +641,7 @@ abstract class BaseCollection implements CollectionInterface
     /**
      * {@inheritDoc}
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }
