@@ -16,6 +16,8 @@ parameters:
       - src/BaseCollection.php
       - src/TypedCollection.php
       - src/ArrayHelper.php
+    SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
+      - src/IndexedCollection.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~
