@@ -4,46 +4,55 @@ declare(strict_types=1);
 
 namespace spaceonfire\Collection;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use spaceonfire\Type\BuiltinType;
+use stdClass;
 
 class TypedCollectionTest extends TestCase
 {
-    public function testScalar()
+    public function testConstructWithTypeStringBuiltin()
     {
         new TypedCollection([0, 1, 2], 'integer');
-        $this->addToAssertionCount(1);
+        self::assertTrue(true);
     }
 
-    public function testScalarException()
+    public function testConstructWithTypeStringClassName()
+    {
+        new TypedCollection($this->getObjectsArray(), stdClass::class);
+        self::assertTrue(true);
+    }
+
+    public function testConstructWithTypeObject()
+    {
+        new TypedCollection([0, 1, 2], new BuiltinType(BuiltinType::INT));
+        self::assertTrue(true);
+    }
+
+    public function testConstructWithInvalidType()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new TypedCollection([], 111);
+    }
+
+    public function testConstructWithTypeStringBuiltinException()
     {
         $this->expectException(RuntimeException::class);
         new TypedCollection([0, 1, 2], 'string');
     }
 
-    public function testObject()
-    {
-        new TypedCollection($this->getObjectsArray(), \stdClass::class);
-        $this->addToAssertionCount(1);
-    }
-
-    public function testObjectException()
+    public function testConstructWithTypeStringClassNameException()
     {
         $this->expectException(RuntimeException::class);
         new TypedCollection($this->getObjectsArray(), CollectionInterface::class);
-    }
-
-    public function testObjectClassExistException()
-    {
-        $this->expectException(RuntimeException::class);
-        new TypedCollection($this->getObjectsArray(), 'double');
     }
 
     public function testOffsetSet()
     {
         $collection = new TypedCollection([0, 1, 2], 'integer');
         $collection[] = 3;
-        $this->addToAssertionCount(1);
+        self::assertTrue(true);
     }
 
     public function testOffsetSetException()
@@ -55,7 +64,7 @@ class TypedCollectionTest extends TestCase
 
     public function testDowngrade()
     {
-        $collection = new TypedCollection($this->getObjectsArray(), \stdClass::class);
+        $collection = new TypedCollection($this->getObjectsArray(), stdClass::class);
         $downgrade = $collection->downgrade();
         $this->assertNotEquals(TypedCollection::class, get_class($downgrade));
     }
@@ -154,8 +163,7 @@ class TypedCollectionTest extends TestCase
 
     public function testExtendTypedCollection()
     {
-        $collection = new class([1, 2, 3]) extends TypedCollection
-        {
+        $collection = new class([1, 2, 3]) extends TypedCollection {
             public function __construct($items = [])
             {
                 parent::__construct($items, 'integer');
@@ -166,8 +174,7 @@ class TypedCollectionTest extends TestCase
 
     protected function getObjectsArray(int $times = 3): array
     {
-        $prototype = new class extends \stdClass
-        {
+        $prototype = new class extends stdClass {
         };
 
         $items = [];

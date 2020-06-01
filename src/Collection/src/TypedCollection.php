@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace spaceonfire\Collection;
 
+use InvalidArgumentException;
 use RuntimeException;
+use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeFactory;
 use stdClass;
 
 /**
@@ -31,17 +34,29 @@ use stdClass;
 class TypedCollection extends BaseCollection
 {
     /**
-     * @var string
+     * @var Type
      */
     protected $type;
 
     /**
      * TypedCollection constructor.
      * @param array $items
-     * @param string $type Scalar type name or Full qualified name of object class
+     * @param string|Type $type Scalar type name or Full qualified name of object class
      */
-    public function __construct($items = [], string $type = stdClass::class)
+    public function __construct($items = [], $type = stdClass::class)
     {
+        if (!$type instanceof Type) {
+            if (!is_string($type)) {
+                throw new InvalidArgumentException(sprintf(
+                    'Argument $type expected to be a string or an instance of %s. Got: %s',
+                    Type::class,
+                    gettype($type)
+                ));
+            }
+
+            $type = TypeFactory::create($type);
+        }
+
         $this->type = $type;
         parent::__construct($items);
     }
@@ -53,14 +68,7 @@ class TypedCollection extends BaseCollection
      */
     protected function checkType($item): bool
     {
-        $type = gettype($item);
-
-        if ($type === 'object' && !class_exists($this->type) && !interface_exists($this->type)) {
-            throw new RuntimeException('Class ' . $this->type . ' does not exist');
-        }
-
-        if (($type === 'object' && !($item instanceof $this->type)) ||
-            ($type !== 'object' && $type !== $this->type)) {
+        if (!$this->type->check($item)) {
             throw new RuntimeException(static::class . ' accept only instances of ' . $this->type);
         }
 
