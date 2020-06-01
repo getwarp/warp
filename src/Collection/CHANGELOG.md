@@ -22,6 +22,19 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.0.0] - 2020-06-04
+### Added
+- Make collection interface stricter
+- Added abstract decorator
+- Added `IndexedCollection` decorator
+- `TypedCollection` now acts as decorator
+
+### Deprecated
+- `TypedCollection` now final. Extend it with a decorator.
+
+### Removed
+- `BaseCollection` has been removed. Use decorators if you need to add new functionality to collections.
+
 ## [1.5.0] - 2020-06-01
 ### Added
 - Use `spaceonfire/type` for checking typed collection items type

@@ -28,7 +28,6 @@
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "phpunit/phpunit": "^8.0",
     "roave/security-advisories": "dev-master",
-    "spaceonfire/simple-php-apidoc": "^1.1.2",
     "symplify/easy-coding-standard-prefixed": "7.3.17"
   },
   "autoload": {
@@ -42,17 +41,13 @@
     }
   },
   "scripts": {
-    "doc": [
-      "apidoc",
-      "npx prettier --write docs/**/*.md"
-    ],
     "test": "phpunit",
     "codestyle": "ecs check --ansi",
     "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.x-dev"
+      "dev-master": "2.x-dev"
     }
   },
   "minimum-stability": "dev",

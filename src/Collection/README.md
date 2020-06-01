@@ -18,13 +18,13 @@ tests/        Unit tests
 
 Via Composer
 
-``` bash
+```bash
 $ composer require spaceonfire/collection
 ```
 
 ## Usage
 
-``` php
+```php
 $collection = new spaceonfire\Collection\Collection([0, 1, 2, 3]);
 //$collection->sum() === 6
 ```
@@ -37,7 +37,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
