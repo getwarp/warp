@@ -1,0 +1,54 @@
+{
+  "name": "spaceonfire/type",
+  "type": "library",
+  "description": "Collection of value objects provides ability of type checking in runtime",
+  "keywords": [
+    "spaceonfire",
+    "type"
+  ],
+  "homepage": "https://github.com/spaceonfire/type",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "webmozart/assert": "^1.3"
+  },
+  "require-dev": {
+    "ext-json": "*",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "phpunit/phpunit": "^8.0",
+    "roave/security-advisories": "dev-master",
+    "symplify/easy-coding-standard-prefixed": "7.3.17"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Type\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Type\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
