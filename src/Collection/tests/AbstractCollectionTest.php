@@ -565,6 +565,12 @@ abstract class AbstractCollectionTest extends TestCase
         self::assertEqualsWithDelta(2, $collection->average(), 0.01);
     }
 
+    public function testAverageEmpty()
+    {
+        $collection = $this->factory();
+        self::assertNull($collection->average());
+    }
+
     public function testAverageWithField()
     {
         $collection = $this->factory([
