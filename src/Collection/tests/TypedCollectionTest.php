@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Collection;
 
 use InvalidArgumentException;
+use LogicException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use spaceonfire\Type\BuiltinType;
 use stdClass;
 
@@ -38,13 +38,13 @@ class TypedCollectionTest extends TestCase
 
     public function testConstructWithTypeStringBuiltinException()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(LogicException::class);
         new TypedCollection([0, 1, 2], 'string');
     }
 
     public function testConstructWithTypeStringClassNameException()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(LogicException::class);
         new TypedCollection($this->getObjectsArray(), CollectionInterface::class);
     }
 
@@ -57,7 +57,7 @@ class TypedCollectionTest extends TestCase
 
     public function testOffsetSetException()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(LogicException::class);
         $collection = new TypedCollection([0, 1, 2], 'integer');
         $collection[] = '3';
     }
@@ -156,20 +156,9 @@ class TypedCollectionTest extends TestCase
 
     public function testReplaceException()
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(LogicException::class);
         $collection = new TypedCollection([1, 2, 3], 'integer');
         $collection->replace('2', '5', false);
-    }
-
-    public function testExtendTypedCollection()
-    {
-        $collection = new class([1, 2, 3]) extends TypedCollection {
-            public function __construct($items = [])
-            {
-                parent::__construct($items, 'integer');
-            }
-        };
-        $this->assertEquals([1, 5, 3], $collection->replace(2, 5)->all());
     }
 
     protected function getObjectsArray(int $times = 3): array

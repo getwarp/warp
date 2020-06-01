@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Collection;
 
 use InvalidArgumentException;
-use RuntimeException;
+use LogicException;
 use spaceonfire\Type\Type;
 use spaceonfire\Type\TypeFactory;
 use stdClass;
@@ -31,7 +31,7 @@ use stdClass;
  *
  * @package spaceonfire\Collection
  */
-class TypedCollection extends BaseCollection
+final class TypedCollection extends AbstractCollectionDecorator
 {
     /**
      * @var Type
@@ -40,7 +40,7 @@ class TypedCollection extends BaseCollection
 
     /**
      * TypedCollection constructor.
-     * @param array $items
+     * @param CollectionInterface|array|iterable|mixed $items
      * @param string|Type $type Scalar type name or Full qualified name of object class
      */
     public function __construct($items = [], $type = stdClass::class)
@@ -59,66 +59,45 @@ class TypedCollection extends BaseCollection
 
         $this->type = $type;
         parent::__construct($items);
+
+        foreach ($this->getIterator() as $item) {
+            $this->checkType($item);
+        }
     }
 
     /**
      * Check that item are the same type as collection requires
      * @param mixed $item
-     * @return bool
+     * @return void
      */
-    protected function checkType($item): bool
+    protected function checkType($item): void
     {
         if (!$this->type->check($item)) {
-            throw new RuntimeException(static::class . ' accept only instances of ' . $this->type);
+            throw new LogicException(static::class . ' accept only instances of ' . $this->type);
         }
-
-        return true;
     }
 
     /** {@inheritDoc} */
-    protected function getItems($items): array
+    protected function newStatic($items): CollectionInterface
     {
-        $result = parent::getItems($items);
-        foreach ($result as $item) {
-            $this->checkType($item);
-        }
-        return $result;
+        return new self($items, $this->type);
     }
 
     /** {@inheritDoc} */
-    protected function newStatic(array $items = []): CollectionInterface
-    {
-        if (static::class === __CLASS__) {
-            return new static($items, $this->type);
-        }
-
-        return parent::newStatic($items);
-    }
-
-    /** {@inheritDoc} */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->checkType($value);
         parent::offsetSet($offset, $value);
     }
 
-    /**
-     * Converts current collection to lower level collection without type check
-     * @return CollectionInterface
-     */
-    public function downgrade(): CollectionInterface
-    {
-        return new Collection($this->all());
-    }
-
     /** {@inheritDoc} */
-    public function keys()
+    public function keys(): CollectionInterface
     {
         return $this->downgrade()->keys();
     }
 
     /** {@inheritDoc} */
-    public function flip()
+    public function flip(): CollectionInterface
     {
         return $this->downgrade()->flip();
     }
@@ -127,19 +106,13 @@ class TypedCollection extends BaseCollection
      * {@inheritDoc}
      * Also collection will be downgraded
      */
-    public function remap($from, $to)
+    public function remap($from, $to): CollectionInterface
     {
         return $this->downgrade()->remap($from, $to);
     }
 
     /** {@inheritDoc} */
-    public function indexBy($key)
-    {
-        return $this->newStatic(parent::indexBy($key)->all());
-    }
-
-    /** {@inheritDoc} */
-    public function groupBy($groupField, $preserveKeys = true)
+    public function groupBy($groupField, $preserveKeys = true): CollectionInterface
     {
         return $this->downgrade()
             ->groupBy($groupField, $preserveKeys)
@@ -152,13 +125,13 @@ class TypedCollection extends BaseCollection
      * {@inheritDoc}
      * Also collection will be downgraded
      */
-    public function map(callable $callback)
+    public function map(callable $callback): CollectionInterface
     {
         return $this->downgrade()->map($callback);
     }
 
     /** {@inheritDoc} */
-    public function replace($item, $replacement, $strict = true)
+    public function replace($item, $replacement, $strict = true): CollectionInterface
     {
         $this->checkType($item);
         $this->checkType($replacement);
