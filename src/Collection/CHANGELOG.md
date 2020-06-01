@@ -22,6 +22,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.5.0] - 2020-06-01
+### Added
+- Use `spaceonfire/type` for checking typed collection items type
+
+### Fixed
+- Fix division by zero when calling average() on empty collection
+
 ## [1.4.0] - 2020-05-31
 ### Added
 - Update `CollectionInterface`:
