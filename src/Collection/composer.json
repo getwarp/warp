@@ -19,6 +19,7 @@
     "php": "^7.2",
     "ext-json": "*",
     "spaceonfire/criteria": "^1.0",
+    "spaceonfire/type": "^1.0",
     "symfony/polyfill-php73": "^1.14",
     "webmozart/assert": "^1.3"
   },

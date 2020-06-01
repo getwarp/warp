@@ -44,16 +44,16 @@ File location: `src/BaseCollection.php:17`
 
 TypedCollection constructor.
 
-| Param    | Type     | Description                                             |
-| -------- | -------- | ------------------------------------------------------- |
-| `$items` | _array_  |                                                         |
-| `$type`  | _string_ | Scalar type name or Full qualified name of object class |
+| Param    | Type                                 | Description                                             |
+| -------- | ------------------------------------ | ------------------------------------------------------- |
+| `$items` | _array_                              |                                                         |
+| `$type`  | _string&#124;\spaceonfire\Type\Type_ | Scalar type name or Full qualified name of object class |
 
 ```php
-public function TypedCollection::__construct(mixed $items = [], string $type = stdClass::class): mixed
+public function TypedCollection::__construct(mixed $items = [], mixed $type = stdClass::class): mixed
 ```
 
-File location: `src/TypedCollection.php:43`
+File location: `src/TypedCollection.php:46`
 
 ### \_\_toString()
 
@@ -67,7 +67,7 @@ Convert the collection to its string representation.
 public function BaseCollection::__toString(): mixed
 ```
 
-File location: `src/BaseCollection.php:640`
+File location: `src/BaseCollection.php:644`
 
 ### all()
 
@@ -127,7 +127,7 @@ Check whether the collection contains a specific item.
 public function BaseCollection::contains(mixed $item, mixed $strict = false): bool
 ```
 
-File location: `src/BaseCollection.php:395`
+File location: `src/BaseCollection.php:399`
 
 ### count()
 
@@ -139,7 +139,7 @@ File location: `src/BaseCollection.php:395`
 public function BaseCollection::count(): mixed
 ```
 
-File location: `src/BaseCollection.php:222`
+File location: `src/BaseCollection.php:226`
 
 ### downgrade()
 
@@ -153,7 +153,7 @@ Converts current collection to lower level collection without type check
 public function TypedCollection::downgrade(): \spaceonfire\Collection\CollectionInterface
 ```
 
-File location: `src/TypedCollection.php:101`
+File location: `src/TypedCollection.php:109`
 
 ### each()
 
@@ -185,7 +185,7 @@ The original collection will not be changed, a new collection with modified data
 public function BaseCollection::filter(?callable $callback = null): mixed
 ```
 
-File location: `src/BaseCollection.php:442`
+File location: `src/BaseCollection.php:446`
 
 ### find()
 
@@ -200,7 +200,7 @@ Find item in the collection
 public function BaseCollection::find(callable $callback): mixed
 ```
 
-File location: `src/BaseCollection.php:452`
+File location: `src/BaseCollection.php:456`
 
 ### first()
 
@@ -214,7 +214,7 @@ Returns first item of the collection
 public function BaseCollection::first(): mixed
 ```
 
-File location: `src/BaseCollection.php:547`
+File location: `src/BaseCollection.php:551`
 
 ### firstKey()
 
@@ -228,7 +228,7 @@ Returns first key of the collection
 public function BaseCollection::firstKey(): mixed
 ```
 
-File location: `src/BaseCollection.php:553`
+File location: `src/BaseCollection.php:557`
 
 ### flip()
 
@@ -244,7 +244,7 @@ The original collection will not be changed, a new collection will be returned i
 public function TypedCollection::flip(): mixed
 ```
 
-File location: `src/TypedCollection.php:113`
+File location: `src/TypedCollection.php:121`
 
 ### getIterator()
 
@@ -258,7 +258,7 @@ Retrieve an external iterator
 public function BaseCollection::getIterator(): mixed
 ```
 
-File location: `src/BaseCollection.php:571`
+File location: `src/BaseCollection.php:575`
 
 ### groupBy()
 
@@ -277,7 +277,7 @@ The original collection will not be changed, a new collection will be returned i
 public function TypedCollection::groupBy(mixed $groupField, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/TypedCollection.php:134`
+File location: `src/TypedCollection.php:142`
 
 ### implode()
 
@@ -293,7 +293,7 @@ Join collection elements with string
 public function BaseCollection::implode(?string $glue = null, mixed $field = null): string
 ```
 
-File location: `src/BaseCollection.php:528`
+File location: `src/BaseCollection.php:532`
 
 ### indexBy()
 
@@ -311,7 +311,7 @@ The original collection will not be changed, a new collection will be returned i
 public function TypedCollection::indexBy(mixed $key): mixed
 ```
 
-File location: `src/TypedCollection.php:128`
+File location: `src/TypedCollection.php:136`
 
 ### isEmpty()
 
@@ -325,7 +325,7 @@ Determine if the collection is empty or not.
 public function BaseCollection::isEmpty(): bool
 ```
 
-File location: `src/BaseCollection.php:213`
+File location: `src/BaseCollection.php:217`
 
 ### jsonSerialize()
 
@@ -337,7 +337,7 @@ File location: `src/BaseCollection.php:213`
 public function BaseCollection::jsonSerialize(): mixed
 ```
 
-File location: `src/BaseCollection.php:649`
+File location: `src/BaseCollection.php:653`
 
 ### keys()
 
@@ -353,7 +353,7 @@ The original collection will not be changed, a new collection will be returned i
 public function TypedCollection::keys(): mixed
 ```
 
-File location: `src/TypedCollection.php:107`
+File location: `src/TypedCollection.php:115`
 
 ### last()
 
@@ -367,7 +367,7 @@ Returns last item of the collection
 public function BaseCollection::last(): mixed
 ```
 
-File location: `src/BaseCollection.php:559`
+File location: `src/BaseCollection.php:563`
 
 ### lastKey()
 
@@ -381,7 +381,7 @@ Returns last key of the collection
 public function BaseCollection::lastKey(): mixed
 ```
 
-File location: `src/BaseCollection.php:565`
+File location: `src/BaseCollection.php:569`
 
 ### map()
 
@@ -397,7 +397,7 @@ Also collection will be downgraded
 public function TypedCollection::map(callable $callback): mixed
 ```
 
-File location: `src/TypedCollection.php:147`
+File location: `src/TypedCollection.php:155`
 
 ### matching()
 
@@ -414,7 +414,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::matching(\spaceonfire\Criteria\CriteriaInterface $criteria): \spaceonfire\Collection\CollectionInterface
 ```
 
-File location: `src/BaseCollection.php:499`
+File location: `src/BaseCollection.php:503`
 
 ### max()
 
@@ -430,7 +430,7 @@ Calculate the maximum value of a field of the models in the collection.
 public function BaseCollection::max(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:172`
+File location: `src/BaseCollection.php:176`
 
 ### median()
 
@@ -445,7 +445,7 @@ Calculate the median value of items in the collection
 public function BaseCollection::median(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:129`
+File location: `src/BaseCollection.php:133`
 
 ### merge()
 
@@ -464,7 +464,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::merge(mixed ...$collections): mixed
 ```
 
-File location: `src/BaseCollection.php:341`
+File location: `src/BaseCollection.php:345`
 
 ### min()
 
@@ -480,7 +480,7 @@ Calculate the minimum value of a field of the models in the collection
 public function BaseCollection::min(mixed $field = null): mixed
 ```
 
-File location: `src/BaseCollection.php:195`
+File location: `src/BaseCollection.php:199`
 
 ### offsetExists()
 
@@ -492,7 +492,7 @@ File location: `src/BaseCollection.php:195`
 public function BaseCollection::offsetExists(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:580`
+File location: `src/BaseCollection.php:584`
 
 ### offsetGet()
 
@@ -505,7 +505,7 @@ File location: `src/BaseCollection.php:580`
 public function BaseCollection::offsetGet(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:590`
+File location: `src/BaseCollection.php:594`
 
 ### offsetSet()
 
@@ -518,7 +518,7 @@ File location: `src/BaseCollection.php:590`
 public function TypedCollection::offsetSet(mixed $offset, mixed $value): mixed
 ```
 
-File location: `src/TypedCollection.php:91`
+File location: `src/TypedCollection.php:99`
 
 ### offsetUnset()
 
@@ -530,7 +530,7 @@ File location: `src/TypedCollection.php:91`
 public function BaseCollection::offsetUnset(mixed $offset): mixed
 ```
 
-File location: `src/BaseCollection.php:613`
+File location: `src/BaseCollection.php:617`
 
 ### reduce()
 
@@ -546,7 +546,7 @@ Reduce the collection to a single value.
 public function BaseCollection::reduce(callable $callback, mixed $initialValue = null): mixed
 ```
 
-File location: `src/BaseCollection.php:161`
+File location: `src/BaseCollection.php:165`
 
 ### remap()
 
@@ -569,7 +569,7 @@ Also collection will be downgraded
 public function TypedCollection::remap(mixed $from, mixed $to): mixed
 ```
 
-File location: `src/TypedCollection.php:122`
+File location: `src/TypedCollection.php:130`
 
 ### remove()
 
@@ -588,7 +588,7 @@ The original collection will not be changed, a new collection with modified data
 public function BaseCollection::remove(mixed $item, mixed $strict = false): mixed
 ```
 
-File location: `src/BaseCollection.php:419`
+File location: `src/BaseCollection.php:423`
 
 ### replace()
 
@@ -607,7 +607,7 @@ The original collection will not be changed, a new collection will be returned i
 public function TypedCollection::replace(mixed $item, mixed $replacement, mixed $strict = true): mixed
 ```
 
-File location: `src/TypedCollection.php:153`
+File location: `src/TypedCollection.php:161`
 
 ### reverse()
 
@@ -623,7 +623,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::reverse(): mixed
 ```
 
-File location: `src/BaseCollection.php:302`
+File location: `src/BaseCollection.php:306`
 
 ### slice()
 
@@ -642,7 +642,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::slice(mixed $offset, mixed $limit = null, mixed $preserveKeys = true): mixed
 ```
 
-File location: `src/BaseCollection.php:490`
+File location: `src/BaseCollection.php:494`
 
 ### sort()
 
@@ -664,7 +664,7 @@ The original collection will not be changed, a new collection with sorted data i
 public function BaseCollection::sort(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:233`
+File location: `src/BaseCollection.php:237`
 
 ### sortBy()
 
@@ -695,7 +695,7 @@ When sorting by multiple keys with different sort flags, use an array of sort fl
 public function BaseCollection::sortBy(mixed $key, mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:291`
+File location: `src/BaseCollection.php:295`
 
 ### sortByKey()
 
@@ -716,7 +716,7 @@ The original collection will not be changed, a new collection with sorted data i
 public function BaseCollection::sortByKey(mixed $direction = SORT_ASC, mixed $sortFlag = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:250`
+File location: `src/BaseCollection.php:254`
 
 ### sortNatural()
 
@@ -734,7 +734,7 @@ The original collection will not be changed, a new collection with sorted data i
 public function BaseCollection::sortNatural(mixed $caseSensitive = false): mixed
 ```
 
-File location: `src/BaseCollection.php:267`
+File location: `src/BaseCollection.php:271`
 
 ### sum()
 
@@ -765,7 +765,7 @@ Get the collection of items as JSON.
 public function BaseCollection::toJson(int $options): string
 ```
 
-File location: `src/BaseCollection.php:621`
+File location: `src/BaseCollection.php:625`
 
 ### unique()
 
@@ -781,7 +781,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::unique(int $sortFlags = SORT_REGULAR): mixed
 ```
 
-File location: `src/BaseCollection.php:522`
+File location: `src/BaseCollection.php:526`
 
 ### values()
 
@@ -797,7 +797,7 @@ The original collection will not be changed, a new collection will be returned i
 public function BaseCollection::values(): mixed
 ```
 
-File location: `src/BaseCollection.php:311`
+File location: `src/BaseCollection.php:315`
 
 ---
 

@@ -122,6 +122,10 @@ abstract class BaseCollection implements CollectionInterface
     /** {@inheritDoc} */
     public function average($field = null)
     {
+        if ($this->isEmpty()) {
+            return null;
+        }
+
         return $this->sum($field) / $this->count();
     }
 
