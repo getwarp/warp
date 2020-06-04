@@ -1,0 +1,17 @@
+# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
+parameters:
+	level: max
+	inferPrivatePropertyTypeFromConstructor: true
+	checkGenericClassInNonGenericObjectType: false
+	paths:
+		- src/
+	autoload_files:
+		- vendor/autoload.php
+	ignoreErrors:
+		- '/expects callable(.*) array(.*) given\.$/'
+		- '/expects class-string(.*)string given\.$/'
+		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\Definition\\DefinitionAggregate/'
+		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\ServiceProvider\\ServiceProviderAggregate/'

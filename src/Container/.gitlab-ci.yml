@@ -1,0 +1,53 @@
+stages:
+  - test
+
+.in-docker-job:
+  tags:
+    - docker
+  image: alpine
+
+.php-job:
+  extends: .in-docker-job
+  image: spaceonfire/nginx-php-fpm:latest-7.2
+
+.composer-job:
+  extends: .php-job
+  before_script:
+    - composer install
+  cache:
+    paths:
+      - vendor
+      - $COMPOSER_CACHE_DIR
+  variables:
+    COMPOSER_CACHE_DIR: $CI_PROJECT_DIR/._composer-cache
+
+##
+## "Test" stage jobs
+##
+
+codestyle:
+  extends: .composer-job
+  stage: test
+  script:
+    - composer codestyle -- --no-progress-bar --no-interaction
+
+phpstan:
+  extends: .composer-job
+  stage: test
+  script:
+    - composer dump-autoload --classmap-authoritative
+    - composer lint -- --no-interaction --no-progress
+
+phpunit:
+  extends: .composer-job
+  stage: test
+  script:
+    - docker-php-ext-enable xdebug
+    - composer test -- --no-interaction
+    - cat build/coverage.txt
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+  artifacts:
+    paths:
+      - build/coverage/
+    reports:
+      junit: build/report.junit.xml
