@@ -4,7 +4,16 @@
   "description": "Small yet powerful implementation of PSR-11 compatible dependency injection container",
   "keywords": [
     "spaceonfire",
-    "container"
+    "container",
+    "psr-11",
+    "psr11",
+    "dependency",
+    "injection",
+    "di",
+    "inversion of control",
+    "ioc",
+    "service",
+    "provider"
   ],
   "homepage": "https://github.com/spaceonfire/container",
   "license": "MIT",
