@@ -80,7 +80,7 @@ final class ServiceProviderAggregate extends AbstractCollectionDecorator impleme
      */
     public function addProvider(ServiceProviderInterface $provider): ServiceProviderAggregateInterface
     {
-        if ($this->offsetExists($provider->getIdentifier())) {
+        if ($this->offsetExists($this->indexer($provider))) {
             return $this;
         }
 

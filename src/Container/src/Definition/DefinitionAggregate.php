@@ -38,6 +38,7 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
 
     /**
      * @inheritDoc
+     * @codeCoverageIgnore
      * @return self
      */
     protected function newStatic($items): CollectionInterface

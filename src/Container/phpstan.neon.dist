@@ -6,10 +6,10 @@ parameters:
 	level: max
 	inferPrivatePropertyTypeFromConstructor: true
 	checkGenericClassInNonGenericObjectType: false
+	bootstrapFiles:
+		- vendor/autoload.php
 	paths:
 		- src/
-	autoload_files:
-		- vendor/autoload.php
 	ignoreErrors:
 		- '/expects callable(.*) array(.*) given\.$/'
 		- '/expects class-string(.*)string given\.$/'

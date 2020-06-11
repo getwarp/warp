@@ -148,8 +148,10 @@ final class Container implements
             }
 
             return $reflection->newInstanceArgs($this->resolveArguments($constructor, $arguments));
+            // @codeCoverageIgnoreStart
         } catch (ReflectionException $e) {
             throw new ContainerException($e->getMessage(), $e->getCode(), $e);
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -186,8 +188,10 @@ final class Container implements
             $reflection = new ReflectionFunction(Closure::fromCallable($callable));
 
             return $reflection->invokeArgs($this->resolveArguments($reflection, $arguments));
+            // @codeCoverageIgnoreStart
         } catch (ReflectionException $e) {
             throw new ContainerException($e->getMessage(), $e->getCode(), $e);
+            // @codeCoverageIgnoreEnd
         }
     }
 
