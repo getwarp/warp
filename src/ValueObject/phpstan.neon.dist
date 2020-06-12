@@ -8,10 +8,10 @@ parameters:
 	inferPrivatePropertyTypeFromConstructor: true
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
+	bootstrapFiles:
+		- vendor/autoload.php
 	paths:
 		- src/
-	autoload_files:
-		- vendor/autoload.php
 	ignoreErrors:
 		- '/^PHPDoc tag \@param for parameter (.*) with type (.*)\|string is not subtype of native type string.$/'
 		- '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'

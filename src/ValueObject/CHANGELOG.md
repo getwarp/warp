@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.0] - 2020-06-12
+### Added
+- Added `NullableStrategy`
+
 ## [1.1.0] - 2020-04-21
 ### Added
 - Added phpDoc comments as possible
