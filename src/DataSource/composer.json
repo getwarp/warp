@@ -34,7 +34,7 @@
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "7.3.17",
+    "symplify/easy-coding-standard-prefixed": "^8.0",
     "spaceonfire/value-object": "^1.0",
     "ramsey/uuid": "^4.0",
     "spiral/pagination": "^2.2.2"

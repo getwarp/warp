@@ -4,22 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
-
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
-```
-bin/
-build/
-docs/
-config/
-src/
-tests/
-vendor/
-```
+This package provides useful interfaces to design your domain model.
 
 ## Install
 
@@ -60,11 +45,11 @@ If you discover any security related issues, please email genteelknight@gmail.co
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/spaceonfire/DataSource.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/spaceonfire/data-source.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/DataSource.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/data-source.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/spaceonfire/DataSource
-[link-downloads]: https://packagist.org/packages/spaceonfire/DataSource
+[link-packagist]: https://packagist.org/packages/spaceonfire/data-source
+[link-downloads]: https://packagist.org/packages/spaceonfire/data-source
 [link-author]: https://github.com/hustlahusky
 [link-contributors]: ../../contributors

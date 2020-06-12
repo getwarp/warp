@@ -1,4 +1,4 @@
-# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+# Start command: composer install && composer dump-autoload --classmap-authoritative && vendor/bin/phpstan analyze
 
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
@@ -8,10 +8,10 @@ parameters:
 	inferPrivatePropertyTypeFromConstructor: true
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
+	bootstrapFiles:
+		- vendor/autoload.php
 	paths:
 		- src/
-	autoload_files:
-		- vendor/autoload.php
 	ignoreErrors:
 		- '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
 		- '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
