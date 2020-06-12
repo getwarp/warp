@@ -96,7 +96,10 @@ class CycleQuery implements QueryInterface
         }
 
         foreach ($criteria->getOrderBy() as $key => $order) {
-            $this->select->orderBy($key, $order === SORT_ASC ? SelectQuery::SORT_ASC : SelectQuery::SORT_DESC);
+            $this->select->orderBy(
+                $this->mapper->convertNameToStorage($key),
+                $order === SORT_ASC ? SelectQuery::SORT_ASC : SelectQuery::SORT_DESC
+            );
         }
 
         if ($criteria instanceof PaginableCriteria) {

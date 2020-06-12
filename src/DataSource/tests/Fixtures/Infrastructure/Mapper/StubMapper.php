@@ -40,7 +40,7 @@ class StubMapper implements MapperInterface
     /**
      * @inheritDoc
      */
-    public function convertToDomain(string $fieldName, $storageValue)
+    public function convertValueToDomain(string $fieldName, $storageValue)
     {
         return $storageValue;
     }
@@ -48,8 +48,24 @@ class StubMapper implements MapperInterface
     /**
      * @inheritDoc
      */
-    public function convertToStorage(string $fieldName, $domainValue)
+    public function convertValueToStorage(string $fieldName, $domainValue)
     {
         return $domainValue;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function convertNameToDomain(string $fieldName): string
+    {
+        return $fieldName;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function convertNameToStorage(string $fieldName): string
+    {
+        return $fieldName;
     }
 }

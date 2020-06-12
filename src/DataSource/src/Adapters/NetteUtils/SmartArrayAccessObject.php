@@ -13,6 +13,7 @@ trait SmartArrayAccessObject
 
     /**
      * @inheritDoc
+     * @param string $offset
      */
     public function offsetExists($offset): bool
     {
@@ -21,6 +22,8 @@ trait SmartArrayAccessObject
 
     /**
      * @inheritDoc
+     * @param string $offset
+     * @return mixed
      */
     public function &offsetGet($offset)
     {
@@ -29,6 +32,8 @@ trait SmartArrayAccessObject
 
     /**
      * @inheritDoc
+     * @param string $offset
+     * @param mixed $value
      */
     public function offsetSet($offset, $value): void
     {
@@ -37,12 +42,17 @@ trait SmartArrayAccessObject
 
     /**
      * @inheritDoc
+     * @param string $offset
      */
     public function offsetUnset($offset): void
     {
         $this->__set($offset, null);
     }
 
+    /**
+     * Returns object properties
+     * @return array
+     */
     public function getProperties(): array
     {
         return array_keys(ObjectHelpers::getMagicProperties(static::class));

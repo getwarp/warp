@@ -7,85 +7,14 @@ declare(strict_types=1);
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Query;
 
 use Cycle\ORM\Select\QueryBuilder;
-use InvalidArgumentException;
-use spaceonfire\Criteria\Expression\AbstractExpressionDecorator;
-use spaceonfire\Criteria\Expression\Selector;
-use spaceonfire\DataSource\MapperInterface;
+use spaceonfire\DataSource\Query\AbstractExpressionVisitor;
 use Spiral\Database\Injection\Parameter;
 use Webmozart\Expression\Constraint;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
-use Webmozart\Expression\Selector as SelectorNS;
 
-class CycleQueryExpressionVisitor
+class CycleQueryExpressionVisitor extends AbstractExpressionVisitor
 {
-    /**
-     * @var MapperInterface
-     */
-    protected $mapper;
-
-    /**
-     * CycleQueryExpressionVisitor constructor.
-     * @param MapperInterface $mapper
-     */
-    public function __construct(MapperInterface $mapper)
-    {
-        $this->mapper = $mapper;
-    }
-
-    /**
-     * Generates Cycle's Query Builder scope for given expression
-     * @param Expression $expression
-     * @return callable
-     */
-    public function dispatch(Expression $expression): callable
-    {
-        $methodsMap = [
-            AbstractExpressionDecorator::class => 'visitExpressionAdapter',
-            Logic\AndX::class => 'visitConjunction',
-            Logic\OrX::class => 'visitDisjunction',
-            SelectorNS\Key::class => 'visitSelector',
-            SelectorNS\Property::class => 'visitSelector',
-            Selector::class => 'visitSelector',
-            '' => null,
-        ];
-
-        $method = $methodsMap[get_class($expression)] ?? null;
-
-        if (!$method) {
-            foreach ($methodsMap as $class => $method) {
-                if ($class !== null && $expression instanceof $class) {
-                    break;
-                }
-            }
-        }
-
-        if ($method) {
-            return $this->$method($expression);
-        }
-
-        throw $this->makeNotSupportedExpression($expression);
-    }
-
-    private function makeNotSupportedExpression(
-        Expression $expression,
-        ?string $message = null
-    ): InvalidArgumentException {
-        return new InvalidArgumentException(
-            sprintf($message ?? 'Not supported expression class: "%s"', get_class($expression))
-        );
-    }
-
-    /**
-     * Visit inner expression for expression adapter
-     * @param AbstractExpressionDecorator $expr
-     * @return callable
-     */
-    public function visitExpressionAdapter(AbstractExpressionDecorator $expr): callable
-    {
-        return $this->dispatch($expr->getInnerExpression());
-    }
-
     /**
      * Generates Cycle's Query Builder scope for conjunction expression
      * @param Logic\AndX $expression
@@ -114,46 +43,6 @@ class CycleQueryExpressionVisitor
             }
             return $queryBuilder;
         };
-    }
-
-    /**
-     * Generates Cycle's Query Builder scope for field selector expression
-     * @param Selector|SelectorNS\Property|SelectorNS\Key|SelectorNS\Selector $selector
-     * @return callable
-     */
-    public function visitSelector(SelectorNS\Selector $selector): callable
-    {
-        if (!$selector instanceof Selector) {
-            $supportedSelectors = [
-                SelectorNS\Property::class => 'makeFromProperty',
-                SelectorNS\Key::class => 'makeFromKey',
-            ];
-
-            foreach ($supportedSelectors as $selectorClass => $method) {
-                if ($selector instanceof $selectorClass) {
-                    $selector = Selector::$method($selector);
-                    break;
-                }
-            }
-        }
-
-        if (!$selector instanceof Selector) {
-            throw $this->makeNotSupportedExpression($selector); // @codeCoverageIgnore
-        }
-
-        $expression = $selector->getExpression();
-        $isNegated = false;
-
-        if ($expression instanceof Logic\Not) {
-            $expression = $expression->getNegatedExpression();
-            $isNegated = true;
-        }
-
-        return $this->visitComparison(
-            implode('.', $selector->getPropertyPath()->getElements()),
-            $expression,
-            $isNegated
-        );
     }
 
     /**
@@ -282,45 +171,5 @@ class CycleQueryExpressionVisitor
         }
 
         throw $this->makeNotSupportedExpression($expression);
-    }
-
-    /**
-     * Format expression value for storage
-     * @param string $field
-     * @param mixed $value
-     * @return mixed
-     */
-    public function visitValue(string $field, $value)
-    {
-        return $this->mapper->convertToStorage($field, $value);
-    }
-
-    private function negateExpression(Expression $expressionToNegate): Expression
-    {
-        if ($expressionToNegate instanceof Constraint\Equals) {
-            return new Constraint\NotEquals($expressionToNegate->getComparedValue());
-        }
-
-        if ($expressionToNegate instanceof Constraint\Same) {
-            return new Constraint\NotSame($expressionToNegate->getComparedValue());
-        }
-
-        if ($expressionToNegate instanceof Constraint\GreaterThan) {
-            return new Constraint\LessThanEqual($expressionToNegate->getComparedValue());
-        }
-
-        if ($expressionToNegate instanceof Constraint\GreaterThanEqual) {
-            return new Constraint\LessThan($expressionToNegate->getComparedValue());
-        }
-
-        if ($expressionToNegate instanceof Constraint\LessThan) {
-            return new Constraint\GreaterThanEqual($expressionToNegate->getComparedValue());
-        }
-
-        if ($expressionToNegate instanceof Constraint\LessThanEqual) {
-            return new Constraint\GreaterThan($expressionToNegate->getComparedValue());
-        }
-
-        return $expressionToNegate;
     }
 }

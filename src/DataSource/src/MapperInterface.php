@@ -35,7 +35,7 @@ interface MapperInterface
      * @param mixed $storageValue
      * @return mixed
      */
-    public function convertToDomain(string $fieldName, $storageValue);
+    public function convertValueToDomain(string $fieldName, $storageValue);
 
     /**
      * Converts field value from domain to storage
@@ -43,5 +43,19 @@ interface MapperInterface
      * @param mixed $domainValue
      * @return mixed
      */
-    public function convertToStorage(string $fieldName, $domainValue);
+    public function convertValueToStorage(string $fieldName, $domainValue);
+
+    /**
+     * Converts field name from storage to domain
+     * @param string $fieldName
+     * @return string
+     */
+    public function convertNameToDomain(string $fieldName): string;
+
+    /**
+     * Converts field name from domain to storage
+     * @param string $fieldName
+     * @return string
+     */
+    public function convertNameToStorage(string $fieldName): string;
 }

@@ -18,7 +18,7 @@ class BasicCycleMapper extends Mapper implements MapperInterface
     /**
      * @inheritDoc
      */
-    public function convertToDomain(string $fieldName, $storageValue)
+    public function convertValueToDomain(string $fieldName, $storageValue)
     {
         return $this->hydrator->hydrateValue($fieldName, $storageValue);
     }
@@ -26,8 +26,24 @@ class BasicCycleMapper extends Mapper implements MapperInterface
     /**
      * @inheritDoc
      */
-    public function convertToStorage(string $fieldName, $domainValue)
+    public function convertValueToStorage(string $fieldName, $domainValue)
     {
         return $this->hydrator->extractValue($fieldName, $domainValue);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function convertNameToDomain(string $fieldName): string
+    {
+        return $this->hydrator->hydrateName($fieldName);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function convertNameToStorage(string $fieldName): string
+    {
+        return $this->hydrator->extractName($fieldName);
     }
 }

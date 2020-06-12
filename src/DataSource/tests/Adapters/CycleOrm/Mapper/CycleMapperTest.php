@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper;
 
 use Cycle\ORM\ORMInterface;
+use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use Laminas\Hydrator\Strategy\ClosureStrategy;
 use Nette\Utils\Strings;
 use spaceonfire\DataSource\Adapters\CycleOrm\AbstractCycleOrmTest;
@@ -25,6 +26,11 @@ class CycleMapperTest extends AbstractCycleOrmTest
                 public function __construct(ORMInterface $orm, string $role)
                 {
                     parent::__construct($orm, $role);
+
+                    $this->hydrator->setNamingStrategy(MapNamingStrategy::createFromExtractionMap([
+                        'name' => 'NAME',
+                    ]));
+
                     $this->hydrator->addStrategy(
                         'name',
                         new ClosureStrategy(
@@ -41,15 +47,27 @@ class CycleMapperTest extends AbstractCycleOrmTest
         }
     }
 
-    public function testConvertToStorage(): void
+    public function testConvertValueToStorage(): void
     {
-        $storageVal = self::$mapper->convertToStorage('name', 'Admin User');
+        $storageVal = self::$mapper->convertValueToStorage('name', 'Admin User');
         self::assertEquals('ADMIN USER', $storageVal);
     }
 
-    public function testConvertToDomain(): void
+    public function testConvertValueToDomain(): void
     {
-        $domainVal = self::$mapper->convertToDomain('name', 'Admin User');
+        $domainVal = self::$mapper->convertValueToDomain('name', 'Admin User');
         self::assertEquals('admin user', $domainVal);
+    }
+
+    public function testConvertNameToStorage(): void
+    {
+        $storageVal = self::$mapper->convertNameToStorage('name');
+        self::assertSame('NAME', $storageVal);
+    }
+
+    public function testConvertNameToDomain(): void
+    {
+        $domainVal = self::$mapper->convertNameToDomain('NAME');
+        self::assertSame('name', $domainVal);
     }
 }
