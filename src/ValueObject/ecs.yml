@@ -8,7 +8,6 @@ parameters:
   cache_directory: ._ecs_cache
   paths:
     - src/
-    - tests/
   skip:
     Unused variable $_.: ~
     Unused parameter $value.:
@@ -17,6 +16,7 @@ parameters:
       - src/EnumValue.php
     PhpCsFixer\Fixer\Strict\StrictComparisonFixer:
       - src/EnumValue.php
+      - src/Integrations/HydratorStrategy/BooleanStrategy.php
     SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
       - src/Integrations/HydratorStrategy/*
 
