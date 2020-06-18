@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.3.1] - 2020-06-18
+### Fixed
+- Make value object strategy more flexible
+
 ## [1.3.0] - 2020-06-15
 ### Added
 - Added `BooleanStrategy`

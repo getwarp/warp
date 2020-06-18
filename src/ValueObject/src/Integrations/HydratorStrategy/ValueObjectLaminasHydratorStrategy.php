@@ -27,12 +27,17 @@ final class ValueObjectLaminasHydratorStrategy implements StrategyInterface
 
     /**
      * @inheritDoc
-     * @param BaseValueObject $value
+     * @param BaseValueObject|mixed $value
      */
     public function extract($value, ?object $object = null)
     {
-        Assert::isInstanceOf($value, $this->valueObjectClass);
-        return $value->value();
+        $class = $this->valueObjectClass;
+
+        if ($value instanceof $class) {
+            return $value->value();
+        }
+
+        return $value;
     }
 
     /**
@@ -40,6 +45,12 @@ final class ValueObjectLaminasHydratorStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data)
     {
-        return new $this->valueObjectClass($value);
+        $class = $this->valueObjectClass;
+
+        if ($value instanceof $class) {
+            return $value;
+        }
+
+        return new $class($value);
     }
 }

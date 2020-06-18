@@ -19,3 +19,8 @@ parameters:
 		-
 			message: '/^Instantiated class (.*) is abstract.$/'
 			path: src/Integrations/HydratorStrategy/*
+		-
+			message: '/^Call to an undefined method object::value\(\).$/'
+			paths:
+				- src/Integrations/HydratorStrategy/ValueObjectZendHydratorStrategy.php
+				- src/Integrations/HydratorStrategy/ValueObjectLaminasHydratorStrategy.php
