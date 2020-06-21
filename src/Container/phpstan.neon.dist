@@ -12,6 +12,5 @@ parameters:
 		- src/
 	ignoreErrors:
 		- '/expects callable(.*) array(.*) given\.$/'
-		- '/expects class-string(.*)string given\.$/'
 		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\Definition\\DefinitionAggregate/'
 		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\ServiceProvider\\ServiceProviderAggregate/'

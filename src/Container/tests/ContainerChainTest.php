@@ -6,49 +6,13 @@ namespace spaceonfire\Container;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 
 class ContainerChainTest extends TestCase
 {
-    private function createContainerMock(array $definitions = [], $interface = ContainerInterface::class): ObjectProphecy
-    {
-        $isSpaceonfireContainer = $interface === ContainerInterface::class || is_subclass_of($interface, ContainerInterface::class);
-
-        $otherInterfaces = [];
-        if (is_array($interface)) {
-            $otherInterfaces = $interface;
-            $interface = array_shift($otherInterfaces);
-        }
-
-        $prophecy = $this->prophesize($interface);
-
-        foreach ($otherInterfaces as $otherInterface) {
-            $prophecy->willImplement($otherInterface);
-        }
-
-        $prophecy->has(Argument::type('string'))->willReturn(false);
-
-        if ($isSpaceonfireContainer) {
-            $prophecy->get(Argument::type('string'), Argument::type('array'))->willThrow(new NotFoundException());
-        } else {
-            $prophecy->get(Argument::type('string'))->willThrow(new NotFoundException());
-        }
-
-        foreach ($definitions as $id => $result) {
-            $prophecy->has($id)->willReturn(true);
-
-            if ($interface === ContainerInterface::class || is_subclass_of($interface, ContainerInterface::class)) {
-                $prophecy->get($id, Argument::type('array'))->willReturn($result);
-            } else {
-                $prophecy->get($id)->willReturn($result);
-            }
-        }
-
-        return $prophecy;
-    }
+    use WithContainerMockTrait;
 
     public function testHas(): void
     {
