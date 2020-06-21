@@ -121,7 +121,7 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
     public function get($id, array $arguments = [])
     {
         if ($this->definitions->hasDefinition($id)) {
-            return $this->definitions->resolve($id, $this);
+            return $this->definitions->resolve($id, $this->getContainer());
         }
 
         if ($this->providers->provides($id)) {

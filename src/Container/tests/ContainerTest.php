@@ -120,4 +120,16 @@ class ContainerTest extends TestCase
 
         self::assertSame(42, $container->invoke('intval', ['var' => '42', 'base' => 10]));
     }
+
+    public function testResolveDefinitionWithParentContainer(): void
+    {
+        $container = new ContainerChain([
+            new Container(),
+            new ReflectionContainer(),
+        ]);
+
+        $container->add('foo', B::class);
+
+        self::assertInstanceOf(B::class, $container->get('foo'));
+    }
 }
