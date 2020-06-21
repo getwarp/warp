@@ -17,7 +17,14 @@ $ composer require spaceonfire/container
 ## Usage
 
 ```php
-$container = new spaceonfire\Container\Container();
+use spaceonfire\Container\Container;
+use spaceonfire\Container\ReflectionContainer;
+use spaceonfire\Container\ContainerChain;
+
+$container = new ContainerChain([
+    new Container(),
+    new ReflectionContainer(),
+]);
 ```
 
 ## Change log

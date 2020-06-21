@@ -11,6 +11,8 @@ parameters:
   skip:
     Unused variable $_.: ~
     Unused parameter $_.: ~
+    SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff.UnusedParameter:
+      - src/ReflectionContainer.php
 
 services:
   Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~

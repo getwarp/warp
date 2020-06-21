@@ -6,15 +6,11 @@ namespace spaceonfire\Container;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use ReflectionMethod;
-use spaceonfire\Container\Argument\Argument;
-use spaceonfire\Container\Argument\ArgumentValue;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 use spaceonfire\Container\Fixtures\A;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\BadServiceProvider;
-use spaceonfire\Container\Fixtures\InvalidDependencyClass;
 use spaceonfire\Container\Fixtures\MyClass;
 use spaceonfire\Container\Fixtures\MyClassProvider;
 
@@ -45,12 +41,17 @@ class ContainerTest extends TestCase
         $container->addServiceProvider(MyClassProvider::class);
         self::assertInstanceOf(MyClass::class, $container->get(MyClass::class));
 
-        self::assertInstanceOf(B::class, $container->get(B::class));
-
         $container->addServiceProvider(BadServiceProvider::class);
 
         $this->expectException(ContainerException::class);
         $container->get('bad');
+    }
+
+    public function testGetNotFound(): void
+    {
+        $this->expectException(NotFoundException::class);
+        $container = new Container();
+        $container->get(B::class);
     }
 
     public function testHas(): void
@@ -63,7 +64,7 @@ class ContainerTest extends TestCase
         self::assertTrue($container->has('foo'));
         self::assertTrue($container->has('bad'));
         self::assertTrue($container->has(MyClass::class));
-        self::assertTrue($container->has(B::class));
+        self::assertFalse($container->has(B::class));
         self::assertFalse($container->has('bar'));
     }
 
@@ -97,6 +98,9 @@ class ContainerTest extends TestCase
     public function testInvoke(): void
     {
         $container = new Container();
+        $container->share(A::class);
+        $container->share(B::class);
+        $container->add(MyClass::class);
 
         self::assertSame('bar', $container->invoke(MyClass::class . '::staticMethod'));
 
@@ -115,44 +119,5 @@ class ContainerTest extends TestCase
         self::assertSame(42, $container->invoke($invokable));
 
         self::assertSame(42, $container->invoke('intval', ['var' => '42', 'base' => 10]));
-    }
-
-    /**
-     * @dataProvider resolveArgumentsDataProvider
-     * @param array $arguments
-     */
-    public function testResolveArguments(array $arguments = []): void
-    {
-        $method = new ReflectionMethod(MyClass::class, 'methodForResolve');
-
-        $container = new Container();
-
-        $resolved = $container->resolveArguments($method, $arguments);
-
-        self::assertCount(3, $resolved);
-        self::assertInstanceOf(B::class, $resolved[0]);
-        self::assertInstanceOf(A::class, $resolved[1]);
-        self::assertIsInt($resolved[2]);
-    }
-
-    public function resolveArgumentsDataProvider(): array
-    {
-        return [
-            [[]],
-            [['int' => 23]],
-            [['b' => new Argument('b', B::class)]],
-            [['a' => new Argument('a', A::class, new ArgumentValue(new A()))]],
-        ];
-    }
-
-    public function testResolveArgumentsFailed(): void
-    {
-        $this->expectException(ContainerException::class);
-
-        $method = new ReflectionMethod(MyClass::class, 'methodForResolve');
-
-        $container = new Container();
-
-        $container->resolveArguments($method, ['b' => new Argument('b', 'something_that_dont_exist')]);
     }
 }
