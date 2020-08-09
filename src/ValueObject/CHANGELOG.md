@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.4.0] - 2020-08-09
+### Added
+- Added optional `$nullValuePredicate` argument to `NullableStrategy` constructor
+  that allows you to specify which values should be considered as `null`
+
 ## [1.3.1] - 2020-06-18
 ### Fixed
 - Make value object strategy more flexible

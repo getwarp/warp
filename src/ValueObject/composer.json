@@ -29,7 +29,8 @@
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "phpunit/phpunit": "^8.0",
     "ramsey/uuid": "^3.9|^4.0",
-    "symplify/easy-coding-standard-prefixed": "^8.0"
+    "slevomat/coding-standard": "^6.3.10",
+    "symplify/easy-coding-standard-prefixed": "^8.2"
   },
   "suggest": {
     "ramsey/uuid": "To use UuidValue",

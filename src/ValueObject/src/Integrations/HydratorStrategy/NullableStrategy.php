@@ -12,14 +12,30 @@ final class NullableStrategy implements StrategyInterface
      * @var StrategyInterface
      */
     private $strategy;
+    /**
+     * @var callable
+     */
+    private $nullValuePredicate;
 
     /**
      * NullableStrategy constructor.
      * @param StrategyInterface $strategy
+     * @param callable|null $nullValuePredicate
      */
-    public function __construct(StrategyInterface $strategy)
+    public function __construct(StrategyInterface $strategy, ?callable $nullValuePredicate = null)
     {
         $this->strategy = $strategy;
+        $this->nullValuePredicate = $nullValuePredicate ?? [$this, 'defaultNullValuePredicate'];
+    }
+
+    /**
+     * Default null value predicate
+     * @param mixed $value
+     * @return bool
+     */
+    public function defaultNullValuePredicate($value): bool
+    {
+        return $value === null;
     }
 
     /**
@@ -27,7 +43,7 @@ final class NullableStrategy implements StrategyInterface
      */
     public function extract($value, ?object $object = null)
     {
-        if ($value === null) {
+        if (($this->nullValuePredicate)($value)) {
             return null;
         }
 
@@ -39,7 +55,7 @@ final class NullableStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data)
     {
-        if ($value === null) {
+        if (($this->nullValuePredicate)($value)) {
             return null;
         }
 
