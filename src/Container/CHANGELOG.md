@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.1.0] - 2020-09-23
+### Added
+- Support definition tags
+
 ## [2.0.1] - 2020-06-21
 ### Fixed
 - Resolve definition in `Container` class using parent container
