@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use spaceonfire\Collection\Collection;
+use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\Definition\DefinitionInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
@@ -184,5 +186,37 @@ final class ContainerChain implements ContainerWithServiceProvidersInterface, Co
         }
 
         throw new ContainerException('No container provided with support of service providers');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasTagged(string $tag): bool
+    {
+        foreach ($this->chain as $container) {
+            if ($container instanceof ContainerInterface && $container->hasTagged($tag)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTagged(string $tag): CollectionInterface
+    {
+        $result = new Collection();
+
+        foreach ($this->chain as $container) {
+            if (!$container instanceof ContainerInterface) {
+                continue;
+            }
+
+            $result = $result->merge($container->getTagged($tag));
+        }
+
+        return $result;
     }
 }

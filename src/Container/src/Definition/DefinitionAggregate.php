@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Container\Definition;
 
 use spaceonfire\Collection\AbstractCollectionDecorator;
+use spaceonfire\Collection\Collection;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Collection\IndexedCollection;
 use spaceonfire\Collection\TypedCollection;
@@ -18,6 +19,10 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
      * @var DefinitionFactoryInterface
      */
     private $definitionFactory;
+    /**
+     * @var array<string,string>
+     */
+    private $tags = [];
 
     /**
      * DefinitionAggregate constructor.
@@ -114,5 +119,39 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
     public function resolve(string $id, ContainerInterface $container)
     {
         return $this->getDefinition($id)->resolve($container);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasTag(string $tag): bool
+    {
+        if (array_key_exists($tag, $this->tags)) {
+            return true;
+        }
+
+        /** @var DefinitionInterface $definition */
+        foreach ($this->getIterator() as $definition) {
+            if ($definition->hasTag($tag)) {
+                $this->tags[$tag] = $tag;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function resolveTagged(string $tag, ContainerInterface $container): CollectionInterface
+    {
+        return (new Collection($this->getIterator()))
+            ->filter(static function (DefinitionInterface $definition) use ($tag) {
+                return $definition->hasTag($tag);
+            })
+            ->map(static function (DefinitionInterface $definition) use ($container) {
+                return $definition->resolve($container);
+            });
     }
 }

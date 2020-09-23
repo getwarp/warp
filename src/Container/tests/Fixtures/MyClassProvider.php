@@ -15,6 +15,7 @@ class MyClassProvider extends AbstractServiceProvider
     {
         return [
             MyClass::class,
+            'tag',
         ];
     }
 
@@ -23,6 +24,6 @@ class MyClassProvider extends AbstractServiceProvider
      */
     public function register(): void
     {
-        $this->getContainer()->add(MyClass::class, new MyClass());
+        $this->getContainer()->add(MyClass::class, new MyClass())->addTag('tag');
     }
 }

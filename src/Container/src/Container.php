@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use InvalidArgumentException;
+use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\Argument\ArgumentResolver;
 use spaceonfire\Container\Argument\ResolverInterface;
 use spaceonfire\Container\Definition\DefinitionAggregate;
@@ -45,7 +46,7 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
 
     /**
      * Container constructor.
-     * @param DefinitionAggregateInterface $definitions
+     * @param DefinitionAggregateInterface|null $definitions
      * @param ServiceProviderAggregateInterface|null $providers
      */
     public function __construct(
@@ -127,7 +128,7 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
         if ($this->providers->provides($id)) {
             $this->providers->register($id);
 
-            if (!$this->definitions->hasDefinition($id)) {
+            if (!$this->definitions->hasDefinition($id) || $this->definitions->hasTag($id)) {
                 throw new ContainerException(sprintf('Service provider lied about providing (%s) service', $id));
             }
 
@@ -151,5 +152,25 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
     public function invoke(callable $callable, array $arguments = [])
     {
         return ($this->callableInvoker)($callable, $arguments);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasTagged(string $tag): bool
+    {
+        return $this->definitions->hasTag($tag);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTagged(string $tag): CollectionInterface
+    {
+        if ($this->providers->provides($tag)) {
+            $this->providers->register($tag);
+        }
+
+        return $this->definitions->resolveTagged($tag, $this->getContainer());
     }
 }

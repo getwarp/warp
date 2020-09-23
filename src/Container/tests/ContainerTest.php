@@ -132,4 +132,33 @@ class ContainerTest extends TestCase
 
         self::assertInstanceOf(B::class, $container->get('foo'));
     }
+
+    public function testHasTagged(): void
+    {
+        $container = new Container();
+
+        self::assertFalse($container->hasTagged('tag'));
+
+        $container->add('foo')->addTag('tag');
+
+        self::assertTrue($container->hasTagged('tag'));
+    }
+
+    public function testGetTagged(): void
+    {
+        $container = new Container();
+
+        self::assertTrue($container->getTagged('tag')->isEmpty());
+
+        $container->addServiceProvider(MyClassProvider::class);
+
+        $container->add('foo', function () {
+            return 'foo';
+        })->addTag('tag');
+
+        $resolved = $container->getTagged('tag');
+
+        self::assertFalse($resolved->isEmpty());
+        self::assertSame('foo', $resolved->first());
+    }
 }

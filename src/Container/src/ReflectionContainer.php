@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use BadMethodCallException;
+use spaceonfire\Collection\Collection;
+use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\Argument\ArgumentResolver;
 use spaceonfire\Container\Argument\ResolverInterface;
 use spaceonfire\Container\Definition\DefinitionInterface;
@@ -96,5 +98,21 @@ final class ReflectionContainer implements ContainerInterface, ContainerAwareInt
     public function share(string $id, $concrete = null): DefinitionInterface
     {
         throw new BadMethodCallException('ReflectionContainer does not support definitions');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasTagged(string $tag): bool
+    {
+        return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTagged(string $tag): CollectionInterface
+    {
+        return new Collection();
     }
 }

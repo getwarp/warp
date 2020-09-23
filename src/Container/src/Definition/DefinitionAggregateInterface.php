@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Container\Definition;
 
 use IteratorAggregate;
+use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\ContainerInterface;
 
 interface DefinitionAggregateInterface extends IteratorAggregate
@@ -46,4 +47,19 @@ interface DefinitionAggregateInterface extends IteratorAggregate
      * @return mixed
      */
     public function resolve(string $id, ContainerInterface $container);
+
+    /**
+     * Checks whether tag exists as definition.
+     * @param string $tag
+     * @return bool
+     */
+    public function hasTag(string $tag): bool;
+
+    /**
+     * Resolve and build a collection of concrete values by given tag.
+     * @param string $tag
+     * @param ContainerInterface $container
+     * @return mixed[]|CollectionInterface
+     */
+    public function resolveTagged(string $tag, ContainerInterface $container): CollectionInterface;
 }

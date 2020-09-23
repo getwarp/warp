@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\Definition\DefinitionInterface;
 
 interface ContainerInterface extends PsrContainerInterface
@@ -47,4 +48,16 @@ interface ContainerInterface extends PsrContainerInterface
      * @return DefinitionInterface
      */
     public function share(string $id, $concrete = null): DefinitionInterface;
+
+    /**
+     * @param string $tag
+     * @return bool
+     */
+    public function hasTagged(string $tag): bool;
+
+    /**
+     * @param string $tag
+     * @return mixed[]|CollectionInterface
+     */
+    public function getTagged(string $tag): CollectionInterface;
 }
