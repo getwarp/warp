@@ -42,7 +42,7 @@ interface DefinitionInterface
     public function addArguments(array $arguments): self;
 
     /**
-     * Add a method to be invoked
+     * Add a method to be invoked.
      * @param string $method
      * @param array<string,mixed> $arguments
      * @return $this
@@ -50,7 +50,7 @@ interface DefinitionInterface
     public function addMethodCall(string $method, array $arguments = []): self;
 
     /**
-     * Add multiple methods to be invoked
+     * Add multiple methods to be invoked.
      * @param array<string,array<string,mixed>> $methods
      * @return $this
      */
@@ -62,4 +62,24 @@ interface DefinitionInterface
      * @return mixed
      */
     public function resolve(ContainerInterface $container);
+
+    /**
+     * Add a tag to the definition.
+     * @param string $tag
+     * @return $this
+     */
+    public function addTag(string $tag): self;
+
+    /**
+     * Does the definition have a tag?
+     * @param string $tag
+     * @return bool
+     */
+    public function hasTag(string $tag): bool;
+
+    /**
+     * Returns tags of the definition.
+     * @return string[]
+     */
+    public function getTags(): array;
 }

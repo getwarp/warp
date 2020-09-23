@@ -10,6 +10,17 @@ use spaceonfire\Container\Exception\ContainerException;
 
 class DefinitionAggregateTest extends TestCase
 {
+    public function testConstruct(): void
+    {
+        $emptyAggregate = new DefinitionAggregate();
+        self::assertTrue($emptyAggregate->isEmpty());
+
+        $definition = $emptyAggregate->makeDefinition('foo', 'bar', true);
+        $notEmptyAggregate = new DefinitionAggregate([$definition]);
+
+        self::assertFalse($notEmptyAggregate->isEmpty());
+    }
+
     public function testDefinitionOperations(): void
     {
         $aggregate = new DefinitionAggregate();
@@ -60,5 +71,39 @@ class DefinitionAggregateTest extends TestCase
         $aggregate->addDefinition(new Definition('foo', 'bar'));
 
         self::assertSame('baz', $aggregate->resolve('foo', $container));
+    }
+
+    public function testHasTag(): void
+    {
+        $aggregate = new DefinitionAggregate();
+        self::assertFalse($aggregate->hasTag('tag'));
+        $definition = new Definition('foo', 'bar');
+        $definition->addTag('tag');
+        $aggregate->addDefinition($definition);
+        self::assertTrue($aggregate->hasTag('tag'));
+        // second call should returns true immediately
+        self::assertTrue($aggregate->hasTag('tag'));
+    }
+
+    public function testResolveTagged(): void
+    {
+        $containerProphecy = $this->prophesize(ContainerInterface::class);
+        $containerProphecy->has('bar')->willReturn(true);
+        $containerProphecy->get('bar')->willReturn('baz');
+        /** @var ContainerInterface $container */
+        $container = $containerProphecy->reveal();
+
+        $aggregate = new DefinitionAggregate();
+
+        self::assertTrue($aggregate->resolveTagged('baz', $container)->isEmpty());
+
+        $definition = new Definition('foo', 'bar');
+        $definition->addTag('tag');
+        $aggregate->addDefinition($definition);
+
+        $resolved = $aggregate->resolveTagged('tag', $container);
+
+        self::assertCount(1, $resolved);
+        self::assertSame('baz', $resolved->first());
     }
 }

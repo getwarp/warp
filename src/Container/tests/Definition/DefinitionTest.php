@@ -128,4 +128,17 @@ class DefinitionTest extends TestCase
 
         $definition->resolve($container);
     }
+
+    public function testTags(): void
+    {
+        $definition = new Definition('foo', 'bar');
+
+        self::assertFalse($definition->hasTag('baz'));
+
+        $definition->addTag('baz');
+
+        self::assertTrue($definition->hasTag('baz'));
+
+        self::assertSame(['baz'], $definition->getTags());
+    }
 }

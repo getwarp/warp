@@ -31,6 +31,10 @@ final class Definition implements DefinitionInterface
      */
     private $methods = [];
     /**
+     * @var array<string,string>
+     */
+    private $tags = [];
+    /**
      * @var object|null
      */
     private $resolved;
@@ -151,5 +155,30 @@ final class Definition implements DefinitionInterface
         }
 
         return $this->resolved = $resolved;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function addTag(string $tag): DefinitionInterface
+    {
+        $this->tags[$tag] = $tag;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hasTag(string $tag): bool
+    {
+        return array_key_exists($tag, $this->tags);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTags(): array
+    {
+        return array_keys($this->tags);
     }
 }

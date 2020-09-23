@@ -32,30 +32,43 @@ class ServiceProviderAggregateTest extends TestCase
         return $aggregate;
     }
 
-    private function createServiceProvider(?string $id = null, array $provides = []): ServiceProviderInterface
+    private function createServiceProvider(?string $id = null, array $provides = [], array $tags = []): ServiceProviderInterface
     {
-        return new class($id, $provides) extends AbstractServiceProvider {
+        return new class($id, $provides, $tags) extends AbstractServiceProvider {
             private $provides;
+            private $tags;
+            private $registered = false;
 
-            public function __construct(?string $id = null, array $provides = [])
+            public function __construct(?string $id = null, array $provides = [], array $tags = [])
             {
                 if ($id) {
                     $this->setIdentifier($id);
                 }
 
                 $this->provides = $provides;
+                $this->tags = $tags;
             }
 
             public function provides(): array
             {
-                return array_keys($this->provides);
+                return array_merge(array_keys($this->provides), $this->tags);
             }
 
             public function register(): void
             {
                 foreach ($this->provides as $abstract => $concrete) {
-                    $this->getContainer()->add($abstract, $concrete, true);
+                    $def = $this->getContainer()->add($abstract, $concrete, true);
+
+                    foreach ($this->tags as $tag) {
+                        $def->addTag($tag);
+                    }
                 }
+                $this->registered = true;
+            }
+
+            public function isRegistered(): bool
+            {
+                return $this->registered;
             }
         };
     }
@@ -146,5 +159,21 @@ class ServiceProviderAggregateTest extends TestCase
         $this->expectException(ContainerException::class);
         $aggregate = $this->createAggregate();
         $aggregate->register('foo');
+    }
+
+    public function testRegisterMultipleProviders(): void
+    {
+        $aggregate = $this->createAggregate();
+
+        $fooProvider = $this->createServiceProvider('foo', ['foo' => 'foo'], ['tag']);
+        $barProvider = $this->createServiceProvider('bar', ['bar' => 'bar'], ['tag']);
+
+        $aggregate->addProvider($fooProvider);
+        $aggregate->addProvider($barProvider);
+
+        $aggregate->register('tag');
+
+        self::assertTrue($fooProvider->isRegistered());
+        self::assertTrue($barProvider->isRegistered());
     }
 }

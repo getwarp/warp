@@ -7,6 +7,7 @@ namespace spaceonfire\Container;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use spaceonfire\Collection\Collection;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 
@@ -129,5 +130,52 @@ class ContainerChainTest extends TestCase
         $chain = new ContainerChain([$containerProphecy->reveal()]);
 
         $chain->share('foo', 'bar');
+    }
+
+    public function testHasTagged(): void
+    {
+        $chain = new ContainerChain([]);
+
+        self::assertFalse($chain->hasTagged('tag'));
+
+        $containerProphecy = $this->createContainerMock();
+        $containerProphecy->hasTagged('tag')->willReturn(true)->shouldBeCalled();
+        $chain->addContainer($containerProphecy->reveal());
+
+        self::assertTrue($chain->hasTagged('tag'));
+    }
+
+    public function testGetTagged(): void
+    {
+        $chain = new ContainerChain([]);
+
+        self::assertTrue($chain->getTagged('tag')->isEmpty());
+
+        $containerWithFoo = $this->createContainerMock();
+        $containerWithFoo->hasTagged('tag')->willReturn(true);
+        $containerWithFoo->getTagged('tag')->willReturn(new Collection(['foo']))->shouldBeCalled();
+        $chain->addContainer($containerWithFoo->reveal());
+
+        $containerWithBar = $this->createContainerMock();
+        $containerWithBar->hasTagged('tag')->willReturn(true);
+        $containerWithBar->getTagged('tag')->willReturn(new Collection(['bar']))->shouldBeCalled();
+        $chain->addContainer($containerWithBar->reveal());
+
+        // psr container without tags support should be skipped
+        $chain->addContainer($this->createContainerMock([], PsrContainerInterface::class)->reveal());
+
+        $resolved = $chain->getTagged('tag');
+
+        self::assertFalse($resolved->isEmpty());
+
+        $foo = $resolved->find(function ($v) {
+            return $v === 'foo';
+        });
+        self::assertSame('foo', $foo);
+
+        $bar = $resolved->find(function ($v) {
+            return $v === 'bar';
+        });
+        self::assertSame('bar', $bar);
     }
 }

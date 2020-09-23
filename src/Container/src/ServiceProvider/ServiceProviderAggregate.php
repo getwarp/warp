@@ -68,7 +68,9 @@ final class ServiceProviderAggregate extends AbstractCollectionDecorator impleme
 
         foreach ($value->provides() as $service) {
             if (!isset($this->providesMap[$service])) {
-                $this->providesMap[$service] = $alias;
+                $this->providesMap[$service] = [$alias];
+            } else {
+                $this->providesMap[$service][] = $alias;
             }
         }
 
@@ -105,15 +107,15 @@ final class ServiceProviderAggregate extends AbstractCollectionDecorator impleme
             throw new ContainerException(sprintf('(%s) is not provided by a service provider', $service));
         }
 
-        $providerId = $this->providesMap[$service];
+        foreach ($this->providesMap[$service] as $providerId) {
+            if (array_key_exists($providerId, $this->registered)) {
+                continue;
+            }
 
-        if (array_key_exists($providerId, $this->registered)) {
-            return;
+            /** @var ServiceProviderInterface $provider */
+            $provider = $this->offsetGet($providerId);
+            $provider->register();
+            $this->registered[$provider->getIdentifier()] = true;
         }
-
-        /** @var ServiceProviderInterface $provider */
-        $provider = $this->offsetGet($providerId);
-        $provider->register();
-        $this->registered[$provider->getIdentifier()] = true;
     }
 }

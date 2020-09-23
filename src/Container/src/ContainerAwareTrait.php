@@ -12,9 +12,7 @@ trait ContainerAwareTrait
     protected $container;
 
     /**
-     * Set a container
-     * @param ContainerInterface $container
-     * @return $this|ContainerAwareInterface
+     * @inheritDoc
      */
     public function setContainer(ContainerInterface $container): ContainerAwareInterface
     {
@@ -23,8 +21,7 @@ trait ContainerAwareTrait
     }
 
     /**
-     * Get the container
-     * @return ContainerInterface
+     * @inheritDoc
      */
     public function getContainer(): ContainerInterface
     {

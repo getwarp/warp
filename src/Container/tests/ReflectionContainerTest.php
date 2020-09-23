@@ -71,4 +71,16 @@ class ReflectionContainerTest extends TestCase
         $container = new ReflectionContainer();
         $container->share('foo', 'bar');
     }
+
+    public function testHasTagged(): void
+    {
+        $container = new ReflectionContainer();
+        self::assertFalse($container->hasTagged('tag'));
+    }
+
+    public function testGetTagged(): void
+    {
+        $container = new ReflectionContainer();
+        self::assertTrue($container->getTagged('tag')->isEmpty());
+    }
 }
