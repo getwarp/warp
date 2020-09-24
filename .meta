@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "repos/collection": "git@github.com:spaceonfire/collection.git",
+    "repos/command-bus": "git@github.com:spaceonfire/command-bus.git",
+    "repos/common": "git@github.com:spaceonfire/common.git",
+    "repos/container": "git@github.com:spaceonfire/container.git",
+    "repos/criteria": "git@github.com:spaceonfire/criteria.git",
+    "repos/data-source": "git@github.com:spaceonfire/data-source.git",
+    "repos/type": "git@github.com:spaceonfire/type.git",
+    "repos/value-object": "git@github.com:spaceonfire/value-object.git",
+    "repos/laminas-hydrator-bridge": "git@github.com:spaceonfire/laminas-hydrator-bridge.git",
+    "repos/monolog-bridge": "git@github.com:spaceonfire/monolog-bridge.git"
+  }
+}
