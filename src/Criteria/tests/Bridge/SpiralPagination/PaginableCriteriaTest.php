@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Adapter\SpiralPagination;
+namespace spaceonfire\Criteria\Bridge\SpiralPagination;
 
 use spaceonfire\Criteria\AbstractCriteriaTest;
 use spaceonfire\Criteria\CriteriaInterface;

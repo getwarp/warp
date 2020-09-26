@@ -37,7 +37,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Criteria constructor.
-     * @param Expression $where
+     * @param Expression|null $where
      * @param array<string,int> $orderBy
      * @param int|null $offset
      * @param int|null $limit

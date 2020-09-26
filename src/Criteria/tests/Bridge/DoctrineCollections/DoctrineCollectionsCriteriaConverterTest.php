@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Adapter\DoctrineCollections;
+namespace spaceonfire\Criteria\Bridge\DoctrineCollections;
 
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
