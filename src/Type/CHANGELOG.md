@@ -22,5 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.0.1] - 2020-09-26
+### Fixed
+- Development config updates
+- Minor type issues fixes found by static analyser
+
 ## [1.0.0] - 2020-06-01
 - First release
