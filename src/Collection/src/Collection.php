@@ -149,7 +149,7 @@ final class Collection implements CollectionInterface
         }
 
         $count = count($items);
-        $middleIndex = floor(($count - 1) / 2);
+        $middleIndex = (int)floor(($count - 1) / 2);
 
         sort($items, SORT_NATURAL);
 

@@ -45,7 +45,7 @@ class ArrayHelper
         Assert::string($prefix);
         $result = [];
         foreach ($array as $key => $item) {
-            $prefixedKey = ($prefix ? $prefix . $separator : '') . $key;
+            $prefixedKey = ($prefix !== '' ? $prefix . $separator : '') . $key;
 
             if (static::isArrayAssoc($item)) {
                 $childFlatten = self::flatten($item, $separator, $prefixedKey);
@@ -102,7 +102,7 @@ class ArrayHelper
         /** @var array $ret */
         $ret = array_shift($arrays);
 
-        while (!empty($arrays)) {
+        while (count($arrays) > 0) {
             foreach (array_shift($arrays) as $k => $v) {
                 if (is_int($k)) {
                     if (array_key_exists($k, $ret)) {
@@ -314,7 +314,7 @@ class ArrayHelper
             return $array[$key];
         }
 
-        if (false !== $pos = strrpos($key, '.')) {
+        if (is_string($key) && false !== $pos = strrpos($key, '.')) {
             $array = static::getValue($array, substr($key, 0, $pos), $default);
             $key = substr($key, $pos + 1);
         }
@@ -353,10 +353,10 @@ class ArrayHelper
      * @throws InvalidArgumentException if the $direction or $sortFlag parameters do not have
      * correct number of elements as that of $key.
      */
-    public static function multisort(&$array, $key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
+    public static function multisort(array &$array, $key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
     {
         $keys = is_array($key) ? $key : [$key];
-        if (empty($keys) || empty($array)) {
+        if (count($keys) === 0 || count($array) === 0) {
             return;
         }
         $n = count($keys);

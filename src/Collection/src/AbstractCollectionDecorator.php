@@ -34,7 +34,7 @@ abstract class AbstractCollectionDecorator implements CollectionInterface
     /**
      * Creates new instance of collection
      * @param array|iterable|mixed $items
-     * @return static
+     * @return static|self
      */
     protected function newStatic($items)
     {
