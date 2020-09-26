@@ -16,7 +16,7 @@ final class ServiceProviderAggregate extends AbstractCollectionDecorator impleme
     use ContainerAwareTrait;
 
     /**
-     * @var array<string,string> maps service name to provider id which provides it
+     * @var array<string,array<string>> maps service name to provider id which provides it
      */
     private $providesMap = [];
     /**
