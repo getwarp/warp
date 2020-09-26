@@ -1,4 +1,4 @@
-# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+# Start command: composer install && composer dump-autoload --classmap-authoritative && vendor/bin/phpstan analyze
 
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
@@ -7,7 +7,7 @@ parameters:
 	inferPrivatePropertyTypeFromConstructor: true
 	checkGenericClassInNonGenericObjectType: false
 	bootstrapFiles:
-		- vendor/autoload.php
+		- tests/bootstrap.php
 	paths:
 		- src/
 	ignoreErrors:
