@@ -1,23 +1,19 @@
-# Start command: composer update --classmap-authoritative && vendor/bin/phpstan analyze
+# Start command: composer install && composer dump-autoload --classmap-authoritative && vendor/bin/phpstan analyze
 
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
-	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
+	- %rootDir%/../phpstan-webmozart-assert/extension.neon
 parameters:
 	level: max
 	inferPrivatePropertyTypeFromConstructor: true
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	treatPhpDocTypesAsCertain: false
+	bootstrapFiles:
+		- tests/bootstrap.php
 	paths:
 		- src/
-	autoload_files:
-		- vendor/autoload.php
-#	ignoreErrors:
-#		- '/^Unsafe usage of new static/'
-#		-
-#			message: '/^Parameter #1 \$function of function call_user_func_array expects callable/'
-#			path: src/CollectionAliasesTrait.php
-#		-
-#			message: '/^PHPDoc tag \@param for parameter \$collections with type array<iterable> is not subtype of native type array<int, mixed>.$/'
-#			path: src/CollectionInterface.php
+	ignoreErrors:
+		-
+			message: '/^Parameter #3 \$length of function substr expects int/'
+			path: src/CollectionType.php
