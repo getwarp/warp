@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.1.1] - 2020-09-26
+### Fixed
+- Development config updates
+- Fix PhpDoc comment in service provider aggregate
+
 ## [2.1.0] - 2020-09-23
 ### Added
 - Support definition tags
