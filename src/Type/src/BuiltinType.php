@@ -134,19 +134,15 @@ final class BuiltinType implements Type
         switch ($this->type) {
             case self::INT:
                 return (int)$value;
-                break;
 
             case self::FLOAT:
                 return (float)$value;
-                break;
 
             case self::STRING:
                 return (string)$value;
-                break;
 
             default:
                 return $value;
-                break;
         }
     }
 

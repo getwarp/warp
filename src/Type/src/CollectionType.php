@@ -111,6 +111,7 @@ final class CollectionType implements Type
             throw new InvalidArgumentException(sprintf('Type "%s" is not supported by %s', $type, __CLASS__));
         }
 
+        /** @var array $parsed */
         $parsed = self::parseType($type);
 
         $parsed['value'] = TypeFactory::create($parsed['value']);
@@ -120,6 +121,10 @@ final class CollectionType implements Type
         return new self($parsed['value'], $parsed['key'], $parsed['iterable']);
     }
 
+    /**
+     * @param string $type
+     * @return array|null
+     */
     private static function parseType(string $type): ?array
     {
         $result = [
@@ -133,7 +138,10 @@ final class CollectionType implements Type
             return $result;
         }
 
-        if (0 < ($openPos = strpos($type, '<')) && strpos($type, '>') === strlen($type) - 1) {
+        if (
+            (0 < $openPos = strpos($type, '<')) &&
+            (strpos($type, '>') === strlen($type) - 1)
+        ) {
             $result['iterable'] = substr($type, 0, $openPos);
             [$key, $value] = array_map('trim', explode(',', substr($type, $openPos + 1, -1))) + [null, null];
 
