@@ -4,53 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
 
-use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\ValueObject\BaseValueObject;
-use Webmozart\Assert\Assert;
+use function class_alias;
 
-final class ValueObjectLaminasHydratorStrategy implements StrategyInterface
-{
-    /**
-     * @var string|BaseValueObject
-     */
-    private $valueObjectClass;
+class_alias(
+    \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy::class,
+    __NAMESPACE__ . '\ValueObjectLaminasHydratorStrategy'
+);
 
+if (false) {
     /**
-     * ValueObjectLaminasHydratorStrategy constructor.
-     * @param string|BaseValueObject $valueObjectClass
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy instead.
      */
-    public function __construct(string $valueObjectClass)
+    class ValueObjectLaminasHydratorStrategy extends \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy
     {
-        Assert::subclassOf($valueObjectClass, BaseValueObject::class);
-        $this->valueObjectClass = $valueObjectClass;
-    }
-
-    /**
-     * @inheritDoc
-     * @param BaseValueObject|mixed $value
-     */
-    public function extract($value, ?object $object = null)
-    {
-        $class = $this->valueObjectClass;
-
-        if ($value instanceof $class) {
-            return $value->value();
-        }
-
-        return $value;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        $class = $this->valueObjectClass;
-
-        if ($value instanceof $class) {
-            return $value;
-        }
-
-        return new $class($value);
     }
 }

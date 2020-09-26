@@ -18,9 +18,10 @@ parameters:
 		- '/^Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)$/'
 		-
 			message: '/^Instantiated class (.*) is abstract.$/'
-			path: src/Integrations/HydratorStrategy/*
+			path: src/Bridge/LaminasHydrator/*
 		-
 			message: '/^Call to an undefined method object::value\(\).$/'
-			paths:
-				- src/Integrations/HydratorStrategy/ValueObjectZendHydratorStrategy.php
-				- src/Integrations/HydratorStrategy/ValueObjectLaminasHydratorStrategy.php
+			path: src/Bridge/LaminasHydrator/ValueObjectStrategy.php
+		-
+			message: '/^If condition is always false\.$/'
+			path: src/Integrations/*

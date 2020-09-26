@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
+namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\ValueObject\IpValue;
 
-class ValueObjectLaminasHydratorStrategyTest extends TestCase
+class ValueObjectStrategyTest extends TestCase
 {
     public function testConstruct(): void
     {
-        new ValueObjectLaminasHydratorStrategy(IpValue::class);
+        new ValueObjectStrategy(IpValue::class);
         self::assertTrue(true);
     }
 
     public function testConstructFail(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new ValueObjectLaminasHydratorStrategy(\stdClass::class);
+        new ValueObjectStrategy(\stdClass::class);
     }
 
     public function testExtract(): void
     {
-        $strategy = new ValueObjectLaminasHydratorStrategy(IpValue::class);
+        $strategy = new ValueObjectStrategy(IpValue::class);
 
         $extracted = $strategy->extract(new IpValue('127.0.0.1'));
         self::assertSame('127.0.0.1', $extracted);
@@ -33,7 +33,7 @@ class ValueObjectLaminasHydratorStrategyTest extends TestCase
 
     public function testHydrate(): void
     {
-        $strategy = new ValueObjectLaminasHydratorStrategy(IpValue::class);
+        $strategy = new ValueObjectStrategy(IpValue::class);
 
         $hydrated = $strategy->hydrate('127.0.0.1', null);
         self::assertSame('127.0.0.1', $hydrated->value());

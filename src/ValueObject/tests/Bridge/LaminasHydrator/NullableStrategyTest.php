@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
+namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use PHPUnit\Framework\TestCase;

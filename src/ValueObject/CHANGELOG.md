@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.5.0] - 2020-09-27
+### Deprecated
+- Namespace `spaceonfire\ValueObject\Integrations\HydratorStrategy` renamed to `spaceonfire\ValueObject\Bridge\LaminasHydrator`.
+  Class aliases provided for backwards compatibility, but will be removed in next major release.
+
 ## [1.4.0] - 2020-08-09
 ### Added
 - Added optional `$nullValuePredicate` argument to `NullableStrategy` constructor

@@ -4,75 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
 
-use InvalidArgumentException;
-use Laminas\Hydrator\Strategy\StrategyInterface;
-use Webmozart\Assert\Assert;
+use function class_alias;
 
-final class BooleanStrategy implements StrategyInterface
-{
-    /**
-     * @var int|string
-     */
-    private $trueValue;
-    /**
-     * @var int|string
-     */
-    private $falseValue;
-    /**
-     * @var bool
-     */
-    private $strict;
+class_alias(
+    \spaceonfire\ValueObject\Bridge\LaminasHydrator\BooleanStrategy::class,
+    __NAMESPACE__ . '\BooleanStrategy'
+);
 
+if (false) {
     /**
-     * BooleanStrategy constructor.
-     * @param int|string|mixed $trueValue
-     * @param int|string|mixed $falseValue
-     * @param bool $strict
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\ValueObject\Bridge\LaminasHydrator\BooleanStrategy instead.
      */
-    public function __construct($trueValue, $falseValue, bool $strict = true)
+    class BooleanStrategy extends \spaceonfire\ValueObject\Bridge\LaminasHydrator\BooleanStrategy
     {
-        if (!is_int($trueValue) && !is_string($trueValue)) {
-            throw new InvalidArgumentException(sprintf(
-                'Expected int or string as $trueValue. Got: %s',
-                is_object($trueValue) ? get_class($trueValue) : gettype($trueValue)
-            ));
-        }
-
-        if (!is_int($falseValue) && !is_string($falseValue)) {
-            throw new InvalidArgumentException(sprintf(
-                'Expected int or string as $falseValue. Got: %s',
-                is_object($falseValue) ? get_class($falseValue) : gettype($falseValue)
-            ));
-        }
-
-        $this->trueValue = $trueValue;
-        $this->falseValue = $falseValue;
-        $this->strict = $strict;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function extract($value, ?object $object = null)
-    {
-        Assert::boolean($value, 'Unable to extract. Expected a boolean. Got: %s.');
-        return $value === true ? $this->trueValue : $this->falseValue;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        if (is_bool($value)) {
-            return $value;
-        }
-
-        if ($this->strict) {
-            return $value === $this->trueValue;
-        }
-
-        /** @noinspection TypeUnsafeComparisonInspection */
-        return $value == $this->trueValue;
     }
 }

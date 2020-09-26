@@ -4,61 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
 
-use Laminas\Hydrator\Strategy\StrategyInterface;
+use function class_alias;
 
-final class NullableStrategy implements StrategyInterface
-{
-    /**
-     * @var StrategyInterface
-     */
-    private $strategy;
-    /**
-     * @var callable
-     */
-    private $nullValuePredicate;
+class_alias(
+    \spaceonfire\ValueObject\Bridge\LaminasHydrator\NullableStrategy::class,
+    __NAMESPACE__ . '\NullableStrategy'
+);
 
+if (false) {
     /**
-     * NullableStrategy constructor.
-     * @param StrategyInterface $strategy
-     * @param callable|null $nullValuePredicate
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\ValueObject\Bridge\LaminasHydrator\NullableStrategy instead.
      */
-    public function __construct(StrategyInterface $strategy, ?callable $nullValuePredicate = null)
+    class NullableStrategy extends \spaceonfire\ValueObject\Bridge\LaminasHydrator\NullableStrategy
     {
-        $this->strategy = $strategy;
-        $this->nullValuePredicate = $nullValuePredicate ?? [$this, 'defaultNullValuePredicate'];
-    }
-
-    /**
-     * Default null value predicate
-     * @param mixed $value
-     * @return bool
-     */
-    public function defaultNullValuePredicate($value): bool
-    {
-        return $value === null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function extract($value, ?object $object = null)
-    {
-        if (($this->nullValuePredicate)($value)) {
-            return null;
-        }
-
-        return $this->strategy->extract($value, $object);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        if (($this->nullValuePredicate)($value)) {
-            return null;
-        }
-
-        return $this->strategy->hydrate($value, $data);
     }
 }
