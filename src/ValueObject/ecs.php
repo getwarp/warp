@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
-use SlevomatCodingStandard\Sniffs\Classes\UnusedPrivateElementsSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
@@ -31,18 +30,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('skip', [
         'Unused variable $_.' => null,
-        'Unused parameter $value.' => ['src/BaseValueObject.php'],
-        'Unused parameter $args.' => ['src/EnumValue.php'],
+        'Unused parameter $value.' => [
+            __DIR__ . '/src/BaseValueObject.php',
+        ],
+        'Unused parameter $args.' => [
+            __DIR__ . '/src/EnumValue.php',
+        ],
         StrictComparisonFixer::class => [
-            'src/EnumValue.php',
-            'src/Integrations/HydratorStrategy/BooleanStrategy.php',
+            __DIR__ . '/src/EnumValue.php',
+            __DIR__ . '/src/Integrations/HydratorStrategy/BooleanStrategy.php',
+        ],
+        UnusedParameterSniff::class => [
+            __DIR__ . '/src/Integrations/HydratorStrategy/*',
         ],
     ]);
 
     $services = $containerConfigurator->services();
 
     $services->set(LineLengthFixer::class);
-    $services->set(UnusedPrivateElementsSniff::class);
     $services->set(UnusedInheritedVariablePassedToClosureSniff::class);
     $services->set(UnusedParameterSniff::class);
     $services->set(UnusedVariableSniff::class);
