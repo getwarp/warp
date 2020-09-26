@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm\Repository;
+namespace spaceonfire\DataSource\Bridge\CycleOrm\Repository;
 
-use spaceonfire\DataSource\Adapters\CycleOrm\AbstractCycleOrmTest;
-use spaceonfire\DataSource\Adapters\CycleOrm\Mapper\StdClassCycleMapper;
+use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Tag\CycleTagRepository;
 use stdClass;
 

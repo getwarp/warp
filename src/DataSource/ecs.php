@@ -34,8 +34,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         UnusedParameterSniff::class => [
             __DIR__ . '/src/AbstractCriteriaDecorator.php',
-            __DIR__ . '/src/Adapters/CycleOrm/Repository/AbstractCycleRepository.php',
-            __DIR__ . '/src/Adapters/CycleOrm/Mapper/Hydrator/Strategy/CollectionExtractorStrategy.php',
+            __DIR__ . '/src/Bridge/CycleOrm/Repository/AbstractCycleRepository.php',
+            __DIR__ . '/src/Bridge/CycleOrm/Mapper/Hydrator/Strategy/CollectionExtractorStrategy.php',
         ],
     ]);
 

@@ -4,35 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper;
 
-use Cycle\ORM\ORMInterface;
-use spaceonfire\DataSource\Adapters\CycleOrm\Mapper\Hydrator\StdClassHydrator;
-use stdClass;
+use function class_alias;
 
-class StdClassCycleMapper extends BasicCycleMapper
-{
-    /**
-     * @var StdClassHydrator
-     */
-    protected $hydrator;
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper::class,
+    __NAMESPACE__ . '\StdClassCycleMapper'
+);
 
+if (false) {
     /**
-     * StdClassCycleMapper constructor.
-     * @param ORMInterface $orm
-     * @param string $role
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper instead.
      */
-    public function __construct(ORMInterface $orm, string $role)
+    class StdClassCycleMapper extends \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper
     {
-        parent::__construct($orm, $role);
-
-        $this->entity = stdClass::class;
-        $this->hydrator = new StdClassHydrator();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function init(array $data): array
-    {
-        return [new stdClass(), $data];
     }
 }

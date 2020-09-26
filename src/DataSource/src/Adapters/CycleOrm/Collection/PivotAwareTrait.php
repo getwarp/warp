@@ -4,38 +4,20 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Collection;
 
-use RuntimeException;
-use SplObjectStorage;
+use function class_alias;
 
-trait PivotAwareTrait
-{
-    /**
-     * @var SplObjectStorage
-     */
-    protected $pivotContext;
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareTrait::class,
+    __NAMESPACE__ . '\PivotAwareTrait'
+);
 
+if (false) {
     /**
-     * Get associated pivot data.
-     *
-     * @return SplObjectStorage
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareTrait instead.
      */
-    public function getPivotContext(): SplObjectStorage
+    trait PivotAwareTrait
     {
-        if ($this->pivotContext === null) {
-            throw new RuntimeException('Pivot context not defined'); // @codeCoverageIgnore
-        }
-
-        return $this->pivotContext;
-    }
-
-    /**
-     * Set associated pivot data.
-     *
-     * @param SplObjectStorage $pivotContext
-     * @return mixed|void
-     */
-    public function setPivotContext(SplObjectStorage $pivotContext)
-    {
-        $this->pivotContext = $pivotContext;
+        use \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareTrait;
     }
 }

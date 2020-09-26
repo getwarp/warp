@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Collection;
 
-use spaceonfire\Collection\AbstractCollectionDecorator;
+use function class_alias;
 
-class PivotedCollection extends AbstractCollectionDecorator implements PivotAwareInterface
-{
-    use PivotAwareTrait;
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotedCollection::class,
+    __NAMESPACE__ . '\PivotedCollection'
+);
+
+if (false) {
+    /**
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotedCollection instead.
+     */
+    class PivotedCollection extends \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotedCollection
+    {
+    }
 }

@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper;
 
-use Cycle\ORM\Exception\MapperException;
-use spaceonfire\ValueObject\UuidValue;
-use Throwable;
+use function class_alias;
 
-class UuidCycleMapper extends BasicCycleMapper
-{
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\UuidCycleMapper::class,
+    __NAMESPACE__ . '\UuidCycleMapper'
+);
+
+if (false) {
     /**
-     * @inheritDoc
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\UuidCycleMapper instead.
      */
-    protected function nextPrimaryKey()
+    class UuidCycleMapper extends \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\UuidCycleMapper
     {
-        try {
-            return UuidValue::random()->value();
-            // @codeCoverageIgnoreStart
-        } catch (Throwable $e) {
-            throw new MapperException($e->getMessage(), $e->getCode(), $e);
-            // @codeCoverageIgnoreEnd
-        }
     }
 }

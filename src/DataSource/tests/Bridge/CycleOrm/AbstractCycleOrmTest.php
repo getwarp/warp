@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm;
+namespace spaceonfire\DataSource\Bridge\CycleOrm;
 
 use BadMethodCallException;
 use Cycle\ORM\ORM;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use spaceonfire\DataSource\Adapters\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
 use Spiral\Database\DatabaseManager;
 use Spiral\Database\Driver\Driver;
 use Spiral\Database\Driver\DriverInterface;
 
 /**
  * Class AbstractCycleOrmTest
- * @package spaceonfire\DataSource\Adapters\CycleOrm
+ * @package spaceonfire\DataSource\Bridge\CycleOrm
  * @method static AbstractCycleRepository getRepository(string $className)
  * @method static ORM getOrm()
  * @method static DatabaseManager getDbal()
