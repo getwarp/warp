@@ -2,14 +2,14 @@
 
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
-	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
+	- %rootDir%/../phpstan-webmozart-assert/extension.neon
 parameters:
 	level: max
 	inferPrivatePropertyTypeFromConstructor: true
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
 	bootstrapFiles:
-		- vendor/autoload.php
+		- tests/bootstrap.php
 	paths:
 		- src/
 	ignoreErrors:
