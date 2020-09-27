@@ -4,58 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject\Integrations\HydratorStrategy;
 
-use spaceonfire\ValueObject\BaseValueObject;
-use Webmozart\Assert\Assert;
-use Zend\Hydrator\Strategy\StrategyInterface;
+use function class_alias;
 
-/**
- * Class ValueObjectZendHydratorStrategy
- * @package spaceonfire\ValueObject\Integrations\HydratorStrategy
- * @codeCoverageIgnore
- */
-final class ValueObjectZendHydratorStrategy implements StrategyInterface
-{
-    /**
-     * @var string|BaseValueObject
-     */
-    private $valueObjectClass;
+class_alias(
+    \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy::class,
+    __NAMESPACE__ . '\ValueObjectZendHydratorStrategy'
+);
 
+if (false) {
     /**
-     * ValueObjectZendHydratorStrategy constructor.
-     * @param string|BaseValueObject $valueObjectClass
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy instead.
      */
-    public function __construct(string $valueObjectClass)
+    class ValueObjectZendHydratorStrategy extends \spaceonfire\ValueObject\Bridge\LaminasHydrator\ValueObjectStrategy
     {
-        Assert::subclassOf($valueObjectClass, BaseValueObject::class);
-        $this->valueObjectClass = $valueObjectClass;
-    }
-
-    /**
-     * @inheritDoc
-     * @param BaseValueObject|mixed $value
-     */
-    public function extract($value, ?object $object = null)
-    {
-        $class = $this->valueObjectClass;
-
-        if ($value instanceof $class) {
-            return $value->value();
-        }
-
-        return $value;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        $class = $this->valueObjectClass;
-
-        if ($value instanceof $class) {
-            return $value;
-        }
-
-        return new $class($value);
     }
 }

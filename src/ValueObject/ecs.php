@@ -38,10 +38,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         StrictComparisonFixer::class => [
             __DIR__ . '/src/EnumValue.php',
-            __DIR__ . '/src/Integrations/HydratorStrategy/BooleanStrategy.php',
+            __DIR__ . '/src/Bridge/LaminasHydrator/BooleanStrategy.php',
         ],
         UnusedParameterSniff::class => [
-            __DIR__ . '/src/Integrations/HydratorStrategy/*',
+            __DIR__ . '/src/Bridge/LaminasHydrator/*',
         ],
     ]);
 
