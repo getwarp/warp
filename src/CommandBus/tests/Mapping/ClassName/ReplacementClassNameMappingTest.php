@@ -6,7 +6,7 @@ namespace spaceonfire\CommandBus\Mapping\ClassName;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
+use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
 
 class ReplacementClassNameMappingTest extends TestCase
 {
@@ -52,10 +52,10 @@ class ReplacementClassNameMappingTest extends TestCase
 
     public function testGetClassName(): void
     {
-        $mapping = new ReplacementClassNameMapping('spaceonfire\CommandBus\Fixtures\Command', 'spaceonfire\CommandBus\Fixtures\Handler');
+        $mapping = new ReplacementClassNameMapping('spaceonfire\CommandBus\_Fixtures\Command', 'spaceonfire\CommandBus\_Fixtures\Handler');
 
         self::assertEquals(
-            'spaceonfire\CommandBus\Fixtures\Handler\AddTaskCommand',
+            'spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommand',
             $mapping->getClassName(AddTaskCommand::class)
         );
     }

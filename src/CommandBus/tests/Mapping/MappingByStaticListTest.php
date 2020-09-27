@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace spaceonfire\CommandBus\Mapping;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\Fixtures\Command\CompleteTaskCommand;
-use spaceonfire\CommandBus\Fixtures\Handler\AddTaskCommandHandler;
+use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
+use spaceonfire\CommandBus\_Fixtures\Command\CompleteTaskCommand;
+use spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
 
 class MappingByStaticListTest extends TestCase
 {
