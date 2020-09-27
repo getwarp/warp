@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Fixtures\Handler;
+namespace spaceonfire\CommandBus\_Fixtures\Handler;
 
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
+use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
 
 class AddTaskCommandHandler
 {

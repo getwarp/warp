@@ -25,8 +25,14 @@
     "phpunit/phpunit": "^8.5",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
+    "psr/log": "^1.1",
     "roave/security-advisories": "dev-master",
+    "symfony/stopwatch": "^5.1",
     "symplify/easy-coding-standard-prefixed": "^7.2"
+  },
+  "suggest": {
+    "psr/log": "Required for LoggerMiddleware and ProfilerMiddleware",
+    "symfony/stopwatch": "Required for ProfilerMiddleware"
   },
   "autoload": {
     "psr-4": {
@@ -45,7 +51,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.1-dev"
+      "dev-master": "1.2-dev"
     }
   },
   "config": {

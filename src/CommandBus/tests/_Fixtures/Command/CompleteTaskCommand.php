@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Fixtures\Command;
+namespace spaceonfire\CommandBus\_Fixtures\Command;
 
 class CompleteTaskCommand
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\CommandBus\Mapping\ClassName;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\Fixtures\Handler\AddTaskCommandHandler;
+use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
+use spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
 
 class ClassNameMappingChainTest extends TestCase
 {
@@ -14,8 +14,8 @@ class ClassNameMappingChainTest extends TestCase
     {
         $mapping = new ClassNameMappingChain([
             new ReplacementClassNameMapping(
-                'spaceonfire\CommandBus\Fixtures\Command',
-                'spaceonfire\CommandBus\Fixtures\Handler'
+                'spaceonfire\CommandBus\_Fixtures\Command',
+                'spaceonfire\CommandBus\_Fixtures\Handler'
             ),
             new SuffixClassNameMapping('Handler'),
         ]);

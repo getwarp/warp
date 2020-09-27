@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Fixtures\Handler;
+namespace spaceonfire\CommandBus\_Fixtures\Handler;
 
 /**
  * Sample handler that has all commands specified as individual methods, rather

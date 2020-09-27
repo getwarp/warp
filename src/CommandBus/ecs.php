@@ -32,6 +32,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'Unused parameter $commandClassName.' => [
             __DIR__ . '/src/Mapping/Method/StaticMethodNameMapping.php',
         ],
+        'Unused parameter $message.' => [
+            __DIR__ . '/src/Bridge/PsrLog/LoggerMiddleware.php',
+            __DIR__ . '/src/Bridge/SymfonyStopwatch/ProfilerMiddleware.php',
+        ],
+        'Class LoggerMiddleware contains unused private method compareLogLevel().' => [
+            __DIR__ . '/src/Bridge/PsrLog/LoggerMiddleware.php',
+        ],
     ]);
 
     $services = $containerConfigurator->services();
