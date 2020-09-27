@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.0] - 2020-09-27
+### Added
+- Added logger middleware uses [PSR-3 logger](https://github.com/php-fig/log) implementation
+- Added profiler middleware uses [symfony's stopwatch component](https://github.com/symfony/stopwatch)
+
 ## [1.1.0] - 2020-05-10
 ### Added
 - Added more flexible ways to declare command to handler mapping
