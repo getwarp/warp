@@ -19,3 +19,6 @@ parameters:
 				- src/Expression/ExpressionFactory.php
 				- src/Expression/AbstractExpressionDecorator.php
 		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
+		-
+			message: '/^If condition is always false\.$/'
+			path: src/Adapter/*
