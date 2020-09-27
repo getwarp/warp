@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.0] - 2020-09-27
+### Deprecated
+- Namespace `spaceonfire\DataSource\Adapters` renamed to `spaceonfire\DataSource\Bridge`.
+  Class aliases provided for backwards compatibility, but will be removed in next major release.
+
 ## [1.0.0] - 2020-06-12
 ### Added
 - First release

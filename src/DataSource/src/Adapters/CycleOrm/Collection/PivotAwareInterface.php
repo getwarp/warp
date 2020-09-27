@@ -4,26 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Collection;
 
-use spaceonfire\Collection\CollectionInterface;
-use SplObjectStorage;
+use function class_alias;
 
-/**
- * Carries pivot data associated with each element.
- */
-interface PivotAwareInterface extends CollectionInterface
-{
-    /**
-     * Get associated pivot data.
-     *
-     * @return SplObjectStorage
-     */
-    public function getPivotContext(): SplObjectStorage;
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareInterface::class,
+    __NAMESPACE__ . '\PivotAwareInterface'
+);
 
+if (false) {
     /**
-     * Set associated pivot data.
-     *
-     * @param SplObjectStorage $pivotContext
-     * @return mixed|void
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareInterface instead.
      */
-    public function setPivotContext(SplObjectStorage $pivotContext);
+    interface PivotAwareInterface extends \spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareInterface
+    {
+    }
 }

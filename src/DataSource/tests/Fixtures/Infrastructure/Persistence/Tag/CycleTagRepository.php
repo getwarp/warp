@@ -6,7 +6,7 @@ namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Tag;
 
 use Cycle\Schema\Definition\Entity;
 use Cycle\Schema\Definition\Field;
-use spaceonfire\DataSource\Adapters\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
 use spaceonfire\DataSource\Fixtures\Domain\Tag\TagRepository;
 
 class CycleTagRepository extends AbstractCycleRepository implements TagRepository

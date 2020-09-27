@@ -4,57 +4,20 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\NetteUtils;
 
-use Nette\SmartObject;
-use Nette\Utils\ObjectHelpers;
+use function class_alias;
 
-trait SmartArrayAccessObject
-{
-    use SmartObject;
+class_alias(
+    \spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject::class,
+    __NAMESPACE__ . '\SmartArrayAccessObject'
+);
 
+if (false) {
     /**
-     * @inheritDoc
-     * @param string $offset
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject instead.
      */
-    public function offsetExists($offset): bool
+    trait SmartArrayAccessObject
     {
-        return $this->__isset($offset);
-    }
-
-    /**
-     * @inheritDoc
-     * @param string $offset
-     * @return mixed
-     */
-    public function &offsetGet($offset)
-    {
-        return $this->__get($offset);
-    }
-
-    /**
-     * @inheritDoc
-     * @param string $offset
-     * @param mixed $value
-     */
-    public function offsetSet($offset, $value): void
-    {
-        $this->__set($offset, $value);
-    }
-
-    /**
-     * @inheritDoc
-     * @param string $offset
-     */
-    public function offsetUnset($offset): void
-    {
-        $this->__set($offset, null);
-    }
-
-    /**
-     * Returns object properties
-     * @return array
-     */
-    public function getProperties(): array
-    {
-        return array_keys(ObjectHelpers::getMagicProperties(static::class));
+        use \spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
     }
 }

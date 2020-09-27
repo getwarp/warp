@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm\Repository;
+namespace spaceonfire\DataSource\Bridge\CycleOrm\Repository;
 
-use spaceonfire\Criteria\Adapter\SpiralPagination\PaginableCriteria;
+use spaceonfire\Criteria\Bridge\SpiralPagination\PaginableCriteria;
 use spaceonfire\Criteria\Criteria;
-use spaceonfire\DataSource\Adapters\CycleOrm\AbstractCycleOrmTest;
+use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
 use spaceonfire\DataSource\Exceptions\SaveException;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm;
+namespace spaceonfire\DataSource\Bridge\CycleOrm;
 
 use Cycle\ORM;
 use Cycle\Schema;
 use Cycle\Schema\Generator;
 use InvalidArgumentException;
-use spaceonfire\DataSource\Adapters\CycleOrm\Fixtures\TestLogger;
-use spaceonfire\DataSource\Adapters\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\Bridge\CycleOrm\Fixtures\TestLogger;
+use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Domain\User\User;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;

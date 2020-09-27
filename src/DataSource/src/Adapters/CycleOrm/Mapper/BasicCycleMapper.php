@@ -4,46 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper;
 
-use Cycle\ORM\Mapper\Mapper;
-use Laminas\Hydrator\AbstractHydrator;
-use spaceonfire\DataSource\MapperInterface;
+use function class_alias;
 
-class BasicCycleMapper extends Mapper implements MapperInterface
-{
-    /**
-     * @var AbstractHydrator
-     */
-    protected $hydrator;
+class_alias(
+    \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper::class,
+    __NAMESPACE__ . '\BasicCycleMapper'
+);
 
+if (false) {
     /**
-     * @inheritDoc
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper instead.
      */
-    public function convertValueToDomain(string $fieldName, $storageValue)
+    class BasicCycleMapper extends \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper
     {
-        return $this->hydrator->hydrateValue($fieldName, $storageValue);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function convertValueToStorage(string $fieldName, $domainValue)
-    {
-        return $this->hydrator->extractValue($fieldName, $domainValue);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function convertNameToDomain(string $fieldName): string
-    {
-        return $this->hydrator->hydrateName($fieldName);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function convertNameToStorage(string $fieldName): string
-    {
-        return $this->hydrator->extractName($fieldName);
     }
 }

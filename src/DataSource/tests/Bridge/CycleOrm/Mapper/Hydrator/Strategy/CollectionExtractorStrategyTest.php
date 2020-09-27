@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper\Hydrator\Strategy;
+namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\Strategy;
 
 use Cycle\ORM\Promise\Collection\CollectionPromise;
 use Cycle\ORM\Promise\PromiseMany;
 use Cycle\ORM\Promise\Reference;
 use Cycle\ORM\Relation\Pivoted\PivotedCollection as CyclePivotedCollection;
 use spaceonfire\Collection\Collection;
-use spaceonfire\DataSource\Adapters\CycleOrm\AbstractCycleOrmTest;
-use spaceonfire\DataSource\Adapters\CycleOrm\Collection\PivotedCollection;
+use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotedCollection;
 use SplObjectStorage;
 
 class CollectionExtractorStrategyTest extends AbstractCycleOrmTest
