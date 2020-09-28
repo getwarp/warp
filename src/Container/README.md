@@ -3,6 +3,8 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
+[![Code Coverage][ico-coverage]][link-actions]
+[![Build Status][ico-build-status]][link-actions]
 
 Small yet powerful implementation of PSR-11 compatible dependency injection container
 
