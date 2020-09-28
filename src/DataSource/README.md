@@ -3,6 +3,8 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
+[![Code Coverage][ico-coverage]][link-actions]
+[![Build Status][ico-build-status]][link-actions]
 
 This package provides useful interfaces to design your domain model.
 
@@ -48,8 +50,10 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-version]: https://img.shields.io/packagist/v/spaceonfire/data-source.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/data-source.svg?style=flat-square
-
+[ico-coverage]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2Fhustlahusky%2Fd62607c1a2e4707959b0142e0ea876cd%2Fraw%2Fspaceonfire-data-source.json
+[ico-build-status]: https://github.com/spaceonfire/data-source/workflows/Build%20Pipeline/badge.svg
 [link-packagist]: https://packagist.org/packages/spaceonfire/data-source
 [link-downloads]: https://packagist.org/packages/spaceonfire/data-source
 [link-author]: https://github.com/hustlahusky
 [link-contributors]: ../../contributors
+[link-actions]: ../../actions
