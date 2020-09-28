@@ -29,7 +29,7 @@
     "phpunit/phpunit": "^8.0",
     "roave/security-advisories": "dev-master",
     "spiral/pagination": "^2.2",
-    "symplify/easy-coding-standard-prefixed": "7.3.17"
+    "symplify/easy-coding-standard-prefixed": "^8.3"
   },
   "suggest": {
     "spiral/pagination": ""
