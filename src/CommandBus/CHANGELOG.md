@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.1] - 2020-10-01
+### Fixed
+- Check container has handler class before asking for it
+
 ## [1.2.0] - 2020-09-27
 ### Added
 - Added logger middleware uses [PSR-3 logger](https://github.com/php-fig/log) implementation

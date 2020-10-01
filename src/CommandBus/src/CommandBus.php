@@ -123,9 +123,11 @@ class CommandBus
      */
     protected function createHandlerObject(string $handlerClassName): object
     {
-        return $this->container
-            ? $this->container->get($handlerClassName)
-            : new $handlerClassName();
+        if ($this->container && $this->container->has($handlerClassName)) {
+            return $this->container->get($handlerClassName);
+        }
+
+        return new $handlerClassName();
     }
 
     /**
