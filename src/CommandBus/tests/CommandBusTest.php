@@ -32,6 +32,11 @@ class CommandBusTest extends TestCase
             ->willReturn('a-return-value');
 
         $this->container
+            ->method('has')
+            ->with(AddTaskCommandHandler::class)
+            ->willReturn(true);
+
+        $this->container
             ->method('get')
             ->with(AddTaskCommandHandler::class)
             ->willReturn($handlerMock);
