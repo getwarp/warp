@@ -1,0 +1,58 @@
+{
+  "name": "spaceonfire/laminas-hydrator-bridge",
+  "type": "library",
+  "description": "Provides integration for Laminas Hydrator with some spaceonfire libraries",
+  "keywords": [
+    "spaceonfire",
+    "laminas",
+    "laminas-hydrator",
+    "hydrator"
+  ],
+  "homepage": "https://github.com/spaceonfire/laminas-hydrator-bridge",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "laminas/laminas-hydrator": "^2.4|^3.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12",
+    "phpunit/phpunit": "^8.5",
+    "roave/security-advisories": "dev-master",
+    "symplify/easy-coding-standard-prefixed": "^8.3",
+    "spaceonfire/type": "^1.1"
+  },
+  "suggest": {
+    "spaceonfire/type": "Required to use ScalarStrategy"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\LaminasHydratorBridge\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\LaminasHydratorBridge\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
