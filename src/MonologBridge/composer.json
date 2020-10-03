@@ -1,0 +1,62 @@
+{
+  "name": "spaceonfire/monolog-bridge",
+  "type": "library",
+  "description": "Provides integration for Monolog with some spaceonfire libraries",
+  "keywords": [
+    "spaceonfire",
+    "monolog"
+  ],
+  "homepage": "https://github.com/spaceonfire/monolog-bridge",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "laminas/laminas-hydrator": "^2.4|^3.0",
+    "monolog/monolog": "^2.1",
+    "spaceonfire/laminas-hydrator-bridge": "^1.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12",
+    "phpunit/phpunit": "^8.5",
+    "roave/security-advisories": "dev-master",
+    "symfony/console": "^5.1",
+    "symfony/mailer": "^5.1",
+    "symfony/monolog-bridge": "^5.1",
+    "symplify/easy-coding-standard-prefixed": "^8.3"
+  },
+  "suggest": {
+    "symfony/console": "",
+    "symfony/mailer": "",
+    "symfony/monolog-bridge": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\MonologBridge\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\MonologBridge\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
