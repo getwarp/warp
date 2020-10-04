@@ -22,6 +22,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.0] - 2020-10-04
+### Added
+- Support non strict mode for all scalar types (int, float, string and bool)
+- Force return `null` when casting to null builtin type
+
 ## [1.0.1] - 2020-09-26
 ### Fixed
 - Development config updates

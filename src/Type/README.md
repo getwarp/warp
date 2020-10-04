@@ -1,4 +1,4 @@
-# type
+# Type
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -6,7 +6,7 @@
 [![Code Coverage][ico-coverage]][link-actions]
 [![Build Status][ico-build-status]][link-actions]
 
-Collection of value objects provides ability of type checking in runtime.
+Collection of objects that provides ability of checking value types.
 
 ## Install
 
@@ -26,8 +26,9 @@ $int = new BuiltinType(BuiltinType::INT);
 Assert::true($int->check(1));
 Assert::false($int->check('1'));
 
-$intNoString = new BuiltinType(BuiltinType::INT, false);
-Assert::true($int->check('1'));
+$intNonStrict = new BuiltinType(BuiltinType::INT, false);
+Assert::true($intNonStrict->check('1'));
+Assert::same(1, $intNonStrict->cast('1'));
 ```
 
 ## Change log

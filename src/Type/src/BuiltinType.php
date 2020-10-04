@@ -20,10 +20,11 @@ final class BuiltinType implements Type
     public const CALLABLE = 'callable';
     public const ITERABLE = 'iterable';
 
-    private const SUPPORT_NO_STRICT = [
-        self::INT => true,
-        self::FLOAT => true,
-        self::STRING => true,
+    public const SCALAR_TYPES = [
+        self::INT => self::INT,
+        self::FLOAT => self::FLOAT,
+        self::STRING => self::STRING,
+        self::BOOL => self::BOOL,
     ];
 
     /**
@@ -48,7 +49,7 @@ final class BuiltinType implements Type
 
         $this->type = self::prepareType($type);
 
-        if ($strict === false && !isset(self::SUPPORT_NO_STRICT[$this->type])) {
+        if ($strict === false && !isset(self::SCALAR_TYPES[$this->type])) {
             $strict = true;
             trigger_error(sprintf('Type "%s" cannot be non-strict. $strict argument overridden.', $this->type));
         }
@@ -90,7 +91,11 @@ final class BuiltinType implements Type
                     break;
 
                 case self::BOOL:
-                    Assert::boolean($value);
+                    if ($this->strict) {
+                        Assert::boolean($value);
+                    } else {
+                        Assert::scalar($value);
+                    }
                     break;
 
                 case self::RESOURCE:
@@ -140,6 +145,12 @@ final class BuiltinType implements Type
 
             case self::STRING:
                 return (string)$value;
+
+            case self::BOOL:
+                return (bool)$value;
+
+            case self::NULL:
+                return null;
 
             default:
                 return $value;
