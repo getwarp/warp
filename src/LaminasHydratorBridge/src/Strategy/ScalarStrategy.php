@@ -42,10 +42,10 @@ final class ScalarStrategy implements StrategyInterface
             ));
         }
 
-        $this->hydrateType = BuiltinType::create($hydrateType, false);
+        $this->hydrateType = new BuiltinType($hydrateType, false);
         $this->extractType = $extractType === null
             ? $this->hydrateType
-            : BuiltinType::create($extractType, false);
+            : new BuiltinType($extractType, false);
     }
 
     /**

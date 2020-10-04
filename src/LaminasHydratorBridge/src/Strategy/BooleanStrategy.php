@@ -43,6 +43,11 @@ class BooleanStrategy implements StrategyInterface
         $this->strict = $strict;
     }
 
+    /**
+     * @param mixed $inputValue
+     * @param string $argument
+     * @return array<int|string>
+     */
     private function prepareInputValue($inputValue, string $argument): array
     {
         $result = [];
