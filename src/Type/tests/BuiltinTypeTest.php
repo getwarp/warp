@@ -113,6 +113,15 @@ class BuiltinTypeTest extends TestCase
         }));
         self::assertFalse($string->check(null));
         self::assertFalse($string->check([]));
+
+        $bool = BuiltinType::create('bool', false);
+        self::assertTrue($bool->check(true));
+        self::assertTrue($bool->check(false));
+        self::assertTrue($bool->check(1));
+        self::assertTrue($bool->check(''));
+        self::assertFalse($bool->check([]));
+        self::assertFalse($bool->check((object)[]));
+        self::assertFalse($bool->check(null));
     }
 
     public function testNonStrictNotice(): void
@@ -124,13 +133,13 @@ class BuiltinTypeTest extends TestCase
     public function testCast(): void
     {
         $integer = BuiltinType::create('integer');
-        self::assertEquals(1, $integer->cast('1'));
+        self::assertSame(1, $integer->cast('1'));
 
         $float = BuiltinType::create('float');
-        self::assertEquals(1.0, $float->cast('1.0'));
+        self::assertSame(1.0, $float->cast('1.0'));
 
         $string = BuiltinType::create('string');
-        self::assertEquals('lorem ipsum', $string->cast(new class {
+        self::assertSame('lorem ipsum', $string->cast(new class {
             public function __toString(): string
             {
                 return 'lorem ipsum';
@@ -138,12 +147,25 @@ class BuiltinTypeTest extends TestCase
         }));
 
         $bool = BuiltinType::create('bool');
-        self::assertEquals('1', $bool->cast('1'));
+        self::assertTrue($bool->cast(true));
+        self::assertTrue($bool->cast('1'));
+        self::assertTrue($bool->cast(1));
+        self::assertTrue($bool->cast(-2));
+        self::assertFalse($bool->cast(false));
+        self::assertFalse($bool->cast(''));
+        self::assertFalse($bool->cast(0));
+        self::assertFalse($bool->cast(-0.0));
+
+        $null = BuiltinType::create('null');
+        self::assertNull($null->cast(1));
+
+        $noCast = BuiltinType::create('resource');
+        self::assertSame(1, $noCast->cast(1));
     }
 
     public function testStringify(): void
     {
         $type = BuiltinType::create('integer');
-        self::assertEquals('int', (string)$type);
+        self::assertSame('int', (string)$type);
     }
 }
