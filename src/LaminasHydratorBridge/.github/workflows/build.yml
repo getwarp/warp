@@ -109,5 +109,5 @@ jobs:
           path: build/
 
       - name: Generate coverage badge
-        if: matrix.php-version == '7.2' && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: matrix.php-version == '7.2' && github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
         run: php bin/coverage-badge ${{ github.repository }}.json ${{ secrets.COVERAGE_GIST_ID }} ${{ secrets.COVERAGE_GIST_TOKEN }}
