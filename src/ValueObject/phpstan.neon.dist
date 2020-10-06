@@ -24,4 +24,7 @@ parameters:
 			path: src/Bridge/LaminasHydrator/ValueObjectStrategy.php
 		-
 			message: '/^If condition is always false\.$/'
-			path: src/Integrations/*
+			paths:
+				- src/Integrations/*
+				- src/Bridge/LaminasHydrator/BooleanStrategy.php
+				- src/Bridge/LaminasHydrator/NullableStrategy.php

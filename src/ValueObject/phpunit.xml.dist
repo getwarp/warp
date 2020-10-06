@@ -19,6 +19,8 @@
 			<directory suffix=".php">src/</directory>
 			<exclude>
 				<directory>src/Integrations/</directory>
+				<file>src/Bridge/LaminasHydrator/BooleanStrategy.php</file>
+				<file>src/Bridge/LaminasHydrator/NullableStrategy.php</file>
 			</exclude>
 		</whitelist>
 	</filter>

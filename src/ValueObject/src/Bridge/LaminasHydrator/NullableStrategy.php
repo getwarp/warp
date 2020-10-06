@@ -4,69 +4,19 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
 
-use Laminas\Hydrator\Strategy\StrategyInterface;
+use function class_alias;
 
-/**
- * Class NullableStrategy
- *
- * Attention: You should not extend this class because it will become final in the next major release
- * after the backward compatibility aliases are removed.
- *
- * @package spaceonfire\ValueObject\Bridge\LaminasHydrator
- */
-class NullableStrategy implements StrategyInterface
-{
-    /**
-     * @var StrategyInterface
-     */
-    private $strategy;
-    /**
-     * @var callable
-     */
-    private $nullValuePredicate;
+class_alias(
+    \spaceonfire\LaminasHydratorBridge\Strategy\NullableStrategy::class,
+    __NAMESPACE__ . '\NullableStrategy'
+);
 
+if (false) {
     /**
-     * NullableStrategy constructor.
-     * @param StrategyInterface $strategy
-     * @param callable|null $nullValuePredicate
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\LaminasHydratorBridge\Strategy\NullableStrategy instead.
      */
-    public function __construct(StrategyInterface $strategy, ?callable $nullValuePredicate = null)
+    class NullableStrategy extends \spaceonfire\LaminasHydratorBridge\Strategy\NullableStrategy
     {
-        $this->strategy = $strategy;
-        $this->nullValuePredicate = $nullValuePredicate ?? [$this, 'defaultNullValuePredicate'];
-    }
-
-    /**
-     * Default null value predicate
-     * @param mixed $value
-     * @return bool
-     */
-    public function defaultNullValuePredicate($value): bool
-    {
-        return $value === null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function extract($value, ?object $object = null)
-    {
-        if (($this->nullValuePredicate)($value)) {
-            return null;
-        }
-
-        return $this->strategy->extract($value, $object);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        if (($this->nullValuePredicate)($value)) {
-            return null;
-        }
-
-        return $this->strategy->hydrate($value, $data);
     }
 }
