@@ -19,4 +19,6 @@ parameters:
 		- '/^Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)$/'
 		-
 			message: '/^If condition is always false\.$/'
-			path: src/Adapters/*
+			paths:
+				- src/Adapters/*
+				- src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php

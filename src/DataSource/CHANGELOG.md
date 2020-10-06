@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.0] - 2020-10-06
+### Deprecated
+- Class `spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator` moved to
+  `spaceonfire/laminas-hydrator-bridge` library. Class alias provided for backwards compatibility,
+  but will be removed in next major release.
+
 ## [1.1.0] - 2020-09-27
 ### Deprecated
 - Namespace `spaceonfire\DataSource\Adapters` renamed to `spaceonfire\DataSource\Bridge`.

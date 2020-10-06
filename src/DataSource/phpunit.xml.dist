@@ -19,6 +19,7 @@
 			<directory suffix=".php">src/</directory>
 			<exclude>
 				<directory>src/Adapters/</directory>
+				<file>src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
