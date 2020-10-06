@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper;
 
 use Cycle\ORM\ORMInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator;
+use spaceonfire\LaminasHydratorBridge\StdClassHydrator;
 use stdClass;
 
 class StdClassCycleMapper extends BasicCycleMapper

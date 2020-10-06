@@ -24,6 +24,7 @@
     "jawira/case-converter": "^3.4",
     "spaceonfire/collection": "^2.0",
     "spaceonfire/criteria": "^1.1",
+    "spaceonfire/laminas-hydrator-bridge": "^1.0",
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
