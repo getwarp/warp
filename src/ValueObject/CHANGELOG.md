@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.6.0] - 2020-10-06
+### Deprecated
+- Classes `spaceonfire\ValueObject\Bridge\LaminasHydrator\BooleanStrategy` and `spaceonfire\ValueObject\Bridge\LaminasHydrator\NullableStrategy`
+  were moved to `spaceonfire/laminas-hydrator-bridge` library. Class alias provided for backwards compatibility,
+  but will be removed in next major release.
+
 ## [1.5.0] - 2020-09-27
 ### Deprecated
 - Namespace `spaceonfire\ValueObject\Integrations\HydratorStrategy` renamed to `spaceonfire\ValueObject\Bridge\LaminasHydrator`.
