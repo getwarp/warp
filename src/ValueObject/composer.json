@@ -21,6 +21,7 @@
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6.1",
     "jawira/case-converter": "^3.4.1",
+    "spaceonfire/laminas-hydrator-bridge": "^1.0",
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
@@ -34,7 +35,6 @@
   },
   "suggest": {
     "ramsey/uuid": "To use UuidValue",
-    "zendframework/zend-hydrator": "There is hydrator strategy integration for this package",
     "laminas/laminas-hydrator": "There is hydrator strategy integration for this package"
   },
   "autoload": {
@@ -54,7 +54,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.5-dev"
+      "dev-master": "1.6-dev"
     }
   },
   "config": {
