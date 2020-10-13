@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.1.0] - 2020-10-13
+### Added
+- Update `spaceonfire/type` library up to `^1.2`. Replace deprecated static `TypeFactory` call in `TypedCollection`.
+
 ## [2.0.1] - 2020-09-26
 ### Fixed
 - Development config updates
