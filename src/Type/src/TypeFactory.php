@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type;
 
-use InvalidArgumentException;
+use spaceonfire\Type\Factory\CompositeTypeFactory;
 
+/**
+ * Class TypeFactory
+ * @package spaceonfire\Type
+ * @deprecated use dynamic type factory instead. This class will be removed in next major release.
+ * @see Factory\TypeFactoryInterface
+ */
 abstract class TypeFactory
 {
-    /**
-     * @var string[]|Type[]
-     */
-    private const FACTORIES = [
-        CollectionType::class,
-        DisjunctionType::class,
-        ConjunctionType::class,
-        InstanceOfType::class,
-        BuiltinType::class,
-    ];
-
     /**
      * @codeCoverageIgnore
      */
@@ -28,12 +23,6 @@ abstract class TypeFactory
 
     public static function create(string $type): Type
     {
-        foreach (self::FACTORIES as $factory) {
-            if ($factory::supports($type)) {
-                return $factory::create($type);
-            }
-        }
-
-        throw new InvalidArgumentException('Not supported type: ' . $type);
+        return CompositeTypeFactory::makeWithDefaultFactories()->make($type);
     }
 }

@@ -31,6 +31,20 @@ Assert::true($intNonStrict->check('1'));
 Assert::same(1, $intNonStrict->cast('1'));
 ```
 
+You can also use factory to create type object from string
+
+```php
+use spaceonfire\Type\Factory\CompositeTypeFactory;
+
+$factory = CompositeTypeFactory::makeWithDefaultFactories();
+$factory->make('int');
+$factory->make('string[]');
+$factory->make('array<string,object>');
+$factory->make('int|null');
+$factory->make('Traversable|iterable|null');
+$factory->make('Traversable&JsonSerializable');
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

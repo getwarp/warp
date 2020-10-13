@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Type;
 
 use InvalidArgumentException;
+use spaceonfire\Type\Factory\InstanceOfTypeFactory;
 
 final class InstanceOfType implements Type
 {
@@ -19,7 +20,7 @@ final class InstanceOfType implements Type
      */
     public function __construct(string $className)
     {
-        if (!self::supports($className)) {
+        if (!class_exists($className) && !interface_exists($className)) {
             throw new InvalidArgumentException(sprintf('Type "%s" is not supported by %s', $className, __CLASS__));
         }
 
@@ -43,18 +44,24 @@ final class InstanceOfType implements Type
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return bool
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function supports(string $type): bool
     {
-        return class_exists($type) || interface_exists($type);
+        return (new InstanceOfTypeFactory())->supports($type);
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return self
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function create(string $type): Type
     {
-        return new self($type);
+        return (new InstanceOfTypeFactory())->make($type);
     }
 }

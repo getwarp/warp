@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type;
 
-use InvalidArgumentException;
-use Traversable;
+use spaceonfire\Type\Factory\CollectionTypeFactory;
+use spaceonfire\Type\Factory\CompositeTypeFactory;
 
 final class CollectionType implements Type
 {
@@ -70,96 +70,28 @@ final class CollectionType implements Type
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return bool
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function supports(string $type): bool
     {
-        $typeParts = self::parseType($type);
-
-        if ($typeParts === null) {
-            return false;
-        }
-
-        if (isset($typeParts['iterable'])) {
-            if (InstanceOfType::supports($typeParts['iterable'])) {
-                if (
-                    $typeParts['iterable'] !== Traversable::class &&
-                    !is_subclass_of($typeParts['iterable'], Traversable::class)
-                ) {
-                    return false;
-                }
-            } else {
-                if (!in_array($typeParts['iterable'], ['array', 'iterable'], true)) {
-                    return false;
-                }
-            }
-        }
-
-        if (!isset($typeParts['value'])) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function create(string $type): Type
-    {
-        if (!self::supports($type)) {
-            throw new InvalidArgumentException(sprintf('Type "%s" is not supported by %s', $type, __CLASS__));
-        }
-
-        /** @var array $parsed */
-        $parsed = self::parseType($type);
-
-        $parsed['value'] = TypeFactory::create($parsed['value']);
-        $parsed['key'] = $parsed['key'] ? TypeFactory::create($parsed['key']) : null;
-        $parsed['iterable'] = $parsed['iterable'] ? TypeFactory::create($parsed['iterable']) : null;
-
-        return new self($parsed['value'], $parsed['key'], $parsed['iterable']);
+        $factory = new CollectionTypeFactory();
+        $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());
+        return $factory->supports($type);
     }
 
     /**
      * @param string $type
-     * @return array|null
+     * @return self
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
-    private static function parseType(string $type): ?array
+    public static function create(string $type): Type
     {
-        $result = [
-            'iterable' => null,
-            'key' => null,
-            'value' => null,
-        ];
-
-        if (strpos($type, '[]') === strlen($type) - 2) {
-            $result['value'] = substr($type, 0, -2) ?: null;
-            return $result;
-        }
-
-        if (
-            (0 < $openPos = strpos($type, '<')) &&
-            (strpos($type, '>') === strlen($type) - 1)
-        ) {
-            $result['iterable'] = substr($type, 0, $openPos);
-            [$key, $value] = array_map('trim', explode(',', substr($type, $openPos + 1, -1))) + [null, null];
-
-            if (!$value && !$key) {
-                return null;
-            }
-
-            if ($value === null) {
-                $value = $key;
-                $key = null;
-            }
-
-            $result['key'] = $key ?: null;
-            $result['value'] = $value ?: null;
-
-            return $result;
-        }
-
-        return null;
+        $factory = new CollectionTypeFactory();
+        $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());
+        return $factory->make($type);
     }
 }

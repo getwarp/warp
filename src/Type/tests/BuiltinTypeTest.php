@@ -7,83 +7,62 @@ namespace spaceonfire\Type;
 use ArrayIterator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use stdClass;
 
 class BuiltinTypeTest extends TestCase
 {
-    public function testSupports(): void
-    {
-        self::assertTrue(BuiltinType::supports('int'));
-        self::assertTrue(BuiltinType::supports('integer'));
-        self::assertTrue(BuiltinType::supports('bool'));
-        self::assertTrue(BuiltinType::supports('boolean'));
-        self::assertTrue(BuiltinType::supports('float'));
-        self::assertTrue(BuiltinType::supports('double'));
-        self::assertTrue(BuiltinType::supports('string'));
-        self::assertTrue(BuiltinType::supports('resource'));
-        self::assertTrue(BuiltinType::supports('resource (closed)'));
-        self::assertTrue(BuiltinType::supports('null'));
-        self::assertTrue(BuiltinType::supports('object'));
-        self::assertTrue(BuiltinType::supports('array'));
-        self::assertTrue(BuiltinType::supports('callable'));
-        self::assertTrue(BuiltinType::supports('iterable'));
-        self::assertFalse(BuiltinType::supports('unknown'));
-        self::assertFalse(BuiltinType::supports(stdClass::class));
-    }
-
-    public function testCreate(): void
-    {
-        BuiltinType::create('integer');
-        self::assertTrue(true);
-    }
-
-    public function testCreateFail(): void
+    public function testConstructorFail(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        BuiltinType::create('unknown type');
+        new BuiltinType('unknown type');
+    }
+
+    public function testConstructorNonStrictNotice(): void
+    {
+        $this->expectNotice();
+        new BuiltinType(BuiltinType::OBJECT, false);
     }
 
     public function testCheck(): void
     {
-        $integer = BuiltinType::create('integer');
+        $integer = new BuiltinType(BuiltinType::INT);
         self::assertTrue($integer->check(1));
         self::assertFalse($integer->check('1'));
 
-        $float = BuiltinType::create('float');
+        $float = new BuiltinType(BuiltinType::FLOAT);
         self::assertTrue($float->check(1.0));
         self::assertFalse($float->check('1'));
 
-        $string = BuiltinType::create('string');
+        $string = new BuiltinType(BuiltinType::STRING);
         self::assertTrue($string->check('lorem ipsum'));
         self::assertFalse($string->check(1));
 
-        $bool = BuiltinType::create('bool');
+        $bool = new BuiltinType(BuiltinType::BOOL);
         self::assertTrue($bool->check(true));
         self::assertFalse($bool->check(1));
 
-        $object = BuiltinType::create('object');
+        $object = new BuiltinType(BuiltinType::OBJECT);
         self::assertTrue($object->check((object)[]));
         self::assertFalse($object->check(1));
 
-        $array = BuiltinType::create('array');
+        $array = new BuiltinType(BuiltinType::ARRAY);
         self::assertTrue($array->check([]));
         self::assertFalse($array->check(1));
 
-        $null = BuiltinType::create('null');
+        $null = new BuiltinType(BuiltinType::NULL);
         self::assertTrue($null->check(null));
         self::assertFalse($null->check(1));
 
-        $callable = BuiltinType::create('callable');
+        $callable = new BuiltinType(BuiltinType::CALLABLE);
         self::assertTrue($callable->check(static function () {
         }));
         self::assertFalse($callable->check(1));
 
-        $iterable = BuiltinType::create('iterable');
+        $iterable = new BuiltinType(BuiltinType::ITERABLE);
         self::assertTrue($iterable->check(new ArrayIterator()));
         self::assertFalse($iterable->check(1));
 
         $f = fopen(__FILE__, 'rb');
-        $resource = BuiltinType::create('resource');
+        $resource = new BuiltinType(BuiltinType::RESOURCE);
         self::assertTrue($resource->check($f));
         self::assertFalse($resource->check(1));
         fclose($f);
@@ -91,17 +70,17 @@ class BuiltinTypeTest extends TestCase
 
     public function testNonStrictCheck(): void
     {
-        $integer = BuiltinType::create('integer', false);
+        $integer = new BuiltinType(BuiltinType::INT, false);
         self::assertTrue($integer->check(1));
         self::assertTrue($integer->check('1'));
         self::assertFalse($integer->check('lorem ipsum'));
 
-        $float = BuiltinType::create('float', false);
+        $float = new BuiltinType(BuiltinType::FLOAT, false);
         self::assertTrue($float->check(1.0));
         self::assertTrue($float->check('1.1'));
         self::assertFalse($float->check('lorem ipsum'));
 
-        $string = BuiltinType::create('string', false);
+        $string = new BuiltinType(BuiltinType::STRING, false);
         self::assertTrue($string->check('lorem ipsum'));
         self::assertTrue($string->check(1));
         self::assertTrue($string->check(true));
@@ -114,7 +93,7 @@ class BuiltinTypeTest extends TestCase
         self::assertFalse($string->check(null));
         self::assertFalse($string->check([]));
 
-        $bool = BuiltinType::create('bool', false);
+        $bool = new BuiltinType(BuiltinType::BOOL, false);
         self::assertTrue($bool->check(true));
         self::assertTrue($bool->check(false));
         self::assertTrue($bool->check(1));
@@ -124,21 +103,15 @@ class BuiltinTypeTest extends TestCase
         self::assertFalse($bool->check(null));
     }
 
-    public function testNonStrictNotice(): void
-    {
-        $this->expectNotice();
-        BuiltinType::create('object', false);
-    }
-
     public function testCast(): void
     {
-        $integer = BuiltinType::create('integer');
+        $integer = new BuiltinType(BuiltinType::INT);
         self::assertSame(1, $integer->cast('1'));
 
-        $float = BuiltinType::create('float');
+        $float = new BuiltinType(BuiltinType::FLOAT);
         self::assertSame(1.0, $float->cast('1.0'));
 
-        $string = BuiltinType::create('string');
+        $string = new BuiltinType(BuiltinType::STRING);
         self::assertSame('lorem ipsum', $string->cast(new class {
             public function __toString(): string
             {
@@ -146,7 +119,7 @@ class BuiltinTypeTest extends TestCase
             }
         }));
 
-        $bool = BuiltinType::create('bool');
+        $bool = new BuiltinType(BuiltinType::BOOL);
         self::assertTrue($bool->cast(true));
         self::assertTrue($bool->cast('1'));
         self::assertTrue($bool->cast(1));
@@ -156,16 +129,16 @@ class BuiltinTypeTest extends TestCase
         self::assertFalse($bool->cast(0));
         self::assertFalse($bool->cast(-0.0));
 
-        $null = BuiltinType::create('null');
+        $null = new BuiltinType(BuiltinType::NULL);
         self::assertNull($null->cast(1));
 
-        $noCast = BuiltinType::create('resource');
+        $noCast = new BuiltinType(BuiltinType::RESOURCE);
         self::assertSame(1, $noCast->cast(1));
     }
 
     public function testStringify(): void
     {
-        $type = BuiltinType::create('integer');
-        self::assertSame('int', (string)$type);
+        $type = new BuiltinType(BuiltinType::INT);
+        self::assertSame(BuiltinType::INT, (string)$type);
     }
 }

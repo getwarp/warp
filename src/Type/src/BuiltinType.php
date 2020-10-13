@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Type;
 
 use InvalidArgumentException;
+use spaceonfire\Type\Factory\BuiltinTypeFactory;
 use Webmozart\Assert\Assert;
 
 final class BuiltinType implements Type
@@ -19,6 +20,19 @@ final class BuiltinType implements Type
     public const NULL = 'null';
     public const CALLABLE = 'callable';
     public const ITERABLE = 'iterable';
+
+    public const ALL = [
+        self::INT,
+        self::FLOAT,
+        self::STRING,
+        self::BOOL,
+        self::RESOURCE,
+        self::OBJECT,
+        self::ARRAY,
+        self::NULL,
+        self::CALLABLE,
+        self::ITERABLE,
+    ];
 
     public const SCALAR_TYPES = [
         self::INT => self::INT,
@@ -43,17 +57,14 @@ final class BuiltinType implements Type
      */
     public function __construct(string $type, bool $strict = true)
     {
-        if (!self::supports($type)) {
-            throw new InvalidArgumentException(sprintf('Type "%s" is not supported by %s', $type, __CLASS__));
-        }
+        Assert::oneOf($type, self::ALL);
 
-        $this->type = self::prepareType($type);
-
-        if ($strict === false && !isset(self::SCALAR_TYPES[$this->type])) {
+        if ($strict === false && !isset(self::SCALAR_TYPES[$type])) {
             $strict = true;
-            trigger_error(sprintf('Type "%s" cannot be non-strict. $strict argument overridden.', $this->type));
+            trigger_error(sprintf('Type "%s" cannot be non-strict. $strict argument overridden.', $type));
         }
 
+        $this->type = $type;
         $this->strict = $strict;
     }
 
@@ -165,51 +176,26 @@ final class BuiltinType implements Type
         return $this->type;
     }
 
-    private static function prepareType(string $type): string
-    {
-        $type = strtolower($type);
-
-        if (strpos($type, 'resource') === 0) {
-            $type = self::RESOURCE;
-        }
-
-        $map = [
-            'boolean' => self::BOOL,
-            'integer' => self::INT,
-            'double' => self::FLOAT,
-        ];
-
-        return $map[$type] ?? $type;
-    }
-
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return bool
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function supports(string $type): bool
     {
-        $type = self::prepareType($type);
-
-        $supported = [
-            self::INT => true,
-            self::FLOAT => true,
-            self::STRING => true,
-            self::BOOL => true,
-            self::RESOURCE => true,
-            self::OBJECT => true,
-            self::ARRAY => true,
-            self::NULL => true,
-            self::CALLABLE => true,
-            self::ITERABLE => true,
-        ];
-
-        return array_key_exists($type, $supported);
+        return (new BuiltinTypeFactory())->supports($type);
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @param bool $strict
+     * @return self
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function create(string $type, bool $strict = true): Type
     {
-        return new self($type, $strict);
+        return (new BuiltinTypeFactory($strict))->make($type);
     }
 }
