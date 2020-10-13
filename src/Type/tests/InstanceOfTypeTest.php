@@ -5,41 +5,27 @@ declare(strict_types=1);
 namespace spaceonfire\Type;
 
 use InvalidArgumentException;
-use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 class InstanceOfTypeTest extends TestCase
 {
-    public function testSupports(): void
-    {
-        self::assertTrue(InstanceOfType::supports(JsonSerializable::class));
-        self::assertTrue(InstanceOfType::supports(stdClass::class));
-        self::assertFalse(InstanceOfType::supports('NonExistingClass'));
-    }
-
-    public function testCreate(): void
-    {
-        InstanceOfType::create(JsonSerializable::class);
-        self::assertTrue(true);
-    }
-
-    public function testCreateFail(): void
+    public function testConstructFail(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        InstanceOfType::create('NonExistingClass');
+        new InstanceOfType('unknown class');
     }
 
     public function testCheck(): void
     {
-        $type = InstanceOfType::create(stdClass::class);
+        $type = new InstanceOfType(stdClass::class);
         self::assertTrue($type->check((object)[]));
         self::assertFalse($type->check([]));
     }
 
     public function testStringify(): void
     {
-        $type = InstanceOfType::create(stdClass::class);
+        $type = new InstanceOfType(stdClass::class);
         self::assertEquals(stdClass::class, (string)$type);
     }
 }

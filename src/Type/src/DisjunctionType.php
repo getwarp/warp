@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type;
 
-use InvalidArgumentException;
+use spaceonfire\Type\Factory\CompositeTypeFactory;
+use spaceonfire\Type\Factory\DisjunctionTypeFactory;
 use Webmozart\Assert\Assert;
 
 final class DisjunctionType implements Type
 {
+    public const DELIMITER = '|';
+
     /**
      * @var Type[]
      */
@@ -43,32 +46,34 @@ final class DisjunctionType implements Type
      */
     public function __toString(): string
     {
-        return implode('|', array_map(static function (Type $type): string {
+        return implode(self::DELIMITER, array_map(static function (Type $type): string {
             return (string)$type;
         }, $this->disjuncts));
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return bool
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function supports(string $type): bool
     {
-        return count(explode('|', $type)) > 1;
+        $factory = new DisjunctionTypeFactory();
+        $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());
+        return $factory->supports($type);
     }
 
     /**
-     * @inheritDoc
+     * @param string $type
+     * @return self
+     * @deprecated use dynamic type factory instead. This method will be removed in next major release.
+     * @see Factory\TypeFactoryInterface
      */
     public static function create(string $type): Type
     {
-        if (!self::supports($type)) {
-            throw new InvalidArgumentException(sprintf('Type "%s" is not supported by %s', $type, __CLASS__));
-        }
-
-        $disjuncts = array_map(static function (string $subType): Type {
-            return TypeFactory::create(trim($subType));
-        }, explode('|', $type));
-
-        return new self($disjuncts);
+        $factory = new DisjunctionTypeFactory();
+        $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());
+        return $factory->make($type);
     }
 }

@@ -22,6 +22,17 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.0] - 2020-10-13
+### Removed
+- `Type` interface doesn't declare static methods `support()` and `create()` no more.
+### Added
+- Dynamic type factories. It replaces static methods in `Type` classes and static `TypeFactory` class.
+- Mixed type.
+- Void type.
+### Deprecated
+- Static methods in classes implementing `Type` interface and static `TypeFactory` class marked as deprecated.
+  Their API still backward compatible using dynamic type factories. It will be removed in next major release.
+
 ## [1.1.0] - 2020-10-04
 ### Added
 - Support non strict mode for all scalar types (int, float, string and bool)
