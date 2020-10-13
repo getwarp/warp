@@ -12,6 +12,8 @@ use spaceonfire\Type\ConjunctionType;
 use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
 use spaceonfire\Type\InstanceOfType;
+use spaceonfire\Type\MixedType;
+use spaceonfire\Type\VoidType;
 use Traversable;
 
 class CompositeTypeFactoryTest extends TestCase
@@ -26,6 +28,7 @@ class CompositeTypeFactoryTest extends TestCase
         self::assertTrue($factory->supports(JsonSerializable::class));
         self::assertTrue($factory->supports('int'));
         self::assertTrue($factory->supports('mixed'));
+        self::assertTrue($factory->supports('void'));
         self::assertFalse($factory->supports('[]'));
         self::assertFalse($factory->supports('unknown'));
     }
@@ -39,6 +42,8 @@ class CompositeTypeFactoryTest extends TestCase
         self::assertInstanceOf(DisjunctionType::class, $factory->make(JsonSerializable::class . '|' . Traversable::class));
         self::assertInstanceOf(InstanceOfType::class, $factory->make(JsonSerializable::class));
         self::assertInstanceOf(BuiltinType::class, $factory->make('int'));
+        self::assertInstanceOf(MixedType::class, $factory->make('mixed'));
+        self::assertInstanceOf(VoidType::class, $factory->make('void'));
     }
 
     public function testMakeException(): void

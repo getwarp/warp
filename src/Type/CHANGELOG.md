@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 - Dynamic type factories. It replaces static methods in `Type` classes and static `TypeFactory` class.
 - Mixed type.
+- Void type.
 ### Deprecated
 - Static methods in classes implementing `Type` interface and static `TypeFactory` class marked as deprecated.
   Their API still backward compatible using dynamic type factories. It will be removed in next major release.

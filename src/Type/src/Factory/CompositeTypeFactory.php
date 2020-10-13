@@ -38,6 +38,7 @@ final class CompositeTypeFactory implements TypeFactoryInterface
         yield new InstanceOfTypeFactory();
         yield new BuiltinTypeFactory();
         yield new MixedTypeFactory();
+        yield new VoidTypeFactory();
     }
 
     /**
