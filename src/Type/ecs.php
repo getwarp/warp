@@ -29,6 +29,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('skip', [
         'Unused variable $_.' => null,
+        'Unused parameter $_.' => null,
     ]);
 
     $services = $containerConfigurator->services();

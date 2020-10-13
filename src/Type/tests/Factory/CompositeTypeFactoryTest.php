@@ -25,6 +25,7 @@ class CompositeTypeFactoryTest extends TestCase
         self::assertTrue($factory->supports(JsonSerializable::class . '|' . Traversable::class));
         self::assertTrue($factory->supports(JsonSerializable::class));
         self::assertTrue($factory->supports('int'));
+        self::assertTrue($factory->supports('mixed'));
         self::assertFalse($factory->supports('[]'));
         self::assertFalse($factory->supports('unknown'));
     }
