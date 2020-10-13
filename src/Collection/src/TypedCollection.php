@@ -6,8 +6,8 @@ namespace spaceonfire\Collection;
 
 use InvalidArgumentException;
 use LogicException;
+use spaceonfire\Type\Factory\CompositeTypeFactory;
 use spaceonfire\Type\Type;
-use spaceonfire\Type\TypeFactory;
 use stdClass;
 
 /**
@@ -54,7 +54,7 @@ final class TypedCollection extends AbstractCollectionDecorator
                 ));
             }
 
-            $type = TypeFactory::create($type);
+            $type = CompositeTypeFactory::makeWithDefaultFactories()->make($type);
         }
 
         $this->type = $type;
