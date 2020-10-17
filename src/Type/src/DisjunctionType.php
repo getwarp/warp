@@ -6,25 +6,18 @@ namespace spaceonfire\Type;
 
 use spaceonfire\Type\Factory\CompositeTypeFactory;
 use spaceonfire\Type\Factory\DisjunctionTypeFactory;
-use Webmozart\Assert\Assert;
 
-final class DisjunctionType implements Type
+final class DisjunctionType extends AbstractAggregatedType
 {
     public const DELIMITER = '|';
-
-    /**
-     * @var Type[]
-     */
-    private $disjuncts;
 
     /**
      * DisjunctionType constructor.
      * @param Type[] $disjuncts
      */
-    public function __construct(array $disjuncts)
+    public function __construct(iterable $disjuncts)
     {
-        Assert::allIsInstanceOf($disjuncts, Type::class);
-        $this->disjuncts = $disjuncts;
+        parent::__construct($disjuncts, self::DELIMITER);
     }
 
     /**
@@ -32,23 +25,13 @@ final class DisjunctionType implements Type
      */
     public function check($value): bool
     {
-        foreach ($this->disjuncts as $type) {
+        foreach ($this->types as $type) {
             if ($type->check($value)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString(): string
-    {
-        return implode(self::DELIMITER, array_map(static function (Type $type): string {
-            return (string)$type;
-        }, $this->disjuncts));
     }
 
     /**

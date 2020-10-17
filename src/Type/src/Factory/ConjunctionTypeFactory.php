@@ -8,32 +8,11 @@ use spaceonfire\Type\ConjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
 use spaceonfire\Type\Type;
 
-final class ConjunctionTypeFactory implements TypeFactoryInterface
+final class ConjunctionTypeFactory extends AbstractAggregatedTypeFactory
 {
-    use TypeFactoryTrait;
-
-    /**
-     * @inheritDoc
-     */
-    public function supports(string $type): bool
+    public function __construct()
     {
-        if ($this->parent === null) {
-            return false;
-        }
-
-        $parts = explode(ConjunctionType::DELIMITER, $type);
-
-        if (count($parts) < 2) {
-            return false;
-        }
-
-        foreach ($parts as $part) {
-            if (!$this->parent->supports(trim($part))) {
-                return false;
-            }
-        }
-
-        return true;
+        parent::__construct(ConjunctionType::DELIMITER);
     }
 
     /**
@@ -41,14 +20,12 @@ final class ConjunctionTypeFactory implements TypeFactoryInterface
      */
     public function make(string $type): Type
     {
-        if (!$this->supports($type)) {
+        $parsed = $this->parse($type);
+
+        if ($parsed === null || $this->parent === null) {
             throw new TypeNotSupportedException($type, ConjunctionType::class);
         }
 
-        $conjuncts = array_map(function (string $subType): Type {
-            return $this->parent->make(trim($subType));
-        }, explode(ConjunctionType::DELIMITER, $type));
-
-        return new ConjunctionType($conjuncts);
+        return new ConjunctionType(array_map([$this->parent, 'make'], $parsed));
     }
 }

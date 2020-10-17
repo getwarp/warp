@@ -32,6 +32,6 @@ class ConjunctionTypeTest extends TestCase
             new InstanceOfType(Traversable::class),
         ]);
 
-        self::assertEquals(JsonSerializable::class . '&' . Traversable::class, (string)$type);
+        self::assertSame(JsonSerializable::class . '&' . Traversable::class, (string)$type);
     }
 }
