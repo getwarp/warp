@@ -33,6 +33,7 @@ final class CompositeTypeFactory implements TypeFactoryInterface
     public static function makeDefaultFactories(): iterable
     {
         yield new CollectionTypeFactory();
+        yield new GroupTypeFactory();
         yield new ConjunctionTypeFactory();
         yield new DisjunctionTypeFactory();
         yield new InstanceOfTypeFactory();
