@@ -46,7 +46,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
 
         $this->iterableTypeFactory->setParent($this->parent);
 
-        $typeParts = self::parseType($type);
+        $typeParts = $this->parseType($type);
 
         if ($typeParts === null) {
             return false;
@@ -84,7 +84,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
         }
 
         /** @var array $parsed */
-        $parsed = self::parseType($type);
+        $parsed = $this->parseType($type);
 
         $parsed['value'] = $this->parent->make($parsed['value']);
         $parsed['key'] = $parsed['key'] ? $this->parent->make($parsed['key']) : null;
@@ -97,8 +97,10 @@ final class CollectionTypeFactory implements TypeFactoryInterface
      * @param string $type
      * @return array<string,string|null>|null
      */
-    private static function parseType(string $type): ?array
+    private function parseType(string $type): ?array
     {
+        $type = $this->removeWhitespaces($type);
+
         $result = [
             'iterable' => null,
             'key' => null,
@@ -115,7 +117,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
             (strpos($type, '>') === strlen($type) - 1)
         ) {
             $result['iterable'] = substr($type, 0, $openPos);
-            [$key, $value] = array_map('trim', explode(',', substr($type, $openPos + 1, -1))) + [null, null];
+            [$key, $value] = explode(',', substr($type, $openPos + 1, -1)) + [null, null];
 
             if (!$value && !$key) {
                 return null;

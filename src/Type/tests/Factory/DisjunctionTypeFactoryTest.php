@@ -25,6 +25,7 @@ class DisjunctionTypeFactoryTest extends TestCase
         self::assertTrue($factory->supports(JsonSerializable::class . '|' . Traversable::class));
         self::assertFalse($factory->supports(JsonSerializable::class . '|unknown'));
         self::assertFalse($factory->supports(JsonSerializable::class));
+        self::assertFalse($factory->supports('array<unexpected_end|unknown'));
     }
 
     public function testNoSupportsWithoutParent(): void

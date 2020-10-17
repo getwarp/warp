@@ -31,7 +31,7 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
      */
     public function supports(string $type): bool
     {
-        $type = self::prepareType($type);
+        $type = $this->prepareType($type);
 
         return in_array($type, BuiltinType::ALL, true);
     }
@@ -41,7 +41,7 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
      */
     public function make(string $type): Type
     {
-        $type = self::prepareType($type);
+        $type = $this->prepareType($type);
 
         if (!$this->supports($type)) {
             throw new TypeNotSupportedException($type, BuiltinType::class);
@@ -50,9 +50,9 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
         return new BuiltinType($type, $this->prepareStrictArgument($type));
     }
 
-    private static function prepareType(string $type): string
+    private function prepareType(string $type): string
     {
-        $type = strtolower($type);
+        $type = strtolower($this->removeWhitespaces($type));
 
         if (strpos($type, 'resource') === 0) {
             $type = BuiltinType::RESOURCE;

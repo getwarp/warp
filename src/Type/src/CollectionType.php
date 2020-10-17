@@ -62,7 +62,11 @@ final class CollectionType implements Type
      */
     public function __toString(): string
     {
-        if ($this->iterableType instanceof InstanceOfType || $this->keyType !== null) {
+        if (
+            $this->iterableType instanceof InstanceOfType ||
+            $this->valueType instanceof AbstractAggregatedType ||
+            $this->keyType !== null
+        ) {
             return $this->iterableType . '<' . implode(',', array_filter([$this->keyType, $this->valueType])) . '>';
         }
 

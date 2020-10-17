@@ -31,6 +31,7 @@ final class InstanceOfTypeFactory implements TypeFactoryInterface
      */
     public function supports(string $type): bool
     {
+        $type = $this->removeWhitespaces($type);
         return class_exists($type, $this->autoload) || interface_exists($type, $this->autoload);
     }
 
@@ -39,6 +40,8 @@ final class InstanceOfTypeFactory implements TypeFactoryInterface
      */
     public function make(string $type): Type
     {
+        $type = $this->removeWhitespaces($type);
+
         if (!$this->supports($type)) {
             throw new TypeNotSupportedException($type, InstanceOfType::class);
         }

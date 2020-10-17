@@ -25,6 +25,6 @@ class DisjunctionTypeTest extends TestCase
             new BuiltinType(BuiltinType::INT),
             new BuiltinType(BuiltinType::NULL),
         ]);
-        self::assertEquals('int|null', (string)$type);
+        self::assertSame('int|null', (string)$type);
     }
 }

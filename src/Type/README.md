@@ -35,8 +35,9 @@ You can also use factory to create type object from string
 
 ```php
 use spaceonfire\Type\Factory\CompositeTypeFactory;
+use spaceonfire\Type\Factory\MemoizedTypeFactory;
 
-$factory = CompositeTypeFactory::makeWithDefaultFactories();
+$factory = new MemoizedTypeFactory(CompositeTypeFactory::makeWithDefaultFactories());
 $factory->make('int');
 $factory->make('string[]');
 $factory->make('array<string,object>');

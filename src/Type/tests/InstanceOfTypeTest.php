@@ -26,6 +26,6 @@ class InstanceOfTypeTest extends TestCase
     public function testStringify(): void
     {
         $type = new InstanceOfType(stdClass::class);
-        self::assertEquals(stdClass::class, (string)$type);
+        self::assertSame(stdClass::class, (string)$type);
     }
 }

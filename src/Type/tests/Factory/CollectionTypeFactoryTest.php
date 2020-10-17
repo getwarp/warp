@@ -31,6 +31,7 @@ class CollectionTypeFactoryTest extends TestCase
         self::assertTrue($factory->supports('int[]'));
         self::assertTrue($factory->supports('array<int>'));
         self::assertTrue($factory->supports('iterable<string,int>'));
+        self::assertTrue($factory->supports('(string|int)[]'));
         self::assertTrue($factory->supports('ArrayIterator<int>'));
         self::assertTrue($factory->supports('Traversable<int>'));
         self::assertFalse($factory->supports('[]'));
@@ -40,6 +41,7 @@ class CollectionTypeFactoryTest extends TestCase
         self::assertFalse($factory->supports('string<string>'));
         self::assertFalse($factory->supports('array<unknow>'));
         self::assertFalse($factory->supports('array<unknown,int>'));
+        self::assertFalse($factory->supports('array<unexpected_end'));
     }
 
     public function testSupportsWithCustomIterableTypeFactory(): void

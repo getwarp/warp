@@ -6,25 +6,18 @@ namespace spaceonfire\Type;
 
 use spaceonfire\Type\Factory\CompositeTypeFactory;
 use spaceonfire\Type\Factory\ConjunctionTypeFactory;
-use Webmozart\Assert\Assert;
 
-final class ConjunctionType implements Type
+final class ConjunctionType extends AbstractAggregatedType
 {
     public const DELIMITER = '&';
-
-    /**
-     * @var Type[]
-     */
-    private $conjuncts;
 
     /**
      * ConjunctionType constructor.
      * @param Type[] $conjuncts
      */
-    public function __construct(array $conjuncts)
+    public function __construct(iterable $conjuncts)
     {
-        Assert::allIsInstanceOf($conjuncts, Type::class);
-        $this->conjuncts = $conjuncts;
+        parent::__construct($conjuncts, self::DELIMITER);
     }
 
     /**
@@ -32,23 +25,13 @@ final class ConjunctionType implements Type
      */
     public function check($value): bool
     {
-        foreach ($this->conjuncts as $type) {
+        foreach ($this->types as $type) {
             if (!$type->check($value)) {
                 return false;
             }
         }
 
         return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString(): string
-    {
-        return implode(self::DELIMITER, array_map(static function (Type $type): string {
-            return (string)$type;
-        }, $this->conjuncts));
     }
 
     /**
