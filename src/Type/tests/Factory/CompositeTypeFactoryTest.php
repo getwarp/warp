@@ -31,6 +31,8 @@ class CompositeTypeFactoryTest extends TestCase
         self::assertTrue($factory->supports('void'));
         self::assertFalse($factory->supports('[]'));
         self::assertFalse($factory->supports('unknown'));
+        self::assertTrue($factory->supports('int|string|array<bool|int>|string|null'));
+        self::assertTrue($factory->supports('int | string|array < bool | int >|string  |null'));
     }
 
     public function testMake(): void
@@ -44,6 +46,7 @@ class CompositeTypeFactoryTest extends TestCase
         self::assertInstanceOf(BuiltinType::class, $factory->make('int'));
         self::assertInstanceOf(MixedType::class, $factory->make('mixed'));
         self::assertInstanceOf(VoidType::class, $factory->make('void'));
+        self::assertInstanceOf(DisjunctionType::class, $factory->make('int|string|array<bool|int>|string|null'));
     }
 
     public function testMakeException(): void

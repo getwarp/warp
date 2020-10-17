@@ -36,6 +36,7 @@ final class PartialSupportTypeFactory implements TypeFactoryInterface
      */
     public function supports(string $type): bool
     {
+        $type = $this->removeWhitespaces($type);
         return $this->factory->supports($type) && ($this->supportedPredicate)($type);
     }
 
@@ -44,6 +45,8 @@ final class PartialSupportTypeFactory implements TypeFactoryInterface
      */
     public function make(string $type): Type
     {
+        $type = $this->removeWhitespaces($type);
+
         if (!$this->supports($type)) {
             throw new TypeNotSupportedException($type);
         }

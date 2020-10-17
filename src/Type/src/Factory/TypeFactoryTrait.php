@@ -19,4 +19,9 @@ trait TypeFactoryTrait
     {
         $this->parent = $parent;
     }
+
+    protected function removeWhitespaces(string $string): string
+    {
+        return preg_replace('/\s+/', '', $string) ?? $string;
+    }
 }
