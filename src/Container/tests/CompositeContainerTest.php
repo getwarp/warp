@@ -11,13 +11,13 @@ use spaceonfire\Collection\Collection;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 
-class ContainerChainTest extends TestCase
+class CompositeContainerTest extends TestCase
 {
     use WithContainerMockTrait;
 
     public function testHas(): void
     {
-        $chain = new ContainerChain([
+        $chain = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
@@ -29,7 +29,7 @@ class ContainerChainTest extends TestCase
 
     public function testGet(): void
     {
-        $chain = new ContainerChain([
+        $chain = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
@@ -46,7 +46,7 @@ class ContainerChainTest extends TestCase
         $containerAware = $this->createContainerMock(['bar' => 'bar'], [ContainerInterface::class, ContainerAwareInterface::class]);
         $containerAware->setContainer(Argument::any())->shouldBeCalled();
 
-        $chain = new ContainerChain([
+        $chain = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $containerAware->reveal(),
         ]);
@@ -56,7 +56,7 @@ class ContainerChainTest extends TestCase
 
     public function testAddServiceProvider(): void
     {
-        $chain = new ContainerChain([]);
+        $chain = new CompositeContainer([]);
 
         $primary = $this->createContainerMock(['bar' => 'bar'], ContainerWithServiceProvidersInterface::class);
         $primary->addServiceProvider(Argument::any())->shouldBeCalled();
@@ -75,7 +75,7 @@ class ContainerChainTest extends TestCase
     public function testAddServiceProviderFailed(): void
     {
         $this->expectException(ContainerException::class);
-        $chain = new ContainerChain([
+        $chain = new CompositeContainer([
             $this->createContainerMock([], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
@@ -85,7 +85,7 @@ class ContainerChainTest extends TestCase
     public function testNoPrimaryContainerInChain(): void
     {
         $this->expectException(ContainerException::class);
-        $chain = new ContainerChain([
+        $chain = new CompositeContainer([
             $this->createContainerMock([], PsrContainerInterface::class)->reveal(),
         ]);
         $chain->addServiceProvider('provider');
@@ -96,7 +96,7 @@ class ContainerChainTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->make(Argument::type('string'), Argument::type('array'))->shouldBeCalled();
 
-        $chain = new ContainerChain([$containerProphecy->reveal()]);
+        $chain = new CompositeContainer([$containerProphecy->reveal()]);
 
         $chain->make('foo');
     }
@@ -106,7 +106,7 @@ class ContainerChainTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->invoke(Argument::type('callable'), Argument::type('array'))->shouldBeCalled();
 
-        $chain = new ContainerChain([$containerProphecy->reveal()]);
+        $chain = new CompositeContainer([$containerProphecy->reveal()]);
 
         $chain->invoke(static function () {
         });
@@ -117,7 +117,7 @@ class ContainerChainTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->add(Argument::type('string'), Argument::any(), Argument::type('bool'))->shouldBeCalled();
 
-        $chain = new ContainerChain([$containerProphecy->reveal()]);
+        $chain = new CompositeContainer([$containerProphecy->reveal()]);
 
         $chain->add('foo', 'bar');
     }
@@ -127,14 +127,14 @@ class ContainerChainTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->share(Argument::type('string'), Argument::any())->shouldBeCalled();
 
-        $chain = new ContainerChain([$containerProphecy->reveal()]);
+        $chain = new CompositeContainer([$containerProphecy->reveal()]);
 
         $chain->share('foo', 'bar');
     }
 
     public function testHasTagged(): void
     {
-        $chain = new ContainerChain([]);
+        $chain = new CompositeContainer([]);
 
         self::assertFalse($chain->hasTagged('tag'));
 
@@ -147,7 +147,7 @@ class ContainerChainTest extends TestCase
 
     public function testGetTagged(): void
     {
-        $chain = new ContainerChain([]);
+        $chain = new CompositeContainer([]);
 
         self::assertTrue($chain->getTagged('tag')->isEmpty());
 
