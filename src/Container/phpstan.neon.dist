@@ -14,3 +14,7 @@ parameters:
 		- '/expects callable(.*) array(.*) given\.$/'
 		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\Definition\\DefinitionAggregate/'
 		- '/no value type specified in iterable type(.*)spaceonfire\\Container\\ServiceProvider\\ServiceProviderAggregate/'
+		-
+			message: '/^If condition is always false\.$/'
+			paths:
+				- src/ContainerChain.php

@@ -123,7 +123,7 @@ class ContainerTest extends TestCase
 
     public function testResolveDefinitionWithParentContainer(): void
     {
-        $container = new ContainerChain([
+        $container = new CompositeContainer([
             new Container(),
             new ReflectionContainer(),
         ]);

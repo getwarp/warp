@@ -21,9 +21,9 @@ $ composer require spaceonfire/container
 ```php
 use spaceonfire\Container\Container;
 use spaceonfire\Container\ReflectionContainer;
-use spaceonfire\Container\ContainerChain;
+use spaceonfire\Container\CompositeContainer;
 
-$container = new ContainerChain([
+$container = new CompositeContainer([
     new Container(),
     new ReflectionContainer(),
 ]);
