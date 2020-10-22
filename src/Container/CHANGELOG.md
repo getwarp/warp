@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.2.0] - 2020-10-22
+### Deprecated
+- Class `spaceonfire\Container\ContainerChain` renamed to `spaceonfire\Container\CompositeContainer`.
+  This name clearly describes what this class does and just fits best.
+  Class alias provided for backwards compatibility, but will be removed in next major release.
+
 ## [2.1.1] - 2020-09-26
 ### Fixed
 - Development config updates
