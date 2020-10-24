@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container;
 
+use Generator;
+use IteratorAggregate;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
+use spaceonfire\Collection\ArrayHelper;
 use spaceonfire\Collection\Collection;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Container\Definition\DefinitionInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
+use Traversable;
 
 /**
  * Class CompositeContainer
@@ -20,12 +24,14 @@ use spaceonfire\Container\Exception\NotFoundException;
  * @package spaceonfire\Container
  * @final
  */
-class CompositeContainer implements ContainerWithServiceProvidersInterface, ContainerAwareInterface
+class CompositeContainer implements ContainerWithServiceProvidersInterface, ContainerAwareInterface, IteratorAggregate
 {
     use ContainerAwareTrait;
 
+    private const DEFAULT_PRIORITY = 999;
+
     /**
-     * @var PsrContainerInterface[]
+     * @var array<int, PsrContainerInterface[]>
      */
     private $containers = [];
     /**
@@ -37,7 +43,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      * CompositeContainer constructor.
      * @param PsrContainerInterface[] $containers
      */
-    public function __construct(iterable $containers)
+    public function __construct(iterable $containers = [])
     {
         $this->setContainer($this);
         $this->addContainers($containers);
@@ -49,7 +55,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
     public function setContainer(ContainerInterface $container): ContainerAwareInterface
     {
         $this->container = $container;
-        foreach ($this->containers as $delegate) {
+        foreach ($this->getIterator() as $delegate) {
             if ($delegate instanceof ContainerAwareInterface) {
                 $delegate->setContainer($container);
             }
@@ -95,8 +101,23 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      */
     public function addContainers(iterable $containers): self
     {
-        foreach ($containers as $container) {
-            $this->addContainer($container);
+        if ($containers instanceof Traversable) {
+            $containers = iterator_to_array($containers);
+        }
+
+        $isAssoc = ArrayHelper::isArrayAssoc($containers);
+
+        foreach ($containers as $priority => $container) {
+            if (is_int($priority)) {
+                // Assoc means that the keys are not in order.
+                // So if this is integer key we threat it as priority.
+                // In other way add gaps between keys
+                $priority = $isAssoc ? $priority : ($priority + 1) * 10;
+            } else {
+                $priority = null;
+            }
+
+            $this->addContainer($container, $priority ?? self::DEFAULT_PRIORITY);
         }
         return $this;
     }
@@ -104,9 +125,10 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
     /**
      * Add container to the chain
      * @param PsrContainerInterface $container
+     * @param int $priority
      * @return $this
      */
-    public function addContainer(PsrContainerInterface $container): self
+    public function addContainer(PsrContainerInterface $container, int $priority = self::DEFAULT_PRIORITY): self
     {
         if ($container instanceof ContainerInterface) {
             $this->setPrimary($container);
@@ -116,8 +138,29 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
             $container->setContainer($this->getContainer());
         }
 
-        $this->containers[] = $container;
+        if (isset($this->containers[$priority])) {
+            $this->containers[$priority][] = $container;
+        } else {
+            $this->containers[$priority] = [$container];
+        }
+
         return $this;
+    }
+
+    /**
+     * Iterates over inner containers
+     * @return Generator<PsrContainerInterface>
+     */
+    public function getIterator(): Generator
+    {
+        // Sort by priority
+        ksort($this->containers);
+
+        foreach ($this->containers as $containers) {
+            foreach ($containers as $container) {
+                yield $container;
+            }
+        }
     }
 
     /**
@@ -125,7 +168,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      */
     public function get($id, array $arguments = [])
     {
-        foreach ($this->containers as $container) {
+        foreach ($this->getIterator() as $container) {
             if ($container->has($id)) {
                 return $container instanceof ContainerInterface
                     ? $container->get($id, $arguments)
@@ -141,7 +184,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      */
     public function has($id): bool
     {
-        foreach ($this->containers as $container) {
+        foreach ($this->getIterator() as $container) {
             if ($container->has($id)) {
                 return true;
             }
@@ -202,7 +245,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      */
     public function hasTagged(string $tag): bool
     {
-        foreach ($this->containers as $container) {
+        foreach ($this->getIterator() as $container) {
             if ($container instanceof ContainerInterface && $container->hasTagged($tag)) {
                 return true;
             }
@@ -218,7 +261,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
     {
         $result = new Collection();
 
-        foreach ($this->containers as $container) {
+        foreach ($this->getIterator() as $container) {
             if (!$container instanceof ContainerInterface) {
                 continue;
             }

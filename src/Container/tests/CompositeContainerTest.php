@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container;
 
+use ArrayIterator;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
@@ -17,28 +18,28 @@ class CompositeContainerTest extends TestCase
 
     public function testHas(): void
     {
-        $chain = new CompositeContainer([
+        $composite = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
 
-        self::assertTrue($chain->has('foo'));
-        self::assertTrue($chain->has('bar'));
-        self::assertFalse($chain->has('baz'));
+        self::assertTrue($composite->has('foo'));
+        self::assertTrue($composite->has('bar'));
+        self::assertFalse($composite->has('baz'));
     }
 
     public function testGet(): void
     {
-        $chain = new CompositeContainer([
+        $composite = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
 
-        self::assertSame('foo', $chain->get('foo'));
-        self::assertSame('bar', $chain->get('bar'));
+        self::assertSame('foo', $composite->get('foo'));
+        self::assertSame('bar', $composite->get('bar'));
 
         $this->expectException(NotFoundException::class);
-        $chain->get('baz');
+        $composite->get('baz');
     }
 
     public function testSetContainer(): void
@@ -46,17 +47,17 @@ class CompositeContainerTest extends TestCase
         $containerAware = $this->createContainerMock(['bar' => 'bar'], [ContainerInterface::class, ContainerAwareInterface::class]);
         $containerAware->setContainer(Argument::any())->shouldBeCalled();
 
-        $chain = new CompositeContainer([
+        $composite = new CompositeContainer([
             $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
             $containerAware->reveal(),
         ]);
 
-        $chain->setContainer($chain);
+        $composite->setContainer($composite);
     }
 
     public function testAddServiceProvider(): void
     {
-        $chain = new CompositeContainer([]);
+        $composite = new CompositeContainer([]);
 
         $primary = $this->createContainerMock(['bar' => 'bar'], ContainerWithServiceProvidersInterface::class);
         $primary->addServiceProvider(Argument::any())->shouldBeCalled();
@@ -67,28 +68,28 @@ class CompositeContainerTest extends TestCase
             $primary->reveal(),
         ];
 
-        $chain->addContainers($containers);
+        $composite->addContainers($containers);
 
-        $chain->addServiceProvider('provider');
+        $composite->addServiceProvider('provider');
     }
 
     public function testAddServiceProviderFailed(): void
     {
         $this->expectException(ContainerException::class);
-        $chain = new CompositeContainer([
+        $composite = new CompositeContainer([
             $this->createContainerMock([], PsrContainerInterface::class)->reveal(),
             $this->createContainerMock(['bar' => 'bar'])->reveal(),
         ]);
-        $chain->addServiceProvider('provider');
+        $composite->addServiceProvider('provider');
     }
 
     public function testNoPrimaryContainerInChain(): void
     {
         $this->expectException(ContainerException::class);
-        $chain = new CompositeContainer([
+        $composite = new CompositeContainer([
             $this->createContainerMock([], PsrContainerInterface::class)->reveal(),
         ]);
-        $chain->addServiceProvider('provider');
+        $composite->addServiceProvider('provider');
     }
 
     public function testMake(): void
@@ -96,9 +97,9 @@ class CompositeContainerTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->make(Argument::type('string'), Argument::type('array'))->shouldBeCalled();
 
-        $chain = new CompositeContainer([$containerProphecy->reveal()]);
+        $composite = new CompositeContainer([$containerProphecy->reveal()]);
 
-        $chain->make('foo');
+        $composite->make('foo');
     }
 
     public function testInvoke(): void
@@ -106,9 +107,9 @@ class CompositeContainerTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->invoke(Argument::type('callable'), Argument::type('array'))->shouldBeCalled();
 
-        $chain = new CompositeContainer([$containerProphecy->reveal()]);
+        $composite = new CompositeContainer([$containerProphecy->reveal()]);
 
-        $chain->invoke(static function () {
+        $composite->invoke(static function () {
         });
     }
 
@@ -117,9 +118,9 @@ class CompositeContainerTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->add(Argument::type('string'), Argument::any(), Argument::type('bool'))->shouldBeCalled();
 
-        $chain = new CompositeContainer([$containerProphecy->reveal()]);
+        $composite = new CompositeContainer([$containerProphecy->reveal()]);
 
-        $chain->add('foo', 'bar');
+        $composite->add('foo', 'bar');
     }
 
     public function testShare(): void
@@ -127,44 +128,44 @@ class CompositeContainerTest extends TestCase
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->share(Argument::type('string'), Argument::any())->shouldBeCalled();
 
-        $chain = new CompositeContainer([$containerProphecy->reveal()]);
+        $composite = new CompositeContainer([$containerProphecy->reveal()]);
 
-        $chain->share('foo', 'bar');
+        $composite->share('foo', 'bar');
     }
 
     public function testHasTagged(): void
     {
-        $chain = new CompositeContainer([]);
+        $composite = new CompositeContainer([]);
 
-        self::assertFalse($chain->hasTagged('tag'));
+        self::assertFalse($composite->hasTagged('tag'));
 
         $containerProphecy = $this->createContainerMock();
         $containerProphecy->hasTagged('tag')->willReturn(true)->shouldBeCalled();
-        $chain->addContainer($containerProphecy->reveal());
+        $composite->addContainer($containerProphecy->reveal());
 
-        self::assertTrue($chain->hasTagged('tag'));
+        self::assertTrue($composite->hasTagged('tag'));
     }
 
     public function testGetTagged(): void
     {
-        $chain = new CompositeContainer([]);
+        $composite = new CompositeContainer([]);
 
-        self::assertTrue($chain->getTagged('tag')->isEmpty());
+        self::assertTrue($composite->getTagged('tag')->isEmpty());
 
         $containerWithFoo = $this->createContainerMock();
         $containerWithFoo->hasTagged('tag')->willReturn(true);
         $containerWithFoo->getTagged('tag')->willReturn(new Collection(['foo']))->shouldBeCalled();
-        $chain->addContainer($containerWithFoo->reveal());
+        $composite->addContainer($containerWithFoo->reveal());
 
         $containerWithBar = $this->createContainerMock();
         $containerWithBar->hasTagged('tag')->willReturn(true);
         $containerWithBar->getTagged('tag')->willReturn(new Collection(['bar']))->shouldBeCalled();
-        $chain->addContainer($containerWithBar->reveal());
+        $composite->addContainer($containerWithBar->reveal());
 
         // psr container without tags support should be skipped
-        $chain->addContainer($this->createContainerMock([], PsrContainerInterface::class)->reveal());
+        $composite->addContainer($this->createContainerMock([], PsrContainerInterface::class)->reveal());
 
-        $resolved = $chain->getTagged('tag');
+        $resolved = $composite->getTagged('tag');
 
         self::assertFalse($resolved->isEmpty());
 
@@ -177,5 +178,41 @@ class CompositeContainerTest extends TestCase
             return $v === 'bar';
         });
         self::assertSame('bar', $bar);
+    }
+
+    public function testAddContainersFromIterator(): void
+    {
+        $containers = [
+            10 => $this->createContainerMock(['foo' => 'foo'], PsrContainerInterface::class)->reveal(),
+            20 => $this->createContainerMock(['bar' => 'bar'])->reveal(),
+            'baz' => $this->createContainerMock(['baz' => 'baz'])->reveal(),
+        ];
+
+        $composite = new CompositeContainer(new ArrayIterator($containers));
+
+        self::assertCount(count($containers), $composite);
+        foreach ($composite as $container) {
+            self::assertContains($container, $containers);
+        }
+    }
+
+    public function testContainersPriority(): void
+    {
+        $composite = new CompositeContainer();
+
+        $fooContainer = $this->createContainerMock(['foo' => 'foo'])->reveal();
+        $composite->addContainer($fooContainer, 10);
+
+        self::assertSame('foo', $composite->get('foo'));
+
+        $barContainer = $this->createContainerMock(['foo' => 'bar'])->reveal();
+        $composite->addContainer($barContainer, 9);
+
+        self::assertSame('bar', $composite->get('foo'));
+
+        $bazContainer = $this->createContainerMock(['foo' => 'baz'])->reveal();
+        $composite->addContainer($bazContainer, 8);
+
+        self::assertSame('baz', $composite->get('foo'));
     }
 }
