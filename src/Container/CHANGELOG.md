@@ -22,6 +22,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [2.3.0] - 2020-10-24
+### Added
+- Added priority option for containers in `spaceonfire\Container\CompositeContainer`.
+
 ## [2.2.0] - 2020-10-22
 ### Deprecated
 - Class `spaceonfire\Container\ContainerChain` renamed to `spaceonfire\Container\CompositeContainer`.
