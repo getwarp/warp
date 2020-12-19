@@ -11,6 +11,7 @@ use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Fixtures\A;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
+use spaceonfire\Container\RawValueHolder;
 use spaceonfire\Container\WithContainerMockTrait;
 
 class ArgumentResolverTest extends TestCase
@@ -58,7 +59,7 @@ class ArgumentResolverTest extends TestCase
             [[]],
             [['int' => 23]],
             [['b' => new Argument('b', B::class)]],
-            [['a' => new Argument('a', A::class, new ArgumentValue(new A()))]],
+            [['a' => new Argument('a', A::class, new RawValueHolder(new A()))]],
         ];
     }
 

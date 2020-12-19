@@ -4,28 +4,17 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Argument;
 
-final class ArgumentValue
-{
-    /**
-     * @var mixed
-     */
-    private $value;
+use spaceonfire\Container\RawValueHolder;
+use function class_alias;
 
-    /**
-     * ArgumentValue constructor.
-     * @param mixed $value
-     */
-    public function __construct($value)
-    {
-        $this->value = $value;
-    }
+class_alias(RawValueHolder::class, __NAMESPACE__ . '\ArgumentValue');
 
+if (false) {
     /**
-     * Getter for `value` property
-     * @return mixed
+     * @deprecated Will be dropped in next major release.
+     * Use \spaceonfire\Container\RawValueHolder instead.
      */
-    public function getValue()
+    final class ArgumentValue extends RawValueHolder
     {
-        return $this->value;
     }
 }

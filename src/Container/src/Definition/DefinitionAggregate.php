@@ -52,7 +52,7 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
     }
 
     /**
-     * Returns index for definition
+     * Returns index for definition.
      * @param DefinitionInterface $value
      * @return string
      */
@@ -65,7 +65,7 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
      * @inheritDoc
      * @param DefinitionInterface $value
      */
-    public function offsetSet($_, $value): void
+    public function offsetSet($offset, $value): void
     {
         $alias = $this->indexer($value);
 

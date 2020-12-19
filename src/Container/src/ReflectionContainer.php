@@ -44,7 +44,7 @@ final class ReflectionContainer implements ContainerInterface, ContainerAwareInt
     /**
      * @inheritDoc
      */
-    public function setContainer(ContainerInterface $container): ContainerAwareInterface
+    public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
         $this->argumentResolver->setContainer($container);

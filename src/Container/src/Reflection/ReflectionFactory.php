@@ -8,6 +8,7 @@ use ReflectionClass;
 use ReflectionException;
 use spaceonfire\Container\Argument\Argument;
 use spaceonfire\Container\Argument\ResolverInterface;
+use spaceonfire\Container\Exception\CannotInstantiateAbstractClassException;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 
@@ -19,7 +20,7 @@ final class ReflectionFactory
     private $argumentResolver;
 
     /**
-     * ObjectFactory constructor.
+     * ReflectionFactory constructor.
      * @param ResolverInterface $argumentResolver
      */
     public function __construct(ResolverInterface $argumentResolver)
@@ -28,7 +29,7 @@ final class ReflectionFactory
     }
 
     /**
-     * Create an instance of given class
+     * Create an instance of given class.
      * @param string $className
      * @param array<string,Argument|mixed> $arguments
      * @return mixed|object
@@ -43,6 +44,10 @@ final class ReflectionFactory
 
         try {
             $reflection = new ReflectionClass($className);
+
+            if ($reflection->isAbstract()) {
+                throw new CannotInstantiateAbstractClassException($className);
+            }
 
             if (null === $constructor = $reflection->getConstructor()) {
                 return new $className();

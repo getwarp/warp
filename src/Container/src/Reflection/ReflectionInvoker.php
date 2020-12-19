@@ -25,7 +25,7 @@ final class ReflectionInvoker implements ContainerAwareInterface
     private $argumentResolver;
 
     /**
-     * CallableInvoker constructor.
+     * ReflectionInvoker constructor.
      * @param ResolverInterface $argumentResolver
      * @param ContainerInterface $container
      */
@@ -36,7 +36,7 @@ final class ReflectionInvoker implements ContainerAwareInterface
     }
 
     /**
-     * Invoke callable
+     * Invoke callable.
      * @param callable $callable
      * @param array<string,Argument|mixed> $arguments
      * @return mixed

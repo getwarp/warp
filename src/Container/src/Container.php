@@ -64,7 +64,7 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
     /**
      * @inheritDoc
      */
-    public function setContainer(ContainerInterface $container): ContainerAwareInterface
+    public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
         $this->argumentResolver->setContainer($container);

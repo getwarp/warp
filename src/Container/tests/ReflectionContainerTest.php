@@ -6,8 +6,11 @@ namespace spaceonfire\Container;
 
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
+use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 use spaceonfire\Container\Fixtures\A;
+use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
+use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
 
@@ -82,5 +85,19 @@ class ReflectionContainerTest extends TestCase
     {
         $container = new ReflectionContainer();
         self::assertTrue($container->getTagged('tag')->isEmpty());
+    }
+
+    public function testGetAcceptNullableAbstractClass(): void
+    {
+        $container = new ReflectionContainer();
+        $object = $container->get(AcceptNullableAbstractClass::class);
+        self::assertNull($object->getAbstractClass());
+    }
+
+    public function testGetRequiresAbstractClass(): void
+    {
+        $this->expectException(ContainerException::class);
+        $container = new ReflectionContainer();
+        $container->get(RequiresAbstractClass::class);
     }
 }

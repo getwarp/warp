@@ -11,6 +11,9 @@ use Psr\Container\ContainerInterface as PsrContainerInterface;
 use spaceonfire\Collection\Collection;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
+use spaceonfire\Container\Fixtures\AbstractClass\AbstractClass;
+use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
+use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
 
 class CompositeContainerTest extends TestCase
 {
@@ -214,5 +217,36 @@ class CompositeContainerTest extends TestCase
         $composite->addContainer($bazContainer, 8);
 
         self::assertSame('baz', $composite->get('foo'));
+    }
+
+    public function testGetAcceptNullableAbstractClass(): void
+    {
+        $composite = new CompositeContainer([
+            new Container(),
+            new ReflectionContainer(),
+        ]);
+
+        $object = $composite->get(AcceptNullableAbstractClass::class);
+
+        self::assertNull($object->getAbstractClass());
+    }
+
+    public function testGetRequiresAbstractClass(): void
+    {
+        $composite = new CompositeContainer();
+
+        $abstractClass = new class extends AbstractClass {
+        };
+
+        $abstractClassContainer = $this->createContainerMock([
+            AbstractClass::class => $abstractClass,
+        ])->reveal();
+
+        $composite->addContainer($abstractClassContainer);
+        $composite->addContainer(new ReflectionContainer());
+
+        $object = $composite->get(RequiresAbstractClass::class);
+
+        self::assertSame($abstractClass, $object->getAbstractClass());
     }
 }

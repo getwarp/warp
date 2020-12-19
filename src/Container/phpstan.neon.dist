@@ -18,3 +18,4 @@ parameters:
 			message: '/^If condition is always false\.$/'
 			paths:
 				- src/ContainerChain.php
+				- src/Argument/ArgumentValue.php

@@ -19,6 +19,7 @@
 			<directory suffix=".php">src/</directory>
 			<exclude>
 				<file>src/ContainerChain.php</file>
+				<file>src/Argument/ArgumentValue.php</file>
 			</exclude>
 		</whitelist>
 	</filter>

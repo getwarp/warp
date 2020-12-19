@@ -7,7 +7,7 @@ namespace spaceonfire\Container\Definition;
 interface DefinitionFactoryInterface
 {
     /**
-     * Make definition
+     * Make definition object.
      * @param string $abstract
      * @param mixed $concrete
      * @param bool $shared

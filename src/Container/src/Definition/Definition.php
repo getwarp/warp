@@ -7,6 +7,7 @@ namespace spaceonfire\Container\Definition;
 use spaceonfire\Container\Argument\Argument;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
+use spaceonfire\Container\RawValueHolder;
 
 final class Definition implements DefinitionInterface
 {
@@ -128,14 +129,16 @@ final class Definition implements DefinitionInterface
      */
     public function resolve(ContainerInterface $container)
     {
-        if ($this->resolved !== null && $this->isShared()) {
+        if (null !== $this->resolved && $this->isShared()) {
             return $this->resolved;
         }
 
-        if (is_callable($this->concrete)) {
+        if ($this->concrete instanceof RawValueHolder) {
+            $resolved = $this->concrete->getValue();
+        } elseif (is_callable($this->concrete)) {
             $resolved = $container->invoke($this->concrete, $this->arguments);
         } elseif (is_string($this->concrete)) {
-            $buildAnyway = $this->abstract === $this->concrete || $this->arguments !== [];
+            $buildAnyway = $this->abstract === $this->concrete || [] !== $this->arguments;
 
             $resolved = $buildAnyway
                 ? $container->make($this->concrete, $this->arguments)
