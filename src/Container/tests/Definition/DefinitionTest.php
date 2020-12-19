@@ -7,9 +7,9 @@ namespace spaceonfire\Container\Definition;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument as ArgumentProphecy;
 use spaceonfire\Container\Argument\Argument;
-use spaceonfire\Container\Argument\ArgumentValue;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
+use spaceonfire\Container\RawValueHolder;
 use stdClass;
 
 class DefinitionTest extends TestCase
@@ -67,7 +67,7 @@ class DefinitionTest extends TestCase
             return $arg->resolve($container);
         });
 
-        $definition->addArguments([new Argument('arg', null, new ArgumentValue('bar'))]);
+        $definition->addArguments([new Argument('arg', null, new RawValueHolder('bar'))]);
 
         self::assertSame('bar', $definition->resolve($container));
     }
@@ -127,6 +127,19 @@ class DefinitionTest extends TestCase
         $this->expectException(ContainerException::class);
 
         $definition->resolve($container);
+    }
+
+    public function testResolveUsingRawValueHolder(): void
+    {
+        $containerProphecy = $this->prophesize(ContainerInterface::class);
+        /** @var ContainerInterface $container */
+        $container = $containerProphecy->reveal();
+
+        $definition = new Definition('foo', new RawValueHolder('foo'));
+
+        $resolved = $definition->resolve($container);
+
+        self::assertSame('foo', $resolved);
     }
 
     public function testTags(): void

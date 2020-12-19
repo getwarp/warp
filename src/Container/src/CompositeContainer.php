@@ -21,7 +21,6 @@ use Traversable;
  * Attention: You should not extend this class because it will become final in the next major release
  * after the backward compatibility aliases are removed.
  *
- * @package spaceonfire\Container
  * @final
  */
 class CompositeContainer implements ContainerWithServiceProvidersInterface, ContainerAwareInterface, IteratorAggregate
@@ -52,7 +51,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
     /**
      * @inheritDoc
      */
-    public function setContainer(ContainerInterface $container): ContainerAwareInterface
+    public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
         foreach ($this->getIterator() as $delegate) {

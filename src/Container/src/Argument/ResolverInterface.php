@@ -10,7 +10,7 @@ use spaceonfire\Container\ContainerAwareInterface;
 interface ResolverInterface extends ContainerAwareInterface
 {
     /**
-     * Resolves function arguments
+     * Resolve function arguments.
      * @param ReflectionFunctionAbstract $reflection
      * @param array<string,mixed> $arguments
      * @return array<mixed>

@@ -7,7 +7,6 @@ namespace spaceonfire\Container\Definition;
 /**
  * List of common definitions tags. Use these constants to prevent collision that can be caused by typos in tag names.
  * Feel free to suggest tag names of your choice.
- * @package spaceonfire\Container\Definition
  */
 final class DefinitionTag
 {

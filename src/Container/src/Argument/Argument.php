@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace spaceonfire\Container\Argument;
 
 use spaceonfire\Container\ContainerInterface;
+use spaceonfire\Container\Exception\CannotInstantiateAbstractClassException;
 use spaceonfire\Container\Exception\ContainerException;
+use spaceonfire\Container\RawValueHolder;
 
 final class Argument
 {
@@ -18,7 +20,7 @@ final class Argument
      */
     private $className;
     /**
-     * @var ArgumentValue|null
+     * @var RawValueHolder |null
      */
     private $defaultValue;
 
@@ -26,9 +28,9 @@ final class Argument
      * Argument constructor.
      * @param string $name
      * @param string|null $className
-     * @param ArgumentValue|null $defaultValue
+     * @param RawValueHolder |null $defaultValue
      */
-    public function __construct(string $name, ?string $className = null, ?ArgumentValue $defaultValue = null)
+    public function __construct(string $name, ?string $className = null, ?RawValueHolder $defaultValue = null)
     {
         $this->name = $name;
         $this->className = $className;
@@ -36,7 +38,7 @@ final class Argument
     }
 
     /**
-     * Getter for `name` property
+     * Getter for `name` property.
      * @return string
      */
     public function getName(): string
@@ -45,17 +47,25 @@ final class Argument
     }
 
     /**
-     * Resolve argument using container
+     * Resolve argument using container.
      * @param ContainerInterface $container
      * @return mixed
      */
     public function resolve(ContainerInterface $container)
     {
-        if ($this->className !== null && $container->has($this->className)) {
-            return $container->get($this->className);
+        if (null !== $this->className && $container->has($this->className)) {
+            try {
+                return $container->get($this->className);
+            } catch (CannotInstantiateAbstractClassException $exception) {
+                if (null !== $this->defaultValue) {
+                    return $this->defaultValue->getValue();
+                }
+
+                throw $exception;
+            }
         }
 
-        if ($this->defaultValue !== null) {
+        if (null !== $this->defaultValue) {
             return $this->defaultValue->getValue();
         }
 

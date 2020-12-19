@@ -32,7 +32,7 @@ interface DefinitionAggregateInterface extends IteratorAggregate
     public function getDefinition(string $id): DefinitionInterface;
 
     /**
-     * Make definition
+     * Make definition.
      * @param string $abstract
      * @param mixed $concrete
      * @param bool $shared

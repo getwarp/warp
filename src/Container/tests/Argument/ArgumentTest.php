@@ -7,6 +7,7 @@ namespace spaceonfire\Container\Argument;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
+use spaceonfire\Container\RawValueHolder;
 
 class ArgumentTest extends TestCase
 {
@@ -38,7 +39,7 @@ class ArgumentTest extends TestCase
         /** @var ContainerInterface $container */
         $container = $containerProphecy->reveal();
 
-        $argument = new Argument('foo', 'MyClass', new ArgumentValue('baz'));
+        $argument = new Argument('foo', 'MyClass', new RawValueHolder('baz'));
 
         self::assertSame('baz', $argument->resolve($container));
     }

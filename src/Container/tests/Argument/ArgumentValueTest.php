@@ -6,6 +6,7 @@ namespace spaceonfire\Container\Argument;
 
 use ArrayIterator;
 use PHPUnit\Framework\TestCase;
+use spaceonfire\Container\RawValueHolder;
 use stdClass;
 
 class ArgumentValueTest extends TestCase
@@ -16,7 +17,7 @@ class ArgumentValueTest extends TestCase
      */
     public function testGetValue($val): void
     {
-        self::assertSame($val, (new ArgumentValue($val))->getValue());
+        self::assertSame($val, (new RawValueHolder($val))->getValue());
     }
 
     public function dataProvider(): array

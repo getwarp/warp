@@ -52,7 +52,7 @@ final class ServiceProviderAggregate extends AbstractCollectionDecorator impleme
      * @inheritDoc
      * @param ServiceProviderInterface $value
      */
-    public function offsetSet($_, $value): void
+    public function offsetSet($offset, $value): void
     {
         $alias = $this->indexer($value);
 

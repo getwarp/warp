@@ -6,9 +6,11 @@ namespace spaceonfire\Container\Argument;
 
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
+use ReflectionNamedType;
 use spaceonfire\Container\ContainerAwareTrait;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
+use spaceonfire\Container\RawValueHolder;
 use Throwable;
 
 final class ArgumentResolver implements ResolverInterface
@@ -44,12 +46,21 @@ final class ArgumentResolver implements ResolverInterface
                     continue;
                 }
 
-                $class = $parameter->getClass();
-                $defaultValue = $parameter->isDefaultValueAvailable()
-                    ? new ArgumentValue($parameter->getDefaultValue())
-                    : null;
+                $type = $parameter->getType();
 
-                $argument = new Argument($name, $class === null ? null : $class->getName(), $defaultValue);
+                if ($parameter->isDefaultValueAvailable()) {
+                    $defaultValue = new RawValueHolder($parameter->getDefaultValue());
+                } elseif (null !== $type && $type->allowsNull()) {
+                    $defaultValue = new RawValueHolder(null);
+                } else {
+                    $defaultValue = null;
+                }
+
+                $argument = new Argument(
+                    $name,
+                    $type instanceof ReflectionNamedType ? $type->getName() : null,
+                    $defaultValue
+                );
 
                 $result[$name] = $argument->resolve($this->getContainer());
             } catch (Throwable $e) {
