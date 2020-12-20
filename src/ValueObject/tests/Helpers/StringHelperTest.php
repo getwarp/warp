@@ -27,17 +27,17 @@ class StringHelperTest extends TestCase
 
     public function testStringify(): void
     {
-        $this->assertEquals('"a"', StringHelper::stringify('a'));
-        $this->assertEquals('null', StringHelper::stringify(null));
-        $this->assertEquals('false', StringHelper::stringify(false));
-        $this->assertEquals('true', StringHelper::stringify(true));
-        $this->assertEquals('5', StringHelper::stringify(5));
-        $this->assertEquals('5.5', StringHelper::stringify(5.5));
-        $this->assertEquals(null, StringHelper::stringify(new \stdClass()));
-        $this->assertEquals('"/\\\\Привет\""', StringHelper::stringify('/\Привет"'));
-        $this->assertEquals('"a"', StringHelper::stringify($this->stringableObjectFactory('a')));
-        $this->assertEquals('[1, 2, 3, "a", "b", "c"]', StringHelper::stringify([1, 2, 3, 'a', 'b', 'c']));
-        $this->assertEquals('[1 => "a", 2 => "b", 3 => "c"]', StringHelper::stringify([1 => 'a', 2 => 'b', 3 => 'c']));
+        self::assertSame('"a"', StringHelper::stringify('a'));
+        self::assertSame('null', StringHelper::stringify(null));
+        self::assertSame('false', StringHelper::stringify(false));
+        self::assertSame('true', StringHelper::stringify(true));
+        self::assertSame('5', StringHelper::stringify(5));
+        self::assertSame('5.5', StringHelper::stringify(5.5));
+        self::assertSame(null, StringHelper::stringify(new \stdClass()));
+        self::assertSame('"/\\\\Привет\""', StringHelper::stringify('/\Привет"'));
+        self::assertSame('"a"', StringHelper::stringify($this->stringableObjectFactory('a')));
+        self::assertSame('[1, 2, 3, "a", "b", "c"]', StringHelper::stringify([1, 2, 3, 'a', 'b', 'c']));
+        self::assertSame('[1 => "a", 2 => "b", 3 => "c"]', StringHelper::stringify([1 => 'a', 2 => 'b', 3 => 'c']));
     }
 
     /**
@@ -45,19 +45,19 @@ class StringHelperTest extends TestCase
      */
     public function testGetSuggestion(): void
     {
-        $this->assertEquals(null, StringHelper::getSuggestion([], ''));
-        $this->assertEquals(null, StringHelper::getSuggestion([], 'a'));
-        $this->assertEquals(null, StringHelper::getSuggestion(['a'], 'a'));
-        $this->assertEquals('a', StringHelper::getSuggestion(['a', 'b'], ''));
-        $this->assertEquals('b', StringHelper::getSuggestion(['a', 'b'], 'a')); // ignore 100% match
-        $this->assertEquals('a1', StringHelper::getSuggestion(['a1', 'a2'], 'a')); // take first
-        $this->assertEquals(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'a'));
-        $this->assertEquals(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'ab'));
-        $this->assertEquals(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'abc'));
-        $this->assertEquals('bar', StringHelper::getSuggestion(['foo', 'bar', 'baz'], 'baz'));
-        $this->assertEquals('abcd', StringHelper::getSuggestion(['abcd'], 'acbd'));
-        $this->assertEquals('abcd', StringHelper::getSuggestion(['abcd'], 'axbd'));
-        $this->assertEquals(null, StringHelper::getSuggestion(['abcd'], 'axyd')); // 'tags' vs 'this'
-        $this->assertEquals(null, StringHelper::getSuggestion(['setItem'], 'item'));
+        self::assertSame(null, StringHelper::getSuggestion([], ''));
+        self::assertSame(null, StringHelper::getSuggestion([], 'a'));
+        self::assertSame(null, StringHelper::getSuggestion(['a'], 'a'));
+        self::assertSame('a', StringHelper::getSuggestion(['a', 'b'], ''));
+        self::assertSame('b', StringHelper::getSuggestion(['a', 'b'], 'a')); // ignore 100% match
+        self::assertSame('a1', StringHelper::getSuggestion(['a1', 'a2'], 'a')); // take first
+        self::assertSame(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'a'));
+        self::assertSame(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'ab'));
+        self::assertSame(null, StringHelper::getSuggestion(['aaa', 'bbb'], 'abc'));
+        self::assertSame('bar', StringHelper::getSuggestion(['foo', 'bar', 'baz'], 'baz'));
+        self::assertSame('abcd', StringHelper::getSuggestion(['abcd'], 'acbd'));
+        self::assertSame('abcd', StringHelper::getSuggestion(['abcd'], 'axbd'));
+        self::assertSame(null, StringHelper::getSuggestion(['abcd'], 'axyd')); // 'tags' vs 'this'
+        self::assertSame(null, StringHelper::getSuggestion(['setItem'], 'item'));
     }
 }

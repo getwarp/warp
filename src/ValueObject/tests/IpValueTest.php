@@ -11,7 +11,7 @@ class IpValueTest extends TestCase
     public function testConstructor(): void
     {
         $val = new IpValue('127.0.0.1');
-        $this->assertEquals('127.0.0.1', $val->value());
+        self::assertSame('127.0.0.1', $val->value());
     }
 
     public function testConstructorException(): void

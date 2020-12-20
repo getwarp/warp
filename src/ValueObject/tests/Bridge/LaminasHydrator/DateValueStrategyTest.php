@@ -27,7 +27,7 @@ class DateValueStrategyTest extends TestCase
         $strategy = new DateValueStrategy('Y-m-d');
 
         $extracted = $strategy->extract(DateTimeImmutableValue::createFromFormat('Y-m-d', '2020-04-21'));
-        self::assertEquals('2020-04-21', $extracted);
+        self::assertSame('2020-04-21', $extracted);
     }
 
     public function testHydrate(): void
@@ -36,6 +36,6 @@ class DateValueStrategyTest extends TestCase
 
         $date = DateTimeImmutableValue::createFromFormat('Y-m-d', '2020-04-21');
         $hydrated = $strategy->hydrate('2020-04-21', null);
-        self::assertEquals($date->getTimestamp(), $hydrated->getTimestamp());
+        self::assertSame($date->getTimestamp(), $hydrated->getTimestamp());
     }
 }

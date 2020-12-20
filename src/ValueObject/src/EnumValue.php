@@ -44,17 +44,6 @@ abstract class EnumValue extends BaseValueObject
     } // @codeCoverageIgnore
 
     /**
-     * Checks that current VO is bigger than provided one.
-     * @param EnumValue $other
-     * @return bool
-     */
-    public function equals(EnumValue $other): bool
-    {
-        /** @noinspection TypeUnsafeComparisonInspection PhpNonStrictObjectEqualityInspection */
-        return $other == $this;
-    }
-
-    /**
      * Support for magic methods
      * @param string $name
      * @param array $args
@@ -95,8 +84,12 @@ abstract class EnumValue extends BaseValueObject
             if (!isset(self::$cache[$class])) {
                 $reflected = new ReflectionClass($class);
                 self::$cache[$class] = [];
-                foreach ($reflected->getConstants() as $key => $value) {
-                    self::$cache[$class][self::keysFormatter($key)] = $value;
+                foreach ($reflected->getReflectionConstants() as $constant) {
+                    if (!$constant->isPublic()) {
+                        continue;
+                    }
+
+                    self::$cache[$class][self::keysFormatter($constant->getName())] = $constant->getValue();
                 }
             }
             // @codeCoverageIgnoreStart

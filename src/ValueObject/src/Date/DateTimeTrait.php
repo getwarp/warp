@@ -14,8 +14,6 @@ use Throwable;
  *
  * Inspired by `nette/utils` DateTime
  * @see https://github.com/nette/utils/blob/master/src/Utils/DateTime.php
- *
- * @package spaceonfire\ValueObject\Date
  */
 trait DateTimeTrait
 {

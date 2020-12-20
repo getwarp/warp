@@ -16,16 +16,16 @@ class UuidValueTest extends TestCase
     public function testConstructor(): void
     {
         $val = $this->factory('42779f6d-e7c7-4572-8497-2d43bd9c1677');
-        $this->assertEquals('42779f6d-e7c7-4572-8497-2d43bd9c1677', $val->value());
-        $this->assertEquals('42779f6d-e7c7-4572-8497-2d43bd9c1677', (string)$val);
-        $this->assertEquals('"42779f6d-e7c7-4572-8497-2d43bd9c1677"', json_encode($val));
+        self::assertSame('42779f6d-e7c7-4572-8497-2d43bd9c1677', $val->value());
+        self::assertSame('42779f6d-e7c7-4572-8497-2d43bd9c1677', (string)$val);
+        self::assertSame('"42779f6d-e7c7-4572-8497-2d43bd9c1677"', json_encode($val));
     }
 
     public function testConstructFromOtherUuidValueObject(): void
     {
         $valA = $this->factory('42779f6d-e7c7-4572-8497-2d43bd9c1677');
         $valB = $this->factory($valA);
-        $this->assertEquals($valA->value(), $valB->value());
+        self::assertSame($valA->value(), $valB->value());
     }
 
     public function testConstructFailWithObject(): void
@@ -43,6 +43,6 @@ class UuidValueTest extends TestCase
     public function testRandom(): void
     {
         $val = $this->factory('42779f6d-e7c7-4572-8497-2d43bd9c1677')::random();
-        $this->assertIsString($val->value());
+        self::assertIsString($val->value());
     }
 }

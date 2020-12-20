@@ -13,14 +13,14 @@ class UriValueTest extends TestCase
     public function testConstructor(): void
     {
         $val = new UriValue('http://localhost');
-        $this->assertInstanceOf(UriInterface::class, $val->value());
-        $this->assertEquals('http://localhost', (string)$val);
-        $this->assertEquals('"http:\/\/localhost"', json_encode($val));
+        self::assertInstanceOf(UriInterface::class, $val->value());
+        self::assertSame('http://localhost', (string)$val);
+        self::assertSame('"http:\/\/localhost"', json_encode($val));
 
         $val = new UriValue(new Uri('http://localhost'));
-        $this->assertInstanceOf(UriInterface::class, $val->value());
-        $this->assertEquals('http://localhost', (string)$val);
-        $this->assertEquals('"http:\/\/localhost"', json_encode($val));
+        self::assertInstanceOf(UriInterface::class, $val->value());
+        self::assertSame('http://localhost', (string)$val);
+        self::assertSame('"http:\/\/localhost"', json_encode($val));
     }
 
     public function testConstructorException(): void

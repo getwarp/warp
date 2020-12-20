@@ -25,15 +25,16 @@ class EnumValueTest extends TestCase
             public const TWO_WORDS = 2;
             public const MANY_MANY_WORDS = 3;
             public const ONE_STRING = '1';
+            private const PRIVATE = 'private';
         };
     }
 
     public function testConstructor(): void
     {
         $val = $this->factory(1);
-        $this->assertEquals(1, $val->value());
-        $this->assertEquals('1', (string)$val);
-        $this->assertEquals('"1"', json_encode($val));
+        self::assertSame(1, $val->value());
+        self::assertSame('1', (string)$val);
+        self::assertSame('"1"', json_encode($val));
     }
 
     public function testConstructorException(): void
@@ -54,19 +55,21 @@ class EnumValueTest extends TestCase
         $b = $this->factory(1);
         $c = $this->factory(2);
 
-        $this->assertTrue($a->equals($b));
-        $this->assertFalse($a->equals($c));
+        self::assertTrue($a->equals($b));
+        self::assertFalse($a->equals($c));
 
         $b = $this->factory('1');
-        $this->assertTrue($a->equals($b));
+        self::assertFalse($a->equals($b));
+
+        self::assertFalse($b->equals(new EmailValue('a@b.com')));
     }
 
     public function testRandom(): void
     {
         $enum = $this->factory(1);
 
-        $this->assertContains($enum::randomValue(), $enum::values());
-        $this->assertContains($enum::random()->value(), $enum::values());
+        self::assertContains($enum::randomValue(), $enum::values());
+        self::assertContains($enum::random()->value(), $enum::values());
     }
 
     public function testMagicCalls(): void
@@ -76,10 +79,27 @@ class EnumValueTest extends TestCase
         $a = $enum::one();
         $b = $enum::twoWords();
 
-        $this->assertInstanceOf(EnumValue::class, $a);
-        $this->assertInstanceOf(EnumValue::class, $b);
+        self::assertInstanceOf(EnumValue::class, $a);
+        self::assertInstanceOf(EnumValue::class, $b);
 
-        $this->assertEquals(1, $a->value());
-        $this->assertEquals(2, $b->value());
+        self::assertSame(1, $a->value());
+        self::assertSame(2, $b->value());
+    }
+
+    public function testPrivateConstantUnavailable(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->factory('private');
+    }
+
+    public function testValues(): void
+    {
+        $enum = $this->factory(1);
+        self::assertSame([
+            'one' => 1,
+            'twoWords' => 2,
+            'manyManyWords' => 3,
+            'oneString' => '1',
+        ], $enum::values());
     }
 }

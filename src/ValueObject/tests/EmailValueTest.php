@@ -11,7 +11,7 @@ class EmailValueTest extends TestCase
     public function testConstructor(): void
     {
         $val = new EmailValue('test@test.test');
-        $this->assertEquals('test@test.test', $val->value());
+        self::assertSame('test@test.test', $val->value());
     }
 
     public function testConstructFail(): void
