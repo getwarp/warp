@@ -14,7 +14,7 @@ use Webmozart\Assert\Assert;
  * Attention: You should not extend this class because it will become final in the next major release
  * after the backward compatibility aliases are removed.
  *
- * @package spaceonfire\ValueObject\Bridge\LaminasHydrator
+ * @final
  */
 class ValueObjectStrategy implements StrategyInterface
 {

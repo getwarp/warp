@@ -74,6 +74,20 @@ abstract class BaseValueObject implements JsonSerializable
     }
 
     /**
+     * Checks that current VO is equals to given one.
+     * @param static $other
+     * @return bool
+     */
+    public function equals($other): bool
+    {
+        if (!is_a($this, get_class($other))) {
+            return false;
+        }
+
+        return $other->value() === $this->value();
+    }
+
+    /**
      * Cast VO to string
      * @return string
      */

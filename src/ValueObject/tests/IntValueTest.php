@@ -17,15 +17,15 @@ class IntValueTest extends TestCase
     public function testConstructFromInt(): void
     {
         $val = $this->factory(5);
-        $this->assertEquals(5, $val->value());
-        $this->assertEquals('5', (string)$val);
+        self::assertSame(5, $val->value());
+        self::assertSame('5', (string)$val);
     }
 
     public function testConstructFromString(): void
     {
         $val = $this->factory('5');
-        $this->assertEquals(5, $val->value());
-        $this->assertEquals('5', (string)$val);
+        self::assertSame(5, $val->value());
+        self::assertSame('5', (string)$val);
     }
 
     public function testConstructFailWithObject(): void
@@ -34,13 +34,13 @@ class IntValueTest extends TestCase
         $this->factory(new \stdClass());
     }
 
-    public function testEqualsTo(): void
+    public function testEquals(): void
     {
         $a = $this->factory(5);
         $b = $this->factory(5);
         $c = $this->factory(10);
-        $this->assertTrue($a->equalsTo($b));
-        $this->assertFalse($a->equalsTo($c));
+        self::assertTrue($a->equals($b));
+        self::assertFalse($a->equals($c));
     }
 
     public function testIsBiggerThat(): void
@@ -48,13 +48,13 @@ class IntValueTest extends TestCase
         $a = $this->factory(5);
         $b = $this->factory(1);
         $c = $this->factory(10);
-        $this->assertTrue($a->isBiggerThan($b));
-        $this->assertFalse($a->isBiggerThan($c));
+        self::assertTrue($a->isBiggerThan($b));
+        self::assertFalse($a->isBiggerThan($c));
     }
 
     public function testJson(): void
     {
         $val = $this->factory(5);
-        $this->assertEquals(5, json_encode($val));
+        self::assertSame('5', json_encode($val));
     }
 }
