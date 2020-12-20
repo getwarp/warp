@@ -10,11 +10,11 @@ use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
 use spaceonfire\DataSource\Exceptions\SaveException;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;
-use spaceonfire\DataSource\Traits\RepositoryTestTraits;
+use spaceonfire\DataSource\Traits\RepositoryTestTrait;
 
 class CycleRepositoryTest extends AbstractCycleOrmTest
 {
-    use RepositoryTestTraits;
+    use RepositoryTestTrait;
 
     protected function setUp(): void
     {

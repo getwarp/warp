@@ -4,60 +4,22 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User;
 
-use Cycle\Schema\Definition\Entity;
-use Cycle\Schema\Definition\Field;
+use Cycle\ORM\ORMInterface;
 use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\UuidCycleMapper;
-use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepositoryAdapter;
 use spaceonfire\DataSource\Exceptions\NotFoundException;
 use spaceonfire\DataSource\Fixtures\Domain\User\Exceptions;
 use spaceonfire\DataSource\Fixtures\Domain\User\User;
 use spaceonfire\DataSource\Fixtures\Domain\User\UserRepositoryInterface;
 
 /**
- * Class CycleUserRepository
- * @package spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User
  * @codeCoverageIgnore
  */
-class CycleUserRepository extends AbstractCycleRepository implements UserRepositoryInterface
+class CycleUserRepository extends AbstractCycleRepositoryAdapter implements UserRepositoryInterface
 {
-    /**
-     * @inheritDoc
-     */
-    public static function getTableName(): string
+    public function __construct(ORMInterface $orm)
     {
-        return 'users';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function getEntityClass(): ?string
-    {
-        return User::class;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected static function defineInternal(): Entity
-    {
-        $e = new Entity();
-
-        $e->setRole('user');
-
-        $e->getFields()->set('id', (new Field())->setType('string(36)')->setColumn('id')->setPrimary(true));
-
-        $e->getFields()->set('name', (new Field())->setType('string(255)')->setColumn('name'));
-
-        $e->setMapper(UuidCycleMapper::class);
-
-        return $e;
-    }
-
-    protected static function makeNotFoundException($primary = null): NotFoundException
-    {
-        return new Exceptions\UserNotFoundException(null, compact('primary'));
+        parent::__construct('user', $orm);
     }
 
     /**
@@ -65,9 +27,7 @@ class CycleUserRepository extends AbstractCycleRepository implements UserReposit
      */
     public function findByPrimary($primary): User
     {
-        /** @var User $entity */
-        $entity = parent::findByPrimary($primary);
-        return $entity;
+        return parent::findByPrimary($primary);
     }
 
     /**
@@ -76,5 +36,10 @@ class CycleUserRepository extends AbstractCycleRepository implements UserReposit
     public function findOne(?CriteriaInterface $criteria = null): ?User
     {
         return parent::findOne($criteria);
+    }
+
+    protected static function makeNotFoundException($primary = null): NotFoundException
+    {
+        return new Exceptions\UserNotFoundException(null, compact('primary'));
     }
 }

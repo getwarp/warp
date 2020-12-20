@@ -6,15 +6,21 @@ namespace spaceonfire\DataSource\Bridge\CycleOrm;
 
 use Cycle\ORM;
 use Cycle\Schema;
+use Cycle\Schema\Definition\Entity;
+use Cycle\Schema\Definition\Field;
+use Cycle\Schema\Definition\Relation;
 use Cycle\Schema\Generator;
+use Cycle\Schema\Registry;
 use InvalidArgumentException;
 use spaceonfire\DataSource\Bridge\CycleOrm\Fixtures\TestLogger;
-use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\UuidCycleMapper;
+use spaceonfire\DataSource\Bridge\CycleOrm\Schema\AbstractRegistryFactory;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Domain\User\User;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Tag\CycleTagRepository;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User\CycleUserRepository;
+use spaceonfire\DataSource\RepositoryInterface;
 use Spiral\Database;
 use Spiral\Database\Config\DatabaseConfig;
 use Spiral\Database\DatabaseManager;
@@ -33,7 +39,7 @@ class CycleOrmTestCompanion
     /** @var string[] */
     private $repositories;
 
-    /** @var AbstractCycleRepository[] */
+    /** @var RepositoryInterface[] */
     private $repositoriesCache;
 
     /** @var bool */
@@ -85,7 +91,7 @@ class CycleOrmTestCompanion
         return $this->logger;
     }
 
-    public function getRepository(string $className): AbstractCycleRepository
+    public function getRepository(string $className): RepositoryInterface
     {
         $repository = &$this->repositoriesCache[$className];
 
@@ -97,7 +103,7 @@ class CycleOrmTestCompanion
             throw new InvalidArgumentException(sprintf('Unknown repository class "%s"', $className));
         }
 
-        $repository = new $className($this->orm->getRepository($this->repositories[$className]), $this->orm);
+        $repository = new $className($this->orm);
 
         return $repository;
     }
@@ -108,7 +114,11 @@ class CycleOrmTestCompanion
             return;
         }
 
-        $this->repositories = [CyclePostRepository::class, CycleUserRepository::class, CycleTagRepository::class];
+        $this->repositories = [
+            CyclePostRepository::class => 'post',
+            CycleUserRepository::class => 'user',
+            CycleTagRepository::class => 'tag',
+        ];
 
         $this->repositoriesCache = [];
 
@@ -133,7 +143,7 @@ class CycleOrmTestCompanion
 //        $this->logger->display();
         $this->getDriver()->setLogger($this->logger);
 
-        $this->orm = (new ORM\ORM(new ORM\Factory($this->dbal), $this->buildSchema($this->dbal)))
+        $this->orm = (new ORM\ORM(new ORM\Factory($this->dbal), $this->buildSchema()))
             ->withPromiseFactory(new ORM\Promise\PromiseFactory());
 
         $this->importFixtureData();
@@ -155,21 +165,64 @@ class CycleOrmTestCompanion
         }
     }
 
-    private function buildSchema(Database\DatabaseProviderInterface $dbal, ?string $database = null): ORM\Schema
+    private function buildSchema(): ORM\Schema
     {
-        $registry = new Schema\Registry($dbal);
+        $registryFactory = new class($this->dbal) extends AbstractRegistryFactory {
+            private $dbal;
 
-        $this->repositories = array_flip($this->repositories);
+            public function __construct($dbal)
+            {
+                $this->dbal = $dbal;
+            }
 
-        /**
-         * @var AbstractCycleRepository $repository
-         */
-        foreach ($this->repositories as $repository => &$role) {
-            $registry->register($e = $repository::define());
-            $registry->linkTable($e, $database, $repository::getTableName());
-            $role = $e->getRole();
-        }
-        unset($role);
+            public function make(): Registry
+            {
+                $registry = new Registry($this->dbal);
+
+                $post = new Entity();
+                $post->setRole('post');
+                $post->setClass(Post::class);
+
+                $post->getFields()->set('id', (new Field())->setType('string(36)')->setColumn('id')->setPrimary(true));
+                $post->getFields()->set('title', (new Field())->setType('string(255)')->setColumn('title'));
+                $post->getFields()->set('authorId', (new Field())->setType('string(36)')->setColumn('authorId'));
+
+                $post->getRelations()->set('author', (new Relation())->setTarget(User::class)->setType('belongsTo'));
+                $post->getRelations()->get('author')->getOptions()->set('innerKey', 'authorId');
+
+                $post->setMapper(UuidCycleMapper::class);
+
+                $this->autocompleteEntity($post);
+                $registry->register($post);
+                $registry->linkTable($post, null, 'posts');
+
+                $user = new Entity();
+                $user->setRole('user');
+                $user->setClass(User::class);
+
+                $user->getFields()->set('id', (new Field())->setType('string(36)')->setColumn('id')->setPrimary(true));
+                $user->getFields()->set('name', (new Field())->setType('string(255)')->setColumn('name'));
+
+                $user->setMapper(UuidCycleMapper::class);
+
+                $this->autocompleteEntity($user);
+                $registry->register($user);
+                $registry->linkTable($user, null, 'users');
+
+                $tag = new Entity();
+                $tag->setRole('tag');
+
+                $tag->getFields()->set('id', (new Field())->setType('primary')->setColumn('id')->setPrimary(true));
+
+                $this->autocompleteEntity($tag);
+                $registry->register($tag);
+                $registry->linkTable($tag, null, 'tags');
+
+                return $registry;
+            }
+        };
+
+        $registry = $registryFactory->make();
 
         $schema = (new Schema\Compiler())->compile($registry, [
             new Generator\ResetTables(),
@@ -202,6 +255,14 @@ class CycleOrmTestCompanion
                     '35a60006-c34a-4c0b-8e9d-7759f6d0c09b'
                 ),
             ],
+            CycleTagRepository::class => [
+                $this->orm->make('tag', [
+                    'id' => 24,
+                ]),
+                $this->orm->make('tag', [
+                    'id' => 42,
+                ]),
+            ]
         ];
 
         foreach ($fixtures as $repoClass => $entities) {

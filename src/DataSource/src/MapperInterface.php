@@ -17,7 +17,7 @@ interface MapperInterface
     /**
      * Hydrate entity with dataset.
      * @param object $entity
-     * @param array  $data
+     * @param array $data
      * @return object
      */
     public function hydrate($entity, array $data);
@@ -30,7 +30,7 @@ interface MapperInterface
     public function extract($entity): array;
 
     /**
-     * Converts field value from storage to domain
+     * Converts field value from storage to domain.
      * @param string $fieldName
      * @param mixed $storageValue
      * @return mixed
@@ -38,7 +38,7 @@ interface MapperInterface
     public function convertValueToDomain(string $fieldName, $storageValue);
 
     /**
-     * Converts field value from domain to storage
+     * Converts field value from domain to storage.
      * @param string $fieldName
      * @param mixed $domainValue
      * @return mixed
@@ -46,14 +46,14 @@ interface MapperInterface
     public function convertValueToStorage(string $fieldName, $domainValue);
 
     /**
-     * Converts field name from storage to domain
+     * Converts field name from storage to domain.
      * @param string $fieldName
      * @return string
      */
     public function convertNameToDomain(string $fieldName): string;
 
     /**
-     * Converts field name from domain to storage
+     * Converts field name from domain to storage.
      * @param string $fieldName
      * @return string
      */

@@ -4,39 +4,14 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Tag;
 
-use Cycle\Schema\Definition\Entity;
-use Cycle\Schema\Definition\Field;
-use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
+use Cycle\ORM\ORMInterface;
+use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepositoryAdapter;
 use spaceonfire\DataSource\Fixtures\Domain\Tag\TagRepository;
 
-class CycleTagRepository extends AbstractCycleRepository implements TagRepository
+class CycleTagRepository extends AbstractCycleRepositoryAdapter implements TagRepository
 {
-    /**
-     * @inheritDoc
-     */
-    public static function getTableName(): string
+    public function __construct(ORMInterface $orm)
     {
-        return 'tags';
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public static function getEntityClass(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected static function defineInternal(): Entity
-    {
-        $e = new Entity();
-        $e->setRole('tag');
-
-        $e->getFields()->set('id', (new Field())->setType('primary')->setColumn('id')->setPrimary(true));
-
-        return $e;
+        parent::__construct('tag', $orm);
     }
 }

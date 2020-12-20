@@ -16,11 +16,9 @@ use spaceonfire\DataSource\MapperInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * Class InMemoryUserRepositoryInterface
- * @package spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\User
  * @codeCoverageIgnore
  */
-class InMemoryUserRepositoryInterface implements UserRepositoryInterface
+class InMemoryUserRepository implements UserRepositoryInterface
 {
     /**
      * @var User[]

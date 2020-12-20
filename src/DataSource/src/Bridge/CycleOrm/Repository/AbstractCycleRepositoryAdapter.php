@@ -5,12 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\DataSource\Bridge\CycleOrm\Repository;
 
 use Cycle\ORM;
-use Cycle\Schema\Definition\Entity;
-use RuntimeException;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper;
 use spaceonfire\DataSource\Bridge\CycleOrm\Query\CycleQuery;
 use spaceonfire\DataSource\EntityInterface;
 use spaceonfire\DataSource\Exceptions\NotFoundException;
@@ -19,123 +15,37 @@ use spaceonfire\DataSource\Exceptions\SaveException;
 use spaceonfire\DataSource\MapperInterface;
 use spaceonfire\DataSource\QueryInterface;
 use spaceonfire\DataSource\RepositoryInterface;
-use stdClass;
-use Throwable;
 use Webmozart\Assert\Assert;
 
-/**
- * Class AbstractCycleRepository.
- *
- * @deprecated due to bad design decision of mixing repository class with schema builder.
- * @see AbstractCycleRepositoryAdapter
- * @codeCoverageIgnore
- */
-abstract class AbstractCycleRepository implements RepositoryInterface
+abstract class AbstractCycleRepositoryAdapter implements RepositoryInterface
 {
     /**
-     * @var string[]
+     * @var string
      */
-    private static $roles = [];
+    protected $role;
     /**
      * @var ORM\RepositoryInterface|ORM\Select\Repository
      */
-    private $repository;
+    protected $repository;
     /**
      * @var ORM\ORMInterface
      */
-    private $orm;
+    protected $orm;
     /**
      * @var ORM\Transaction
      */
     protected $transaction;
 
     /**
-     * @param ORM\RepositoryInterface $repository
+     * @param string $role
      * @param ORM\ORMInterface $orm
      */
-    public function __construct(ORM\RepositoryInterface $repository, ORM\ORMInterface $orm)
+    public function __construct(string $role, ORM\ORMInterface $orm)
     {
-        $this->repository = $repository;
+        $this->role = $role;
         $this->orm = $orm;
+        $this->repository = $orm->getRepository($role);
         $this->transaction = new ORM\Transaction($orm);
-    }
-
-    /**
-     * Returns entity table name
-     * @return string
-     * @see \Cycle\Schema\Registry::linkTable()
-     */
-    abstract public static function getTableName(): string;
-
-    /**
-     * Returns entity class name
-     * @return string|EntityInterface|null
-     */
-    abstract public static function getEntityClass(): ?string;
-
-    /**
-     * Returns Cycle entity definition
-     * @return Entity
-     */
-    abstract protected static function defineInternal(): Entity;
-
-    /**
-     * Returns entity role for current repository
-     * @return string
-     */
-    private static function getRole(): string
-    {
-        if (!isset(self::$roles[static::class])) {
-            throw new RuntimeException('Role is not defined for ' . static::class); // @codeCoverageIgnore
-        }
-
-        return self::$roles[static::class];
-    }
-
-    /**
-     * Sets entity role of current repository
-     * @param string $role
-     */
-    private static function setRole(string $role): void
-    {
-        self::$roles[static::class] = $role;
-    }
-
-    /**
-     * Returns Cycle entity definition
-     * @return Entity
-     */
-    final public static function define(): Entity
-    {
-        $e = static::defineInternal();
-
-        if (!$e->getClass() && null !== $class = static::getEntityClass()) {
-            $e->setClass($class);
-        }
-
-        if (!$e->getRole() && $class = $e->getClass()) {
-            $e->setRole($class); // @codeCoverageIgnore
-        }
-
-        if (null === $role = $e->getRole()) {
-            throw new RuntimeException('Entity must define role or class name'); // @codeCoverageIgnore
-        }
-
-        static::setRole($role);
-
-        if (!$e->getMapper()) {
-            $e->setMapper($e->getClass() === null ? StdClassCycleMapper::class : BasicCycleMapper::class);
-        }
-
-        return $e;
-    }
-
-    /**
-     * Creates query
-     */
-    protected function query(): QueryInterface
-    {
-        return new CycleQuery($this->repository->select(), $this->getMapper());
     }
 
     /**
@@ -144,7 +54,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      */
     public function save($entity, bool $cascade = true): void
     {
-        static::assertEntity($entity);
+        $this->assertEntity($entity);
 
         $this->transaction->persist(
             $entity,
@@ -153,7 +63,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
 
         try {
             $this->transaction->run();
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             throw static::makeSaveException($e);
         }
     }
@@ -164,7 +74,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      */
     public function remove($entity, bool $cascade = true): void
     {
-        static::assertEntity($entity);
+        $this->assertEntity($entity);
 
         $this->transaction->delete(
             $entity,
@@ -174,7 +84,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
         try {
             $this->transaction->run();
             // @codeCoverageIgnoreStart
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             throw static::makeRemoveException($e);
             // @codeCoverageIgnoreEnd
         }
@@ -187,11 +97,11 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $entity = $this->repository->findByPK($primary);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw static::makeNotFoundException($primary);
         }
 
-        static::assertEntity($entity);
+        $this->assertEntity($entity);
 
         return $entity;
     }
@@ -203,7 +113,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
@@ -217,17 +127,17 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
         $entity = $query->fetchOne();
 
-        if ($entity === null) {
+        if (null === $entity) {
             return null;
         }
 
-        static::assertEntity($entity);
+        $this->assertEntity($entity);
 
         return $entity;
     }
@@ -239,7 +149,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
@@ -274,17 +184,23 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     public function getMapper(): MapperInterface
     {
         /** @var MapperInterface $mapper */
-        $mapper = $this->orm->getMapper(static::getRole());
+        $mapper = $this->orm->getMapper($this->role);
+        Assert::isInstanceOf($mapper, MapperInterface::class);
         return $mapper;
     }
 
-    protected static function assertEntity(object $entity): void
+    protected function assertEntity(object $entity): void
     {
-        // @codeCoverageIgnoreStart
-        $entityClasses = static::getEntityClass() === null
-            ? [stdClass::class]
-            : [EntityInterface::class, static::getEntityClass()];
-        // @codeCoverageIgnoreEnd
+        $entityClass = $this->orm->getSchema()->define($this->role, ORM\Schema::ENTITY);
+
+        if (null === $entityClass || ($entityClass === $this->role && !class_exists($entityClass))) {
+            return;
+        }
+
+        $entityClasses = [
+            EntityInterface::class,
+            $entityClass,
+        ];
 
         foreach ($entityClasses as $class) {
             Assert::isInstanceOf($entity, $class, 'Associated with repository class must implement %2$s. Got: %s');
@@ -302,22 +218,30 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     }
 
     /**
-     * @param Throwable $e
+     * @param \Throwable $e
      * @return RemoveException
      * @codeCoverageIgnore
      */
-    protected static function makeRemoveException(Throwable $e): RemoveException
+    protected static function makeRemoveException(\Throwable $e): RemoveException
     {
         return new RemoveException(null, [], 0, $e);
     }
 
     /**
-     * @param Throwable $e
+     * @param \Throwable $e
      * @return SaveException
      * @codeCoverageIgnore
      */
-    protected static function makeSaveException(Throwable $e): SaveException
+    protected static function makeSaveException(\Throwable $e): SaveException
     {
         return new SaveException(null, [], 0, $e);
+    }
+
+    /**
+     * Creates query
+     */
+    protected function query(): QueryInterface
+    {
+        return new CycleQuery($this->repository->select(), $this->getMapper());
     }
 }

@@ -8,15 +8,13 @@ use BadMethodCallException;
 use Cycle\ORM\ORM;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepository;
+use spaceonfire\DataSource\RepositoryInterface;
 use Spiral\Database\DatabaseManager;
 use Spiral\Database\Driver\Driver;
 use Spiral\Database\Driver\DriverInterface;
 
 /**
- * Class AbstractCycleOrmTest
- * @package spaceonfire\DataSource\Bridge\CycleOrm
- * @method static AbstractCycleRepository getRepository(string $className)
+ * @method static RepositoryInterface getRepository(string $className)
  * @method static ORM getOrm()
  * @method static DatabaseManager getDbal()
  * @method static DriverInterface|Driver getDriver()

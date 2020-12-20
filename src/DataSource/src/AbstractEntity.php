@@ -6,7 +6,7 @@ namespace spaceonfire\DataSource;
 
 use spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
 
-abstract class AbstractEntity implements EntityInterface
+abstract class AbstractEntity implements EntityInterface, \ArrayAccess, \JsonSerializable
 {
     use SmartArrayAccessObject, JsonSerializableObjectTrait;
 }

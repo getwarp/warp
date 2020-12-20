@@ -13,19 +13,19 @@ use Spiral\Pagination\PaginableInterface;
 interface QueryInterface extends Countable, PaginableInterface, FilterableInterface
 {
     /**
-     * Fetch one element
+     * Fetch one element.
      * @return EntityInterface|null
      */
     public function fetchOne(): ?EntityInterface;
 
     /**
-     * Fetch all elements
+     * Fetch all elements.
      * @return CollectionInterface
      */
     public function fetchAll(): CollectionInterface;
 
     /**
-     * Filter query with provided criteria
+     * Filter query with given criteria.
      * @param CriteriaInterface $criteria
      * @return QueryInterface
      */

@@ -4,22 +4,15 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Fixtures\Domain\Post;
 
-use spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
-use spaceonfire\DataSource\EntityInterface;
-use spaceonfire\DataSource\JsonSerializableObjectTrait;
+use spaceonfire\DataSource\AbstractEntity;
 
 /**
- * Class Post
- * @package spaceonfire\DataSource\Fixtures\Domain\Post
- *
  * @property string|null $id
  * @property string|null $title
  * @property string|null $authorId
  */
-class Post implements EntityInterface
+class Post extends AbstractEntity
 {
-    use SmartArrayAccessObject, JsonSerializableObjectTrait;
-
     /**
      * @var string|null
      */
