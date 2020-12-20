@@ -9,7 +9,7 @@ use spaceonfire\DataSource\Fixtures\Domain\Post\Exceptions\PostNotFoundException
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\RepositoryInterface;
 
-trait RepositoryTestTraits
+trait RepositoryTestTrait
 {
     /**
      * @var RepositoryInterface

@@ -8,11 +8,11 @@ use PHPUnit\Framework\TestCase;
 use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
 use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\InMemoryPostRepository;
-use spaceonfire\DataSource\Traits\RepositoryTestTraits;
+use spaceonfire\DataSource\Traits\RepositoryTestTrait;
 
 class RepositoryTest extends TestCase
 {
-    use RepositoryTestTraits;
+    use RepositoryTestTrait;
 
     protected function setUp(): void
     {

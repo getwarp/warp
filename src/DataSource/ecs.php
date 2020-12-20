@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
-use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
@@ -29,20 +28,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('skip', [
         'Unused variable $_.' => null,
-        'Unused parameter $parameters.' => [
-            __DIR__ . '/src/Exceptions/*',
-        ],
-        UnusedParameterSniff::class => [
-            __DIR__ . '/src/AbstractCriteriaDecorator.php',
-            __DIR__ . '/src/Bridge/CycleOrm/Repository/AbstractCycleRepository.php',
-            __DIR__ . '/src/Bridge/CycleOrm/Mapper/Hydrator/Strategy/CollectionExtractorStrategy.php',
-        ],
     ]);
 
     $services = $containerConfigurator->services();
 
-    $services->set(LineLengthFixer::class);
+    $services->set(LineLengthFixer::class)
+        ->call('configure', [
+            [
+                LineLengthFixer::LINE_LENGTH => 120,
+                LineLengthFixer::INLINE_SHORT_LINES => false,
+            ],
+        ]);
     $services->set(UnusedInheritedVariablePassedToClosureSniff::class);
-    $services->set(UnusedParameterSniff::class);
     $services->set(UnusedVariableSniff::class);
 };

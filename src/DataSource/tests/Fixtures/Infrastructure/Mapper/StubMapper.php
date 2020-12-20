@@ -7,8 +7,6 @@ namespace spaceonfire\DataSource\Fixtures\Infrastructure\Mapper;
 use spaceonfire\DataSource\MapperInterface;
 
 /**
- * Class StubMapper
- * @package spaceonfire\DataSource\Fixtures\Infrastructure\Mapper
  * @codeCoverageIgnore
  */
 class StubMapper implements MapperInterface

@@ -4,22 +4,15 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Fixtures\Domain\User;
 
-use spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
-use spaceonfire\DataSource\EntityInterface;
-use spaceonfire\DataSource\JsonSerializableObjectTrait;
+use spaceonfire\DataSource\AbstractEntity;
 
 /**
- * Class User
- * @package spaceonfire\DataSource\Fixtures\Domain\User
  * @codeCoverageIgnore
- *
  * @property string|null $id
  * @property string|null $name
  */
-class User implements EntityInterface
+class User extends AbstractEntity
 {
-    use SmartArrayAccessObject, JsonSerializableObjectTrait;
-
     /**
      * @var string|null
      */
