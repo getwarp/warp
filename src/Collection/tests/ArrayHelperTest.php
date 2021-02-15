@@ -98,7 +98,7 @@ class ArrayHelperTest extends TestCase
 
     public function testGetValueNonexistingProperties1()
     {
-        $this->expectNotice();
+        $this->expectError();
         $object = new class {
         };
         ArrayHelper::getValue($object, 'nonExisting');

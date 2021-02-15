@@ -13,8 +13,7 @@ use spaceonfire\Criteria\FilterableInterface;
 use Traversable;
 
 /**
- * Interface CollectionInterface
- * @package spaceonfire\Collection
+ * CollectionInterface.
  *
  * @method string join(string|null $glue = null, $field = null) alias to implode()
  * @method int|float avg($field = null) alias to average()
