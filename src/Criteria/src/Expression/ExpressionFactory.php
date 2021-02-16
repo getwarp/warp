@@ -38,8 +38,7 @@ use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Method;
 
 /**
- * Class ExpressionBuilder
- * @package spaceonfire\Criteria\Expression
+ * Class ExpressionFactory.
  *
  * @method Not not(Expression $expr)
  * @method AndX andX(Expression[] $conjuncts)
