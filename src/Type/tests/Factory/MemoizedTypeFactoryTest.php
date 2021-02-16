@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type\Factory;
 
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use spaceonfire\Type\AbstractTestCase;
 use spaceonfire\Type\Type;
 
-class MemoizedTypeFactoryTest extends TestCase
+class MemoizedTypeFactoryTest extends AbstractTestCase
 {
     public function testSupports(): void
     {
