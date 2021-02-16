@@ -6,10 +6,9 @@ namespace spaceonfire\Type;
 
 use Iterator;
 use JsonSerializable;
-use PHPUnit\Framework\TestCase;
 use Traversable;
 
-class ConjunctionTypeTest extends TestCase
+class ConjunctionTypeTest extends AbstractTestCase
 {
     public function testCheck(): void
     {
