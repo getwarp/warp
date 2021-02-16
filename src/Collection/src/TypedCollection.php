@@ -28,8 +28,6 @@ use stdClass;
  * $dateTime = new TypedCollection($items, \DateTime::class);
  * $jsonSerializable = new TypedCollection($items, \JsonSerializable::class);
  * ```
- *
- * @package spaceonfire\Collection
  */
 final class TypedCollection extends AbstractCollectionDecorator
 {

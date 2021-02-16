@@ -15,8 +15,6 @@ use Traversable;
 /**
  * `Collection` class allows you to create in-place simple collection object.
  *
- * @package spaceonfire\Collection
- *
  * @method string join(string|null $glue = null, $field = null) alias to implode()
  * @method int|float avg($field = null) alias to average()
  */
@@ -30,7 +28,7 @@ final class Collection implements CollectionInterface
     protected $items = [];
 
     /**
-     * BaseCollection constructor.
+     * Collection constructor.
      * @param array|iterable|mixed $items
      */
     public function __construct($items = [])

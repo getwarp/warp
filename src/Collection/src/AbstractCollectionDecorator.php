@@ -8,8 +8,8 @@ use spaceonfire\Criteria\CriteriaInterface;
 use Traversable;
 
 /**
- * Class AbstractCollectionDecorator
- * @package spaceonfire\Collection
+ * Class AbstractCollectionDecorator.
+ *
  * @method string join(string|null $glue = null, $field = null) alias to implode()
  * @method int|float avg($field = null) alias to average()
  */

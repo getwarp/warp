@@ -22,37 +22,56 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
-## [2.1.0] - 2020-10-13
+## [2.1.1] - 2020-02-16
+
 ### Added
+
+- Support installation on PHP 8
+
+## [2.1.0] - 2020-10-13
+
+### Added
+
 - Update `spaceonfire/type` library up to `^1.2`. Replace deprecated static `TypeFactory` call in `TypedCollection`.
 
 ## [2.0.1] - 2020-09-26
+
 ### Fixed
+
 - Development config updates
 - Minor type issues fixes found by static analyser
 
 ## [2.0.0] - 2020-06-04
+
 ### Added
+
 - Make collection interface stricter
 - Added abstract decorator
 - Added `IndexedCollection` decorator
 - `TypedCollection` now acts as decorator
 
 ### Deprecated
+
 - `TypedCollection` now final. Extend it with a decorator.
 
 ### Removed
+
 - `BaseCollection` has been removed. Use decorators if you need to add new functionality to collections.
 
 ## [1.5.0] - 2020-06-01
+
 ### Added
+
 - Use `spaceonfire/type` for checking typed collection items type
 
 ### Fixed
+
 - Fix division by zero when calling average() on empty collection
 
 ## [1.4.0] - 2020-05-31
+
 ### Added
+
 - Update `CollectionInterface`:
     - update method signatures according to `BaseCollection`
     - update phpDoc comments
@@ -61,10 +80,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Implement FilterableInterface from `spaceonfire/criteria` by collection
 
 ### Fixed
+
 - Fixed `ArrayHelper::unflatten()` method.
 
 ## [1.3.0] - 2020-03-07
+
 ### Added
+
 - New methods added:
     - `CollectionInterface::unique()`
     - `CollectionInterface::implode()`
@@ -79,16 +101,22 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - `BaseCollection::join()` alias to `BaseCollection::implode()`
 
 ## [1.2.2] - 2020-03-07
+
 ### Fixed
+
 - Declare `CollectionInterface::merge` attributes
 - Fix example in README.md
 
 ## [1.2.1] - 2019-11-09
+
 ### Fixed
+
 - Fix `BaseCollection::filter` call with empty callback
 
 ## [1.2.0] - 2019-11-08
+
 ### Added
+
 - Huge update for `TypedCollection`:
     - check type on item add to collection
     - add `downgrade` method that returns simple `Collection` instance
@@ -96,14 +124,20 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - cover `BaseCollection` and `TypedCollection` with tests
 
 ## [1.1.1] - 2019-10-18
+
 ### Fixed
+
 - Fix checking class and interface existence in TypedCollection
 
 ## [1.1.0] - 2019-10-18
+
 ### Added
+
 - Add TypedCollection
 - Documentation generated
 
 ## [1.0.0] - 2019-10-03
+
 ### Added
+
 - Base collection implementation
