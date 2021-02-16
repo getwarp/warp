@@ -12,8 +12,6 @@ use Webmozart\Assert\Assert;
  * Provides a way to build criteria for JSON API request
  *
  * TODO: support parsing filter
- *
- * @package spaceonfire\Criteria
  */
 class JsonApiCriteriaBuilder
 {

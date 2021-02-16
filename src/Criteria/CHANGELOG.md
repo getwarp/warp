@@ -22,11 +22,21 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.1.1] - 2020-02-16
+
+### Added
+
+- Support installation on PHP 8
+
 ## [1.1.0] - 2020-09-27
+
 ### Deprecated
-- Namespace `spaceonfire\Criteria\Adapter` renamed to `spaceonfire\Criteria\Bridge`.
-  Class aliases provided for backwards compatibility, but will be removed in next major release.
+
+- Namespace `spaceonfire\Criteria\Adapter` renamed to `spaceonfire\Criteria\Bridge`. Class aliases provided for
+  backwards compatibility, but will be removed in next major release.
 
 ## [1.0.0] - 2020-05-27
+
 ### Added
+
 - First stable release

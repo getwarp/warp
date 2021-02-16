@@ -11,8 +11,8 @@ use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
 
 /**
- * Class AbstractExpressionAdapter
- * @package spaceonfire\Criteria\Expression
+ * Class AbstractExpressionDecorator.
+ *
  * @method Logic\AndX andNot(Expression $expr)
  * @method Logic\AndX andMethod(string $methodName, mixed[] $args, Expression $expr)
  * @method Logic\AndX andAtLeast(int $count, Expression $expr)

@@ -16,7 +16,6 @@ use Webmozart\Expression\Expression;
 
 /**
  * Converts Expressions from Doctrine collections to webmozart expressions
- * @package spaceonfire\Criteria\Bridge\DoctrineCollections
  */
 class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
 {
