@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use ArrayIterator;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
 use spaceonfire\Collection\Collection;
@@ -15,10 +14,8 @@ use spaceonfire\Container\Fixtures\AbstractClass\AbstractClass;
 use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
 use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
 
-class CompositeContainerTest extends TestCase
+class CompositeContainerTest extends AbstractTestCase
 {
-    use WithContainerMockTrait;
-
     public function testHas(): void
     {
         $composite = new CompositeContainer([

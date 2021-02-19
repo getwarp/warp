@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Definition;
 
-use PHPUnit\Framework\TestCase;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
 
-class DefinitionAggregateTest extends TestCase
+class DefinitionAggregateTest extends AbstractTestCase
 {
     public function testConstruct(): void
     {

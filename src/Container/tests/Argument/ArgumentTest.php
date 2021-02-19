@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Argument;
 
-use PHPUnit\Framework\TestCase;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\RawValueHolder;
 
-class ArgumentTest extends TestCase
+class ArgumentTest extends AbstractTestCase
 {
     public function testGetName(): void
     {

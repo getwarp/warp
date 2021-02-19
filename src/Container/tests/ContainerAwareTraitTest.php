@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container;
 
-use PHPUnit\Framework\TestCase;
 use spaceonfire\Container\Exception\ContainerException;
 
-class ContainerAwareTraitTest extends TestCase
+class ContainerAwareTraitTest extends AbstractTestCase
 {
     private function factory()
     {

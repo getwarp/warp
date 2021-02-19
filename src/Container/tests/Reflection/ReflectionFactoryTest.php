@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Reflection;
 
-use PHPUnit\Framework\TestCase;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\Argument\ArgumentResolver;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\NotFoundException;
 use spaceonfire\Container\Fixtures\A;
 use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\WithContainerMockTrait;
 
-class ReflectionFactoryTest extends TestCase
+class ReflectionFactoryTest extends AbstractTestCase
 {
-    use WithContainerMockTrait;
-
     /**
      * @var ReflectionFactory
      */
