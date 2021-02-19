@@ -34,12 +34,13 @@ jobs:
           COMPOSER_CACHE_KEY: 'composer-7.2'
         with:
           path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
           restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          /opt/spaceonfire/bin/select-composer.sh v2
+          composer install --prefer-dist --no-progress
 
       - name: Check coding standard
         run: vendor/bin/ecs check --no-progress-bar --no-interaction
@@ -58,12 +59,13 @@ jobs:
           COMPOSER_CACHE_KEY: 'composer-7.2'
         with:
           path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
           restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          /opt/spaceonfire/bin/select-composer.sh v2
+          composer install --prefer-dist --no-progress
 
       - name: PHPStan
         run: vendor/bin/phpstan analyse --no-progress --no-interaction
@@ -76,6 +78,7 @@ jobs:
           - '7.2'
           - '7.3'
           - '7.4'
+          - '8.0'
     container: spaceonfire/nginx-php-fpm:latest-${{ matrix.php-version }}
     steps:
       - name: Checkout
@@ -88,18 +91,19 @@ jobs:
           COMPOSER_CACHE_KEY: 'composer-${{ matrix.php-version }}'
         with:
           path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
           restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          /opt/spaceonfire/bin/select-composer.sh v2
+          composer install --prefer-dist --no-progress
 
       - name: PHPUnit
         run: |
           apk update
           docker-php-ext-enable xdebug
-          vendor/bin/phpunit --no-interaction
+          php -d xdebug.mode=coverage vendor/bin/phpunit --no-interaction
           cat build/coverage.txt
 
       - name: PHPUnit Artifacts

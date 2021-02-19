@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Definition;
 
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument as ArgumentProphecy;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\Argument\Argument;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\RawValueHolder;
 use stdClass;
 
-class DefinitionTest extends TestCase
+class DefinitionTest extends AbstractTestCase
 {
+
     public function testGetters(): void
     {
         $foo = new Definition('foo');

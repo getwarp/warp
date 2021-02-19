@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Argument;
 
-use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Fixtures\A;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
 use spaceonfire\Container\RawValueHolder;
-use spaceonfire\Container\WithContainerMockTrait;
 
-class ArgumentResolverTest extends TestCase
+class ArgumentResolverTest extends AbstractTestCase
 {
-    use WithContainerMockTrait;
-
     /**
      * @var ArgumentResolver
      */

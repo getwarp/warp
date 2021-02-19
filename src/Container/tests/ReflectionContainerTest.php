@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spaceonfire\Container;
 
 use BadMethodCallException;
-use PHPUnit\Framework\TestCase;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\Exception\NotFoundException;
 use spaceonfire\Container\Fixtures\A;
@@ -14,7 +13,7 @@ use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
 
-class ReflectionContainerTest extends TestCase
+class ReflectionContainerTest extends AbstractTestCase
 {
     public function testHas(): void
     {
@@ -44,10 +43,6 @@ class ReflectionContainerTest extends TestCase
 
         self::assertSame('bar', $container->invoke(MyClass::class . '::staticMethod'));
 
-        $oldReporting = error_reporting(E_ALL ^ E_DEPRECATED);
-        self::assertSame('foo', $container->invoke([MyClass::class, 'method']));
-        error_reporting($oldReporting);
-
         self::assertSame('foo', $container->invoke([new MyClass(), 'method']));
 
         $invokable = new class {
@@ -58,7 +53,10 @@ class ReflectionContainerTest extends TestCase
         };
         self::assertSame(42, $container->invoke($invokable));
 
-        self::assertSame(42, $container->invoke('intval', ['var' => '42', 'base' => 10]));
+        self::assertSame(42, $container->invoke('intval', [
+            (PHP_VERSION_ID >= 80000 ? 'value' : 'var') => '42',
+            'base' => 10,
+        ]));
     }
 
     public function testAdd(): void

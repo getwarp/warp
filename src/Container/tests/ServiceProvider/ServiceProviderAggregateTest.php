@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\ServiceProvider;
 
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use spaceonfire\Container\AbstractTestCase;
 use spaceonfire\Container\ContainerInterface;
 use spaceonfire\Container\Definition\Definition;
 use spaceonfire\Container\Exception\ContainerException;
 
-class ServiceProviderAggregateTest extends TestCase
+class ServiceProviderAggregateTest extends AbstractTestCase
 {
     private function createAggregate(?ContainerInterface $container = null): ServiceProviderAggregate
     {
