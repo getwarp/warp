@@ -7,12 +7,12 @@ namespace spaceonfire\LaminasHydratorBridge;
 use Laminas\Hydrator\AbstractHydrator;
 
 /**
- * Class StdClassHydrator
+ * Class StdClassHydrator.
  *
  * Attention: You should not extend this class because it will become final in the next major release
  * after the backward compatibility aliases are removed.
  *
- * @package spaceonfire\LaminasHydratorBridge
+ * @final
  */
 class StdClassHydrator extends AbstractHydrator
 {

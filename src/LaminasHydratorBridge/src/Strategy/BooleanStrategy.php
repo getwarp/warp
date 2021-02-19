@@ -8,12 +8,12 @@ use InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;
 
 /**
- * Class BooleanStrategy
+ * Class BooleanStrategy.
  *
  * Attention: You should not extend this class because it will become final in the next major release
  * after the backward compatibility aliases are removed.
  *
- * @package spaceonfire\LaminasHydratorBridge\Strategy
+ * @final
  */
 class BooleanStrategy implements StrategyInterface
 {
@@ -52,13 +52,7 @@ class BooleanStrategy implements StrategyInterface
     {
         $result = [];
 
-        $isIterable = is_iterable($inputValue);
-
-        if ($isIterable && count($inputValue) === 0) {
-            throw new InvalidArgumentException(sprintf('Argument %s cannot be empty iterable', $argument));
-        }
-
-        foreach ($isIterable ? $inputValue : [$inputValue] as $value) {
+        foreach (is_iterable($inputValue) ? $inputValue : [$inputValue] as $value) {
             if (!is_int($value) && !is_string($value)) {
                 throw new InvalidArgumentException(sprintf(
                     'Argument %s expected to be int, string or iterable or int or string. Got: %s',
@@ -68,6 +62,10 @@ class BooleanStrategy implements StrategyInterface
             }
 
             $result[] = $value;
+        }
+
+        if (count($result) === 0) {
+            throw new InvalidArgumentException(sprintf('Argument %s cannot be empty iterable', $argument));
         }
 
         return $result;
