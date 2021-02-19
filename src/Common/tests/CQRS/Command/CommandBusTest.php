@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace spaceonfire\Common\CQRS\Command;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommand;
 use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommandBus;
 use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommandHandler;
+use spaceonfire\Common\AbstractTestCase;
 
-class CommandBusTest extends TestCase
+class CommandBusTest extends AbstractTestCase
 {
     public function testDispatch(): void
     {

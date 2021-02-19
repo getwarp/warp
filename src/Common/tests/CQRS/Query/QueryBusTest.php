@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace spaceonfire\Common\CQRS\Query;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQuery;
 use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryBus;
 use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryHandler;
 use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryResponse;
+use spaceonfire\Common\AbstractTestCase;
 
-class QueryBusTest extends TestCase
+class QueryBusTest extends AbstractTestCase
 {
     public function testAsk(): void
     {
