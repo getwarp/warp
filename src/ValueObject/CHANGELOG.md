@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.7.1] - 2021-02-19
+
+### Added
+
+- Support installation on PHP 8.
+
 ## [1.7.0] - 2020-12-20
 
 ### Added
