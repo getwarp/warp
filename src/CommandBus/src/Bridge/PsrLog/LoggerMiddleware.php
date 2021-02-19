@@ -156,7 +156,9 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
         $this->logger->log(
             $this->getLogLevelForException($exception),
             $exception->getMessage(),
-            ['exception' => $exception]
+            [
+                'exception' => $exception,
+            ]
         );
     }
 
@@ -165,7 +167,7 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
         $logLevel = $this->exceptionLogLevelMap[get_class($exception)] ?? null;
 
         if ($logLevel === null) {
-            $parents = array_flip(array_merge(class_parents($exception), class_implements($exception)));
+            $parents = array_flip(array_merge(class_parents($exception) ?: [], class_implements($exception) ?: []));
             $intersection = array_intersect_key($this->exceptionLogLevelMap, $parents);
             $logLevel = array_values($intersection)[0] ?? null;
         }

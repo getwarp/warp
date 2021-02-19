@@ -8,6 +8,7 @@ use Closure;
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 use spaceonfire\CommandBus\Mapping\CommandToHandlerMapping;
+use Webmozart\Assert\Assert;
 use function array_pop;
 use function get_class;
 use function is_callable;
@@ -135,7 +136,9 @@ class CommandBus
      */
     public function __clone()
     {
-        $this->middlewareChain = Closure::bind($this->middlewareChain, $this);
+        $middlewareChain = Closure::bind($this->middlewareChain, $this);
+        Assert::isCallable($middlewareChain);
+        $this->middlewareChain = $middlewareChain;
         $this->isClone = true;
     }
 }
