@@ -26,7 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- First release
+- Support installation on PHP 8.
 
 ## [1.0.0] - 2020-10-05
 
