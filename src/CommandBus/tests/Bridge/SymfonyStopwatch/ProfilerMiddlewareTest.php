@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 use spaceonfire\CommandBus\_Fixtures\Bridge\SymfonyStopwatch\FixtureMayBeProfiledMessage;
+use spaceonfire\CommandBus\AbstractTestCase;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-class ProfilerMiddlewareTest extends TestCase
+class ProfilerMiddlewareTest extends AbstractTestCase
 {
     public function testExecute(): void
     {

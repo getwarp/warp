@@ -10,15 +10,15 @@ use DivisionByZeroError;
 use Exception;
 use InvalidArgumentException;
 use LogicException;
-use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 use Psr\Log\Test\TestLogger;
 use RuntimeException;
 use spaceonfire\CommandBus\_Fixtures\Bridge\PsrLog\FixtureMayBeLoggedMessage;
+use spaceonfire\CommandBus\AbstractTestCase;
 use Throwable;
 use TypeError;
 
-class LoggerMiddlewareTest extends TestCase
+class LoggerMiddlewareTest extends AbstractTestCase
 {
     public function testExecute(): void
     {
