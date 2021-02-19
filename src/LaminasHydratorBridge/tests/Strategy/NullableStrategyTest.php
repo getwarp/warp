@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace spaceonfire\LaminasHydratorBridge\Strategy;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use spaceonfire\LaminasHydratorBridge\AbstractTestCase;
 
-class NullableStrategyTest extends TestCase
+class NullableStrategyTest extends AbstractTestCase
 {
     /**
      * @return StrategyInterface

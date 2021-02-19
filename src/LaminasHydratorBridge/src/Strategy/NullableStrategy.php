@@ -12,7 +12,7 @@ use Laminas\Hydrator\Strategy\StrategyInterface;
  * Attention: You should not extend this class because it will become final in the next major release
  * after the backward compatibility aliases are removed.
  *
- * @package spaceonfire\LaminasHydratorBridge\Strategy
+ * @final
  */
 class NullableStrategy implements StrategyInterface
 {

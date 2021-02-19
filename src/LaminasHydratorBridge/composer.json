@@ -19,14 +19,15 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2|^8.0",
     "laminas/laminas-hydrator": "^2.4|^3.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^0.12",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^8.5|^9.5",
+    "phpspec/prophecy-phpunit": "^1.1|^2.0",
     "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^8.3",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
     "spaceonfire/type": "^1.1"
   },
   "suggest": {
@@ -43,7 +44,7 @@
     }
   },
   "scripts": {
-    "test": "phpunit",
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
     "codestyle": "ecs check --ansi",
     "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
