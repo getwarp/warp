@@ -17,24 +17,26 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2|^8.0",
     "laminas/laminas-hydrator": "^2.4|^3.0",
     "monolog/monolog": "^2.1",
     "spaceonfire/laminas-hydrator-bridge": "^1.0"
   },
   "require-dev": {
     "phpstan/phpstan": "^0.12",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^8.5|^9.5",
     "roave/security-advisories": "dev-master",
     "symfony/console": "^5.1",
     "symfony/mailer": "^5.1",
     "symfony/monolog-bridge": "^5.1",
-    "symplify/easy-coding-standard-prefixed": "^8.3"
+    "spaceonfire/container": "^2.4",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
   },
   "suggest": {
     "symfony/console": "",
     "symfony/mailer": "",
-    "symfony/monolog-bridge": ""
+    "symfony/monolog-bridge": "",
+    "spaceonfire/container": ""
   },
   "autoload": {
     "psr-4": {
@@ -47,7 +49,7 @@
     }
   },
   "scripts": {
-    "test": "phpunit",
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
     "codestyle": "ecs check --ansi",
     "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
