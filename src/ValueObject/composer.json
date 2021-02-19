@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2|^8.0",
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6.1",
     "jawira/case-converter": "^3.4.1",
@@ -28,10 +28,10 @@
     "laminas/laminas-hydrator": "^2.4|^3.0",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
-    "phpunit/phpunit": "^8.0",
+    "phpunit/phpunit": "^8.5|^9.5",
     "ramsey/uuid": "^3.9|^4.0",
     "slevomat/coding-standard": "^6.3.10",
-    "symplify/easy-coding-standard-prefixed": "^8.3"
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
   },
   "suggest": {
     "ramsey/uuid": "To use UuidValue",
@@ -48,7 +48,7 @@
     }
   },
   "scripts": {
-    "test": "phpunit",
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
     "codestyle": "ecs check --ansi",
     "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
