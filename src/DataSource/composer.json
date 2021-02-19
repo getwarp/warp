@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2|^8.0",
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6",
     "jawira/case-converter": "^3.4",
@@ -31,11 +31,11 @@
     "cycle/orm": "^1.2",
     "cycle/schema-builder": "^1.1",
     "nette/utils": "^3.0",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^8.5|^9.5",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-webmozart-assert": "^0.12",
     "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^8.3",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
     "spaceonfire/value-object": "^1.0",
     "ramsey/uuid": "^4.0",
     "spiral/pagination": "^2.2.2"
@@ -59,7 +59,7 @@
     }
   },
   "scripts": {
-    "test": "phpunit",
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
     "codestyle": "ecs check --ansi",
     "lint": "phpstan analyze --memory-limit=512M --ansi"
   },
