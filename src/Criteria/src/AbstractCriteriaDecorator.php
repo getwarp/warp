@@ -44,7 +44,15 @@ abstract class AbstractCriteriaDecorator implements CriteriaInterface
      */
     final protected function proxyCall(string $methodName, array $arguments = [])
     {
-        return call_user_func_array([$this->criteria, $methodName], $arguments);
+        $callable = [$this->criteria, $methodName];
+
+        if (!is_callable($callable)) {
+            throw new \BadMethodCallException(
+                sprintf('Call to an undefined method %s::%s()', get_class($this->criteria), $methodName)
+            );
+        }
+
+        return call_user_func_array($callable, $arguments);
     }
 
     /**

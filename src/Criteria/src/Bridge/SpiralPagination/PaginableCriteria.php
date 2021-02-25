@@ -10,12 +10,11 @@ use spaceonfire\Criteria\CriteriaInterface;
 use Spiral\Pagination\PaginableInterface;
 use Spiral\Pagination\Paginator;
 use Spiral\Pagination\PaginatorInterface;
-use Webmozart\Assert\Assert;
 
-class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableInterface
+class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableInterface, PaginatorInterface
 {
     /**
-     * @var PaginatorInterface|Paginator|null
+     * @var PaginatorInterface|Paginator
      */
     private $paginator;
 
@@ -28,43 +27,28 @@ class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableIn
     {
         parent::__construct($criteria ?? new Criteria());
 
-        if ($paginator !== null) {
+        if ($paginator === null) {
+            $this->resetPaginator();
+        } else {
             $this->paginator = $paginator;
             $paginator->paginate($this);
-        } else {
-            $this->resetPaginator();
         }
     }
 
     /**
-     * Getter for `paginator` property
-     * @return PaginatorInterface|Paginator
+     * Clone criteria.
      */
-    public function getPaginator(): PaginatorInterface
+    public function __clone()
     {
-        Assert::notNull($this->paginator);
-        return $this->paginator;
+        $this->paginator = clone $this->paginator;
     }
 
     /**
-     * @return PaginatorInterface|Paginator
+     * @inheritDoc
      */
-    private function makePaginator(): PaginatorInterface
+    public function getLimit(): int
     {
-        $paginator = $this->paginator ?? new Paginator();
-
-        Assert::isInstanceOf($paginator, Paginator::class);
-
-        $limit = $this->getLimit() ?? 25;
-        $tmpCount = $limit + $this->getOffset();
-        $page = (int)($this->getOffset() / $limit) + 1;
-
-        return $paginator->withCount(max($tmpCount, $paginator->count()))->withLimit($limit)->withPage($page);
-    }
-
-    private function resetPaginator(): void
-    {
-        $this->paginator = $this->makePaginator();
+        return parent::getLimit() ?? 25;
     }
 
     /**
@@ -88,12 +72,29 @@ class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableIn
     }
 
     /**
-     * Clone criteria
+     * @inheritDoc
      */
-    public function __clone()
+    public function paginate(PaginableInterface $target): PaginatorInterface
     {
-        if ($this->paginator !== null) {
-            $this->paginator = clone $this->paginator;
-        }
+        $this->paginator = $this->paginator->paginate($target);
+
+        return $this;
+    }
+
+    /**
+     * Getter for `paginator` property
+     * @return PaginatorInterface|Paginator
+     */
+    public function getPaginator(): PaginatorInterface
+    {
+        return $this->paginator;
+    }
+
+    private function resetPaginator(): void
+    {
+        $this->paginator = (new Paginator())
+            ->withLimit($this->getLimit())
+            ->withPage((int)($this->getOffset() / $this->getLimit()) + 1)
+            ->withCount($this->paginator instanceof \Countable ? $this->paginator->count() : 0);
     }
 }

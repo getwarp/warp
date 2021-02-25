@@ -9,6 +9,10 @@ class AbstractCriteriaDecoratorTest extends AbstractCriteriaTest
     private function factory(?CriteriaInterface $criteria = null): AbstractCriteriaDecorator
     {
         return new class($criteria ?? new Criteria()) extends AbstractCriteriaDecorator {
+            public function proxyCallUnknown(): void
+            {
+                $this->proxyCall('unknownMethodName');
+            }
         };
     }
 
@@ -25,5 +29,12 @@ class AbstractCriteriaDecoratorTest extends AbstractCriteriaTest
 
         self::assertEquals($innerCriteria, $outerCriteriaAdapter->getInnerCriteria());
         self::assertInstanceOf(AbstractCriteriaDecorator::class, $outerCriteriaAdapter->getInnerCriteria(false));
+    }
+
+    public function testProxyCallUnknownMethod(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $criteria = $this->factory();
+        $criteria->proxyCallUnknown();
     }
 }
