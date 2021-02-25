@@ -23,7 +23,7 @@
     "guzzlehttp/psr7": "^1.6",
     "jawira/case-converter": "^3.4",
     "spaceonfire/collection": "^2.0",
-    "spaceonfire/criteria": "^1.1",
+    "spaceonfire/criteria": "^1.2",
     "spaceonfire/laminas-hydrator-bridge": "^1.0",
     "webmozart/assert": "^1.6"
   },
@@ -65,7 +65,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.3-dev"
+      "dev-master": "1.4-dev"
     }
   },
   "config": {

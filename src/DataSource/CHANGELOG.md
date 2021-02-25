@@ -22,6 +22,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.4.0] - 2021-02-25
+
+### Added
+
+- Fix CycleQuery::count() after query gets paginated with matching()
+- Update processing PaginableCriteria in CycleQuery
+
 ## [1.3.1] - 2021-02-19
 
 ### Added

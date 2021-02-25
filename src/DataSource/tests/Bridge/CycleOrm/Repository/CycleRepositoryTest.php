@@ -62,6 +62,8 @@ class CycleRepositoryTest extends AbstractCycleOrmTest
     {
         $criteria = new Criteria();
         $criteria->orderBy(['title' => SORT_ASC]);
+        $criteria->offset(1);
+        $criteria->limit(1);
         self::assertEquals(3, self::$repository->count($criteria));
     }
 
