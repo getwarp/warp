@@ -103,7 +103,7 @@ class CycleQuery implements QueryInterface
         }
 
         if ($criteria instanceof PaginableCriteria) {
-            $criteria->getPaginator()->paginate($this);
+            $criteria->paginate($this);
         } else {
             if ($criteria->getOffset()) {
                 $this->offset($criteria->getOffset());
@@ -125,6 +125,9 @@ class CycleQuery implements QueryInterface
      */
     public function count(?string $column = null): int
     {
-        return $this->select->count($column);
+        $select = clone $this->select;
+        $select->limit(-1);
+        $select->offset(0);
+        return $select->count($column);
     }
 }
