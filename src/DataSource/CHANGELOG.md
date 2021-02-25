@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.4.1] - 2021-02-25
+
+### Fixed
+
+- Refactor CycleQuery.
+
 ## [1.4.0] - 2021-02-25
 
 ### Added
