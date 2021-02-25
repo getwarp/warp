@@ -12,12 +12,6 @@ parameters:
 	paths:
 		- src/
 	ignoreErrors:
-		-
-			message: '/^Parameter \#1 \$function of function call_user_func_array expects callable/'
-			paths:
-				- src/AbstractCriteriaDecorator.php
-				- src/Expression/ExpressionFactory.php
-				- src/Expression/AbstractExpressionDecorator.php
 		- '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
 		-
 			message: '/^If condition is always false\.$/'

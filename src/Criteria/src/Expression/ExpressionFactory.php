@@ -134,44 +134,59 @@ class ExpressionFactory
      */
     public function __call(string $name, array $arguments = [])
     {
-        $proxyMethods = array_flip([
-            'all',
-            'andX',
-            'atLeast',
-            'atMost',
-            'contains',
-            'count',
-            'endsWith',
-            'equals',
-            'exactly',
-            'false',
-            'greaterThan',
-            'greaterThanEqual',
-            'in',
-            'isEmpty',
-            'isInstanceOf',
-            'keyExists',
-            'keyNotExists',
-            'lessThan',
-            'lessThanEqual',
-            'matches',
-            'method',
-            'not',
-            'notEmpty',
-            'notEquals',
-            'notNull',
-            'notSame',
-            'null',
-            'orX',
-            'same',
-            'startsWith',
-            'true',
-        ]);
-
-        if (array_key_exists($name, $proxyMethods)) {
-            return call_user_func_array([Expr::class, $name], $arguments);
+        if (null !== $expr = $this->proxyCall($name, $arguments)) {
+            return $expr;
         }
 
         throw new BadMethodCallException('Call to an undefined method ' . static::class . '::' . $name . '()');
+    }
+
+    private function proxyCall(string $name, array $arguments = []): ?Expression
+    {
+        $proxyMethods = [
+            'all' => true,
+            'andX' => true,
+            'atLeast' => true,
+            'atMost' => true,
+            'contains' => true,
+            'count' => true,
+            'endsWith' => true,
+            'equals' => true,
+            'exactly' => true,
+            'false' => true,
+            'greaterThan' => true,
+            'greaterThanEqual' => true,
+            'in' => true,
+            'isEmpty' => true,
+            'isInstanceOf' => true,
+            'keyExists' => true,
+            'keyNotExists' => true,
+            'lessThan' => true,
+            'lessThanEqual' => true,
+            'matches' => true,
+            'method' => true,
+            'not' => true,
+            'notEmpty' => true,
+            'notEquals' => true,
+            'notNull' => true,
+            'notSame' => true,
+            'null' => true,
+            'orX' => true,
+            'same' => true,
+            'startsWith' => true,
+            'true' => true,
+        ];
+
+        if (!array_key_exists($name, $proxyMethods)) {
+            return null;
+        }
+
+        $factory = [Expr::class, $name];
+
+        if (!is_callable($factory)) {
+            return null;
+        }
+
+        return call_user_func_array($factory, $arguments) ?: null;
     }
 }

@@ -22,6 +22,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
+## [1.2.0] - 2020-02-25
+
+### Added
+
+- Fix some errors with PaginableCriteria.
+
 ## [1.1.1] - 2020-02-16
 
 ### Added

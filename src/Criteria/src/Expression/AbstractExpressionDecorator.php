@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spaceonfire\Criteria\Expression;
 
-use BadMethodCallException;
 use spaceonfire\Criteria\Criteria;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Webmozart\Expression\Expression;
@@ -189,24 +188,36 @@ class AbstractExpressionDecorator implements Expression
      */
     public function __call(string $name, array $arguments = [])
     {
+        if (null !== $expr = $this->magicLogicalExpression($name, $arguments)) {
+            return $expr;
+        }
+
+        throw new \BadMethodCallException(sprintf('Call to an undefined method %s::%s()', static::class, $name));
+    }
+
+    private function magicLogicalExpression(string $name, array $arguments): ?Expression
+    {
         $isAnd = strpos($name, 'and') === 0;
         $isOr = strpos($name, 'or') === 0;
 
         if (!$isAnd && !$isOr) {
-            throw new BadMethodCallException('Call to an undefined method ' . static::class . '::' . $name . '()');
+            return null;
         }
 
         $factoryMethod = lcfirst(substr($name, $isAnd ? 3 : 2));
 
-        try {
-            if (stripos($factoryMethod, 'and') !== 0 && stripos($factoryMethod, 'or') !== 0) {
-                $expr = call_user_func_array([Criteria::expr(), $factoryMethod], $arguments);
-                return $isAnd ? $this->andX($expr) : $this->orX($expr);
-            }
-        } catch (BadMethodCallException $e) {
-            // skip BadMethodCallException from ExpressionFactory
+        if (stripos($factoryMethod, 'and') === 0 || stripos($factoryMethod, 'or') === 0) {
+            return null;
         }
 
-        throw new BadMethodCallException('Call to an undefined method ' . static::class . '::' . $name . '()');
+        $factory = [Criteria::expr(), $factoryMethod];
+
+        if (!is_callable($factory)) {
+            return null;
+        }
+
+        $expr = call_user_func_array($factory, $arguments);
+
+        return $isAnd ? $this->andX($expr) : $this->orX($expr);
     }
 }
