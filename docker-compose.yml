@@ -2,14 +2,12 @@ version: '3'
 
 services:
   app:
-    image: spaceonfire/nginx-php-fpm:latest-7.2
+    build:
+      context: '.'
     environment:
-      - SOF_PRESET=default
-      - APPLICATION_ENV=test
-      - WEBROOT=/dev/null
-      - ENABLE_XDEBUG=1
-      - XDEBUG_IDEKEY=spaceonfire
-      - PAGER=more
-      - PUID=1000
+      WEBROOT: '/var/www/html/public'
+      PAGER: 'more'
+    env_file:
+      - '.env'
     volumes:
-      - ./:/var/www/html
+      - './:/var/www/html'

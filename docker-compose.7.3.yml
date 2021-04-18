@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  app:
+    build:
+      args:
+        PHP_VERSION: '7.3'
