@@ -1,0 +1,74 @@
+{
+  "name": "spaceonfire/data-source",
+  "type": "library",
+  "description": "Useful interfaces and abstracts to design your domain model",
+  "keywords": [
+    "spaceonfire",
+    "DataSource",
+    "DDD"
+  ],
+  "homepage": "https://github.com/spaceonfire/data-source",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8.0",
+    "ext-json": "*",
+    "guzzlehttp/psr7": "^1.6",
+    "jawira/case-converter": "^3.4",
+    "spaceonfire/collection": "^2.0",
+    "spaceonfire/criteria": "^1.2",
+    "spaceonfire/laminas-hydrator-bridge": "^1.0",
+    "webmozart/assert": "^1.6"
+  },
+  "require-dev": {
+    "cycle/orm": "^1.2",
+    "cycle/schema-builder": "^1.1",
+    "nette/utils": "^3.0",
+    "phpunit/phpunit": "^8.5|^9.5",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "roave/security-advisories": "dev-master",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
+    "spaceonfire/value-object": "^1.0",
+    "ramsey/uuid": "^4.0",
+    "spiral/pagination": "^2.2.2"
+  },
+  "suggest": {
+    "spaceonfire/value-object": "",
+    "ramsey/uuid": "",
+    "spiral/pagination": "Needed for QueryInterface",
+    "cycle/orm": "There are adapters available to use with Cycle ORM",
+    "cycle/schema-builder": "There are adapters available to use with Cycle ORM",
+    "nette/utils": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\DataSource\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\DataSource\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.4-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

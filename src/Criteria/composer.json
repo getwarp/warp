@@ -1,0 +1,60 @@
+{
+  "name": "spaceonfire/criteria",
+  "type": "library",
+  "description": "Criteria help you to declare rules to filter datasets",
+  "keywords": [
+    "spaceonfire",
+    "criteria"
+  ],
+  "homepage": "https://github.com/spaceonfire/criteria",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8.0",
+    "symfony/property-access": "^4.0|^5.0",
+    "webmozart/assert": "^1.3",
+    "webmozart/expression": "^1.0"
+  },
+  "require-dev": {
+    "doctrine/collections": "^1.6.4",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "phpunit/phpunit": "^8.5|^9.5",
+    "roave/security-advisories": "dev-master",
+    "spiral/pagination": "^2.2",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
+  },
+  "suggest": {
+    "spiral/pagination": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Criteria\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Criteria\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.2-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

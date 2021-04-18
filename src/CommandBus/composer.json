@@ -1,0 +1,61 @@
+{
+  "name": "spaceonfire/command-bus",
+  "type": "library",
+  "description": "",
+  "keywords": [
+    "spaceonfire",
+    "command-bus"
+  ],
+  "homepage": "https://github.com/spaceonfire/command-bus",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8.0",
+    "psr/container": "^1.0",
+    "webmozart/assert": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.5|^9.5",
+    "phpspec/prophecy-phpunit": "^1.1|^2.0",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "psr/log": "^1.1",
+    "roave/security-advisories": "dev-master",
+    "symfony/stopwatch": "^5.1",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
+  },
+  "suggest": {
+    "psr/log": "Required for LoggerMiddleware and ProfilerMiddleware",
+    "symfony/stopwatch": "Required for ProfilerMiddleware"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\CommandBus\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\CommandBus\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.2-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

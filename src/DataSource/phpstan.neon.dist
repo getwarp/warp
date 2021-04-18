@@ -1,0 +1,23 @@
+# Start command: composer install && composer dump-autoload --classmap-authoritative && vendor/bin/phpstan analyze
+
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
+	- %rootDir%/../phpstan-webmozart-assert/extension.neon
+parameters:
+	level: max
+	inferPrivatePropertyTypeFromConstructor: true
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	bootstrapFiles:
+		- tests/bootstrap.php
+	paths:
+		- src/
+	ignoreErrors:
+		- '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
+		- '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
+		- '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
+		-
+			message: '/^If condition is always false\.$/'
+			paths:
+				- src/Adapters/*
+				- src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php

@@ -1,0 +1,63 @@
+{
+  "name": "spaceonfire/value-object",
+  "type": "library",
+  "description": "",
+  "keywords": [
+    "spaceonfire",
+    "value-object"
+  ],
+  "homepage": "https://github.com/spaceonfire/value-object",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space/",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^8.0",
+    "ext-json": "*",
+    "guzzlehttp/psr7": "^1.6.1",
+    "jawira/case-converter": "^3.4.1",
+    "spaceonfire/laminas-hydrator-bridge": "^1.0",
+    "webmozart/assert": "^1.6"
+  },
+  "require-dev": {
+    "laminas/laminas-hydrator": "^2.4|^3.0",
+    "phpstan/phpstan": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "phpunit/phpunit": "^8.5|^9.5",
+    "ramsey/uuid": "^3.9|^4.0",
+    "slevomat/coding-standard": "^6.3.10",
+    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
+  },
+  "suggest": {
+    "ramsey/uuid": "To use UuidValue",
+    "laminas/laminas-hydrator": "There is hydrator strategy integration for this package"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\ValueObject\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\ValueObject\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
+    "codestyle": "ecs check --ansi",
+    "lint": "phpstan analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.7-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
