@@ -29,6 +29,47 @@ abstract class BaseValueObject implements JsonSerializable
     }
 
     /**
+     * Cast VO to string
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->value();
+    }
+
+    /**
+     * Returns inner value of VO
+     * @return mixed
+     */
+    public function value()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Checks that current VO is equals to given one.
+     * @param static $other
+     * @return bool
+     */
+    public function equals($other): bool
+    {
+        if (!is_a($this, get_class($other))) {
+            return false;
+        }
+
+        return $other->value() === $this->value();
+    }
+
+    /**
+     * @inheritDoc
+     * @return mixed|string
+     */
+    public function jsonSerialize()
+    {
+        return (string)$this;
+    }
+
+    /**
      * Cast input value to supported type by class
      * @param mixed $value input value
      * @return mixed casted value
@@ -58,50 +99,9 @@ abstract class BaseValueObject implements JsonSerializable
     protected function throwExceptionForInvalidValue(?string $value): void
     {
         throw new InvalidArgumentException(
-            $value === null
+            null === $value
                 ? sprintf('Unexpected value for "%s"', static::class)
                 : sprintf('Unexpected value "%s" for "%s"', $value, static::class)
         );
-    }
-
-    /**
-     * Returns inner value of VO
-     * @return mixed
-     */
-    public function value()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Checks that current VO is equals to given one.
-     * @param static $other
-     * @return bool
-     */
-    public function equals($other): bool
-    {
-        if (!is_a($this, get_class($other))) {
-            return false;
-        }
-
-        return $other->value() === $this->value();
-    }
-
-    /**
-     * Cast VO to string
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string)$this->value();
-    }
-
-    /**
-     * @inheritDoc
-     * @return mixed|string
-     */
-    public function jsonSerialize()
-    {
-        return (string)$this;
     }
 }

@@ -8,6 +8,15 @@ abstract class StringValue extends BaseValueObject
 {
     /**
      * @inheritDoc
+     * @return string
+     */
+    public function value(): string
+    {
+        return parent::value();
+    }
+
+    /**
+     * @inheritDoc
      */
     protected function validate($value): bool
     {
@@ -21,14 +30,5 @@ abstract class StringValue extends BaseValueObject
     protected function cast($value): string
     {
         return (string)$value;
-    }
-
-    /**
-     * @inheritDoc
-     * @return string
-     */
-    public function value(): string
-    {
-        return parent::value();
     }
 }

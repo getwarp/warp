@@ -19,6 +19,7 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
      * @var DefinitionFactoryInterface
      */
     private $definitionFactory;
+
     /**
      * @var array<string,string>
      */
@@ -39,16 +40,6 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
                 [$this, 'indexer']
             )
         );
-    }
-
-    /**
-     * @inheritDoc
-     * @codeCoverageIgnore
-     * @return self
-     */
-    protected function newStatic($items): CollectionInterface
-    {
-        return new self($items, $this->definitionFactory);
     }
 
     /**
@@ -153,5 +144,15 @@ final class DefinitionAggregate extends AbstractCollectionDecorator implements D
             ->map(static function (DefinitionInterface $definition) use ($container) {
                 return $definition->resolve($container);
             });
+    }
+
+    /**
+     * @inheritDoc
+     * @codeCoverageIgnore
+     * @return self
+     */
+    protected function newStatic($items): CollectionInterface
+    {
+        return new self($items, $this->definitionFactory);
     }
 }

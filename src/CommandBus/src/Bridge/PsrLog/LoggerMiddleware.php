@@ -20,14 +20,17 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
      * @var string
      */
     private $logLevel;
+
     /**
      * @var array<string,string>
      */
     private $exceptionLogLevelMap;
+
     /**
      * @var string
      */
     private $defaultExceptionLogLevel;
+
     /**
      * @var LoggerMiddlewareMessagePredicate
      */
@@ -54,6 +57,31 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
         $this->exceptionLogLevelMap = $exceptionLogLevelMap;
         uasort($this->exceptionLogLevelMap, [$this, 'compareLogLevel']);
         $this->defaultExceptionLogLevel = $defaultExceptionLogLevel;
+    }
+
+    /**
+     * @inheritDoc
+     * @return mixed|null
+     * @throws Throwable
+     */
+    public function execute(object $command, callable $next)
+    {
+        if (!($this->predicate)($command)) {
+            return $next($command);
+        }
+
+        $this->logBefore($command);
+
+        try {
+            $result = $next($command);
+
+            $this->logAfter($command);
+        } catch (Throwable $exception) {
+            $this->logError($command, $exception);
+            throw $exception;
+        }
+
+        return $result;
     }
 
     private function preparePredicate(?LoggerMiddlewareMessagePredicate $predicate): LoggerMiddlewareMessagePredicate
@@ -95,31 +123,6 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
         }
 
         return $aWeight < $bWeight ? 1 : -1;
-    }
-
-    /**
-     * @inheritDoc
-     * @return mixed|null
-     * @throws Throwable
-     */
-    public function execute(object $command, callable $next)
-    {
-        if (!($this->predicate)($command)) {
-            return $next($command);
-        }
-
-        $this->logBefore($command);
-
-        try {
-            $result = $next($command);
-
-            $this->logAfter($command);
-        } catch (Throwable $exception) {
-            $this->logError($command, $exception);
-            throw $exception;
-        }
-
-        return $result;
     }
 
     private function logBefore(object $command): void
@@ -166,7 +169,7 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
     {
         $logLevel = $this->exceptionLogLevelMap[get_class($exception)] ?? null;
 
-        if ($logLevel === null) {
+        if (null === $logLevel) {
             $parents = array_flip(array_merge(class_parents($exception) ?: [], class_implements($exception) ?: []));
             $intersection = array_intersect_key($this->exceptionLogLevelMap, $parents);
             $logLevel = array_values($intersection)[0] ?? null;

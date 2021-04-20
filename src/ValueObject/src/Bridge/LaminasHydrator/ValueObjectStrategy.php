@@ -51,7 +51,7 @@ class ValueObjectStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
-    public function hydrate($value, ?array $data)
+    public function hydrate($value, ?array $data = null)
     {
         $class = $this->valueObjectClass;
 

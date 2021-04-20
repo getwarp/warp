@@ -12,10 +12,19 @@ class UriValue extends BaseValueObject
 {
     /**
      * @inheritDoc
+     * @return UriInterface
+     */
+    public function value(): UriInterface
+    {
+        return parent::value();
+    }
+
+    /**
+     * @inheritDoc
      */
     protected function validate($value): bool
     {
-        return (is_string($value) && parse_url($value) !== false) || $value instanceof UriInterface;
+        return (is_string($value) && false !== parse_url($value)) || $value instanceof UriInterface;
     }
 
     /**
@@ -32,19 +41,10 @@ class UriValue extends BaseValueObject
      */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
-        if ($value !== null) {
+        if (null !== $value) {
             throw new InvalidArgumentException(sprintf('Expected a value to be a valid uri. Got "%s"', $value));
         }
 
         parent::throwExceptionForInvalidValue($value);
-    } // @codeCoverageIgnore
-
-    /**
-     * @inheritDoc
-     * @return UriInterface
-     */
-    public function value(): UriInterface
-    {
-        return parent::value();
     }
 }

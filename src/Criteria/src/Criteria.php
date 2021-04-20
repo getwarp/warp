@@ -14,22 +14,27 @@ class Criteria implements CriteriaInterface
      * @var Expression|null
      */
     protected $expression;
+
     /**
      * @var array<string,int>
      */
     protected $orderBy = [];
+
     /**
      * @var int|null
      */
     protected $offset;
+
     /**
      * @var int|null
      */
     protected $limit;
+
     /**
      * @var mixed[]
      */
     protected $include = [];
+
     /**
      * @var ExpressionFactory
      */
@@ -80,7 +85,7 @@ class Criteria implements CriteriaInterface
      */
     public function andWhere(Expression $expression): CriteriaInterface
     {
-        if ($this->expression === null) {
+        if (null === $this->expression) {
             return $this->where($expression);
         }
 
@@ -92,7 +97,7 @@ class Criteria implements CriteriaInterface
      */
     public function orWhere(Expression $expression): CriteriaInterface
     {
-        if ($this->expression === null) {
+        if (null === $this->expression) {
             return $this->where($expression);
         }
 
@@ -186,14 +191,14 @@ class Criteria implements CriteriaInterface
             $clone->include($criteria->getInclude());
         }
 
-        if ($criteria->getLimit() !== null) {
+        if (null !== $criteria->getLimit()) {
             $clone->limit($criteria->getLimit());
             $clone->offset($criteria->getOffset());
-        } elseif ($criteria->getOffset() > 0) {
+        } elseif (0 < $criteria->getOffset()) {
             $clone->offset($criteria->getOffset());
         }
 
-        if ($criteria->getWhere() !== null) {
+        if (null !== $criteria->getWhere()) {
             $clone->where($criteria->getWhere());
         }
 
@@ -205,7 +210,7 @@ class Criteria implements CriteriaInterface
      */
     public static function expr(): ExpressionFactory
     {
-        if (self::$expressionFactory === null) {
+        if (null === self::$expressionFactory) {
             self::$expressionFactory = new ExpressionFactory();
         }
 

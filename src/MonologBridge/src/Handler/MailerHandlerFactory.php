@@ -62,7 +62,7 @@ final class MailerHandlerFactory extends AbstractHandlerFactory
 
             foreach ($parametersHydrated->messageOptions as $optionName => $optionValue) {
                 Assert::methodExists($email, $optionName);
-                $email->$optionName($optionValue);
+                $email->{$optionName}($optionValue);
             }
 
             $priorityByLevelMap = [

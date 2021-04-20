@@ -54,7 +54,7 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
     {
         $type = strtolower($this->removeWhitespaces($type));
 
-        if (strpos($type, 'resource') === 0) {
+        if (0 === strpos($type, 'resource')) {
             $type = BuiltinType::RESOURCE;
         }
 
@@ -69,7 +69,7 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
 
     private function prepareStrictArgument(string $type): bool
     {
-        return $this->strictByDefault === false && !isset(BuiltinType::SCALAR_TYPES[$type])
+        return false === $this->strictByDefault && !isset(BuiltinType::SCALAR_TYPES[$type])
             ? true
             : $this->strictByDefault;
     }

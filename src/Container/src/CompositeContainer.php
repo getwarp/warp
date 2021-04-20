@@ -33,6 +33,7 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
      * @var array<int, PsrContainerInterface[]>
      */
     private $containers = [];
+
     /**
      * @var ContainerInterface|null
      */
@@ -60,37 +61,6 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
             }
         }
         return $this;
-    }
-
-
-    /**
-     * Getter for `primary` property
-     * @return ContainerInterface
-     */
-    private function getPrimary(): ContainerInterface
-    {
-        if ($this->primary === null) {
-            throw new ContainerException('No primary container provided with support of definitions');
-        }
-
-        return $this->primary;
-    }
-
-    /**
-     * Setter for `primary` property
-     * @param ContainerInterface $primary
-     */
-    private function setPrimary(ContainerInterface $primary): void
-    {
-        if (
-            $this->primary === null ||
-            (
-                !$this->primary instanceof ContainerWithServiceProvidersInterface &&
-                $primary instanceof ContainerWithServiceProvidersInterface
-            )
-        ) {
-            $this->primary = $primary;
-        }
     }
 
     /**
@@ -269,5 +239,35 @@ class CompositeContainer implements ContainerWithServiceProvidersInterface, Cont
         }
 
         return $result;
+    }
+
+    /**
+     * Getter for `primary` property
+     * @return ContainerInterface
+     */
+    private function getPrimary(): ContainerInterface
+    {
+        if (null === $this->primary) {
+            throw new ContainerException('No primary container provided with support of definitions');
+        }
+
+        return $this->primary;
+    }
+
+    /**
+     * Setter for `primary` property
+     * @param ContainerInterface $primary
+     */
+    private function setPrimary(ContainerInterface $primary): void
+    {
+        if (
+            null === $this->primary ||
+            (
+                !$this->primary instanceof ContainerWithServiceProvidersInterface &&
+                $primary instanceof ContainerWithServiceProvidersInterface
+            )
+        ) {
+            $this->primary = $primary;
+        }
     }
 }

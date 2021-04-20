@@ -18,14 +18,17 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
         $this->delimiter = $delimiter;
     }
 
-    private function split(string $string): array
+    /**
+     * @inheritDoc
+     */
+    final public function supports(string $type): bool
     {
-        return (explode($this->delimiter, $string, 2) ?: []) + ['', ''];
+        return null !== $this->parse($type);
     }
 
     final protected function parse(string $type): ?array
     {
-        if ($this->parent === null) {
+        if (null === $this->parent) {
             return null;
         }
 
@@ -33,18 +36,18 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
 
         [$left, $right] = $this->split($type);
 
-        if ($left === '' || $right === '') {
+        if ('' === $left || '' === $right) {
             return null;
         }
 
         while (!$this->parent->supports($left)) {
             [$appendLeft, $right] = $this->split($right);
 
-            if ($appendLeft !== '') {
+            if ('' !== $appendLeft) {
                 $left .= $this->delimiter . $appendLeft;
             }
 
-            if ($right === '') {
+            if ('' === $right) {
                 break;
             }
         }
@@ -56,11 +59,8 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
         return [$left, $right];
     }
 
-    /**
-     * @inheritDoc
-     */
-    final public function supports(string $type): bool
+    private function split(string $string): array
     {
-        return $this->parse($type) !== null;
+        return (explode($this->delimiter, $string, 2) ?: []) + ['', ''];
     }
 }

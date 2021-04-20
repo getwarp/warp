@@ -18,7 +18,7 @@ final class VoidTypeFactory implements TypeFactoryInterface
     public function supports(string $type): bool
     {
         $type = $this->removeWhitespaces($type);
-        return $type === VoidType::NAME;
+        return VoidType::NAME === $type;
     }
 
     /**

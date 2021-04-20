@@ -21,8 +21,8 @@ trait PivotAwareTrait
      */
     public function getPivotContext(): SplObjectStorage
     {
-        if ($this->pivotContext === null) {
-            throw new RuntimeException('Pivot context not defined'); // @codeCoverageIgnore
+        if (null === $this->pivotContext) {
+            throw new RuntimeException('Pivot context not defined');
         }
 
         return $this->pivotContext;

@@ -22,7 +22,7 @@ final class ConjunctionTypeFactory extends AbstractAggregatedTypeFactory
     {
         $parsed = $this->parse($type);
 
-        if ($parsed === null || $this->parent === null) {
+        if (null === $parsed || null === $this->parent) {
             throw new TypeNotSupportedException($type, ConjunctionType::class);
         }
 

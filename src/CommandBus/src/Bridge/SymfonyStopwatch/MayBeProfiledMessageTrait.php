@@ -10,6 +10,7 @@ trait MayBeProfiledMessageTrait
      * @var string|null
      */
     protected $profilingEventName;
+
     /**
      * @var string|null
      */

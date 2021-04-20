@@ -33,14 +33,6 @@ final class IndexedCollection extends AbstractCollectionDecorator
     /**
      * @inheritDoc
      */
-    protected function newStatic($items)
-    {
-        return new self($items, $this->indexer);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function offsetSet($offset, $value): void
     {
         parent::offsetSet(ArrayHelper::getValue($value, $this->indexer), $value);
@@ -69,5 +61,13 @@ final class IndexedCollection extends AbstractCollectionDecorator
     public function remap($from, $to): CollectionInterface
     {
         return $this->downgrade()->remap($from, $to);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function newStatic($items)
+    {
+        return new self($items, $this->indexer);
     }
 }

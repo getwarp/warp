@@ -30,7 +30,7 @@ class DoctrineCollectionsCriteriaConverter
         }
 
         $orderBy = array_map(static function (string $ordering): int {
-            return $ordering === DoctrineCriteria::ASC ? SORT_ASC : SORT_DESC;
+            return DoctrineCriteria::ASC === $ordering ? SORT_ASC : SORT_DESC;
         }, $doctrineCriteria->getOrderings());
 
         $criteria->orderBy($orderBy);

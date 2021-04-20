@@ -56,7 +56,7 @@ class StdClassHydrator extends AbstractHydrator
     {
         foreach ($data as $name => $value) {
             $property = $this->hydrateName($name, $data);
-            $object->$property = $this->hydrateValue($property, $value, $data);
+            $object->{$property} = $this->hydrateValue($property, $value, $data);
         }
 
         return $object;

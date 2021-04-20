@@ -32,13 +32,11 @@ abstract class AbstractCollectionDecorator implements CollectionInterface
     }
 
     /**
-     * Creates new instance of collection
-     * @param array|iterable|mixed $items
-     * @return static|self
+     * @inheritDoc
      */
-    protected function newStatic($items)
+    public function __toString(): string
     {
-        return new static($items);
+        return (string)$this->collection;
     }
 
     /**
@@ -417,10 +415,12 @@ abstract class AbstractCollectionDecorator implements CollectionInterface
     }
 
     /**
-     * @inheritDoc
+     * Creates new instance of collection
+     * @param array|iterable|mixed $items
+     * @return static|self
      */
-    public function __toString(): string
+    protected function newStatic($items)
     {
-        return (string)$this->collection;
+        return new static($items);
     }
 }

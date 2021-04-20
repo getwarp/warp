@@ -27,7 +27,7 @@ class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableIn
     {
         parent::__construct($criteria ?? new Criteria());
 
-        if ($paginator === null) {
+        if (null === $paginator) {
             $this->resetPaginator();
         } else {
             $this->paginator = $paginator;
@@ -57,6 +57,7 @@ class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableIn
     public function limit(?int $limit): CriteriaInterface
     {
         parent::limit($limit);
+
         $this->resetPaginator();
         return $this;
     }
@@ -67,6 +68,7 @@ class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableIn
     public function offset(?int $offset): CriteriaInterface
     {
         parent::offset($offset);
+
         $this->resetPaginator();
         return $this;
     }

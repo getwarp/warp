@@ -1,14 +1,69 @@
-# Start command: composer install && composer dump-autoload --classmap-authoritative && vendor/bin/phpstan analyze
-
 includes:
-	- phar://phpstan.phar/conf/bleedingEdge.neon
-#	- %rootDir%/../phpstan-strict-rules/rules.neon
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - %rootDir%/../phpstan-webmozart-assert/extension.neon
+    - phpstan-baseline.neon
 parameters:
-	level: max
-	inferPrivatePropertyTypeFromConstructor: true
-	bootstrapFiles:
-		- tests/bootstrap.php
-	paths:
-		- src/
-	ignoreErrors:
-		- /^Cannot instantiate interface /
+    level: max
+    inferPrivatePropertyTypeFromConstructor: true
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    paths:
+        - src/Collection/src/
+        - src/CommandBus/src/
+        - src/Common/src/
+        - src/Container/src/
+        - src/Criteria/src/
+        - src/DataSource/src/
+        - src/Type/src/
+        - src/ValueObject/src/
+        - src/LaminasHydratorBridge/src/
+        - src/MonologBridge/src/
+        - src/EasyCodingStandardBridge/bin/
+        - src/EasyCodingStandardBridge/resources/
+    excludes_analyse:
+        - src/EasyCodingStandardBridge/resources/stubs/bad-code/
+    ignoreErrors:
+        - '/^Unsafe usage of new static/'
+        - '/^Property spaceonfire\\CommandBus\\Mapping\\ClassName\\ReplacementClassNameMapping::\$replace \(array\<string\>\|string\) does not accept array\<string\>\|string\|null.$/'
+        - '/^Method spaceonfire\\CommandBus\\CommandBus::createCommandHandler\(\) should return callable\(\): mixed but returns array\(object, string\).$/'
+        - '/expects callable(.*) array(.*) given\.$/'
+        -
+            message: '/^If condition is always false\.$/'
+            paths:
+                - src/Container/src/ContainerChain.php
+                - src/Container/src/Argument/ArgumentValue.php
+        - '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
+        -
+            message: '/^If condition is always false\.$/'
+            path: src/Criteria/src/Adapter/*
+        - '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
+        - '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
+        - '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
+        -
+            message: '/^If condition is always false\.$/'
+            paths:
+                - src/DataSource/src/Adapters/*
+                - src/DataSource/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php
+        -
+            message: '/^Parameter #3 \$length of function substr expects int/'
+            path: src/Type/src/Factory/CollectionTypeFactory.php
+        - '/^Method (.*)::create\(\) should return (.*) but returns spaceonfire\\Type\\Type.$/'
+        -
+            message: '/^Cannot call method make\(\) on spaceonfire\\Type\\Factory\\TypeFactoryInterface\|null.$/'
+            path: src/Type/src/Factory/*.php
+        - '/^PHPDoc tag \@param for parameter (.*) with type (.*)\|string is not subtype of native type string.$/'
+        -
+            message: '/^Call to an undefined method object::value\(\).$/'
+            path: src/ValueObject/src/Bridge/LaminasHydrator/ValueObjectStrategy.php
+        -
+            message: '/^If condition is always false\.$/'
+            paths:
+                - src/ValueObject/src/Integrations/*
+                - src/ValueObject/src/Bridge/LaminasHydrator/BooleanStrategy.php
+                - src/ValueObject/src/Bridge/LaminasHydrator/NullableStrategy.php
+        -
+            message: '/^Empty array passed to foreach\.$/'
+            path: src/EasyCodingStandardBridge/resources/templates/ecs-baseline.php
+        -
+            message: '/^Call to an undefined static method Dotenv\\Repository\\RepositoryBuilder::create\(\)\.$/'
+            path: src/Common/src/Env/env.php

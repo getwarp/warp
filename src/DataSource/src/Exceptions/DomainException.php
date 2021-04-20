@@ -29,29 +29,8 @@ class DomainException extends \DomainException
     ) {
         $this->parameters = $this->prepareParameters($parameters);
         $message = $message ?? $this->getDefaultMessage($this->parameters);
+
         parent::__construct($message, $code, $previous);
-    }
-
-    private function prepareParameters(array $parameters): array
-    {
-        Assert::allRegex(array_keys($parameters), '/[A-Za-z0-9_\-]+/i');
-
-        $keys = array_map(static function ($key) {
-            return '{' . $key . '}';
-        }, array_keys($parameters));
-
-        return array_combine($keys, $parameters) ?: [];
-    }
-
-    /**
-     * Returns default exception message
-     * @param array $parameters
-     * @return string
-     * @noinspection PhpUnusedParameterInspection
-     */
-    protected function getDefaultMessage(array $parameters = []): string
-    {
-        return 'Domain Exception';
     }
 
     /**
@@ -77,5 +56,27 @@ class DomainException extends \DomainException
         }, $this->parameters);
 
         return str_replace(array_keys($this->parameters), $parameters, $message);
+    }
+
+    /**
+     * Returns default exception message
+     * @param array $parameters
+     * @return string
+     * @noinspection PhpUnusedParameterInspection
+     */
+    protected function getDefaultMessage(array $parameters = []): string
+    {
+        return 'Domain Exception';
+    }
+
+    private function prepareParameters(array $parameters): array
+    {
+        Assert::allRegex(array_keys($parameters), '/[A-Za-z0-9_\-]+/i');
+
+        $keys = array_map(static function ($key) {
+            return '{' . $key . '}';
+        }, array_keys($parameters));
+
+        return array_combine($keys, $parameters) ?: [];
     }
 }

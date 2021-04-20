@@ -13,6 +13,7 @@ final class CompositeMapping implements CommandToHandlerMapping
      * @var ClassNameMappingInterface
      */
     private $classNameMapping;
+
     /**
      * @var MethodNameMappingInterface
      */

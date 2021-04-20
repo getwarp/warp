@@ -16,14 +16,17 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
      * @var Stopwatch
      */
     private $stopwatch;
+
     /**
      * @var ProfilerMiddlewareMessagePredicate
      */
     private $predicate;
+
     /**
      * @var LoggerInterface|null
      */
     private $logger;
+
     /**
      * @var string
      */
@@ -48,20 +51,6 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
         $this->logLevel = $logLevel;
     }
 
-    private function preparePredicate(
-        ?ProfilerMiddlewareMessagePredicate $predicate
-    ): ProfilerMiddlewareMessagePredicate {
-        if ($predicate instanceof ProfilerMiddlewareMessagePredicate) {
-            return $predicate;
-        }
-
-        return new ClosureProfilerMiddlewareMessagePredicate(
-            static function (object $message): bool {
-                return true;
-            }
-        );
-    }
-
     /**
      * @inheritDoc
      */
@@ -80,6 +69,29 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setLogger(LoggerInterface $logger): self
+    {
+        $this->logger = $logger;
+        return $this;
+    }
+
+    private function preparePredicate(
+        ?ProfilerMiddlewareMessagePredicate $predicate
+    ): ProfilerMiddlewareMessagePredicate {
+        if ($predicate instanceof ProfilerMiddlewareMessagePredicate) {
+            return $predicate;
+        }
+
+        return new ClosureProfilerMiddlewareMessagePredicate(
+            static function (object $message): bool {
+                return true;
+            }
+        );
     }
 
     private function resolveCommandProfilingEventName(object $command): string
@@ -103,7 +115,7 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
 
         $eventCategory = $command instanceof MayBeProfiledMessage ? $command->getProfilingCategory() : null;
 
-        if ($eventCategory !== null) {
+        if (null !== $eventCategory) {
             $event = $this->stopwatch->start($eventName, $eventCategory);
         } else {
             $event = $this->stopwatch->start($eventName);
@@ -123,14 +135,5 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
         $this->log(sprintf('Profiling event %s finished (%s)', $eventName, (string)$profilingData), [
             'event' => $profilingData,
         ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setLogger(LoggerInterface $logger): self
-    {
-        $this->logger = $logger;
-        return $this;
     }
 }

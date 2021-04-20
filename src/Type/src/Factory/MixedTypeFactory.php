@@ -18,7 +18,7 @@ final class MixedTypeFactory implements TypeFactoryInterface
     public function supports(string $type): bool
     {
         $type = $this->removeWhitespaces($type);
-        return $type === MixedType::NAME;
+        return MixedType::NAME === $type;
     }
 
     /**

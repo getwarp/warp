@@ -71,13 +71,13 @@ class CycleQueryExpressionVisitor extends AbstractExpressionVisitor
         if ($isNegated) {
             /** @var string|Expression|null $expressionClass */
             foreach ($supportedNegateExpressions as $expressionClass) {
-                if ($expressionClass !== null && $expression instanceof $expressionClass) {
+                if (null !== $expressionClass && $expression instanceof $expressionClass) {
                     $expression = $this->negateExpression($expression);
                     break;
                 }
             }
 
-            if ($expressionClass === null) {
+            if (null === $expressionClass) {
                 throw $this->makeNotSupportedExpression($expression);
             }
         }
@@ -87,14 +87,14 @@ class CycleQueryExpressionVisitor extends AbstractExpressionVisitor
             case $expression instanceof Constraint\Same:
                 return function (QueryBuilder $queryBuilder) use ($field, $expression) {
                     $val = $this->visitValue($field, $expression->getComparedValue());
-                    return $queryBuilder->where($field, $val === null ? 'is' : '=', new Parameter($val));
+                    return $queryBuilder->where($field, null === $val ? 'is' : '=', new Parameter($val));
                 };
 
             case $expression instanceof Constraint\NotEquals:
             case $expression instanceof Constraint\NotSame:
                 return function (QueryBuilder $queryBuilder) use ($field, $expression) {
                     $val = $this->visitValue($field, $expression->getComparedValue());
-                    return $queryBuilder->where($field, $val === null ? 'is not' : '<>', new Parameter($val));
+                    return $queryBuilder->where($field, null === $val ? 'is not' : '<>', new Parameter($val));
                 };
 
             case $expression instanceof Constraint\In:

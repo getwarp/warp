@@ -56,6 +56,7 @@ final class TypedCollection extends AbstractCollectionDecorator
         }
 
         $this->type = $type;
+
         parent::__construct($items);
 
         foreach ($this->getIterator() as $item) {
@@ -63,28 +64,11 @@ final class TypedCollection extends AbstractCollectionDecorator
         }
     }
 
-    /**
-     * Check that item are the same type as collection requires
-     * @param mixed $item
-     * @return void
-     */
-    protected function checkType($item): void
-    {
-        if (!$this->type->check($item)) {
-            throw new LogicException(static::class . ' accept only instances of ' . $this->type);
-        }
-    }
-
-    /** {@inheritDoc} */
-    protected function newStatic($items): CollectionInterface
-    {
-        return new self($items, $this->type);
-    }
-
     /** {@inheritDoc} */
     public function offsetSet($offset, $value): void
     {
         $this->checkType($value);
+
         parent::offsetSet($offset, $value);
     }
 
@@ -134,5 +118,23 @@ final class TypedCollection extends AbstractCollectionDecorator
         $this->checkType($item);
         $this->checkType($replacement);
         return $this->newStatic(parent::replace($item, $replacement, $strict)->all());
+    }
+
+    /**
+     * Check that item are the same type as collection requires
+     * @param mixed $item
+     * @return void
+     */
+    protected function checkType($item): void
+    {
+        if (!$this->type->check($item)) {
+            throw new LogicException(static::class . ' accept only instances of ' . $this->type);
+        }
+    }
+
+    /** {@inheritDoc} */
+    protected function newStatic($items): CollectionInterface
+    {
+        return new self($items, $this->type);
     }
 }

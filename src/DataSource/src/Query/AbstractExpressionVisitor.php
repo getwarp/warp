@@ -50,26 +50,17 @@ abstract class AbstractExpressionVisitor
 
         if (!$method) {
             foreach ($methodsMap as $class => $method) {
-                if ($class !== null && $expression instanceof $class) {
+                if (null !== $class && $expression instanceof $class) {
                     break;
                 }
             }
         }
 
         if ($method) {
-            return $this->$method($expression);
+            return $this->{$method}($expression);
         }
 
         throw $this->makeNotSupportedExpression($expression);
-    }
-
-    final protected function makeNotSupportedExpression(
-        Expression $expression,
-        ?string $message = null
-    ): InvalidArgumentException {
-        return new InvalidArgumentException(
-            sprintf($message ?? 'Not supported expression class: "%s"', get_class($expression))
-        );
     }
 
     /**
@@ -103,22 +94,16 @@ abstract class AbstractExpressionVisitor
      */
     public function visitSelector(SelectorNS\Selector $selector): callable
     {
-        if (!$selector instanceof Selector) {
-            $supportedSelectors = [
-                SelectorNS\Property::class => 'makeFromProperty',
-                SelectorNS\Key::class => 'makeFromKey',
-            ];
+        if ($selector instanceof SelectorNS\Property) {
+            $selector = Selector::makeFromProperty($selector);
+        }
 
-            foreach ($supportedSelectors as $selectorClass => $method) {
-                if ($selector instanceof $selectorClass) {
-                    $selector = Selector::$method($selector);
-                    break;
-                }
-            }
+        if ($selector instanceof SelectorNS\Key) {
+            $selector = Selector::makeFromKey($selector);
         }
 
         if (!$selector instanceof Selector) {
-            throw $this->makeNotSupportedExpression($selector); // @codeCoverageIgnore
+            throw $this->makeNotSupportedExpression($selector);
         }
 
         $expression = $selector->getExpression();
@@ -154,6 +139,15 @@ abstract class AbstractExpressionVisitor
     public function visitValue(string $field, $value)
     {
         return $this->mapper->convertValueToStorage($field, $value);
+    }
+
+    final protected function makeNotSupportedExpression(
+        Expression $expression,
+        ?string $message = null
+    ): InvalidArgumentException {
+        return new InvalidArgumentException(
+            sprintf($message ?? 'Not supported expression class: "%s"', get_class($expression))
+        );
     }
 
     final protected function negateExpression(Expression $expressionToNegate): Expression

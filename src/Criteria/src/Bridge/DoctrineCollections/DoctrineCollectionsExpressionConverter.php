@@ -34,11 +34,6 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
         $this->comparisonMethod = $comparisonMethod;
     }
 
-    private function getExpressionFactory(): ExpressionFactory
-    {
-        return Criteria::expr();
-    }
-
     /**
      * @inheritDoc
      * @return Expression
@@ -137,5 +132,10 @@ class DoctrineCollectionsExpressionConverter extends ExpressionVisitor
     public function walkValue(Value $value)
     {
         return $value->getValue();
+    }
+
+    private function getExpressionFactory(): ExpressionFactory
+    {
+        return Criteria::expr();
     }
 }

@@ -44,7 +44,7 @@ final class ReflectionInvoker implements ContainerAwareInterface
     public function __invoke(callable $callable, array $arguments = [])
     {
         try {
-            if (is_string($callable) && strpos($callable, '::') !== false) {
+            if (is_string($callable) && false !== strpos($callable, '::')) {
                 $callable = explode('::', $callable);
             }
 

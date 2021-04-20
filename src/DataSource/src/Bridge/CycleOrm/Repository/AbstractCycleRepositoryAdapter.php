@@ -23,14 +23,17 @@ abstract class AbstractCycleRepositoryAdapter implements RepositoryInterface
      * @var string
      */
     protected $role;
+
     /**
      * @var ORM\RepositoryInterface|ORM\Select\Repository
      */
     protected $repository;
+
     /**
      * @var ORM\ORMInterface
      */
     protected $orm;
+
     /**
      * @var ORM\Transaction
      */

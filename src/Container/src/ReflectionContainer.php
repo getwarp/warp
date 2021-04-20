@@ -21,10 +21,12 @@ final class ReflectionContainer implements ContainerInterface, ContainerAwareInt
      * @var ResolverInterface
      */
     private $argumentResolver;
+
     /**
      * @var ReflectionFactory
      */
     private $objectFactory;
+
     /**
      * @var ReflectionInvoker
      */

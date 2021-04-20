@@ -1,28 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/bootstrap.php"
-		 backupGlobals="false"
-		 backupStaticAttributes="false"
-		 colors="true"
-		 verbose="true"
-		 convertErrorsToExceptions="true"
-		 convertNoticesToExceptions="true"
-		 convertWarningsToExceptions="true"
-		 processIsolation="false"
-		 stopOnFailure="false">
-	<testsuites>
-		<testsuite name="spaceonfire Test Suite">
-			<directory>tests</directory>
-		</testsuite>
-	</testsuites>
-	<filter>
-		<whitelist>
-			<directory suffix=".php">src/</directory>
-		</whitelist>
-	</filter>
-	<logging>
-		<log type="junit" target="build/report.junit.xml"/>
-		<log type="coverage-html" target="build/coverage"/>
-		<log type="coverage-text" target="build/coverage.txt"/>
-		<log type="coverage-clover" target="build/logs/clover.xml"/>
-	</logging>
+<phpunit
+    bootstrap="phpunit-bootstrap.php"
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    colors="true"
+    verbose="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnFailure="false"
+>
+    <testsuites>
+        <testsuite name="collection">
+            <directory>src/Collection/tests</directory>
+        </testsuite>
+        <testsuite name="command-bus">
+            <directory>src/CommandBus/tests</directory>
+        </testsuite>
+        <testsuite name="common">
+            <directory>src/Common/tests</directory>
+        </testsuite>
+        <testsuite name="container">
+            <directory>src/Container/tests</directory>
+        </testsuite>
+        <testsuite name="criteria">
+            <directory>src/Criteria/tests</directory>
+        </testsuite>
+        <testsuite name="data-source">
+            <directory>src/DataSource/tests</directory>
+        </testsuite>
+        <testsuite name="laminas-hydrator-bridge">
+            <directory>src/LaminasHydratorBridge/tests</directory>
+        </testsuite>
+        <testsuite name="monolog-bridge">
+            <directory>src/MonologBridge/tests</directory>
+        </testsuite>
+        <testsuite name="type">
+            <directory>src/Type/tests</directory>
+        </testsuite>
+        <testsuite name="value-object">
+            <directory>src/ValueObject/tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/Collection/src/</directory>
+            <directory suffix=".php">src/CommandBus/src/</directory>
+            <directory suffix=".php">src/Common/src/</directory>
+            <directory suffix=".php">src/Container/src/</directory>
+            <directory suffix=".php">src/Criteria/src/</directory>
+            <directory suffix=".php">src/DataSource/src/</directory>
+            <directory suffix=".php">src/LaminasHydratorBridge/src/</directory>
+            <directory suffix=".php">src/MonologBridge/src/</directory>
+            <directory suffix=".php">src/Type/src/</directory>
+            <directory suffix=".php">src/ValueObject/src/</directory>
+            <exclude>
+                <file>src/Container/src/ContainerChain.php</file>
+                <file>src/Container/src/Argument/ArgumentValue.php</file>
+                <directory>src/Criteria/src/Adapter/</directory>
+                <directory>src/DataSource/src/Adapters/</directory>
+                <file>src/DataSource/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php</file>
+                <directory>src/ValueObject/src/Integrations/</directory>
+                <file>src/ValueObject/src/Bridge/LaminasHydrator/BooleanStrategy.php</file>
+                <file>src/ValueObject/src/Bridge/LaminasHydrator/NullableStrategy.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="junit" target="build/phpunit/report.junit.xml"/>
+        <log type="coverage-html" target="build/phpunit/coverage"/>
+        <log type="coverage-text" target="build/phpunit/coverage.txt"/>
+        <log type="coverage-clover" target="build/phpunit/clover.xml"/>
+    </logging>
 </phpunit>

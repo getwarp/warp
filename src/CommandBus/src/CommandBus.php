@@ -22,14 +22,17 @@ class CommandBus
      * @var CommandToHandlerMapping
      */
     private $mapping;
+
     /**
      * @var Closure
      */
     private $middlewareChain;
+
     /**
      * @var ContainerInterface|null
      */
     private $container;
+
     /**
      * @var bool
      */
@@ -62,6 +65,17 @@ class CommandBus
     }
 
     /**
+     * Clone command bus
+     */
+    public function __clone()
+    {
+        $middlewareChain = Closure::bind($this->middlewareChain, $this);
+        Assert::isCallable($middlewareChain);
+        $this->middlewareChain = $middlewareChain;
+        $this->isClone = true;
+    }
+
+    /**
      * Executes the given command and optionally returns a value
      * @param object $command
      * @return mixed
@@ -69,6 +83,24 @@ class CommandBus
     public function handle(object $command)
     {
         return ($this->middlewareChain)($command);
+    }
+
+    /**
+     * Creates handler object by given class name.
+     *
+     * It uses container if one passed to command bus or simply call handler class constructor.
+     * You can patch this procedure in your own implementation of command bus.
+     *
+     * @param string $handlerClassName
+     * @return object
+     */
+    protected function createHandlerObject(string $handlerClassName): object
+    {
+        if ($this->container && $this->container->has($handlerClassName)) {
+            return $this->container->get($handlerClassName);
+        }
+
+        return new $handlerClassName();
     }
 
     /**
@@ -111,34 +143,5 @@ class CommandBus
         }
 
         return [$handler, $methodName];
-    }
-
-    /**
-     * Creates handler object by given class name.
-     *
-     * It uses container if one passed to command bus or simply call handler class constructor.
-     * You can patch this procedure in your own implementation of command bus.
-     *
-     * @param string $handlerClassName
-     * @return object
-     */
-    protected function createHandlerObject(string $handlerClassName): object
-    {
-        if ($this->container && $this->container->has($handlerClassName)) {
-            return $this->container->get($handlerClassName);
-        }
-
-        return new $handlerClassName();
-    }
-
-    /**
-     * Clone command bus
-     */
-    public function __clone()
-    {
-        $middlewareChain = Closure::bind($this->middlewareChain, $this);
-        Assert::isCallable($middlewareChain);
-        $this->middlewareChain = $middlewareChain;
-        $this->isClone = true;
     }
 }

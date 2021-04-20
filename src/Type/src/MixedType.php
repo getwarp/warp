@@ -11,16 +11,16 @@ final class MixedType implements Type
     /**
      * @inheritDoc
      */
-    public function check($_): bool
+    public function __toString(): string
     {
-        return true;
+        return self::NAME;
     }
 
     /**
      * @inheritDoc
      */
-    public function __toString(): string
+    public function check($_): bool
     {
-        return self::NAME;
+        return true;
     }
 }

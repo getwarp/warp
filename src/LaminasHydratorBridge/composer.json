@@ -20,15 +20,11 @@
   ],
   "require": {
     "php": "^7.2|^8.0",
-    "laminas/laminas-hydrator": "^2.4|^3.0"
+    "laminas/laminas-hydrator": "^3.0|^4.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.12",
-    "phpunit/phpunit": "^8.5|^9.5",
-    "phpspec/prophecy-phpunit": "^1.1|^2.0",
-    "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
-    "spaceonfire/type": "^1.1"
+    "roave/security-advisories": "dev-latest",
+    "spaceonfire/type": "^2.5"
   },
   "suggest": {
     "spaceonfire/type": "Required to use ScalarStrategy"
@@ -43,14 +39,9 @@
       "spaceonfire\\LaminasHydratorBridge\\": "tests"
     }
   },
-  "scripts": {
-    "test": "@php -d xdebug.mode=coverage `which phpunit`",
-    "codestyle": "ecs check --ansi",
-    "lint": "phpstan analyze --memory-limit=512M --ansi"
-  },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0-dev"
+      "dev-master": "2.5-dev"
     }
   },
   "config": {

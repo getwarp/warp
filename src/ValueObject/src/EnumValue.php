@@ -18,32 +18,6 @@ abstract class EnumValue extends BaseValueObject
     protected static $cache = [];
 
     /**
-     * @inheritDoc
-     */
-    protected function validate($value): bool
-    {
-        return in_array($value, static::values(), true);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function throwExceptionForInvalidValue(?string $value): void
-    {
-        if ($value !== null) {
-            $valuesAsString = StringHelper::stringify(array_values(static::values()));
-            $suggestion = StringHelper::getSuggestion(static::values(), $value);
-
-            throw new InvalidArgumentException(
-                sprintf('The value is outside the allowable range of values: %s. Got: \'%s\'', $valuesAsString, $value)
-                . ($suggestion ? ', did you mean \'' . $suggestion . '\'?' : '')
-            );
-        }
-
-        parent::throwExceptionForInvalidValue($value);
-    } // @codeCoverageIgnore
-
-    /**
      * Support for magic methods
      * @param string $name
      * @param array $args
@@ -92,13 +66,37 @@ abstract class EnumValue extends BaseValueObject
                     self::$cache[$class][self::keysFormatter($constant->getName())] = $constant->getValue();
                 }
             }
-            // @codeCoverageIgnoreStart
         } catch (ReflectionException $e) {
             return [];
-            // @codeCoverageIgnoreEnd
         }
 
         return self::$cache[$class];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function validate($value): bool
+    {
+        return in_array($value, static::values(), true);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function throwExceptionForInvalidValue(?string $value): void
+    {
+        if (null !== $value) {
+            $valuesAsString = StringHelper::stringify(array_values(static::values()));
+            $suggestion = StringHelper::getSuggestion(static::values(), $value);
+
+            throw new InvalidArgumentException(
+                sprintf('The value is outside the allowable range of values: %s. Got: \'%s\'', $valuesAsString, $value)
+                . ($suggestion ? ', did you mean \'' . $suggestion . '\'?' : '')
+            );
+        }
+
+        parent::throwExceptionForInvalidValue($value);
     }
 
     private static function keysFormatter(string $key): string

@@ -25,6 +25,7 @@ class DateValueStrategy implements StrategyInterface
      * @var string|DateTimeValueInterface
      */
     private $dateClass;
+
     /**
      * @var string
      */
@@ -42,6 +43,26 @@ class DateValueStrategy implements StrategyInterface
         $this->format = $format;
     }
 
+    /**
+     * @inheritDoc
+     * @param DateTimeValueInterface $value
+     */
+    public function extract($value, ?object $object = null)
+    {
+        Assert::isInstanceOf($value, $this->dateClass);
+        return $value->format($this->format);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hydrate($value, ?array $data = null)
+    {
+        /** @var DateTimeImmutableValue|DateTimeValue $class */
+        $class = $this->dateClass;
+        return $class::createFromFormat($this->format, $value);
+    }
+
     private function validateDateClass(string $dateClass): void
     {
         $allowedClasses = [DateTimeImmutableValue::class, DateTimeValue::class];
@@ -56,25 +77,5 @@ class DateValueStrategy implements StrategyInterface
             ' or a sub-class of them. Got: ' . $dateClass;
 
         throw new InvalidArgumentException($message);
-    }
-
-    /**
-     * @inheritDoc
-     * @param DateTimeValueInterface $value
-     */
-    public function extract($value, ?object $object = null)
-    {
-        Assert::isInstanceOf($value, $this->dateClass);
-        return $value->format($this->format);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        /** @var DateTimeImmutableValue|DateTimeValue $class */
-        $class = $this->dateClass;
-        return $class::createFromFormat($this->format, $value);
     }
 }

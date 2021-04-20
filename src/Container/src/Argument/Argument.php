@@ -15,10 +15,12 @@ final class Argument
      * @var string
      */
     private $name;
+
     /**
      * @var string|null Argument class FQN or null for scalars or arrays
      */
     private $className;
+
     /**
      * @var RawValueHolder |null
      */

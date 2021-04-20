@@ -6,22 +6,73 @@ We accept contributions via Pull Requests on [Github](https://github.com/spaceon
 
 ## Pull Requests
 
-- **[PSR-12 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md)** -
-  Check the code style with `$ composer codestyle` and fix it with `$ composer codestyle -- --fix`.
-- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
-- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
-- **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
-- **Create feature branches** - Don't ask us to pull from your master branch.
+- **Fork** this repository.
 - **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
-- **Send coherent history** - Make sure each individual commit in your pull request is meaningful.
-  If you had to make multiple intermediate commits while developing,
-  please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages)
-  before submitting.
+- **Create feature branches** - Don't ask us to pull from your master branch.
+- Tests, code style and static analysis checks **must pass**.
+- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
-## Running Tests
+## Getting started
+
+Clone your fork repository:
 
 ```bash
-$ composer test
+git clone git@github.com:<your-github-username>/spaceonfire.git
+cd spaceonfire
 ```
 
-**Happy coding**!
+We recommend to use Docker for your dev environment.
+
+```bash
+cp .env.example .env
+docker-compose build
+docker-compose up -d
+```
+
+This will start docker container with minimal supported by our packages version of PHP (7.2). You can select different
+version of base image by running this commands:
+
+```bash
+# cp docker-compose.<php-version>.yml docker-compose.override.yml
+cp docker-compose.8.0.yml docker-compose.override.yml
+docker-compose build
+docker-compose up -d
+```
+
+You can also modify `docker-compose.override.yml` file like you want due it ignored by git.
+
+To enter docker container use this command:
+
+```bash
+docker-compose exec app su-exec nginx bash
+```
+
+Now you can install composer dependencies, run tests and static analysis, etc.
+
+## Scripts
+
+**Check code style**. We are using [PSR-12 Coding Standard][psr12].
+
+```bash
+composer codestyle
+```
+
+**Fix code style**
+
+```bash
+composer codestyle -- --fix
+```
+
+**Running static analysis**
+
+```bash
+composer lint
+```
+
+**Running tests**
+
+```bash
+composer test
+```
+
+[psr12]: https://www.php-fig.org/psr/psr-12/

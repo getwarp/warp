@@ -15,6 +15,7 @@ final class PartialSupportTypeFactory implements TypeFactoryInterface
      * @var TypeFactoryInterface
      */
     private $factory;
+
     /**
      * @var callable
      */

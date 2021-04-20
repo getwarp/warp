@@ -33,21 +33,24 @@ use Webmozart\Assert\Assert;
 abstract class AbstractCycleRepository implements RepositoryInterface
 {
     /**
+     * @var ORM\Transaction
+     */
+    protected $transaction;
+
+    /**
      * @var string[]
      */
     private static $roles = [];
+
     /**
      * @var ORM\RepositoryInterface|ORM\Select\Repository
      */
     private $repository;
+
     /**
      * @var ORM\ORMInterface
      */
     private $orm;
-    /**
-     * @var ORM\Transaction
-     */
-    protected $transaction;
 
     /**
      * @param ORM\RepositoryInterface $repository
@@ -77,34 +80,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      * Returns Cycle entity definition
      * @return Entity
      */
-    abstract protected static function defineInternal(): Entity;
-
-    /**
-     * Returns entity role for current repository
-     * @return string
-     */
-    private static function getRole(): string
-    {
-        if (!isset(self::$roles[static::class])) {
-            throw new RuntimeException('Role is not defined for ' . static::class); // @codeCoverageIgnore
-        }
-
-        return self::$roles[static::class];
-    }
-
-    /**
-     * Sets entity role of current repository
-     * @param string $role
-     */
-    private static function setRole(string $role): void
-    {
-        self::$roles[static::class] = $role;
-    }
-
-    /**
-     * Returns Cycle entity definition
-     * @return Entity
-     */
     final public static function define(): Entity
     {
         $e = static::defineInternal();
@@ -114,28 +89,20 @@ abstract class AbstractCycleRepository implements RepositoryInterface
         }
 
         if (!$e->getRole() && $class = $e->getClass()) {
-            $e->setRole($class); // @codeCoverageIgnore
+            $e->setRole($class);
         }
 
         if (null === $role = $e->getRole()) {
-            throw new RuntimeException('Entity must define role or class name'); // @codeCoverageIgnore
+            throw new RuntimeException('Entity must define role or class name');
         }
 
         static::setRole($role);
 
         if (!$e->getMapper()) {
-            $e->setMapper($e->getClass() === null ? StdClassCycleMapper::class : BasicCycleMapper::class);
+            $e->setMapper(null === $e->getClass() ? StdClassCycleMapper::class : BasicCycleMapper::class);
         }
 
         return $e;
-    }
-
-    /**
-     * Creates query
-     */
-    protected function query(): QueryInterface
-    {
-        return new CycleQuery($this->repository->select(), $this->getMapper());
     }
 
     /**
@@ -173,10 +140,8 @@ abstract class AbstractCycleRepository implements RepositoryInterface
 
         try {
             $this->transaction->run();
-            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw static::makeRemoveException($e);
-            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -187,7 +152,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $entity = $this->repository->findByPK($primary);
 
-        if ($entity === null) {
+        if (null === $entity) {
             throw static::makeNotFoundException($primary);
         }
 
@@ -203,7 +168,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
@@ -217,13 +182,13 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
         $entity = $query->fetchOne();
 
-        if ($entity === null) {
+        if (null === $entity) {
             return null;
         }
 
@@ -239,7 +204,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     {
         $query = $this->query();
 
-        if ($criteria !== null) {
+        if (null !== $criteria) {
             $query->matching($criteria);
         }
 
@@ -250,7 +215,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      * @param mixed $id
      * @return mixed|EntityInterface
      * @deprecated
-     * @codeCoverageIgnore
      */
     public function getById($id)
     {
@@ -261,7 +225,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      * @param mixed $criteria
      * @return CollectionInterface|EntityInterface[]|mixed[]
      * @deprecated
-     * @codeCoverageIgnore
      */
     public function getList($criteria)
     {
@@ -278,13 +241,25 @@ abstract class AbstractCycleRepository implements RepositoryInterface
         return $mapper;
     }
 
+    /**
+     * Returns Cycle entity definition
+     * @return Entity
+     */
+    abstract protected static function defineInternal(): Entity;
+
+    /**
+     * Creates query
+     */
+    protected function query(): QueryInterface
+    {
+        return new CycleQuery($this->repository->select(), $this->getMapper());
+    }
+
     protected static function assertEntity(object $entity): void
     {
-        // @codeCoverageIgnoreStart
-        $entityClasses = static::getEntityClass() === null
+        $entityClasses = null === static::getEntityClass()
             ? [stdClass::class]
             : [EntityInterface::class, static::getEntityClass()];
-        // @codeCoverageIgnoreEnd
 
         foreach ($entityClasses as $class) {
             Assert::isInstanceOf($entity, $class, 'Associated with repository class must implement %2$s. Got: %s');
@@ -294,7 +269,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     /**
      * @param mixed|null $primary
      * @return NotFoundException
-     * @codeCoverageIgnore
      */
     protected static function makeNotFoundException($primary = null): NotFoundException
     {
@@ -304,7 +278,6 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     /**
      * @param Throwable $e
      * @return RemoveException
-     * @codeCoverageIgnore
      */
     protected static function makeRemoveException(Throwable $e): RemoveException
     {
@@ -314,10 +287,31 @@ abstract class AbstractCycleRepository implements RepositoryInterface
     /**
      * @param Throwable $e
      * @return SaveException
-     * @codeCoverageIgnore
      */
     protected static function makeSaveException(Throwable $e): SaveException
     {
         return new SaveException(null, [], 0, $e);
+    }
+
+    /**
+     * Returns entity role for current repository
+     * @return string
+     */
+    private static function getRole(): string
+    {
+        if (!isset(self::$roles[static::class])) {
+            throw new RuntimeException('Role is not defined for ' . static::class);
+        }
+
+        return self::$roles[static::class];
+    }
+
+    /**
+     * Sets entity role of current repository
+     * @param string $role
+     */
+    private static function setRole(string $role): void
+    {
+        self::$roles[static::class] = $role;
     }
 }

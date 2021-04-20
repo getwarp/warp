@@ -15,26 +15,32 @@ final class Definition implements DefinitionInterface
      * @var string
      */
     private $abstract;
+
     /**
      * @var mixed
      */
     private $concrete;
+
     /**
      * @var bool
      */
     private $shared;
+
     /**
      * @var Argument[]
      */
     private $arguments = [];
+
     /**
      * @var array[]
      */
     private $methods = [];
+
     /**
      * @var array<string,string>
      */
     private $tags = [];
+
     /**
      * @var object|null
      */

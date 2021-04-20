@@ -45,7 +45,7 @@ class ArrayHelper
         Assert::string($prefix);
         $result = [];
         foreach ($array as $key => $item) {
-            $prefixedKey = ($prefix !== '' ? $prefix . $separator : '') . $key;
+            $prefixedKey = ('' !== $prefix ? $prefix . $separator : '') . $key;
 
             if (static::isArrayAssoc($item)) {
                 $childFlatten = self::flatten($item, $separator, $prefixedKey);
@@ -75,7 +75,7 @@ class ArrayHelper
             $keysChain = explode($separator, (string)$key);
             /** @var array $subArray */
             $subArray = &$result;
-            while (count($keysChain) > 1) {
+            while (1 < count($keysChain)) {
                 /** @var string $subKey */
                 $subKey = array_shift($keysChain);
                 if (!isset($subArray[$subKey])) {
@@ -102,7 +102,7 @@ class ArrayHelper
         /** @var array $ret */
         $ret = array_shift($arrays);
 
-        while (count($arrays) > 0) {
+        while (0 < count($arrays)) {
             foreach (array_shift($arrays) as $k => $v) {
                 if (is_int($k)) {
                     if (array_key_exists($k, $ret)) {
@@ -176,14 +176,14 @@ class ArrayHelper
      */
     public static function setValue(&$array, $path, $value)
     {
-        if ($path === null) {
+        if (null === $path) {
             $array = $value;
             return;
         }
 
         $keys = is_array($path) ? $path : explode('.', $path);
 
-        while (count($keys) > 1) {
+        while (1 < count($keys)) {
             $key = array_shift($keys);
             if (!isset($array[$key])) {
                 $array[$key] = [];
@@ -244,7 +244,7 @@ class ArrayHelper
         foreach ($array as $element) {
             $key = static::getValue($element, $from);
             $value = static::getValue($element, $to);
-            if ($group !== null) {
+            if (null !== $group) {
                 $result[static::getValue($element, $group)][$key] = $value;
             } else {
                 $result[$key] = $value;
@@ -330,7 +330,7 @@ class ArrayHelper
         if (is_object($array)) {
             // this is expected to fail if the property does not exist, or __get() is not implemented
             // it is not reliably possible to check whether a property is accessible beforehand
-            return $array->$key;
+            return $array->{$key};
         }
 
         return $default;
@@ -356,7 +356,7 @@ class ArrayHelper
     public static function multisort(array &$array, $key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
     {
         $keys = is_array($key) ? $key : [$key];
-        if (count($keys) === 0 || count($array) === 0) {
+        if (0 === count($keys) || 0 === count($array)) {
             return;
         }
         $n = count($keys);

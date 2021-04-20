@@ -8,23 +8,6 @@ abstract class IntValue extends BaseValueObject
 {
     /**
      * @inheritDoc
-     */
-    protected function validate($value): bool
-    {
-        return is_int($value) || (is_string($value) && preg_match('/^[+-]?\d+$/D', $value));
-    }
-
-    /**
-     * @inheritDoc
-     * @return int
-     */
-    protected function cast($value): int
-    {
-        return (int)$value;
-    }
-
-    /**
-     * @inheritDoc
      * @return int
      */
     public function value(): int
@@ -39,7 +22,7 @@ abstract class IntValue extends BaseValueObject
      * @deprecated replaced with equals() method on base value object class
      * @codeCoverageIgnore
      */
-    public function equalsTo(IntValue $other): bool
+    public function equalsTo(self $other): bool
     {
         return $this->equals($other);
     }
@@ -49,7 +32,7 @@ abstract class IntValue extends BaseValueObject
      * @param IntValue $other
      * @return bool
      */
-    public function isBiggerThan(IntValue $other): bool
+    public function isBiggerThan(self $other): bool
     {
         return $this->value() > $other->value();
     }
@@ -61,5 +44,22 @@ abstract class IntValue extends BaseValueObject
     public function jsonSerialize(): int
     {
         return $this->value();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function validate($value): bool
+    {
+        return is_int($value) || (is_string($value) && preg_match('/^[+-]?\d+$/D', $value));
+    }
+
+    /**
+     * @inheritDoc
+     * @return int
+     */
+    protected function cast($value): int
+    {
+        return (int)$value;
     }
 }

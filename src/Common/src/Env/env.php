@@ -46,7 +46,11 @@ function env(string $name, $default = null)
             return is_dir($path);
         });
 
-        $dotEnv = RepositoryBuilder::createWithDefaultAdapters()->immutable()->make();
+        $builder = method_exists(RepositoryBuilder::class, 'createWithDefaultAdapters')
+            ? RepositoryBuilder::createWithDefaultAdapters()
+            : RepositoryBuilder::create();
+
+        $dotEnv = $builder->immutable()->make();
         Dotenv::create($dotEnv, array_unique($envPath), $envFileName)->safeLoad();
     }
 

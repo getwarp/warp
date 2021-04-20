@@ -19,22 +19,27 @@ class JsonApiCriteriaBuilder
      * @var int|null
      */
     protected $page;
+
     /**
      * @var int|null
      */
     protected $pageSize;
+
     /**
      * @var int[]
      */
     protected $pageSizeRange = [10, 250];
+
     /**
      * @var array<string,int>|null
      */
     protected $orderings;
+
     /**
      * @var array|null
      */
     protected $allowedOrderByFields;
+
     /**
      * @var mixed[]
      */
@@ -97,7 +102,7 @@ class JsonApiCriteriaBuilder
 
         $orderings = [];
         foreach (array_filter(explode(',', $sort)) as $sortRule) {
-            if (strpos($sortRule, '-') === 0) {
+            if (0 === strpos($sortRule, '-')) {
                 $sortField = substr($sortRule, 1);
                 $sortDirection = SORT_DESC;
             } else {
@@ -149,7 +154,7 @@ class JsonApiCriteriaBuilder
         $criteria = new Criteria();
 
         if (is_array($this->orderings)) {
-            if ($this->allowedOrderByFields !== null) {
+            if (null !== $this->allowedOrderByFields) {
                 $this->orderings = array_intersect_key($this->orderings, array_flip($this->allowedOrderByFields));
             }
 

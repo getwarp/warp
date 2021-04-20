@@ -14,6 +14,7 @@ abstract class AbstractAggregatedType implements Type, IteratorAggregate
      * @var Type[]
      */
     protected $types;
+
     /**
      * @var string
      */
@@ -30,6 +31,19 @@ abstract class AbstractAggregatedType implements Type, IteratorAggregate
         $this->delimiter = $delimiter;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
+    {
+        return implode($this->delimiter, $this->types);
+    }
+
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->types);
+    }
+
     private function prepareTypes(iterable $types): array
     {
         $output = [];
@@ -44,18 +58,5 @@ abstract class AbstractAggregatedType implements Type, IteratorAggregate
         }
 
         return $output;
-    }
-
-    public function getIterator(): ArrayIterator
-    {
-        return new ArrayIterator($this->types);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString(): string
-    {
-        return implode($this->delimiter, $this->types);
     }
 }

@@ -11,14 +11,23 @@ use Webmozart\Assert\Assert;
 final class BuiltinType implements Type
 {
     public const INT = 'int';
+
     public const FLOAT = 'float';
+
     public const STRING = 'string';
+
     public const BOOL = 'bool';
+
     public const RESOURCE = 'resource';
+
     public const OBJECT = 'object';
+
     public const ARRAY = 'array';
+
     public const NULL = 'null';
+
     public const CALLABLE = 'callable';
+
     public const ITERABLE = 'iterable';
 
     public const ALL = [
@@ -45,6 +54,7 @@ final class BuiltinType implements Type
      * @var string
      */
     private $type;
+
     /**
      * @var bool
      */
@@ -59,13 +69,21 @@ final class BuiltinType implements Type
     {
         Assert::oneOf($type, self::ALL);
 
-        if ($strict === false && !isset(self::SCALAR_TYPES[$type])) {
+        if (false === $strict && !isset(self::SCALAR_TYPES[$type])) {
             $strict = true;
             trigger_error(sprintf('Type "%s" cannot be non-strict. $strict argument overridden.', $type));
         }
 
         $this->type = $type;
         $this->strict = $strict;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
+    {
+        return $this->type;
     }
 
     /**
@@ -166,14 +184,6 @@ final class BuiltinType implements Type
             default:
                 return $value;
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString(): string
-    {
-        return $this->type;
     }
 
     /**

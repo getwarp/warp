@@ -2,8 +2,10 @@
 
 ## Upgrade from 1.x to 2.0
 
--   `BaseCollection` has been removed. Extend `AbstractCollectionDecorator` if you need to add new functionality to collections.
--   `TypedCollection` now final. Use `TypedCollection` inside your `AbstractCollectionDecorator` if you need to add new functionality to collections. For example:
+-   `BaseCollection` has been removed. Extend `AbstractCollectionDecorator` if you need to add new functionality to
+    collections.
+-   `TypedCollection` now final. Use `TypedCollection` inside your `AbstractCollectionDecorator` if you need to add new
+    functionality to collections. For example:
 
 ```php
 use spaceonfire\Collection\AbstractCollectionDecorator;

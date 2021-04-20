@@ -3,8 +3,8 @@
   "type": "library",
   "description": "Collection of objects that provides ability of checking value types",
   "keywords": [
-    "spaceonfire",
-    "type"
+    "type",
+    "type-check"
   ],
   "homepage": "https://github.com/spaceonfire/type",
   "license": "MIT",
@@ -18,16 +18,11 @@
   ],
   "require": {
     "php": "^7.2|^8.0",
-    "webmozart/assert": "^1.3"
+    "webmozart/assert": "^1.6"
   },
   "require-dev": {
     "ext-json": "*",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-webmozart-assert": "^0.12",
-    "phpunit/phpunit": "^8.5|^9.5",
-    "phpspec/prophecy-phpunit": "^1.1|^2.0",
-    "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
@@ -39,14 +34,9 @@
       "spaceonfire\\Type\\": "tests"
     }
   },
-  "scripts": {
-    "test": "@php -d xdebug.mode=coverage `which phpunit`",
-    "codestyle": "ecs check --ansi",
-    "lint": "phpstan analyze --memory-limit=512M --ansi"
-  },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.3-dev"
+      "dev-master": "2.5-dev"
     }
   },
   "config": {

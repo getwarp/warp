@@ -26,6 +26,12 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate,
     ];
 
     /**
+     * Convert the collection to its string representation.
+     * @return string
+     */
+    public function __toString(): string;
+
+    /**
      * Get all items from the collection as array.
      * @return array
      */
@@ -315,12 +321,6 @@ interface CollectionInterface extends ArrayAccess, Countable, IteratorAggregate,
      * @return string
      */
     public function toJson(int $options = 0): string;
-
-    /**
-     * Convert the collection to its string representation.
-     * @return string
-     */
-    public function __toString(): string;
 
     /**
      * Retrieve an external iterator

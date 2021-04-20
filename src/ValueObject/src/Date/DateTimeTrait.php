@@ -32,6 +32,15 @@ trait DateTimeTrait
     }
 
     /**
+     * Returns string representation
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->format('Y-m-d H:i:s');
+    }
+
+    /**
      * DateTime object factory.
      * @param string|int|DateTimeInterface|null $time
      * @return static
@@ -44,7 +53,7 @@ trait DateTimeTrait
 
         if (is_numeric($time)) {
             $time = (int)$time;
-            if ($time <= DateTimeValueInterface::YEAR) {
+            if (DateTimeValueInterface::YEAR >= $time) {
                 $time += time();
             }
             return (new static('@' . $time))->setTimezone(new DateTimeZone(date_default_timezone_get()));
@@ -74,12 +83,12 @@ trait DateTimeTrait
     ) {
         $s = sprintf('%04d-%02d-%02d %02d:%02d:%02.5f', $year, $month, $day, $hour, $minute, $second);
         if (
-            $hour < 0 || $hour > 23 ||
-            $minute < 0 || $minute > 59 ||
-            $second < 0 || $second >= 60 ||
+            0 > $hour || 23 < $hour ||
+            0 > $minute || 59 < $minute ||
+            0 > $second || 60 <= $second ||
             !checkdate($month, $day, $year)
         ) {
-            throw new InvalidArgumentException("Invalid date '$s'");
+            throw new InvalidArgumentException("Invalid date '${s}'");
         }
         return new static($s);
     }
@@ -93,7 +102,7 @@ trait DateTimeTrait
      */
     public static function createFromFormat($format, $time, $timezone = null)
     {
-        if ($timezone === null) {
+        if (null === $timezone) {
             $timezone = new DateTimeZone(date_default_timezone_get());
         } elseif (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
@@ -112,14 +121,5 @@ trait DateTimeTrait
     public function jsonSerialize(): string
     {
         return $this->format('c');
-    }
-
-    /**
-     * Returns string representation
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->format('Y-m-d H:i:s');
     }
 }

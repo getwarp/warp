@@ -34,12 +34,12 @@ class EmailValue extends StringValue
      */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
-        if ($value !== null) {
+        if (null !== $value) {
             throw new InvalidArgumentException(
                 sprintf('Expected a value to be a valid e-mail address. Got "%s"', $value)
             );
         }
 
         parent::throwExceptionForInvalidValue($value);
-    } // @codeCoverageIgnore
+    }
 }

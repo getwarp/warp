@@ -13,16 +13,16 @@ final class VoidType implements Type
     /**
      * @inheritDoc
      */
-    public function check($_): bool
+    public function __toString(): string
     {
-        throw new RuntimeException('Void type cannot be checked');
+        return self::NAME;
     }
 
     /**
      * @inheritDoc
      */
-    public function __toString(): string
+    public function check($_): bool
     {
-        return self::NAME;
+        throw new RuntimeException('Void type cannot be checked');
     }
 }

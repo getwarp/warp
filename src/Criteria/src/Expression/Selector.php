@@ -62,20 +62,6 @@ class Selector extends AbstractSelector
         return $this->propertyPath;
     }
 
-    private function getPropertyAccessor(): PropertyAccessorInterface
-    {
-        static $propertyAccessor;
-
-        if ($propertyAccessor === null) {
-            $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
-                ->disableExceptionOnInvalidIndex()
-                ->disableExceptionOnInvalidPropertyPath()
-                ->getPropertyAccessor();
-        }
-
-        return $propertyAccessor;
-    }
-
     /**
      * @inheritDoc
      */
@@ -116,5 +102,19 @@ class Selector extends AbstractSelector
         }
 
         return $propertyPath . $exprString;
+    }
+
+    private function getPropertyAccessor(): PropertyAccessorInterface
+    {
+        static $propertyAccessor;
+
+        if (null === $propertyAccessor) {
+            $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
+                ->disableExceptionOnInvalidIndex()
+                ->disableExceptionOnInvalidPropertyPath()
+                ->getPropertyAccessor();
+        }
+
+        return $propertyAccessor;
     }
 }

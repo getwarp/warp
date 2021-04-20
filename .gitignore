@@ -40,20 +40,8 @@ nbproject
 !.env.example
 
 # Project folders and files to ignore
-build
 vendor
 .phpunit.result.cache
 phpunit.xml
 phpstan.neon
 docker-compose.override.yml
-node_modules
-/repos/container/
-/repos/data-source/
-/repos/value-object/
-/repos/collection/
-/repos/criteria/
-/repos/command-bus/
-/repos/type/
-/repos/common/
-/repos/laminas-hydrator-bridge/
-/repos/monolog-bridge/

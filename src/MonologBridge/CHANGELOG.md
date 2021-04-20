@@ -22,12 +22,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
-## [1.0.1] - 2020-02-19
+## [2.5.0] - 2021-04-XX
 
 ### Added
 
-- Support installation on PHP 8.
+-   First release from monorepo.
+
+## [1.0.1] - 2021-02-19
+
+### Added
+
+-   Support installation on PHP 8.
 
 ## [1.0.0] - 2020-12-30
 
-Initial release
+Initial release.

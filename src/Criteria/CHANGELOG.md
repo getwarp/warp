@@ -22,27 +22,33 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Nothing
 -->
 
-## [1.2.0] - 2020-02-25
+## [2.5.0] - 2021-04-XX
 
 ### Added
 
-- Fix some errors with PaginableCriteria.
+-   First release from monorepo.
 
-## [1.1.1] - 2020-02-16
+## [1.2.0] - 2021-02-25
 
 ### Added
 
-- Support installation on PHP 8
+-   Fix some errors with PaginableCriteria.
+
+## [1.1.1] - 2021-02-16
+
+### Added
+
+-   Support installation on PHP 8.
 
 ## [1.1.0] - 2020-09-27
 
 ### Deprecated
 
-- Namespace `spaceonfire\Criteria\Adapter` renamed to `spaceonfire\Criteria\Bridge`. Class aliases provided for
-  backwards compatibility, but will be removed in next major release.
+-   Namespace `spaceonfire\Criteria\Adapter` renamed to `spaceonfire\Criteria\Bridge`. Class aliases provided for
+    backwards compatibility, but will be removed in next major release.
 
 ## [1.0.0] - 2020-05-27
 
 ### Added
 
-- First stable release
+-   First stable release.

@@ -2,9 +2,7 @@
   "name": "spaceonfire/spaceonfire",
   "type": "project",
   "description": "",
-  "keywords": [
-    "spaceonfire"
-  ],
+  "keywords": [],
   "homepage": "https://github.com/spaceonfire/spaceonfire",
   "license": "MIT",
   "authors": [
@@ -15,126 +13,107 @@
       "role": "Maintainer"
     }
   ],
-  "repositories": [
-    {
-      "type": "path",
-      "url": "repos/collection"
-    },
-    {
-      "type": "path",
-      "url": "repos/command-bus"
-    },
-    {
-      "type": "path",
-      "url": "repos/common"
-    },
-    {
-      "type": "path",
-      "url": "repos/criteria"
-    },
-    {
-      "type": "path",
-      "url": "repos/container"
-    },
-    {
-      "type": "path",
-      "url": "repos/data-source"
-    },
-    {
-      "type": "path",
-      "url": "repos/laminas-hydrator-bridge"
-    },
-    {
-      "type": "path",
-      "url": "repos/monolog-bridge"
-    },
-    {
-      "type": "path",
-      "url": "repos/type"
-    },
-    {
-      "type": "path",
-      "url": "repos/value-object"
-    }
-  ],
   "require": {
     "php": "^7.2|^8.0",
-    "spaceonfire/collection": "*",
-    "spaceonfire/command-bus": "*",
-    "spaceonfire/common": "*",
-    "spaceonfire/container": "*",
-    "spaceonfire/criteria": "*",
-    "spaceonfire/data-source": "*",
-    "spaceonfire/laminas-hydrator-bridge": "*",
-    "spaceonfire/monolog-bridge": "*",
-    "spaceonfire/type": "*",
-    "spaceonfire/value-object": "*"
+    "ext-json": "*",
+    "guzzlehttp/psr7": "^1.6",
+    "jawira/case-converter": "^3.4",
+    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "monolog/monolog": "^2.1",
+    "psr/container": "^1.0",
+    "symfony/polyfill-php73": "^1.22",
+    "symfony/polyfill-php74": "^1.22",
+    "symfony/polyfill-php80": "^1.22",
+    "symfony/property-access": "^4.4|^5.0",
+    "webmozart/assert": "^1.6",
+    "webmozart/expression": "^1.0"
   },
   "require-dev": {
-    "cycle/orm": "^1.2",
-    "cycle/schema-builder": "^1.1",
-    "laminas/laminas-hydrator": "^3.1",
-    "monolog/monolog": "^2.1",
-    "nette/utils": "^3.1",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-strict-rules": "^0.12.5",
-    "phpstan/phpstan-webmozart-assert": "^0.12",
-    "phpunit/phpunit": "^9.5",
+    "ext-curl": "*",
+    "ext-simplexml": "*",
+    "cycle/orm": "^1.4",
+    "cycle/schema-builder": "^1.2",
+    "doctrine/collections": "^1.6.4",
+    "nette/utils": "^3.0",
+    "phpspec/prophecy": "^1.13",
     "phpspec/prophecy-phpunit": "^1.1|^2.0",
+    "phpstan/phpstan": "^0.12.84",
+    "phpstan/phpstan-webmozart-assert": "^0.12.12",
+    "phpunit/phpunit": "^8.5|^9.5",
     "psr/log": "^1.1",
-    "ramsey/uuid": "^4.1",
-    "roave/security-advisories": "dev-master",
-    "spiral/pagination": "^2.6",
+    "ramsey/uuid": "^3.9|^4.0",
+    "roave/security-advisories": "dev-latest",
+    "slevomat/coding-standard": "^6.4",
+    "spiral/core": "^2.7",
+    "spiral/pagination": "^2.7",
     "symfony/console": "^5.1",
     "symfony/mailer": "^5.1",
     "symfony/monolog-bridge": "^5.1",
     "symfony/stopwatch": "^5.1",
-    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
-    "vlucas/phpdotenv": "^5.2"
-  },
-  "autoload": {
-    "psr-4": {
-      "spaceonfire\\": "src",
-      "spaceonfire\\Collection\\": "repos/collection/src",
-      "spaceonfire\\CommandBus\\": "repos/command-bus/src",
-      "spaceonfire\\Common\\": "repos/common/src",
-      "spaceonfire\\Container\\": "repos/container/src",
-      "spaceonfire\\Criteria\\": "repos/criteria/src",
-      "spaceonfire\\DataSource\\": "repos/data-source/src",
-      "spaceonfire\\LaminasHydratorBridge\\": "repos/laminas-hydrator-bridge/src",
-      "spaceonfire\\MonologBridge\\": "repos/monolog-bridge/src",
-      "spaceonfire\\Type\\": "repos/type/src",
-      "spaceonfire\\ValueObject\\": "repos/value-object/src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "spaceonfire\\": "tests",
-      "spaceonfire\\Collection\\": "repos/collection/tests",
-      "spaceonfire\\CommandBus\\": "repos/command-bus/tests",
-      "spaceonfire\\Common\\": "repos/common/tests",
-      "spaceonfire\\Container\\": "repos/container/tests",
-      "spaceonfire\\Criteria\\": "repos/criteria/tests",
-      "spaceonfire\\LaminasHydratorBridge\\": "repos/laminas-hydrator-bridge/tests",
-      "spaceonfire\\MonologBridge\\": "repos/monolog-bridge/tests",
-      "spaceonfire\\DataSource\\": "repos/data-source/tests",
-      "spaceonfire\\Type\\": "repos/type/tests",
-      "spaceonfire\\ValueObject\\": "repos/value-object/tests"
-    }
+    "symfony/var-exporter": "^5.1",
+    "symplify/easy-coding-standard": "^8.3|^9.2",
+    "symplify/monorepo-builder": "^8.3|^9.2",
+    "vlucas/phpdotenv": "^4.1|^5.2"
   },
   "scripts": {
     "test": "@php -d xdebug.mode=coverage `which phpunit`",
-    "codestyle": "ecs check --ansi",
-    "lint": "phpstan analyze --memory-limit=512M --ansi"
+    "codestyle": "@php -d xdebug.mode=off `which ecs` check --ansi",
+    "lint": "@php -d xdebug.mode=off `which phpstan` analyze --memory-limit=512M --ansi"
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.x-dev"
+      "dev-master": "2.5-dev"
     }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
+    "preferred-install": "dist",
     "sort-packages": true
+  },
+  "autoload": {
+    "files": [
+      "src/Common/functions.php"
+    ],
+    "psr-4": {
+      "spaceonfire\\Collection\\": "src/Collection/src",
+      "spaceonfire\\CommandBus\\": "src/CommandBus/src",
+      "spaceonfire\\Common\\": "src/Common/src",
+      "spaceonfire\\Container\\": "src/Container/src",
+      "spaceonfire\\Criteria\\": "src/Criteria/src",
+      "spaceonfire\\DataSource\\": "src/DataSource/src",
+      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/src",
+      "spaceonfire\\MonologBridge\\": "src/MonologBridge/src",
+      "spaceonfire\\Type\\": "src/Type/src",
+      "spaceonfire\\ValueObject\\": "src/ValueObject/src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Collection\\": "src/Collection/tests",
+      "spaceonfire\\CommandBus\\": "src/CommandBus/tests",
+      "spaceonfire\\Common\\": "src/Common/tests",
+      "spaceonfire\\Container\\": "src/Container/tests",
+      "spaceonfire\\Criteria\\": "src/Criteria/tests",
+      "spaceonfire\\DataSource\\": "src/DataSource/tests",
+      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/tests",
+      "spaceonfire\\MonologBridge\\": "src/MonologBridge/tests",
+      "spaceonfire\\Type\\": "src/Type/tests",
+      "spaceonfire\\ValueObject\\": "src/ValueObject/tests"
+    }
+  },
+  "replace": {
+    "spaceonfire/collection": "self.version",
+    "spaceonfire/command-bus": "self.version",
+    "spaceonfire/common": "self.version",
+    "spaceonfire/container": "self.version",
+    "spaceonfire/criteria": "self.version",
+    "spaceonfire/data-source": "self.version",
+    "spaceonfire/easy-coding-standard-bridge": "self.version",
+    "spaceonfire/laminas-hydrator-bridge": "self.version",
+    "spaceonfire/monolog-bridge": "self.version",
+    "spaceonfire/spaceonfire": "self.version",
+    "spaceonfire/type": "self.version",
+    "spaceonfire/value-object": "self.version"
   }
 }

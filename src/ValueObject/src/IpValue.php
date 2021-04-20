@@ -34,10 +34,10 @@ class IpValue extends StringValue
      */
     protected function throwExceptionForInvalidValue(?string $value): void
     {
-        if ($value !== null) {
+        if (null !== $value) {
             throw new InvalidArgumentException(sprintf('Expected a value to be an IP. Got "%s"', $value));
         }
 
         parent::throwExceptionForInvalidValue($value);
-    } // @codeCoverageIgnore
+    }
 }

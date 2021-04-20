@@ -23,7 +23,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
      */
     public function __construct(?TypeFactoryInterface $iterableTypeFactory = null)
     {
-        if ($iterableTypeFactory === null) {
+        if (null === $iterableTypeFactory) {
             $iterableTypeFactory = new CompositeTypeFactory(...[
                 new InstanceOfTypeFactory(),
                 new PartialSupportTypeFactory(new BuiltinTypeFactory(), function (string $type): bool {
@@ -40,7 +40,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
      */
     public function supports(string $type): bool
     {
-        if ($this->parent === null) {
+        if (null === $this->parent) {
             return false;
         }
 
@@ -48,7 +48,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
 
         $typeParts = $this->parseType($type);
 
-        if ($typeParts === null) {
+        if (null === $typeParts) {
             return false;
         }
 
@@ -123,7 +123,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
                 return null;
             }
 
-            if ($value === null) {
+            if (null === $value) {
                 $value = $key;
                 $key = null;
             }

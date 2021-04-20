@@ -20,6 +20,7 @@ class NullableStrategy implements StrategyInterface
      * @var StrategyInterface
      */
     private $strategy;
+
     /**
      * @var callable
      */
@@ -43,7 +44,7 @@ class NullableStrategy implements StrategyInterface
      */
     public function defaultNullValuePredicate($value): bool
     {
-        return $value === null;
+        return null === $value;
     }
 
     /**
@@ -61,7 +62,7 @@ class NullableStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
-    public function hydrate($value, ?array $data)
+    public function hydrate($value, ?array $data = null)
     {
         if (($this->nullValuePredicate)($value)) {
             return null;

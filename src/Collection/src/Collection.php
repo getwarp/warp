@@ -37,39 +37,11 @@ final class Collection implements CollectionInterface
     }
 
     /**
-     * Results array of items.
-     * @param mixed $items
-     * @return array
+     * {@inheritDoc}
      */
-    protected function getItems($items): array
+    public function __toString(): string
     {
-        if (is_array($items)) {
-            return $items;
-        }
-
-        if ($items instanceof self) {
-            return $items->all();
-        }
-
-        if ($items instanceof Traversable) {
-            return iterator_to_array($items);
-        }
-
-        if ($items instanceof JsonSerializable) {
-            return $items->jsonSerialize();
-        }
-
-        return (array)$items;
-    }
-
-    /**
-     * Creates new instance of collection
-     * @param array $items
-     * @return static
-     */
-    protected function newStatic(array $items = []): CollectionInterface
-    {
-        return new static($items);
+        return $this->toJson();
     }
 
     /** {@inheritDoc} */
@@ -89,7 +61,7 @@ final class Collection implements CollectionInterface
     public function each(callable $callback): CollectionInterface
     {
         foreach ($this->items as $key => $item) {
-            if ($callback($item, $key) === false) {
+            if (false === $callback($item, $key)) {
                 break;
             }
         }
@@ -106,7 +78,7 @@ final class Collection implements CollectionInterface
     public function sum($field = null)
     {
         return $this->reduce(static function ($accum, $item) use ($field) {
-            $value = $field === null ? $item : ArrayHelper::getValue($item, $field, 0);
+            $value = null === $field ? $item : ArrayHelper::getValue($item, $field, 0);
 
             if (!is_numeric($value)) {
                 throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
@@ -132,7 +104,7 @@ final class Collection implements CollectionInterface
         $items = [];
 
         foreach ($this->items as $item) {
-            $value = $field === null ? $item : ArrayHelper::getValue($item, $field);
+            $value = null === $field ? $item : ArrayHelper::getValue($item, $field);
 
             if (!is_numeric($value)) {
                 throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
@@ -173,13 +145,13 @@ final class Collection implements CollectionInterface
     public function max($field = null)
     {
         return $this->reduce(static function ($accum, $item) use ($field) {
-            $value = $field === null ? $item : ArrayHelper::getValue($item, $field, 0);
+            $value = null === $field ? $item : ArrayHelper::getValue($item, $field, 0);
 
             if (!is_numeric($value)) {
                 throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
             }
 
-            if ($accum === null) {
+            if (null === $accum) {
                 return $value;
             }
 
@@ -196,13 +168,13 @@ final class Collection implements CollectionInterface
     public function min($field = null)
     {
         return $this->reduce(static function ($accum, $item) use ($field) {
-            $value = $field === null ? $item : ArrayHelper::getValue($item, $field, 0);
+            $value = null === $field ? $item : ArrayHelper::getValue($item, $field, 0);
 
             if (!is_numeric($value)) {
                 throw new BadMethodCallException('Non-numeric value used in ' . __METHOD__);
             }
 
-            if ($accum === null) {
+            if (null === $accum) {
                 return $value;
             }
 
@@ -213,7 +185,7 @@ final class Collection implements CollectionInterface
     /** {@inheritDoc} */
     public function isEmpty(): bool
     {
-        return $this->count() === 0;
+        return 0 === $this->count();
     }
 
     /**
@@ -234,7 +206,7 @@ final class Collection implements CollectionInterface
     public function sort(int $direction = SORT_ASC, int $sortFlag = SORT_REGULAR): CollectionInterface
     {
         $items = $this->all();
-        if ($direction === SORT_ASC) {
+        if (SORT_ASC === $direction) {
             asort($items, $sortFlag);
         } else {
             arsort($items, $sortFlag);
@@ -251,7 +223,7 @@ final class Collection implements CollectionInterface
     public function sortByKey(int $direction = SORT_ASC, int $sortFlag = SORT_REGULAR): CollectionInterface
     {
         $items = $this->all();
-        if ($direction === SORT_ASC) {
+        if (SORT_ASC === $direction) {
             ksort($items, $sortFlag);
         } else {
             krsort($items, $sortFlag);
@@ -442,7 +414,7 @@ final class Collection implements CollectionInterface
      */
     public function filter(?callable $callback = null): CollectionInterface
     {
-        if ($callback === null) {
+        if (null === $callback) {
             return $this->newStatic(array_filter($this->all()));
         }
 
@@ -453,7 +425,7 @@ final class Collection implements CollectionInterface
     public function find(callable $callback)
     {
         foreach ($this->all() as $key => $item) {
-            if ($callback($item, $key) === true) {
+            if (true === $callback($item, $key)) {
                 return $item;
             }
         }
@@ -531,7 +503,7 @@ final class Collection implements CollectionInterface
         $items = [];
 
         foreach ($this->items as $item) {
-            $value = $field === null ? $item : ArrayHelper::getValue($item, $field);
+            $value = null === $field ? $item : ArrayHelper::getValue($item, $field);
 
             if (is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
                 $items[] = $value;
@@ -541,7 +513,7 @@ final class Collection implements CollectionInterface
             throw new BadMethodCallException('Value that could not be converted to string used in ' . __METHOD__);
         }
 
-        return $glue === null ? implode($items) : implode($glue, $items);
+        return null === $glue ? implode($items) : implode($glue, $items);
     }
 
     /** {@inheritDoc} */
@@ -600,7 +572,7 @@ final class Collection implements CollectionInterface
      */
     public function offsetSet($offset, $value)
     {
-        if ($offset === null) {
+        if (null === $offset) {
             $this->items[] = $value;
         } else {
             $this->items[$offset] = $value;
@@ -623,7 +595,7 @@ final class Collection implements CollectionInterface
     {
         $json = json_encode($this->jsonSerialize(), $options);
 
-        if ($json === false) {
+        if (false === $json) {
             // @codeCoverageIgnoreStart
             throw new RuntimeException(
                 'Error while encoding collection to JSON: ' . json_last_error_msg(),
@@ -637,18 +609,46 @@ final class Collection implements CollectionInterface
 
     /**
      * {@inheritDoc}
-     */
-    public function __toString(): string
-    {
-        return $this->toJson();
-    }
-
-    /**
-     * {@inheritDoc}
      * @return array|mixed
      */
     public function jsonSerialize()
     {
         return $this->all();
+    }
+
+    /**
+     * Results array of items.
+     * @param mixed $items
+     * @return array
+     */
+    protected function getItems($items): array
+    {
+        if (is_array($items)) {
+            return $items;
+        }
+
+        if ($items instanceof self) {
+            return $items->all();
+        }
+
+        if ($items instanceof Traversable) {
+            return iterator_to_array($items);
+        }
+
+        if ($items instanceof JsonSerializable) {
+            return $items->jsonSerialize();
+        }
+
+        return (array)$items;
+    }
+
+    /**
+     * Creates new instance of collection
+     * @param array $items
+     * @return static
+     */
+    protected function newStatic(array $items = []): CollectionInterface
+    {
+        return new static($items);
     }
 }

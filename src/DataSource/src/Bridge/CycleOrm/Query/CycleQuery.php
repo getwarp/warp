@@ -91,7 +91,7 @@ class CycleQuery implements QueryInterface
     {
         $entity = $this->makeSelect()->fetchOne();
 
-        if ($entity === null) {
+        if (null === $entity) {
             return null;
         }
 
@@ -153,7 +153,7 @@ class CycleQuery implements QueryInterface
         foreach ($criteria->getOrderBy() as $key => $order) {
             $select->orderBy(
                 $this->mapper->convertNameToStorage($key),
-                $order === SORT_ASC ? SelectQuery::SORT_ASC : SelectQuery::SORT_DESC
+                SORT_ASC === $order ? SelectQuery::SORT_ASC : SelectQuery::SORT_DESC
             );
         }
 
@@ -164,7 +164,7 @@ class CycleQuery implements QueryInterface
                 $select->offset($criteria->getOffset());
             }
 
-            if ($criteria->getLimit() !== null) {
+            if (null !== $criteria->getLimit()) {
                 $select->limit($criteria->getLimit());
             }
         }

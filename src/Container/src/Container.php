@@ -27,18 +27,22 @@ final class Container implements ContainerWithServiceProvidersInterface, Contain
      * @var DefinitionAggregateInterface
      */
     private $definitions;
+
     /**
      * @var ServiceProviderAggregateInterface
      */
     private $providers;
+
     /**
      * @var ResolverInterface
      */
     private $argumentResolver;
+
     /**
      * @var ReflectionFactory
      */
     private $objectFactory;
+
     /**
      * @var ReflectionInvoker
      */

@@ -12,6 +12,7 @@ class ReplacementClassNameMapping implements ClassNameMappingInterface
      * @var string|string[]
      */
     private $search;
+
     /**
      * @var string|string[]
      */
@@ -24,7 +25,7 @@ class ReplacementClassNameMapping implements ClassNameMappingInterface
      */
     public function __construct($search, $replace = null)
     {
-        if ($replace === null && is_array($search)) {
+        if (null === $replace && is_array($search)) {
             $replace = array_values($search);
             $search = array_keys($search);
         }

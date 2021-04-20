@@ -3,7 +3,6 @@
   "type": "library",
   "description": "Small yet powerful implementation of PSR-11 compatible dependency injection container",
   "keywords": [
-    "spaceonfire",
     "container",
     "psr-11",
     "psr11",
@@ -28,14 +27,10 @@
   "require": {
     "php": "^7.2|^8.0",
     "psr/container": "^1.0",
-    "spaceonfire/collection": "^2.0"
+    "spaceonfire/collection": "^2.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5|^9.5",
-    "phpspec/prophecy-phpunit": "^1.1|^2.0",
-    "phpstan/phpstan": "^0.12",
-    "roave/security-advisories": "dev-master",
-    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1"
+    "roave/security-advisories": "dev-latest"
   },
   "provide": {
     "psr/container-implementation": "^1.0"
@@ -50,14 +45,9 @@
       "spaceonfire\\Container\\": "tests"
     }
   },
-  "scripts": {
-    "test": "@php -d xdebug.mode=coverage `which phpunit`",
-    "codestyle": "ecs check --ansi",
-    "lint": "phpstan analyze --memory-limit=512M --ansi"
-  },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.4-dev"
+      "dev-master": "2.5-dev"
     }
   },
   "config": {

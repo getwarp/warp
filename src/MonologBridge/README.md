@@ -1,12 +1,11 @@
-# Monolog Bridge
+# Monolog Bridge by spaceonfire
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Code Coverage][ico-coverage]][link-actions]
-[![Build Status][ico-build-status]][link-actions]
+[![Total Downloads][ico-downloads]][link-packagist]
+![Code Coverage][ico-coverage]
 
-Provides integration for Monolog with some [`spaceonfire`][link-packagist-vendor] libraries
+Provides integration for [Monolog][link-monolog] with some [`spaceonfire`][link-packagist-vendor] libraries.
 
 ## Install
 
@@ -18,33 +17,21 @@ $ composer require spaceonfire/monolog-bridge
 
 ## Usage
 
-```php
-$skeleton = new spaceonfire\MonologBridge\SkeletonClass();
-echo $skeleton->echoPhrase('I\'m on fire!');
-```
+**TODO:** add usage examples.
 
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Testing
-
-```bash
-$ composer test
-```
-
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
-
-## Security
-
-If you discover any security related issues, please email genteelknight@gmail.com instead of using the issue tracker.
+[Report issues][link-issues] and [send Pull Requests][link-pulls] in the [main spaceonfire repository][link-monorepo].
+Please see [CONTRIBUTING][link-contributing] and [CODE_OF_CONDUCT][link-code-of-conduct] for details.
 
 ## Credits
 
-- [Constantine Karnaukhov][link-author]
-- [All Contributors][link-contributors]
+-   [Constantine Karnaukhov][link-author]
+-   [All Contributors][link-contributors]
 
 ## License
 
@@ -53,11 +40,14 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-version]: https://img.shields.io/packagist/v/spaceonfire/monolog-bridge.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/monolog-bridge.svg?style=flat-square
-[ico-coverage]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2Fhustlahusky%2Fd62607c1a2e4707959b0142e0ea876cd%2Fraw%2spaceonfire-:package.json
-[ico-build-status]: https://github.com/spaceonfire/:package/workflows/Build%20Pipeline/badge.svg
+[ico-coverage]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2Fhustlahusky%2Fd62607c1a2e4707959b0142e0ea876cd%2Fraw%2Fmonolog-bridge.json
 [link-packagist]: https://packagist.org/packages/spaceonfire/monolog-bridge
 [link-packagist-vendor]: https://packagist.org/packages/spaceonfire
-[link-downloads]: https://packagist.org/packages/spaceonfire/monolog-bridge
+[link-monolog]: https://github.com/Seldaek/monolog
 [link-author]: https://github.com/hustlahusky
 [link-contributors]: ../../contributors
-[link-actions]: ../../actions
+[link-monorepo]: https://github.com/spaceonfire/spaceonfire
+[link-issues]: https://github.com/spaceonfire/spaceonfire/issues
+[link-pulls]: https://github.com/spaceonfire/spaceonfire/pulls
+[link-contributing]: https://github.com/spaceonfire/spaceonfire/blob/master/CONTRIBUTING.md
+[link-code-of-conduct]: https://github.com/spaceonfire/spaceonfire/blob/master/CODE_OF_CONDUCT.md

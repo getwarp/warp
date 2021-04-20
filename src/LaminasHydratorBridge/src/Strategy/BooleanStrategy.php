@@ -21,10 +21,12 @@ class BooleanStrategy implements StrategyInterface
      * @var array<int|string>
      */
     private $trueValue;
+
     /**
      * @var array<int|string>
      */
     private $falseValue;
+
     /**
      * @var bool
      */
@@ -41,6 +43,40 @@ class BooleanStrategy implements StrategyInterface
         $this->trueValue = $this->prepareInputValue($trueValue, '$trueValue');
         $this->falseValue = $this->prepareInputValue($falseValue, '$falseValue');
         $this->strict = $strict;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function extract($value, ?object $object = null)
+    {
+        if (!is_bool($value)) {
+            throw new InvalidArgumentException(sprintf(
+                'Unable to extract. Expected a boolean. Got: %s.',
+                is_object($value) ? get_class($value) : gettype($value)
+            ));
+        }
+
+        return true === $value ? $this->trueValue[0] : $this->falseValue[0];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function hydrate($value, ?array $data = null)
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        foreach ($this->trueValue as $trueValue) {
+            /** @noinspection TypeUnsafeComparisonInspection */
+            if (($this->strict ? $value === $trueValue : $value == $trueValue)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -64,44 +100,10 @@ class BooleanStrategy implements StrategyInterface
             $result[] = $value;
         }
 
-        if (count($result) === 0) {
+        if (0 === count($result)) {
             throw new InvalidArgumentException(sprintf('Argument %s cannot be empty iterable', $argument));
         }
 
         return $result;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function extract($value, ?object $object = null)
-    {
-        if (!is_bool($value)) {
-            throw new InvalidArgumentException(sprintf(
-                'Unable to extract. Expected a boolean. Got: %s.',
-                is_object($value) ? get_class($value) : gettype($value)
-            ));
-        }
-
-        return $value === true ? $this->trueValue[0] : $this->falseValue[0];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function hydrate($value, ?array $data)
-    {
-        if (is_bool($value)) {
-            return $value;
-        }
-
-        foreach ($this->trueValue as $trueValue) {
-            /** @noinspection TypeUnsafeComparisonInspection */
-            if (($this->strict ? $value === $trueValue : $value == $trueValue)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

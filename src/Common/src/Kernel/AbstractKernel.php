@@ -18,6 +18,7 @@ abstract class AbstractKernel
      * @var ContainerInterface
      */
     protected $container;
+
     /**
      * @var bool
      */

@@ -20,7 +20,7 @@ abstract class StringHelper
             $ret = '';
 
             foreach ($value as $k => $v) {
-                if ($ret !== '') {
+                if ('' !== $ret) {
                     $ret .= ', ';
                 }
                 if ($useKeys) {

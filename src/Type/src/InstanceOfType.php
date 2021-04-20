@@ -30,17 +30,17 @@ final class InstanceOfType implements Type
     /**
      * @inheritDoc
      */
-    public function check($value): bool
+    public function __toString(): string
     {
-        return $value instanceof $this->className;
+        return $this->className;
     }
 
     /**
      * @inheritDoc
      */
-    public function __toString(): string
+    public function check($value): bool
     {
-        return $this->className;
+        return $value instanceof $this->className;
     }
 
     /**

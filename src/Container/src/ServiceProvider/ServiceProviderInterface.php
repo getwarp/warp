@@ -24,7 +24,7 @@ interface ServiceProviderInterface extends ContainerAwareInterface
      * @param string $id
      * @return self
      */
-    public function setIdentifier(string $id): ServiceProviderInterface;
+    public function setIdentifier(string $id): self;
 
     /**
      * The id of the service provider uniquely identifies it, so that we can quickly determine if it has already been

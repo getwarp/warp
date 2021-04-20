@@ -60,7 +60,7 @@ class CollectionExtractorStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
-    public function hydrate($value, ?array $data)
+    public function hydrate($value, ?array $data = null)
     {
         return $value;
     }

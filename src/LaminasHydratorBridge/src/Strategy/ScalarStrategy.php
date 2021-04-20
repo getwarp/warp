@@ -14,6 +14,7 @@ final class ScalarStrategy implements StrategyInterface
      * @var BuiltinType
      */
     private $hydrateType;
+
     /**
      * @var BuiltinType
      */
@@ -34,7 +35,7 @@ final class ScalarStrategy implements StrategyInterface
             ));
         }
 
-        if ($extractType !== null && !isset(BuiltinType::SCALAR_TYPES[$extractType])) {
+        if (null !== $extractType && !isset(BuiltinType::SCALAR_TYPES[$extractType])) {
             throw new InvalidArgumentException(sprintf(
                 'Argument $extractType expected to be null or one of: %s. Got: "%s"',
                 implode(', ', array_keys(BuiltinType::SCALAR_TYPES)),
@@ -43,7 +44,7 @@ final class ScalarStrategy implements StrategyInterface
         }
 
         $this->hydrateType = new BuiltinType($hydrateType, false);
-        $this->extractType = $extractType === null
+        $this->extractType = null === $extractType
             ? $this->hydrateType
             : new BuiltinType($extractType, false);
     }
@@ -67,7 +68,7 @@ final class ScalarStrategy implements StrategyInterface
     /**
      * @inheritDoc
      */
-    public function hydrate($value, ?array $data)
+    public function hydrate($value, ?array $data = null)
     {
         if (!$this->hydrateType->check($value)) {
             throw new InvalidArgumentException(sprintf(

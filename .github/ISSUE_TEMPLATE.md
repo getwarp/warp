@@ -1,27 +1,16 @@
-<!-- Provide a general summary of the issue in the Title above -->
+<!-- Please provide general summary of the issue and package name in the Title above -->
+<!-- If you discover any security related issues, please email genteelknight@gmail.com instead of using the issue tracker. -->
 
-## Detailed description
+### What steps will reproduce the problem?
 
-Provide a detailed description of the change or addition you are proposing.
+### What is the expected result?
 
-Make it clear if the issue is a bug, an enhancement or just a question.
+### What do you get instead?
 
-## Context
+### Additional info
 
-Why is this change important to you? How would you use it?
-
-How can it benefit other users?
-
-## Possible implementation
-
-Not obligatory, but suggest an idea for implementing addition or change.
-
-## Your environment
-
-Include as many relevant details about the environment you experienced the bug in and how to reproduce it.
-
-- Version used (e.g. PHP 5.6, HHVM 3):
-- Operating system and version (e.g. Ubuntu 16.04, Windows 7):
-- Link to your project:
-- ...
-- ...
+| Q               | A   |
+| --------------- | --- |
+| Package Name    |     |
+| Package Version |     |
+| PHP version     |     |

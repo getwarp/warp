@@ -12,10 +12,12 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
      * @var TypeFactoryInterface
      */
     private $underlyingFactory;
+
     /**
      * @var array<string,bool>
      */
     private $cacheSupports = [];
+
     /**
      * @var array<string,Type>
      */

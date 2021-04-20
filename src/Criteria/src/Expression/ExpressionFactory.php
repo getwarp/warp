@@ -75,28 +75,6 @@ use Webmozart\Expression\Selector\Method;
 class ExpressionFactory
 {
     /**
-     * Check that the value of an array key matches an expression.
-     * @param string|int $key The array key.
-     * @param Expression $expr The evaluated expression.
-     * @return Selector The created expression.
-     */
-    public function key($key, Expression $expr): Selector
-    {
-        return Selector::makeFromKey(Expr::key($key, $expr));
-    }
-
-    /**
-     * Check that the value of a object property/array key/mixed matches an expression.
-     * @param string|PropertyPath $propertyName The name of the property.
-     * @param Expression $expr The evaluated expression.
-     * @return Selector The created expression.
-     */
-    public function property($propertyName, Expression $expr): Selector
-    {
-        return new Selector($propertyName, $expr);
-    }
-
-    /**
      * @param string $name
      * @param mixed[] $arguments
      * @return mixed
@@ -139,6 +117,28 @@ class ExpressionFactory
         }
 
         throw new BadMethodCallException('Call to an undefined method ' . static::class . '::' . $name . '()');
+    }
+
+    /**
+     * Check that the value of an array key matches an expression.
+     * @param string|int $key The array key.
+     * @param Expression $expr The evaluated expression.
+     * @return Selector The created expression.
+     */
+    public function key($key, Expression $expr): Selector
+    {
+        return Selector::makeFromKey(Expr::key($key, $expr));
+    }
+
+    /**
+     * Check that the value of a object property/array key/mixed matches an expression.
+     * @param string|PropertyPath $propertyName The name of the property.
+     * @param Expression $expr The evaluated expression.
+     * @return Selector The created expression.
+     */
+    public function property($propertyName, Expression $expr): Selector
+    {
+        return new Selector($propertyName, $expr);
     }
 
     private function proxyCall(string $name, array $arguments = []): ?Expression

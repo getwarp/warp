@@ -20,21 +20,21 @@ interface CriteriaInterface
      * @param Expression|null $expression
      * @return $this
      */
-    public function where(?Expression $expression): CriteriaInterface;
+    public function where(?Expression $expression): self;
 
     /**
      * Joins provided expression with current one using conjunction.
      * @param Expression $expression
      * @return $this
      */
-    public function andWhere(Expression $expression): CriteriaInterface;
+    public function andWhere(Expression $expression): self;
 
     /**
      * Joins provided expression with current one using disjunction.
      * @param Expression $expression
      * @return $this
      */
-    public function orWhere(Expression $expression): CriteriaInterface;
+    public function orWhere(Expression $expression): self;
 
     /**
      * Getter for `orderBy` property
@@ -47,7 +47,7 @@ interface CriteriaInterface
      * @param array<string,int> $orderBy
      * @return $this
      */
-    public function orderBy(array $orderBy): CriteriaInterface;
+    public function orderBy(array $orderBy): self;
 
     /**
      * Getter for `offset` property
@@ -60,7 +60,7 @@ interface CriteriaInterface
      * @param int|null $offset
      * @return $this
      */
-    public function offset(?int $offset): CriteriaInterface;
+    public function offset(?int $offset): self;
 
     /**
      * Getter for `limit` property
@@ -73,7 +73,7 @@ interface CriteriaInterface
      * @param int|null $limit
      * @return $this
      */
-    public function limit(?int $limit): CriteriaInterface;
+    public function limit(?int $limit): self;
 
     /**
      * Getter for `include` property
@@ -86,14 +86,14 @@ interface CriteriaInterface
      * @param mixed[] $include
      * @return $this
      */
-    public function include(array $include): CriteriaInterface;
+    public function include(array $include): self;
 
     /**
      * Merges parameters from current criteria and provided one
      * @param CriteriaInterface $criteria
      * @return CriteriaInterface
      */
-    public function merge(CriteriaInterface $criteria): CriteriaInterface;
+    public function merge(self $criteria): self;
 
     /**
      * Returns expression factory

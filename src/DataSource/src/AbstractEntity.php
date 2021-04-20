@@ -8,5 +8,6 @@ use spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
 
 abstract class AbstractEntity implements EntityInterface, \ArrayAccess, \JsonSerializable
 {
-    use SmartArrayAccessObject, JsonSerializableObjectTrait;
+    use SmartArrayAccessObject;
+    use JsonSerializableObjectTrait;
 }

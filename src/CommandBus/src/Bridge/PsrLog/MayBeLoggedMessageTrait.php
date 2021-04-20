@@ -10,10 +10,12 @@ trait MayBeLoggedMessageTrait
      * @var string|null
      */
     private $beforeMessage;
+
     /**
      * @var string|null
      */
     private $afterMessage;
+
     /**
      * @var string|null
      */

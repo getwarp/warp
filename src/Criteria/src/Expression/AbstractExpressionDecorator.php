@@ -92,6 +92,21 @@ class AbstractExpressionDecorator implements Expression
     }
 
     /**
+     * @param string $name
+     * @param array $arguments
+     * @return Expression
+     * @see ExpressionFactory
+     */
+    public function __call(string $name, array $arguments = [])
+    {
+        if (null !== $expr = $this->magicLogicalExpression($name, $arguments)) {
+            return $expr;
+        }
+
+        throw new \BadMethodCallException(sprintf('Call to an undefined method %s::%s()', static::class, $name));
+    }
+
+    /**
      * Getter for `expr` property
      * @param bool $recursive
      * @return Expression
@@ -180,25 +195,10 @@ class AbstractExpressionDecorator implements Expression
         return new Logic\OrX([$this, $expr]);
     }
 
-    /**
-     * @param string $name
-     * @param array $arguments
-     * @return Expression
-     * @see ExpressionFactory
-     */
-    public function __call(string $name, array $arguments = [])
-    {
-        if (null !== $expr = $this->magicLogicalExpression($name, $arguments)) {
-            return $expr;
-        }
-
-        throw new \BadMethodCallException(sprintf('Call to an undefined method %s::%s()', static::class, $name));
-    }
-
     private function magicLogicalExpression(string $name, array $arguments): ?Expression
     {
-        $isAnd = strpos($name, 'and') === 0;
-        $isOr = strpos($name, 'or') === 0;
+        $isAnd = 0 === strpos($name, 'and');
+        $isOr = 0 === strpos($name, 'or');
 
         if (!$isAnd && !$isOr) {
             return null;
@@ -206,7 +206,7 @@ class AbstractExpressionDecorator implements Expression
 
         $factoryMethod = lcfirst(substr($name, $isAnd ? 3 : 2));
 
-        if (stripos($factoryMethod, 'and') === 0 || stripos($factoryMethod, 'or') === 0) {
+        if (0 === stripos($factoryMethod, 'and') || 0 === stripos($factoryMethod, 'or')) {
             return null;
         }
 

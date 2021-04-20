@@ -20,6 +20,11 @@ final class CanNotInvokeHandler extends BadMethodCallException implements Except
      */
     private $command;
 
+    private function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
+
     public static function forCommand(object $command, string $reason): self
     {
         $type = get_class($command);
@@ -28,11 +33,6 @@ final class CanNotInvokeHandler extends BadMethodCallException implements Except
         $exception->command = $command;
 
         return $exception;
-    }
-
-    private function __construct(string $message = '', int $code = 0, ?Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
     }
 
     /**

@@ -46,6 +46,16 @@ trait ConsoleApplicationConfiguratorTrait
         }
     }
 
+    /**
+     * @noinspection AccessModifierPresentedInspection
+     */
+    abstract function getContainer(): ContainerInterface;
+
+    /**
+     * @noinspection AccessModifierPresentedInspection
+     */
+    abstract function enableDebugMode(bool $debug);
+
     protected function determineDebugModeFromConsoleInput(InputInterface $input): void
     {
         // Debug option defined and bool(true) value
@@ -60,14 +70,4 @@ trait ConsoleApplicationConfiguratorTrait
             return;
         }
     }
-
-    /**
-     * @noinspection AccessModifierPresentedInspection
-     */
-    abstract function getContainer(): ContainerInterface;
-
-    /**
-     * @noinspection AccessModifierPresentedInspection
-     */
-    abstract function enableDebugMode(bool $debug);
 }

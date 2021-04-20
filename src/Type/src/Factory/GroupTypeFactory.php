@@ -16,16 +16,15 @@ final class GroupTypeFactory implements TypeFactoryInterface
      */
     public function supports(string $type): bool
     {
-        if ($this->parent === null) {
+        if (null === $this->parent) {
             return false;
         }
 
         $type = $this->removeWhitespaces($type);
 
-        return
-            strlen($type) > 2 &&
-            $type[0] === '(' &&
-            strrev($type)[0] === ')' &&
+        return 2 < strlen($type) &&
+            '(' === $type[0] &&
+            ')' === strrev($type)[0] &&
             $this->parent->supports(substr($type, 1, -1));
     }
 
