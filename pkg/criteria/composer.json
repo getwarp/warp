@@ -1,0 +1,43 @@
+{
+  "name": "spaceonfire/criteria",
+  "description": "Criteria help you to declare rules to filter datasets",
+  "type": "library",
+  "keywords": [
+    "criteria",
+    "filter",
+    "match",
+    "pagination"
+  ],
+  "homepage": "https://github.com/spaceonfire/criteria",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "spaceonfire/common": "^3.0",
+    "webmozart/expression": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Criteria\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Criteria\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

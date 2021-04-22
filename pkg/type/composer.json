@@ -1,0 +1,43 @@
+{
+  "name": "spaceonfire/type",
+  "description": "Collection of objects that provides ability of checking value types",
+  "type": "library",
+  "keywords": [
+    "type",
+    "type-check"
+  ],
+  "homepage": "https://github.com/spaceonfire/type",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "spaceonfire/common": "^3.0"
+  },
+  "require-dev": {
+    "ext-json": "*",
+    "phpspec/prophecy": "^1.13",
+    "phpspec/prophecy-phpunit": "^2.0",
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Type\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Type\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

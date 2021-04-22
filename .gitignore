@@ -2,13 +2,14 @@
 *.diff
 *.err
 *.orig
-*.log*
+*.log
 *.rej
 *.swo
 *.swp
 *.zip
 *.vi
 *~
+*.bak
 *.lock
 !**/yarn.lock
 

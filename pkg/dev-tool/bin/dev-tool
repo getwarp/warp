@@ -1,0 +1,115 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+namespace spaceonfire\DevTool;
+
+use Composer\Autoload\ClassLoader;
+use spaceonfire\Container\RawValueHolder;
+use spaceonfire\DevTool\Console\ComposerHelper;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+$composerFinder = new ComposerFinder(getcwd());
+$composerJsonPath = $composerFinder->getComposerJson();
+$classLoader = require $composerFinder->getVendorAutoload();
+unset($composerFinder);
+
+$kernel = new DevToolKernel();
+
+$kernel->getContainer()->define(ClassLoader::class, new RawValueHolder($classLoader), true);
+
+$kernel->configureConsoleApplication(
+    $console = new Application(),
+    $input = new ArgvInput(),
+    $output = new ConsoleOutput()
+);
+
+$console->getHelperSet()->set(new ComposerHelper($composerJsonPath));
+
+$exitCode = $console->run($input, $output);
+
+exit(max(min($exitCode, 255), 0));
+
+final class ComposerFinder
+{
+    private string $directory;
+
+    private ?string $composerJson = null;
+
+    private ?string $vendorAutoload = null;
+
+    public function __construct(string $directory)
+    {
+        $this->directory = $directory;
+    }
+
+    public function getComposerJson(): string
+    {
+        if (null === $this->composerJson) {
+            $this->find();
+        }
+
+        return $this->composerJson;
+    }
+
+    public function getVendorAutoload(): string
+    {
+        if (null === $this->vendorAutoload) {
+            $this->find();
+        }
+
+        return $this->vendorAutoload;
+    }
+
+    private function find(): void
+    {
+        $directory = $this->directory;
+        $composerJsonPath = null;
+        $vendorAutoloadPath = null;
+
+        while (null === $composerJsonPath || null === $vendorAutoloadPath) {
+            [$composerJsonPath, $vendorAutoloadPath] = $this->findInDir($directory);
+
+            if (null !== $composerJsonPath) {
+                break;
+            }
+
+            $d = dirname($directory);
+
+            if ($d === $directory) {
+                throw new \RuntimeException('Cannot find composer.json');
+            }
+
+            $directory = $d;
+        }
+
+        $this->composerJson = $composerJsonPath;
+        $this->vendorAutoload = $vendorAutoloadPath;
+    }
+
+    /**
+     * @param string $directory
+     * @return array{string|null,string|null}
+     * @throws \JsonException
+     */
+    private function findInDir(string $directory): array
+    {
+        $composerJsonPath = $directory . '/composer.json';
+
+        if (!is_file($composerJsonPath)) {
+            return [null, null];
+        }
+
+        $composerJson = json_decode(file_get_contents($composerJsonPath), true, 512, JSON_THROW_ON_ERROR);
+        $vendorAutoloadPath = $directory . '/' . ($composerJson['config']['vendor-dir'] ?? 'vendor') . '/autoload.php';
+
+        if (!is_file($vendorAutoloadPath)) {
+            return [null, null];
+        }
+
+        return [$composerJsonPath, $vendorAutoloadPath];
+    }
+}

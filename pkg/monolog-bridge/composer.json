@@ -1,0 +1,54 @@
+{
+  "name": "spaceonfire/monolog-bridge",
+  "description": "Provides integration for Monolog with some spaceonfire libraries",
+  "type": "library",
+  "keywords": [
+    "spaceonfire",
+    "monolog"
+  ],
+  "homepage": "https://github.com/spaceonfire/monolog-bridge",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "monolog/monolog": "^2.1",
+    "psr/log": "^1.1",
+    "spaceonfire/exception": "^3.0",
+    "spaceonfire/laminas-hydrator-bridge": "^3.0",
+    "yiisoft/friendly-exception": "^1.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "spaceonfire/container": "^3.0",
+    "symfony/console": "^5.2",
+    "symfony/mailer": "^5.2",
+    "symfony/monolog-bridge": "^5.2"
+  },
+  "suggest": {
+    "symfony/console": "",
+    "symfony/mailer": "",
+    "symfony/monolog-bridge": "",
+    "spaceonfire/container": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\MonologBridge\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\MonologBridge\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

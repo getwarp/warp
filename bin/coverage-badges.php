@@ -54,7 +54,7 @@ try {
 
 function collectCoveragePerProject(string $filename, array $projects, ?string $workingDir = null): \Generator
 {
-    $workingDir = $workingDir ?? (getcwd() ?: '');
+    $workingDir ??= getcwd() ?: '';
     $cloverXml = new \SimpleXMLElement($filename, 0, true);
 
     $coveragePerProject = [];
@@ -91,13 +91,13 @@ function submitCoverageBadges(iterable $coveragePerProject, string $gistId, stri
 
     foreach ($coveragePerProject as $project => $coverage) {
         $files[sprintf('%s.json', $project)] = [
-            'content' => json_encode(getCoverageBadge($coverage)),
+            'content' => json_encode(getCoverageBadge($coverage), JSON_THROW_ON_ERROR),
         ];
     }
 
     $postFields = json_encode([
         'files' => $files,
-    ]);
+    ], JSON_THROW_ON_ERROR);
 
     $curl = curl_init();
 
@@ -119,7 +119,7 @@ function submitCoverageBadges(iterable $coveragePerProject, string $gistId, stri
     ]);
 
     $response = curl_exec($curl);
-    $json = json_decode($response, true);
+    $json = json_decode($response, true, 512, JSON_THROW_ON_ERROR);
     $err = curl_error($curl);
     $httpCode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
 

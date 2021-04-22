@@ -1,0 +1,41 @@
+{
+  "name": "spaceonfire/exception",
+  "description": "",
+  "type": "library",
+  "keywords": [
+    "exception"
+  ],
+  "homepage": "https://github.com/spaceonfire/exception",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "symfony/string": "^5.2",
+    "symfony/translation-contracts": "^2.3",
+    "yiisoft/friendly-exception": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Exception\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Exception\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

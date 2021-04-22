@@ -1,0 +1,58 @@
+{
+  "name": "spaceonfire/container",
+  "description": "Small yet powerful implementation of PSR-11 compatible dependency injection container",
+  "type": "library",
+  "keywords": [
+    "container",
+    "psr-11",
+    "psr11",
+    "dependency",
+    "injection",
+    "di",
+    "inversion of control",
+    "ioc",
+    "service",
+    "provider"
+  ],
+  "homepage": "https://github.com/spaceonfire/container",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space/",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "psr/container": "^1.1|^2.0",
+    "spaceonfire/common": "^3.0",
+    "spaceonfire/exception": "^3.0",
+    "spaceonfire/type": "^3.0",
+    "yiisoft/friendly-exception": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
+  },
+  "provide": {
+    "psr/container-implementation": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Container\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Container\\": "tests"
+    },
+    "files": [
+      "tests/autoload.php"
+    ]
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

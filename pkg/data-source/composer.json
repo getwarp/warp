@@ -1,0 +1,55 @@
+{
+  "name": "spaceonfire/data-source",
+  "description": "Useful interfaces and abstracts to design your domain model",
+  "type": "library",
+  "keywords": [
+    "DDD",
+    "domain",
+    "entity",
+    "repository"
+  ],
+  "homepage": "https://github.com/spaceonfire/data-source",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "spaceonfire/collection": "^3.0",
+    "spaceonfire/common": "^3.0",
+    "spaceonfire/criteria": "^3.0",
+    "spaceonfire/exception": "^3.0",
+    "spaceonfire/value-object": "^3.0",
+    "symfony/translation-contracts": "^2.3",
+    "webmozart/expression": "^1.0",
+    "yiisoft/friendly-exception": "^1.0"
+  },
+  "require-dev": {
+    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
+  },
+  "suggest": {
+    "laminas/laminas-hydrator": "There are decorator for property hydrator using laminas-hydrator",
+    "spaceonfire/cycle-bridge": "Implementation of data source contracts for Cycle ORM"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\DataSource\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\DataSource\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

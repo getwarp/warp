@@ -1,7 +1,7 @@
 {
   "name": "spaceonfire/spaceonfire",
-  "type": "project",
   "description": "",
+  "type": "project",
   "keywords": [],
   "homepage": "https://github.com/spaceonfire/spaceonfire",
   "license": "MIT",
@@ -14,93 +14,49 @@
     }
   ],
   "require": {
-    "php": "^7.2|^8.0",
+    "php": "^7.4|^8.0",
     "ext-json": "*",
-    "guzzlehttp/psr7": "^1.6",
-    "jawira/case-converter": "^3.4",
+    "composer/semver": "^3.0",
+    "cycle/orm": "^1.6",
+    "cycle/schema-builder": "^1.2",
+    "doctrine/collections": "^1.5",
+    "gitonomy/gitlib": "^1.2",
     "laminas/laminas-hydrator": "^3.0|^4.0",
     "monolog/monolog": "^2.1",
-    "psr/container": "^1.0",
-    "symfony/polyfill-php73": "^1.22",
-    "symfony/polyfill-php74": "^1.22",
+    "nikic/php-parser": "^4.10",
+    "php-http/discovery": "^1.11",
+    "psr/container": "^1.1|^2.0",
+    "psr/http-message": "^1.0",
+    "psr/log": "^1.1",
+    "symfony/console": "^5.2",
+    "symfony/event-dispatcher-contracts": "^2.0",
+    "symfony/filesystem": "^5.2",
+    "symfony/finder": "^5.2",
     "symfony/polyfill-php80": "^1.22",
-    "symfony/property-access": "^4.4|^5.0",
-    "webmozart/assert": "^1.6",
-    "webmozart/expression": "^1.0"
+    "symfony/string": "^5.2",
+    "symfony/translation-contracts": "^2.3",
+    "webmozart/expression": "^1.0",
+    "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {
-    "ext-curl": "*",
-    "ext-simplexml": "*",
-    "cycle/orm": "^1.4",
-    "cycle/schema-builder": "^1.2",
-    "doctrine/collections": "^1.6.4",
-    "nette/utils": "^3.0",
+    "nyholm/psr7": "^1.4",
     "phpspec/prophecy": "^1.13",
-    "phpspec/prophecy-phpunit": "^1.1|^2.0",
+    "phpspec/prophecy-phpunit": "^2.0",
     "phpstan/phpstan": "^0.12.84",
-    "phpstan/phpstan-webmozart-assert": "^0.12.12",
-    "phpunit/phpunit": "^8.5|^9.5",
-    "psr/log": "^1.1",
-    "ramsey/uuid": "^3.9|^4.0",
+    "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-latest",
     "slevomat/coding-standard": "^7.0",
-    "spiral/core": "^2.7",
-    "spiral/pagination": "^2.7",
-    "symfony/console": "^5.1",
-    "symfony/mailer": "^5.1",
-    "symfony/monolog-bridge": "^5.1",
-    "symfony/stopwatch": "^5.1",
+    "symfony/event-dispatcher": "^5.2",
+    "symfony/mailer": "^5.2",
+    "symfony/monolog-bridge": "^5.2",
+    "symfony/property-access": "^5.2",
+    "symfony/property-info": "^5.2",
+    "symfony/stopwatch": "^5.2",
+    "symfony/uid": "^5.2",
     "symfony/var-exporter": "^5.1",
-    "symplify/easy-coding-standard": "^9.2",
-    "symplify/monorepo-builder": "^8.3|^9.2",
-    "vlucas/phpdotenv": "^4.1|^5.2"
-  },
-  "scripts": {
-    "test": "@php -d xdebug.mode=coverage `which phpunit`",
-    "codestyle": "@php -d xdebug.mode=off `which ecs` check --ansi",
-    "lint": "@php -d xdebug.mode=off `which phpstan` analyze --memory-limit=512M --ansi"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "autoload": {
-    "files": [
-      "src/Common/functions.php"
-    ],
-    "psr-4": {
-      "spaceonfire\\Collection\\": "src/Collection/src",
-      "spaceonfire\\CommandBus\\": "src/CommandBus/src",
-      "spaceonfire\\Common\\": "src/Common/src",
-      "spaceonfire\\Container\\": "src/Container/src",
-      "spaceonfire\\Criteria\\": "src/Criteria/src",
-      "spaceonfire\\DataSource\\": "src/DataSource/src",
-      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/src",
-      "spaceonfire\\MonologBridge\\": "src/MonologBridge/src",
-      "spaceonfire\\Type\\": "src/Type/src",
-      "spaceonfire\\ValueObject\\": "src/ValueObject/src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "spaceonfire\\Collection\\": "src/Collection/tests",
-      "spaceonfire\\CommandBus\\": "src/CommandBus/tests",
-      "spaceonfire\\Common\\": "src/Common/tests",
-      "spaceonfire\\Container\\": "src/Container/tests",
-      "spaceonfire\\Criteria\\": "src/Criteria/tests",
-      "spaceonfire\\DataSource\\": "src/DataSource/tests",
-      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/tests",
-      "spaceonfire\\MonologBridge\\": "src/MonologBridge/tests",
-      "spaceonfire\\Type\\": "src/Type/tests",
-      "spaceonfire\\ValueObject\\": "src/ValueObject/tests"
-    }
+    "symplify/easy-coding-standard": "^9.4",
+    "vlucas/phpdotenv": "^5.2",
+    "yiisoft/arrays": "^1.0"
   },
   "replace": {
     "spaceonfire/collection": "self.version",
@@ -108,12 +64,146 @@
     "spaceonfire/common": "self.version",
     "spaceonfire/container": "self.version",
     "spaceonfire/criteria": "self.version",
+    "spaceonfire/cycle-bridge": "self.version",
     "spaceonfire/data-source": "self.version",
+    "spaceonfire/dev-tool": "self.version",
+    "spaceonfire/doctrine-bridge": "self.version",
     "spaceonfire/easy-coding-standard-bridge": "self.version",
+    "spaceonfire/exception": "self.version",
     "spaceonfire/laminas-hydrator-bridge": "self.version",
     "spaceonfire/monolog-bridge": "self.version",
-    "spaceonfire/spaceonfire": "self.version",
     "spaceonfire/type": "self.version",
     "spaceonfire/value-object": "self.version"
+  },
+  "bin": [
+    "pkg/dev-tool/bin/dev-tool",
+    "pkg/easy-coding-standard-bridge/bin/ecs-baseliner.php",
+    "pkg/easy-coding-standard-bridge/bin/ecs-init.php"
+  ],
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Collection\\": "pkg/collection/src",
+      "spaceonfire\\CommandBus\\": "pkg/command-bus/src",
+      "spaceonfire\\Common\\": "pkg/common/src",
+      "spaceonfire\\Container\\": "pkg/container/src",
+      "spaceonfire\\Criteria\\": "pkg/criteria/src",
+      "spaceonfire\\Bridge\\Cycle\\": "pkg/cycle-bridge/src",
+      "spaceonfire\\DataSource\\": "pkg/data-source/src",
+      "spaceonfire\\DevTool\\": "pkg/dev-tool/src",
+      "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/src",
+      "spaceonfire\\Exception\\": "pkg/exception/src",
+      "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/src",
+      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/src",
+      "spaceonfire\\Type\\": "pkg/type/src",
+      "spaceonfire\\ValueObject\\": "pkg/value-object/src"
+    },
+    "files": [
+      "pkg/common/functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Collection\\": "pkg/collection/tests",
+      "spaceonfire\\CommandBus\\": "pkg/command-bus/tests",
+      "spaceonfire\\Common\\": "pkg/common/tests",
+      "spaceonfire\\Container\\": "pkg/container/tests",
+      "spaceonfire\\Criteria\\": "pkg/criteria/tests",
+      "spaceonfire\\Bridge\\Cycle\\": "pkg/cycle-bridge/tests",
+      "spaceonfire\\DataSource\\": "pkg/data-source/tests",
+      "spaceonfire\\DevTool\\": "pkg/dev-tool/tests",
+      "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/tests",
+      "spaceonfire\\Exception\\": "pkg/exception/tests",
+      "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/tests",
+      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/tests",
+      "spaceonfire\\Type\\": "pkg/type/tests",
+      "spaceonfire\\ValueObject\\": "pkg/value-object/tests"
+    },
+    "files": [
+      "pkg/container/tests/autoload.php"
+    ]
+  },
+  "scripts": {
+    "test": "@php -d xdebug.mode=coverage `which phpunit`",
+    "codestyle": "@php -d xdebug.mode=off `which ecs` check --ansi",
+    "lint": "@php -d xdebug.mode=off `which phpstan` analyze --memory-limit=512M --ansi"
+  },
+  "extra": {
+    "monorepo": {
+      "projects": [
+        {
+          "dir": "pkg/collection",
+          "git": "https://github.com/spaceonfire/collection.git"
+        },
+        {
+          "dir": "pkg/command-bus",
+          "git": "https://github.com/spaceonfire/command-bus.git"
+        },
+        {
+          "dir": "pkg/common",
+          "git": "https://github.com/spaceonfire/common.git"
+        },
+        {
+          "dir": "pkg/container",
+          "git": "https://github.com/spaceonfire/container.git"
+        },
+        {
+          "dir": "pkg/criteria",
+          "git": "https://github.com/spaceonfire/criteria.git"
+        },
+        {
+          "dir": "pkg/cycle-bridge",
+          "git": "https://github.com/spaceonfire/cycle-bridge.git"
+        },
+        {
+          "dir": "pkg/data-source",
+          "git": "https://github.com/spaceonfire/data-source.git"
+        },
+        {
+          "dir": "pkg/dev-tool",
+          "git": null
+        },
+        {
+          "dir": "pkg/doctrine-bridge",
+          "git": "https://github.com/spaceonfire/doctrine-bridge.git"
+        },
+        {
+          "dir": "pkg/easy-coding-standard-bridge",
+          "git": "https://github.com/spaceonfire/easy-coding-standard-bridge.git"
+        },
+        {
+          "dir": "pkg/exception",
+          "git": "https://github.com/spaceonfire/exception.git"
+        },
+        {
+          "dir": "pkg/laminas-hydrator-bridge",
+          "git": "https://github.com/spaceonfire/laminas-hydrator-bridge.git"
+        },
+        {
+          "dir": "pkg/monolog-bridge",
+          "git": "https://github.com/spaceonfire/monolog-bridge.git"
+        },
+        {
+          "dir": "pkg/type",
+          "git": "https://github.com/spaceonfire/type.git"
+        },
+        {
+          "dir": "pkg/value-object",
+          "git": "https://github.com/spaceonfire/value-object.git"
+        }
+      ],
+      "require-dev": {
+        "phpspec/prophecy": "^1.13",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/phpstan": "^0.12.84",
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-latest"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
   }
 }

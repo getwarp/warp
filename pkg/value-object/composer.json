@@ -1,0 +1,55 @@
+{
+  "name": "spaceonfire/value-object",
+  "description": "Value Object library for PHP",
+  "type": "library",
+  "keywords": [
+    "value-object",
+    "string",
+    "int",
+    "uuid",
+    "enum",
+    "date",
+    "time",
+    "datetime"
+  ],
+  "homepage": "https://github.com/spaceonfire/value-object",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space/",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "php-http/discovery": "^1.11",
+    "psr/http-message": "^1.0",
+    "spaceonfire/common": "^3.0",
+    "symfony/string": "^5.2"
+  },
+  "require-dev": {
+    "nyholm/psr7": "^1.4",
+    "phpunit/phpunit": "^9.5",
+    "symfony/uid": "^5.2"
+  },
+  "suggest": {
+    "symfony/uid": "To use UuidValue",
+    "psr/http-factory": "To use UriValue"
+  },
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\ValueObject\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\ValueObject\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

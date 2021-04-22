@@ -1,0 +1,51 @@
+{
+  "name": "spaceonfire/dev-tool",
+  "description": "",
+  "type": "library",
+  "keywords": [],
+  "homepage": "https://github.com/spaceonfire/spaceonfire",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*",
+    "composer/semver": "^3.0",
+    "gitonomy/gitlib": "^1.2",
+    "nikic/php-parser": "^4.10",
+    "spaceonfire/common": "^3.0",
+    "spaceonfire/container": "^3.0",
+    "spaceonfire/criteria": "^3.0",
+    "spaceonfire/type": "^3.0",
+    "symfony/console": "^5.2",
+    "symfony/filesystem": "^5.2",
+    "symfony/finder": "^5.2"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  },
+  "bin": [
+    "bin/dev-tool"
+  ],
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\DevTool\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\DevTool\\": "tests"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  }
+}

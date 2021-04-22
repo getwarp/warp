@@ -2,9 +2,6 @@
 
 ini_set('error_reporting', E_ALL);
 
-define('SOF_ENV_PATH', __DIR__ . '/src/Common/tests/_Fixtures');
-define('SOF_ENV_FILE_NAME', 'test.env');
-
 $findAutoload = static function (): string {
     $paths = [
         __DIR__ . '/vendor/autoload.php',

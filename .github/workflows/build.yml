@@ -1,122 +1,115 @@
-name: Build Pipeline
+name: Build
 
 on:
   push:
-    branches:
-      - master
-    tags:
-      - '*'
   pull_request:
-    branches:
-      - master
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: spaceonfire/spaceonfire-php-test
+  XDEBUG_MODE: off
+
 jobs:
-  composer:
-    runs-on: ubuntu-latest
-    container: spaceonfire/nginx-php-fpm:latest-8.0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Validate composer.json
-        run: |
-          /opt/spaceonfire/bin/select-composer.sh v2
-          composer validate
-          composer validate src/Collection/composer.json
-          composer validate src/CommandBus/composer.json
-          composer validate src/Common/composer.json
-          composer validate src/Container/composer.json
-          composer validate src/Criteria/composer.json
-          composer validate src/DataSource/composer.json
-          composer validate src/EasyCodingStandardBridge/composer.json
-          composer validate src/LaminasHydratorBridge/composer.json
-          composer validate src/MonologBridge/composer.json
-          composer validate src/Type/composer.json
-          composer validate src/ValueObject/composer.json
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        env:
-          COMPOSER_CACHE_KEY: 'composer-8.0-prefer-stable'
-        with:
-          path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
-          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
-
-      - name: Install dependencies
-        run: |
-          /opt/spaceonfire/bin/select-composer.sh v2
-          composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
-
-      - name: Validate monorepo
-        run: vendor/bin/monorepo-builder validate --ansi
-
-  codestyle:
-    runs-on: ubuntu-latest
-    container: spaceonfire/nginx-php-fpm:latest-8.0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        env:
-          COMPOSER_CACHE_KEY: 'composer-8.0-prefer-stable'
-        with:
-          path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
-          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
-
-      - name: Install dependencies
-        run: |
-          /opt/spaceonfire/bin/select-composer.sh v2
-          composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
-
-      - name: Check coding standard
-        run: vendor/bin/ecs check --no-progress-bar --no-interaction
-
-  lint:
-    runs-on: ubuntu-latest
-    container: spaceonfire/nginx-php-fpm:latest-8.0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v2
-        env:
-          COMPOSER_CACHE_KEY: 'composer-8.0-prefer-stable'
-        with:
-          path: vendor
-          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
-          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
-
-      - name: Install dependencies
-        run: |
-          /opt/spaceonfire/bin/select-composer.sh v2
-          composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
-
-      - name: PHPStan
-        run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress --no-interaction
-
-  phpunit:
+  docker:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         php-version:
-          - '7.2'
-          - '7.3'
           - '7.4'
           - '8.0'
-        stability:
-          - 'prefer-lowest'
-          - 'prefer-stable'
-    container: spaceonfire/nginx-php-fpm:latest-${{ matrix.php-version }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - id: fork
+        if: github.repository_owner != 'spaceonfire'
+        run: echo "Building docker image skipped in fork repositories"
+
+      - if: steps.fork.conclusion == 'skipped'
+        name: Checkout repository
+        uses: actions/checkout@v2
+
+      - if: steps.fork.conclusion == 'skipped'
+        name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - if: steps.fork.conclusion == 'skipped'
+        name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: type=raw,value=${{ matrix.php-version }}
+
+      - if: steps.fork.conclusion == 'skipped'
+        name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: .docker/Dockerfile
+          build-args: PHP_VERSION=${{ matrix.php-version }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          pull: true
+          push: true
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.php-version }}
+          cache-to: type=inline
+
+  composer:
+    needs: [ docker ]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:8.0
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate composer.json
+        # todo: add single command to dev-tool
+        run: |
+          composer validate
+          composer validate pkg/collection/composer.json
+          composer validate pkg/command-bus/composer.json
+          composer validate pkg/common/composer.json
+          composer validate pkg/container/composer.json
+          composer validate pkg/criteria/composer.json
+          composer validate pkg/data-source/composer.json
+          composer validate pkg/easy-coding-standard-bridge/composer.json
+          composer validate pkg/laminas-hydrator-bridge/composer.json
+          composer validate pkg/monolog-bridge/composer.json
+          composer validate pkg/type/composer.json
+          composer validate pkg/value-object/composer.json
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+  codestyle:
+    needs: [ docker ]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:8.0
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -125,100 +118,222 @@ jobs:
         id: composer-cache
         uses: actions/cache@v2
         env:
-          COMPOSER_CACHE_KEY: 'composer-${{ matrix.php-version }}-${{ matrix.stability }}'
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
         with:
           path: vendor
           key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
           restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
 
       - name: Install dependencies
-        run: |
-          /opt/spaceonfire/bin/select-composer.sh v2
-          composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction --no-progress
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - name: Check coding standard
+        run: vendor/bin/ecs check --no-progress-bar --no-interaction
+
+  lint:
+    needs: [ docker ]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:8.0
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress --no-interaction
+
+  phpunit:
+    needs: [ docker ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '7.4'
+          - '8.0'
+        stability:
+          - prefer-lowest
+          - prefer-stable
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:${{ matrix.php-version }}
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-${{ matrix.php-version }}-${{ matrix.stability }}
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction --no-progress
 
       - name: PHPUnit
+        run: vendor/bin/phpunit --no-interaction
+
+  coverage:
+    needs: [ docker ]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:8.0
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - name: PHPUnit
+        env:
+          XDEBUG_MODE: coverage
         run: |
-          apk update
-          docker-php-ext-enable xdebug
-          php -d xdebug.mode=coverage vendor/bin/phpunit --no-interaction
+          vendor/bin/phpunit --no-interaction
+          cat build/phpunit/coverage.txt
 
       - name: PHPUnit Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: phpunit-${{ matrix.php-version }}
+          name: coverage
           path: build/phpunit/
 
       - name: Generate coverage badge
-        if: matrix.php-version == '8.0' && matrix.stability == 'prefer-stable' && github.event_name == 'push' && github.ref == 'refs/heads/master'
+        # TODO: update coverage badge publication
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: php bin/coverage-badges.php build/phpunit/clover.xml ${{ secrets.COVERAGE_GIST_ID }} ${{ secrets.COVERAGE_GIST_TOKEN }}
 
-#  split_monorepo:
-#    runs-on: ubuntu-latest
-#    needs:
-#      - 'composer'
-#      - 'codestyle'
-#      - 'lint'
-#      - 'phpunit'
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        package:
-#          - remote_name: 'collection'
-#            remote_repo: ''
-#            directory: 'src/Collection'
-#          - remote_name: 'command-bus'
-#            remote_repo: ''
-#            directory: 'src/CommandBus'
-#          - remote_name: 'common'
-#            remote_repo: ''
-#            directory: 'src/Common'
-#          - remote_name: 'container'
-#            remote_repo: ''
-#            directory: 'src/Container'
-#          - remote_name: 'criteria'
-#            remote_repo: ''
-#            directory: 'src/Criteria'
-#          - remote_name: 'data-source'
-#            remote_repo: ''
-#            directory: 'src/DataSource'
-#          - remote_name: 'easy-coding-standard-bridge'
-#            remote_repo: ''
-#            directory: 'src/EasyCodingStandardBridge'
-#          - remote_name: 'laminas-hydrator-bridge'
-#            remote_repo: ''
-#            directory: 'src/LaminasHydratorBridge'
-#          - remote_name: 'monolog-bridge'
-#            remote_repo: ''
-#            directory: 'src/MonologBridge'
-#          - remote_name: 'type'
-#            remote_repo: ''
-#            directory: 'src/Type'
-#          - remote_name: 'value-object'
-#            remote_repo: ''
-#            directory: 'src/ValueObject'
-#    env:
-#      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-#    steps:
-#      - name: 'Checkout'
-#        uses: 'actions/checkout@v2'
-#
-#      - name: 'Split branch'
-#        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-#        uses: 'symplify/monorepo-split-github-action@2.0'
-#        with:
-#          package-directory: '${{ matrix.package.directory }}'
-#          split-repository-organization: 'spaceonfire'
-#          split-repository-name: '${{ matrix.package.repository_name }}'
-#          user-name: 'hustlahusky'
-#          user-email: 'genteelknight@gmail.com'
-#
-#      - name: 'Split tag'
-#        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-#        uses: 'symplify/monorepo-split-github-action@2.0'
-#        with:
-#          tag: '${GITHUB_REF#refs/tags/}'
-#          package-directory: '${{ matrix.package.directory }}'
-#          split-repository-organization: 'spaceonfire'
-#          split-repository-name: '${{ matrix.package.repository_name }}'
-#          user-name: 'hustlahusky'
-#          user-email: 'genteelknight@gmail.com'
+  list_projects:
+    needs: [ docker ]
+    if: github.repository_owner == 'spaceonfire'
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/spaceonfire/spaceonfire-php-test:8.0
+      options: --user 1001
+    steps:
+      - id: match
+        name: Match ref
+        run: |
+          echo "::set-output name=match::`php -r \"echo preg_match('/^refs\/(heads|tags)\/[\d]+\.[\d]+\.[\dx]+/', '${{ github.ref }}') === 1 ? 'true' : 'false';\"`"
+
+      - if: steps.match.outputs.match == 'true'
+        name: Checkout repository
+        uses: actions/checkout@v2
+
+      - if: steps.match.outputs.match == 'true'
+        name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - if: steps.match.outputs.match == 'true'
+        name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - if: steps.match.outputs.match == 'true'
+        id: output_projects
+        name: Prepare split matrix
+        run: echo "::set-output name=projects::`php pkg/dev-tool/bin/dev-tool monorepo:projects`"
+
+    outputs:
+      match: ${{ steps.match.outputs.match }}
+      projects: ${{ steps.output_projects.outputs.projects }}
+
+  split:
+    needs: [ list_projects ]
+    if: needs.list_projects.outputs.match == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{fromJson(needs.list_projects.outputs.projects)}}
+    steps:
+      - if: matrix.project.git == null
+        name: Skip job
+        run: |
+          echo "Skip ${{ matrix.project.dir }} project split. No git repository specified."
+
+      - if: matrix.project.git != null
+        name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - if: matrix.project.git != null
+        name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.0-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - if: matrix.project.git != null
+        name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - if: matrix.project.git != null
+        name: Split project
+        env:
+          TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: php pkg/dev-tool/bin/dev-tool monorepo:projects:split ${{ matrix.project.dir }}
