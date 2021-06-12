@@ -43,7 +43,7 @@
     "psr/log": "^1.1",
     "ramsey/uuid": "^3.9|^4.0",
     "roave/security-advisories": "dev-latest",
-    "slevomat/coding-standard": "^6.4",
+    "slevomat/coding-standard": "^7.0",
     "spiral/core": "^2.7",
     "spiral/pagination": "^2.7",
     "symfony/console": "^5.1",
@@ -51,7 +51,7 @@
     "symfony/monolog-bridge": "^5.1",
     "symfony/stopwatch": "^5.1",
     "symfony/var-exporter": "^5.1",
-    "symplify/easy-coding-standard": "^8.3|^9.2",
+    "symplify/easy-coding-standard": "^9.2",
     "symplify/monorepo-builder": "^8.3|^9.2",
     "vlucas/phpdotenv": "^4.1|^5.2"
   },

@@ -13,7 +13,7 @@ try {
     include_autoloader();
 
     if (!class_exists(VarExporter::class)) {
-        throw new \RuntimeException('Install VarExporter. Run `composer require --dev symfony/var-exporter`.');
+        throw new RuntimeException('Install VarExporter. Run `composer require --dev symfony/var-exporter`.');
     }
 
     $arguments = $argv;
@@ -57,7 +57,7 @@ HELP;
     $errorFiles = find_error_files($errorFiles);
 
     if (count($errorFiles) === 0) {
-        throw new \InvalidArgumentException('Files not found.');
+        throw new InvalidArgumentException('Files not found.');
     }
 
     $baselineErrors = collect_baseline_errors($errorFiles);
@@ -81,7 +81,7 @@ HELP;
     }
 
     file_put_contents($targetFile, $baselineConfig, LOCK_EX);
-} catch (\Throwable $e) {
+} catch (Throwable $e) {
     fwrite(STDERR, $e->getMessage() . PHP_EOL);
     exit(1);
 }
@@ -143,13 +143,13 @@ function collect_baseline_errors(array $errorFiles): array
 
     foreach ($errorFiles as $filename) {
         if (false === $content = file_get_contents($filename)) {
-            throw new \RuntimeException(sprintf('Unable to read file %s', $filename));
+            throw new RuntimeException(sprintf('Unable to read file %s', $filename));
         }
 
-        $content = json_decode($content, true);
+        $content = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
         if (!is_array($content)) {
-            throw new \RuntimeException(sprintf('Invalid JSON in "%s"', $filename));
+            throw new RuntimeException(sprintf('Invalid JSON in "%s"', $filename));
         }
 
         /**
@@ -194,7 +194,7 @@ function render_baseline_config(array $baselineErrors): string
     $content = file_get_contents(__DIR__ . '/../resources/templates/ecs-baseline.php');
 
     if (false === $content) {
-        throw new \RuntimeException('Unable to read ecs-baseline.php config template.');
+        throw new RuntimeException('Unable to read ecs-baseline.php config template.');
     }
 
     $baselineErrorsValue = VarExporter::export($baselineErrors);
@@ -211,9 +211,7 @@ function indent(string $code, int $level = 1): string
     return implode(
         PHP_EOL,
         array_map(
-            function ($line) use ($level) {
-                return str_repeat('    ', $level) . rtrim($line);
-            },
+            static fn ($line) => str_repeat('    ', $level) . rtrim($line),
             explode(PHP_EOL, $code)
         )
     );

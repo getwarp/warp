@@ -10,7 +10,6 @@ use PhpCsFixer\Fixer\Alias\RandomApiMigrationFixer;
 use PhpCsFixer\Fixer\ArrayNotation\ArraySyntaxFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoTrailingCommaInSinglelineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\NoWhitespaceBeforeCommaInArrayFixer;
-use PhpCsFixer\Fixer\ArrayNotation\TrailingCommaInMultilineArrayFixer;
 use PhpCsFixer\Fixer\ArrayNotation\TrimArraySpacesFixer;
 use PhpCsFixer\Fixer\ArrayNotation\WhitespaceAfterCommaInArrayFixer;
 use PhpCsFixer\Fixer\Basic\BracesFixer;
@@ -38,6 +37,7 @@ use PhpCsFixer\Fixer\ControlStructure\NoUnneededCurlyBracesFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUselessElseFixer;
 use PhpCsFixer\Fixer\ControlStructure\SwitchCaseSemicolonToColonFixer;
 use PhpCsFixer\Fixer\ControlStructure\SwitchCaseSpaceFixer;
+use PhpCsFixer\Fixer\ControlStructure\TrailingCommaInMultilineFixer;
 use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
@@ -89,6 +89,9 @@ use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
+use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DisallowCommentAfterCodeSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\EmptyCommentSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff;
@@ -98,6 +101,7 @@ use SlevomatCodingStandard\Sniffs\PHP\UselessParenthesesSniff;
 use SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
 use SlevomatCodingStandard\Sniffs\Variables\UselessVariableSniff;
+use SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayListItemNewlineFixer;
 use Symplify\CodingStandard\Fixer\ArrayNotation\ArrayOpenerAndCloserNewlineFixer;
@@ -117,12 +121,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(TrimArraySpacesFixer::class);
     $services->set(ArrayListItemNewlineFixer::class);
     $services->set(StandaloneLineInMultilineArrayFixer::class);
-    $services->set(TrailingCommaInMultilineArrayFixer::class);
     $services->set(NoTrailingCommaInSinglelineArrayFixer::class);
     $services->set(ArraySyntaxFixer::class)
         ->call('configure', [
             [
                 'syntax' => 'short',
+            ]
+        ]);
+    $services->set(TrailingCommaInMultilineFixer::class)
+        ->call('configure', [
+            [
+                'elements' => [TrailingCommaInMultilineFixer::ELEMENTS_ARRAYS],
             ]
         ]);
 
@@ -152,7 +161,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
     $services->set(OrderedClassElementsFixer::class);
     // TODO: check this sniff
-    $services->set(\SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff::class);
+    $services->set(TraitUseDeclarationSniff::class);
 
     // Namespaces
     $services->set(NoUnusedImportsFixer::class);
@@ -187,9 +196,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SpaceAfterSemicolonFixer::class);
     $services->set(LanguageConstructSpacingSniff::class);
     // TODO: check this sniffs
-    $services->set(\SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class);
-    $services->set(\SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff::class)
+    $services->set(ParentCallSpacingSniff::class);
+    $services->set(DuplicateSpacesSniff::class);
+    $services->set(TraitUseSpacingSniff::class)
         ->property('linesCountAfterLastUse', 1)
         ->property('linesCountAfterLastUseWhenLastInClass', 0)
         ->property('linesCountBeforeFirstUse', 0)
@@ -207,9 +216,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RandomApiMigrationFixer::class)
         ->call('configure', [
             [
-                'mt_rand' => 'random_int',
-                'rand' => 'random_int',
-            ]
+                'replacements' => [
+                    'mt_rand' => 'random_int',
+                    'rand' => 'random_int',
+                ],
+            ],
         ]);
 
     // PHP 7.1
@@ -274,7 +285,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ClassDefinitionFixer::class)
         ->call('configure', [
             [
-                'singleLine' => true,
+                'single_line' => true,
             ]
         ]);
     $services->set(VisibilityRequiredFixer::class)
@@ -286,14 +297,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(MethodArgumentSpaceFixer::class)
         ->call('configure', [
             [
-                'ensure_fully_multiline' => true,
-            ]
+                'on_multiline' => 'ensure_fully_multiline',
+            ],
         ]);
     $services->set(OrderedImportsFixer::class)
         ->call('configure', [
             [
-                'importsOrder' => ['class', 'function', 'const'],
-            ]
+                'imports_order' => ['class', 'function', 'const'],
+            ],
         ]);
     $services->set(DeclareEqualNormalizeFixer::class)
         ->call('configure', [

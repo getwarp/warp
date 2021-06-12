@@ -17,11 +17,13 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
+    "slevomat/coding-standard": "^7.0",
     "symfony/var-exporter": "^5.1",
-    "symplify/easy-coding-standard": "^8.3|^9.2"
+    "symplify/easy-coding-standard": "^9.2"
   },
   "suggest": {
-    "symplify/easy-coding-standard-prefixed": "^8.3|^9.1",
+    "symplify/easy-coding-standard-prefixed": "^9.2",
+    "slevomat/coding-standard": "^7.0",
     "symfony/var-exporter": "Required for ecs-baseliner"
   },
   "bin": [
