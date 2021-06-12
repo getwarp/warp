@@ -13,7 +13,7 @@ final class ConjunctionType extends AbstractAggregatedType
 
     /**
      * ConjunctionType constructor.
-     * @param Type[] $conjuncts
+     * @param TypeInterface[] $conjuncts
      */
     public function __construct(iterable $conjuncts)
     {
@@ -53,7 +53,7 @@ final class ConjunctionType extends AbstractAggregatedType
      * @deprecated use dynamic type factory instead. This method will be removed in next major release.
      * @see Factory\TypeFactoryInterface
      */
-    public static function create(string $type): Type
+    public static function create(string $type): TypeInterface
     {
         $factory = new ConjunctionTypeFactory();
         $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());

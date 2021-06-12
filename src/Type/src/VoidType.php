@@ -6,7 +6,7 @@ namespace spaceonfire\Type;
 
 use RuntimeException;
 
-final class VoidType implements Type
+final class VoidType implements TypeInterface
 {
     public const NAME = 'void';
 

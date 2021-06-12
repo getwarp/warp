@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type\Factory;
 
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 interface TypeFactoryInterface
 {
@@ -18,9 +18,9 @@ interface TypeFactoryInterface
     /**
      * Create new Type instance from a string.
      * @param string $type
-     * @return Type
+     * @return TypeInterface
      */
-    public function make(string $type): Type;
+    public function make(string $type): TypeInterface;
 
     /**
      * Set parent factory.

@@ -8,10 +8,10 @@ use ArrayIterator;
 use IteratorAggregate;
 use Webmozart\Assert\Assert;
 
-abstract class AbstractAggregatedType implements Type, IteratorAggregate
+abstract class AbstractAggregatedType implements TypeInterface, IteratorAggregate
 {
     /**
-     * @var Type[]
+     * @var TypeInterface[]
      */
     protected $types;
 
@@ -24,7 +24,7 @@ abstract class AbstractAggregatedType implements Type, IteratorAggregate
     {
         $types = array_values($this->prepareTypes($types));
 
-        Assert::allIsInstanceOf($types, Type::class);
+        Assert::allIsInstanceOf($types, TypeInterface::class);
         Assert::minCount($types, 2);
 
         $this->types = $types;

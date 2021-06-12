@@ -44,10 +44,7 @@ parameters:
             paths:
                 - src/DataSource/src/Adapters/*
                 - src/DataSource/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php
-        -
-            message: '/^Parameter #3 \$length of function substr expects int/'
-            path: src/Type/src/Factory/CollectionTypeFactory.php
-        - '/^Method (.*)::create\(\) should return (.*) but returns spaceonfire\\Type\\Type.$/'
+        - '/^Method (.*)::create\(\) should return (.*) but returns spaceonfire\\Type\\TypeInterface.$/'
         -
             message: '/^Cannot call method make\(\) on spaceonfire\\Type\\Factory\\TypeFactoryInterface\|null.$/'
             path: src/Type/src/Factory/*.php
@@ -67,3 +64,14 @@ parameters:
         -
             message: '/^Call to an undefined static method Dotenv\\Repository\\RepositoryBuilder::create\(\)\.$/'
             path: src/Common/src/Env/env.php
+        -
+            message: '/^If condition is always false\.$/'
+            paths:
+                - src/CommandBus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php
+                - src/CommandBus/src/Bridge/PsrLog/MayBeLoggedMessage.php
+                - src/CommandBus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php
+                - src/CommandBus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php
+                - src/CommandBus/src/Exception.php
+                - src/CommandBus/src/Mapping/CommandToHandlerMapping.php
+                - src/CommandBus/src/Middleware.php
+                - src/Type/src/Type.php

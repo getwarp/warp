@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type;
 
-interface Type
-{
-    /**
-     * Print type as a string
-     * @return string
-     */
-    public function __toString(): string;
+\class_alias(
+    TypeInterface::class,
+    __NAMESPACE__ . '\Type'
+);
 
+if (false) {
     /**
-     * Check that type of given value satisfies constraints
-     * @param mixed $value
-     * @return bool
+     * @deprecated Use {@see \spaceonfire\Type\TypeInterface} instead.
      */
-    public function check($value): bool;
+    interface Type extends TypeInterface
+    {
+    }
 }

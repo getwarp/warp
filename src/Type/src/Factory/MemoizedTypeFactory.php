@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type\Factory;
 
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class MemoizedTypeFactory implements TypeFactoryInterface
 {
@@ -19,7 +19,7 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
     private $cacheSupports = [];
 
     /**
-     * @var array<string,Type>
+     * @var array<string,TypeInterface>
      */
     private $cacheMake = [];
 
@@ -48,7 +48,7 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         if (!isset($this->cacheMake[$type])) {
             $this->cacheMake[$type] = $this->underlyingFactory->make($type);

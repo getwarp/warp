@@ -61,6 +61,11 @@ parameters:
 			path: src/Collection/src/AbstractCollectionDecorator.php
 
 		-
+			message: "#^Method spaceonfire\\\\Collection\\\\AbstractCollectionDecorator\\:\\:merge\\(\\) has parameter \\$collections with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Collection/src/AbstractCollectionDecorator.php
+
+		-
 			message: "#^Method spaceonfire\\\\Collection\\\\AbstractCollectionDecorator\\:\\:merge\\(\\) return type has no value type specified in iterable type spaceonfire\\\\Collection\\\\CollectionInterface\\.$#"
 			count: 1
 			path: src/Collection/src/AbstractCollectionDecorator.php
@@ -306,6 +311,11 @@ parameters:
 			path: src/Collection/src/Collection.php
 
 		-
+			message: "#^Method spaceonfire\\\\Collection\\\\Collection\\:\\:merge\\(\\) has parameter \\$collections with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Collection/src/Collection.php
+
+		-
 			message: "#^Method spaceonfire\\\\Collection\\\\Collection\\:\\:merge\\(\\) return type has no value type specified in iterable type spaceonfire\\\\Collection\\\\CollectionInterface\\.$#"
 			count: 1
 			path: src/Collection/src/Collection.php
@@ -467,6 +477,11 @@ parameters:
 
 		-
 			message: "#^Method spaceonfire\\\\Collection\\\\CollectionInterface\\:\\:matching\\(\\) return type has no value type specified in iterable type spaceonfire\\\\Collection\\\\CollectionInterface\\.$#"
+			count: 1
+			path: src/Collection/src/CollectionInterface.php
+
+		-
+			message: "#^Method spaceonfire\\\\Collection\\\\CollectionInterface\\:\\:merge\\(\\) has parameter \\$collections with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Collection/src/CollectionInterface.php
 
@@ -639,6 +654,11 @@ parameters:
 			message: "#^Property spaceonfire\\\\Container\\\\Container\\:\\:\\$providers type has no value type specified in iterable type spaceonfire\\\\Container\\\\ServiceProvider\\\\ServiceProviderAggregateInterface\\.$#"
 			count: 1
 			path: src/Container/src/Container.php
+
+		-
+			message: "#^Property spaceonfire\\\\Container\\\\Definition\\\\Definition\\:\\:\\$methods type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Container/src/Definition/Definition.php
 
 		-
 			message: "#^Method spaceonfire\\\\Container\\\\Definition\\\\DefinitionAggregate\\:\\:addDefinition\\(\\) return type has no value type specified in iterable type spaceonfire\\\\Container\\\\Definition\\\\DefinitionAggregate\\.$#"

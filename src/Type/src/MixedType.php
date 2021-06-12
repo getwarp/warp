@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type;
 
-final class MixedType implements Type
+final class MixedType implements TypeInterface
 {
     public const NAME = 'mixed';
 

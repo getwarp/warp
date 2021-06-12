@@ -7,31 +7,34 @@ namespace spaceonfire\Type;
 use spaceonfire\Type\Factory\CollectionTypeFactory;
 use spaceonfire\Type\Factory\CompositeTypeFactory;
 
-final class CollectionType implements Type
+final class CollectionType implements TypeInterface
 {
     /**
-     * @var Type
+     * @var TypeInterface
      */
     private $valueType;
 
     /**
-     * @var Type|null
+     * @var TypeInterface|null
      */
     private $keyType;
 
     /**
-     * @var Type
+     * @var TypeInterface
      */
     private $iterableType;
 
     /**
      * CollectionType constructor.
-     * @param Type $valueType
-     * @param Type|null $keyType
-     * @param Type|null $iterableType
+     * @param TypeInterface $valueType
+     * @param TypeInterface|null $keyType
+     * @param TypeInterface|null $iterableType
      */
-    public function __construct(Type $valueType, ?Type $keyType = null, ?Type $iterableType = null)
-    {
+    public function __construct(
+        TypeInterface $valueType,
+        ?TypeInterface $keyType = null,
+        ?TypeInterface $iterableType = null
+    ) {
         $this->valueType = $valueType;
         $this->keyType = $keyType;
         $this->iterableType = $iterableType ?? new BuiltinType(BuiltinType::ITERABLE);
@@ -94,7 +97,7 @@ final class CollectionType implements Type
      * @deprecated use dynamic type factory instead. This method will be removed in next major release.
      * @see Factory\TypeFactoryInterface
      */
-    public static function create(string $type): Type
+    public static function create(string $type): TypeInterface
     {
         $factory = new CollectionTypeFactory();
         $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());

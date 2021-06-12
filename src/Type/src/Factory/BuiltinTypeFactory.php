@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Factory;
 
 use spaceonfire\Type\BuiltinType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class BuiltinTypeFactory implements TypeFactoryInterface
 {
@@ -39,7 +39,7 @@ final class BuiltinTypeFactory implements TypeFactoryInterface
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         $type = $this->prepareType($type);
 
