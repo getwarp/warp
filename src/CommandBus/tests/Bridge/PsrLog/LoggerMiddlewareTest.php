@@ -175,7 +175,7 @@ class LoggerMiddlewareTest extends AbstractTestCase
         $greenMessage->setBeforeMessage('Before: green');
         $greenMessage->setAfterMessage('After: green');
 
-        $predicateProphecy = $this->prophesize(LoggerMiddlewareMessagePredicate::class);
+        $predicateProphecy = $this->prophesize(LoggerMiddlewareMessagePredicateInterface::class);
         $predicateProphecy->__invoke($redMessage)->willReturn(false);
         $predicateProphecy->__invoke($greenMessage)->willReturn(true);
 

@@ -9,7 +9,7 @@ use function array_key_exists;
 /**
  * Stupid simple command-to-handler mapper.
  */
-final class MapByStaticList implements CommandToHandlerMapping
+final class MapByStaticList implements CommandToHandlerMappingInterface
 {
     /**
      * @var array<string, array<string>>

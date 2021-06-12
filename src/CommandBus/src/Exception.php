@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus;
 
-use Throwable;
+\class_alias(
+    ExceptionInterface::class,
+    __NAMESPACE__ . '\Exception'
+);
 
-/**
- * Marker interface for all CommandBus exceptions
- */
-interface Exception extends Throwable
-{
+if (false) {
+    /**
+     * @deprecated Use {@see \spaceonfire\CommandBus\ExceptionInterface} instead.
+     */
+    interface Exception extends ExceptionInterface
+    {
+    }
 }

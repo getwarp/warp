@@ -9,10 +9,10 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use spaceonfire\CommandBus\Middleware;
+use spaceonfire\CommandBus\MiddlewareInterface;
 use Throwable;
 
-final class LoggerMiddleware implements Middleware, LoggerAwareInterface
+final class LoggerMiddleware implements MiddlewareInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
@@ -32,21 +32,21 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
     private $defaultExceptionLogLevel;
 
     /**
-     * @var LoggerMiddlewareMessagePredicate
+     * @var LoggerMiddlewareMessagePredicateInterface
      */
     private $predicate;
 
     /**
      * LoggerMiddleware constructor.
      * @param LoggerInterface $logger
-     * @param LoggerMiddlewareMessagePredicate|null $predicate
+     * @param LoggerMiddlewareMessagePredicateInterface|null $predicate
      * @param string $logLevel
      * @param array $exceptionLogLevelMap
      * @param string $defaultExceptionLogLevel
      */
     public function __construct(
         LoggerInterface $logger,
-        ?LoggerMiddlewareMessagePredicate $predicate = null,
+        ?LoggerMiddlewareMessagePredicateInterface $predicate = null,
         string $logLevel = LogLevel::INFO,
         array $exceptionLogLevelMap = [],
         string $defaultExceptionLogLevel = LogLevel::ERROR
@@ -84,9 +84,10 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
         return $result;
     }
 
-    private function preparePredicate(?LoggerMiddlewareMessagePredicate $predicate): LoggerMiddlewareMessagePredicate
-    {
-        if ($predicate instanceof LoggerMiddlewareMessagePredicate) {
+    private function preparePredicate(
+        ?LoggerMiddlewareMessagePredicateInterface $predicate
+    ): LoggerMiddlewareMessagePredicateInterface {
+        if ($predicate instanceof LoggerMiddlewareMessagePredicateInterface) {
             return $predicate;
         }
 
@@ -127,7 +128,9 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
 
     private function logBefore(object $command): void
     {
-        $message = $command instanceof MayBeLoggedMessage
+        \assert(null !== $this->logger);
+
+        $message = $command instanceof MayBeLoggedMessageInterface
             ? $command->renderBeforeMessage()
             : null;
 
@@ -136,7 +139,9 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
 
     private function logAfter(object $command): void
     {
-        $message = $command instanceof MayBeLoggedMessage
+        \assert(null !== $this->logger);
+
+        $message = $command instanceof MayBeLoggedMessageInterface
             ? $command->renderAfterMessage()
             : null;
 
@@ -148,7 +153,9 @@ final class LoggerMiddleware implements Middleware, LoggerAwareInterface
 
     private function logError(object $command, Throwable $exception): void
     {
-        $message = $command instanceof MayBeLoggedMessage
+        \assert(null !== $this->logger);
+
+        $message = $command instanceof MayBeLoggedMessageInterface
             ? $command->renderErrorMessage()
             : null;
 

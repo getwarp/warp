@@ -70,7 +70,7 @@ class CommandBusTest extends TestCase
     {
         $executionOrder = [];
 
-        $middleware1 = $this->createMock(Middleware::class);
+        $middleware1 = $this->createMock(MiddlewareInterface::class);
         $middleware1->method('execute')->willReturnCallback(
             static function ($command, $next) use (&$executionOrder) {
                 $executionOrder[] = 1;
@@ -79,7 +79,7 @@ class CommandBusTest extends TestCase
             }
         );
 
-        $middleware2 = $this->createMock(Middleware::class);
+        $middleware2 = $this->createMock(MiddlewareInterface::class);
         $middleware2->method('execute')->willReturnCallback(
             static function ($command, $next) use (&$executionOrder) {
                 $executionOrder[] = 2;
@@ -88,7 +88,7 @@ class CommandBusTest extends TestCase
             }
         );
 
-        $middleware3 = $this->createMock(Middleware::class);
+        $middleware3 = $this->createMock(MiddlewareInterface::class);
         $middleware3->method('execute')->willReturnCallback(
             static function () use (&$executionOrder) {
                 $executionOrder[] = 3;
@@ -105,7 +105,7 @@ class CommandBusTest extends TestCase
 
     public function testSingleMiddlewareWorks(): void
     {
-        $middleware = $this->createMock(Middleware::class);
+        $middleware = $this->createMock(MiddlewareInterface::class);
         $middleware->expects(self::once())->method('execute')->willReturn('foobar');
 
         $commandBus = $this->commandBusFactory([$middleware]);

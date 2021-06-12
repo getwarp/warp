@@ -7,7 +7,7 @@ namespace spaceonfire\CommandBus\Mapping;
 use spaceonfire\CommandBus\Mapping\ClassName\ClassNameMappingInterface;
 use spaceonfire\CommandBus\Mapping\Method\MethodNameMappingInterface;
 
-final class CompositeMapping implements CommandToHandlerMapping
+final class CompositeMapping implements CommandToHandlerMappingInterface
 {
     /**
      * @var ClassNameMappingInterface

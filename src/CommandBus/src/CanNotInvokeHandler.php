@@ -13,7 +13,7 @@ use function get_class;
  *
  * The most common reason is the receiving method is missing or incorrectly named.
  */
-final class CanNotInvokeHandler extends BadMethodCallException implements Exception
+final class CanNotInvokeHandler extends BadMethodCallException implements ExceptionInterface
 {
     /**
      * @var object

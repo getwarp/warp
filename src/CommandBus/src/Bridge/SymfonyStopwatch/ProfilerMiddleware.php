@@ -7,10 +7,10 @@ namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use spaceonfire\CommandBus\Middleware;
+use spaceonfire\CommandBus\MiddlewareInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
-final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
+final class ProfilerMiddleware implements MiddlewareInterface, LoggerAwareInterface
 {
     /**
      * @var Stopwatch
@@ -18,7 +18,7 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
     private $stopwatch;
 
     /**
-     * @var ProfilerMiddlewareMessagePredicate
+     * @var ProfilerMiddlewareMessagePredicateInterface
      */
     private $predicate;
 
@@ -35,13 +35,13 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
     /**
      * ProfilerMiddleware constructor.
      * @param Stopwatch $stopwatch
-     * @param ProfilerMiddlewareMessagePredicate|null $predicate
+     * @param ProfilerMiddlewareMessagePredicateInterface|null $predicate
      * @param LoggerInterface|null $logger
      * @param string $logLevel
      */
     public function __construct(
         Stopwatch $stopwatch,
-        ?ProfilerMiddlewareMessagePredicate $predicate = null,
+        ?ProfilerMiddlewareMessagePredicateInterface $predicate = null,
         ?LoggerInterface $logger = null,
         string $logLevel = LogLevel::DEBUG
     ) {
@@ -81,9 +81,9 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
     }
 
     private function preparePredicate(
-        ?ProfilerMiddlewareMessagePredicate $predicate
-    ): ProfilerMiddlewareMessagePredicate {
-        if ($predicate instanceof ProfilerMiddlewareMessagePredicate) {
+        ?ProfilerMiddlewareMessagePredicateInterface $predicate
+    ): ProfilerMiddlewareMessagePredicateInterface {
+        if ($predicate instanceof ProfilerMiddlewareMessagePredicateInterface) {
             return $predicate;
         }
 
@@ -96,7 +96,7 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
 
     private function resolveCommandProfilingEventName(object $command): string
     {
-        $eventName = $command instanceof MayBeProfiledMessage
+        $eventName = $command instanceof MayBeProfiledMessageInterface
             ? $command->getProfilingEventName()
             : null;
         return $eventName ?? get_class($command) . '_' . spl_object_hash($command);
@@ -113,7 +113,7 @@ final class ProfilerMiddleware implements Middleware, LoggerAwareInterface
     {
         $eventName = $this->resolveCommandProfilingEventName($command);
 
-        $eventCategory = $command instanceof MayBeProfiledMessage ? $command->getProfilingCategory() : null;
+        $eventCategory = $command instanceof MayBeProfiledMessageInterface ? $command->getProfilingCategory() : null;
 
         if (null !== $eventCategory) {
             $event = $this->stopwatch->start($eventName, $eventCategory);

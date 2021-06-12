@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
 
-interface ProfilerMiddlewareMessagePredicate
-{
+\class_alias(
+    ProfilerMiddlewareMessagePredicateInterface::class,
+    __NAMESPACE__ . '\ProfilerMiddlewareMessagePredicate'
+);
+
+if (false) {
     /**
-     * @param object $message
-     * @return bool
+     * @deprecated Use {@see \spaceonfire\CommandBus\Bridge\SymfonyStopwatch\ProfilerMiddlewareMessagePredicateInterface} instead.
      */
-    public function __invoke(object $message): bool;
+    interface ProfilerMiddlewareMessagePredicate extends ProfilerMiddlewareMessagePredicateInterface
+    {
+    }
 }

@@ -7,7 +7,7 @@ namespace spaceonfire\CommandBus;
 use Closure;
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
-use spaceonfire\CommandBus\Mapping\CommandToHandlerMapping;
+use spaceonfire\CommandBus\Mapping\CommandToHandlerMappingInterface;
 use Webmozart\Assert\Assert;
 use function array_pop;
 use function get_class;
@@ -19,7 +19,7 @@ use function is_callable;
 class CommandBus
 {
     /**
-     * @var CommandToHandlerMapping
+     * @var CommandToHandlerMappingInterface
      */
     private $mapping;
 
@@ -40,20 +40,20 @@ class CommandBus
 
     /**
      * CommandBus constructor.
-     * @param CommandToHandlerMapping $mapping
-     * @param Middleware[] $middleware
+     * @param CommandToHandlerMappingInterface $mapping
+     * @param MiddlewareInterface[] $middleware
      * @param ContainerInterface|null $container
      */
     public function __construct(
-        CommandToHandlerMapping $mapping,
+        CommandToHandlerMappingInterface $mapping,
         array $middleware = [],
         ?ContainerInterface $container = null
     ) {
         foreach ($middleware as $m) {
-            if (!$m instanceof Middleware) {
+            if (!$m instanceof MiddlewareInterface) {
                 throw new InvalidArgumentException(sprintf(
                     'Argument $middleware must be an array of %s. Got one %s',
-                    Middleware::class,
+                    MiddlewareInterface::class,
                     get_class($m)
                 ));
             }
@@ -104,7 +104,7 @@ class CommandBus
     }
 
     /**
-     * @param Middleware[] $middlewareList
+     * @param MiddlewareInterface[] $middlewareList
      * @return Closure
      */
     private function createExecutionChain(array $middlewareList): Closure

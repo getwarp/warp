@@ -86,7 +86,7 @@ class ProfilerMiddlewareTest extends AbstractTestCase
         $greenMessage = new FixtureMayBeProfiledMessage();
         $greenMessage->setProfilingEventName('green_event');
 
-        $predicateProphecy = $this->prophesize(ProfilerMiddlewareMessagePredicate::class);
+        $predicateProphecy = $this->prophesize(ProfilerMiddlewareMessagePredicateInterface::class);
         $predicateProphecy->__invoke($redMessage)->willReturn(false);
         $predicateProphecy->__invoke($greenMessage)->willReturn(true);
 
