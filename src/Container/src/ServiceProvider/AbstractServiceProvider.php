@@ -29,6 +29,6 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
      */
     public function getIdentifier(): string
     {
-        return $this->identifier ?? get_class($this);
+        return $this->identifier ?? static::class;
     }
 }

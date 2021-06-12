@@ -133,7 +133,7 @@ class AbstractExpressionDecorator implements Expression
      */
     public function equivalentTo(Expression $other): bool
     {
-        if (get_class($this) !== get_class($other)) {
+        if (static::class !== get_class($other)) {
             return false;
         }
 
