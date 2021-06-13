@@ -6,6 +6,6 @@ namespace spaceonfire\DataSource\Fixtures\Domain\Tag;
 
 use spaceonfire\DataSource\RepositoryInterface;
 
-interface TagRepository extends RepositoryInterface
+interface TagRepositoryInterface extends RepositoryInterface
 {
 }

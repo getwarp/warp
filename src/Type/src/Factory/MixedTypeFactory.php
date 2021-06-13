@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Factory;
 
 use spaceonfire\Type\Exception\TypeNotSupportedException;
 use spaceonfire\Type\MixedType;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class MixedTypeFactory implements TypeFactoryInterface
 {
@@ -24,7 +24,7 @@ final class MixedTypeFactory implements TypeFactoryInterface
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         $type = $this->removeWhitespaces($type);
         if (!$this->supports($type)) {

@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Factory;
 
 use Prophecy\Argument;
 use spaceonfire\Type\AbstractTestCase;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 class MemoizedTypeFactoryTest extends AbstractTestCase
 {
@@ -27,7 +27,7 @@ class MemoizedTypeFactoryTest extends AbstractTestCase
 
     public function testMake(): void
     {
-        $expectedReturn = $this->prophesize(Type::class)->reveal();
+        $expectedReturn = $this->prophesize(TypeInterface::class)->reveal();
         $underlyingFactory = $this->prophesize(TypeFactoryInterface::class);
         $underlyingFactory->setParent(Argument::any());
         $underlyingFactory->make('supported-type')->willReturn($expectedReturn)->shouldBeCalledOnce();

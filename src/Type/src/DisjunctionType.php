@@ -13,7 +13,7 @@ final class DisjunctionType extends AbstractAggregatedType
 
     /**
      * DisjunctionType constructor.
-     * @param Type[] $disjuncts
+     * @param TypeInterface[] $disjuncts
      */
     public function __construct(iterable $disjuncts)
     {
@@ -53,7 +53,7 @@ final class DisjunctionType extends AbstractAggregatedType
      * @deprecated use dynamic type factory instead. This method will be removed in next major release.
      * @see Factory\TypeFactoryInterface
      */
-    public static function create(string $type): Type
+    public static function create(string $type): TypeInterface
     {
         $factory = new DisjunctionTypeFactory();
         $factory->setParent(CompositeTypeFactory::makeWithDefaultFactories());

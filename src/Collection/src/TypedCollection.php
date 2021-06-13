@@ -7,7 +7,7 @@ namespace spaceonfire\Collection;
 use InvalidArgumentException;
 use LogicException;
 use spaceonfire\Type\Factory\CompositeTypeFactory;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 use stdClass;
 
 /**
@@ -32,22 +32,22 @@ use stdClass;
 final class TypedCollection extends AbstractCollectionDecorator
 {
     /**
-     * @var Type
+     * @var TypeInterface
      */
     protected $type;
 
     /**
      * TypedCollection constructor.
      * @param CollectionInterface|array|iterable|mixed $items
-     * @param string|Type $type Scalar type name or Full qualified name of object class
+     * @param string|TypeInterface $type Scalar type name or Full qualified name of object class
      */
     public function __construct($items = [], $type = stdClass::class)
     {
-        if (!$type instanceof Type) {
+        if (!$type instanceof TypeInterface) {
             if (!is_string($type)) {
                 throw new InvalidArgumentException(sprintf(
                     'Argument $type expected to be a string or an instance of %s. Got: %s',
-                    Type::class,
+                    TypeInterface::class,
                     gettype($type)
                 ));
             }

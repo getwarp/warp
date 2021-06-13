@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
 
-interface MayBeProfiledMessage
-{
-    /**
-     * Returns event name for profiling
-     * @return string|null
-     */
-    public function getProfilingEventName(): ?string;
+\class_alias(
+    MayBeProfiledMessageInterface::class,
+    __NAMESPACE__ . '\MayBeProfiledMessage'
+);
 
+if (false) {
     /**
-     * Returns event category for profiling
-     * @return string|null
+     * @deprecated Use {@see \spaceonfire\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageInterface} instead.
      */
-    public function getProfilingCategory(): ?string;
+    interface MayBeProfiledMessage extends MayBeProfiledMessageInterface
+    {
+    }
 }

@@ -27,7 +27,7 @@ try {
         }
 
         if (false === copy($sourceFile, $targetFile)) {
-            throw new \RuntimeException(sprintf('Cannot copy file "%s"', $filename));
+            throw new RuntimeException(sprintf('Cannot copy file "%s"', $filename));
         }
         echo sprintf('File "%s" copied to working directory.' . PHP_EOL, $filename);
     }
@@ -36,7 +36,7 @@ try {
         'Are you working on a legacy project? Make sure to use `%s`.' . PHP_EOL,
         dirname($_SERVER['SCRIPT_NAME']) . '/ecs-baseliner.php'
     );
-} catch (\Throwable $e) {
+} catch (Throwable $e) {
     fwrite(STDERR, $e->getMessage() . PHP_EOL);
     exit(1);
 }

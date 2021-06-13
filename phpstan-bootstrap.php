@@ -25,3 +25,7 @@ require_once $autoload;
 if (file_exists($codesnifferAutoload = $vendorDir . '/squizlabs/php_codesniffer/autoload.php')) {
     require_once $codesnifferAutoload;
 }
+
+if (file_exists($ecsAutoload = $vendorDir . '/symplify/easy-coding-standard/vendor/autoload.php')) {
+    require_once $ecsAutoload;
+}

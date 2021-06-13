@@ -64,6 +64,14 @@
                 <directory>src/ValueObject/src/Integrations/</directory>
                 <file>src/ValueObject/src/Bridge/LaminasHydrator/BooleanStrategy.php</file>
                 <file>src/ValueObject/src/Bridge/LaminasHydrator/NullableStrategy.php</file>
+                <file>src/CommandBus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php</file>
+                <file>src/CommandBus/src/Bridge/PsrLog/MayBeLoggedMessage.php</file>
+                <file>src/CommandBus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php</file>
+                <file>src/CommandBus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php</file>
+                <file>src/CommandBus/src/Exception.php</file>
+                <file>src/CommandBus/src/Mapping/CommandToHandlerMapping.php</file>
+                <file>src/CommandBus/src/Middleware.php</file>
+                <file>src/Type/src/Type.php</file>
             </exclude>
         </whitelist>
     </filter>

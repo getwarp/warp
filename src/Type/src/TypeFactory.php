@@ -20,7 +20,7 @@ abstract class TypeFactory
     {
     }
 
-    public static function create(string $type): Type
+    public static function create(string $type): TypeInterface
     {
         return CompositeTypeFactory::makeWithDefaultFactories()->make($type);
     }

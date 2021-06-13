@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 class DateValueStrategy implements StrategyInterface
 {
     /**
-     * @var string|DateTimeValueInterface
+     * @var class-string<DateTimeValueInterface>
      */
     private $dateClass;
 
@@ -34,7 +34,7 @@ class DateValueStrategy implements StrategyInterface
     /**
      * DateValueStrategy constructor.
      * @param string $format
-     * @param string|DateTimeValueInterface $dateClass
+     * @param class-string<DateTimeValueInterface> $dateClass
      */
     public function __construct(string $format, string $dateClass = DateTimeImmutableValue::class)
     {
@@ -58,9 +58,25 @@ class DateValueStrategy implements StrategyInterface
      */
     public function hydrate($value, ?array $data = null)
     {
+        if (!is_string($value) && !is_numeric($value)) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected value to be a string or number. Got: "%s"',
+                gettype($value)
+            ));
+        }
+
         /** @var DateTimeImmutableValue|DateTimeValue $class */
         $class = $this->dateClass;
-        return $class::createFromFormat($this->format, $value);
+
+        if (null !== $hydrated = $class::createFromFormat($this->format, (string)$value)) {
+            return $hydrated;
+        }
+
+        $hydrated = $class::createFromFormat($this->format, $class::from($value)->format($this->format));
+
+        \assert(null !== $hydrated);
+
+        return $hydrated;
     }
 
     private function validateDateClass(string $dateClass): void

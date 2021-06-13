@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Factory;
 
 use spaceonfire\Type\CollectionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class CollectionTypeFactory implements TypeFactoryInterface
 {
@@ -77,7 +77,7 @@ final class CollectionTypeFactory implements TypeFactoryInterface
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         if (!$this->supports($type)) {
             throw new TypeNotSupportedException($type, CollectionType::class);

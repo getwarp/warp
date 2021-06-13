@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\CommandBus\Bridge\PsrLog;
 
-interface LoggerMiddlewareMessagePredicate
-{
+\class_alias(
+    LoggerMiddlewareMessagePredicateInterface::class,
+    __NAMESPACE__ . '\LoggerMiddlewareMessagePredicate'
+);
+
+if (false) {
     /**
-     * @param object $message
-     * @return bool
+     * @deprecated Use {@see \spaceonfire\CommandBus\Bridge\PsrLog\LoggerMiddlewareMessagePredicateInterface} instead.
      */
-    public function __invoke(object $message): bool;
+    interface LoggerMiddlewareMessagePredicate extends LoggerMiddlewareMessagePredicateInterface
+    {
+    }
 }

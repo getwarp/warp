@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use spaceonfire\Type\Factory\BuiltinTypeFactory;
 use Webmozart\Assert\Assert;
 
-final class BuiltinType implements Type
+final class BuiltinType implements TypeInterface
 {
     public const INT = 'int';
 
@@ -204,7 +204,7 @@ final class BuiltinType implements Type
      * @deprecated use dynamic type factory instead. This method will be removed in next major release.
      * @see Factory\TypeFactoryInterface
      */
-    public static function create(string $type, bool $strict = true): Type
+    public static function create(string $type, bool $strict = true): TypeInterface
     {
         return (new BuiltinTypeFactory($strict))->make($type);
     }

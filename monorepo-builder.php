@@ -31,9 +31,9 @@ $defaultComposerJson = [
         'phpspec/prophecy-phpunit' => '^1.1|^2.0',
         'phpstan/phpstan' => '^0.12.84',
         'phpstan/phpstan-webmozart-assert' => '^0.12.12',
-        'symplify/easy-coding-standard' => '^8.3|^9.2',
+        'symplify/easy-coding-standard' => '^9.2',
         'symplify/monorepo-builder' => '^8.3|^9.2',
-        'slevomat/coding-standard' => '^6.4',
+        'slevomat/coding-standard' => '^7.0',
     ],
     ComposerJsonSection::SCRIPTS => [
         'test' => '@php -d xdebug.mode=coverage `which phpunit`',

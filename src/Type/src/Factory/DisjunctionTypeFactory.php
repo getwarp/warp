@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Factory;
 
 use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class DisjunctionTypeFactory extends AbstractAggregatedTypeFactory
 {
@@ -18,7 +18,7 @@ final class DisjunctionTypeFactory extends AbstractAggregatedTypeFactory
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         $parsed = $this->parse($type);
 

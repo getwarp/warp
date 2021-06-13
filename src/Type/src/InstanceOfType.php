@@ -7,7 +7,7 @@ namespace spaceonfire\Type;
 use InvalidArgumentException;
 use spaceonfire\Type\Factory\InstanceOfTypeFactory;
 
-final class InstanceOfType implements Type
+final class InstanceOfType implements TypeInterface
 {
     /**
      * @var string
@@ -60,7 +60,7 @@ final class InstanceOfType implements Type
      * @deprecated use dynamic type factory instead. This method will be removed in next major release.
      * @see Factory\TypeFactoryInterface
      */
-    public static function create(string $type): Type
+    public static function create(string $type): TypeInterface
     {
         return (new InstanceOfTypeFactory())->make($type);
     }

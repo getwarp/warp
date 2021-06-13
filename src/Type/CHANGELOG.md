@@ -4,25 +4,13 @@ All notable changes to `type` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-<!--
-## [X.Y.Z] - YYYY-MM-DD
+## [2.5.1] - 2021-06-13
+
 ### Added
-- Nothing
 
-### Deprecated
-- Nothing
+-   `Interface` suffix added to type interface.
 
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
--->
-
-## [2.5.0] - 2021-04-XX
+## [2.5.0] - 2021-04-21
 
 ### Added
 

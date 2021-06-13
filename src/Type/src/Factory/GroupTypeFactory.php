@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Type\Factory;
 
 use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\Type;
+use spaceonfire\Type\TypeInterface;
 
 final class GroupTypeFactory implements TypeFactoryInterface
 {
@@ -31,7 +31,7 @@ final class GroupTypeFactory implements TypeFactoryInterface
     /**
      * @inheritDoc
      */
-    public function make(string $type): Type
+    public function make(string $type): TypeInterface
     {
         $type = $this->removeWhitespaces($type);
 

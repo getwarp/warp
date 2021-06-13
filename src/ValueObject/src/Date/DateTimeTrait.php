@@ -42,7 +42,7 @@ trait DateTimeTrait
 
     /**
      * DateTime object factory.
-     * @param string|int|DateTimeInterface|null $time
+     * @param string|int|float|DateTimeInterface|null $time
      * @return static
      */
     public static function from($time)
