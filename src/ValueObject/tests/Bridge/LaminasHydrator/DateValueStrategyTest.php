@@ -38,4 +38,20 @@ class DateValueStrategyTest extends TestCase
         $hydrated = $strategy->hydrate('2020-04-21', null);
         self::assertSame($date->getTimestamp(), $hydrated->getTimestamp());
     }
+
+    public function testHydrateFallback(): void
+    {
+        $strategy = new DateValueStrategy('Y-m-d H:i:s.u');
+
+        $date = DateTimeImmutableValue::createFromFormat('Y-m-d', '2020-04-21');
+        $hydrated = $strategy->hydrate($date->format('Y-m-d H:i:s'), null);
+        self::assertSame($date->getTimestamp(), $hydrated->getTimestamp());
+    }
+
+    public function testHydrateInvalid(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new DateValueStrategy('Y-m-d'))->hydrate(null);
+    }
 }
