@@ -4,23 +4,11 @@ All notable changes to `spaceonfire/easy-coding-standard-bridge` will be documen
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-<!--
-## [X.Y.Z] - YYYY-MM-DD
+## [2.5.1] - 2021-06-13
+
 ### Added
-- Nothing
 
-### Deprecated
-- Nothing
-
-### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
--->
+-   Update `easy-coding-standard` and other dependencies.
 
 ## [2.5.0] - 2021-04-21
 

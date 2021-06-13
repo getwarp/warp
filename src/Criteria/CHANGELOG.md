@@ -4,25 +4,13 @@ All notable changes to `criteria` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-<!--
-## [X.Y.Z] - YYYY-MM-DD
-### Added
-- Nothing
-
-### Deprecated
-- Nothing
+## [2.5.1] - 2021-06-13
 
 ### Fixed
-- Nothing
 
-### Removed
-- Nothing
+-   Code style fixes.
 
-### Security
-- Nothing
--->
-
-## [2.5.0] - 2021-04-XX
+## [2.5.0] - 2021-04-21
 
 ### Added
 
