@@ -39,7 +39,7 @@
     "phpspec/prophecy-phpunit": "^1.1|^2.0",
     "phpstan/phpstan": "^0.12.84",
     "phpstan/phpstan-webmozart-assert": "^0.12.12",
-    "phpunit/phpunit": "^8.5|^9.5",
+    "phpunit/phpunit": "^8.5.20|^9.5",
     "psr/log": "^1.1",
     "ramsey/uuid": "^3.9|^4.0",
     "roave/security-advisories": "dev-latest",
@@ -73,33 +73,33 @@
   },
   "autoload": {
     "files": [
-      "src/Common/functions.php"
+      "pkg/common/functions.php"
     ],
     "psr-4": {
-      "spaceonfire\\Collection\\": "src/Collection/src",
-      "spaceonfire\\CommandBus\\": "src/CommandBus/src",
-      "spaceonfire\\Common\\": "src/Common/src",
-      "spaceonfire\\Container\\": "src/Container/src",
-      "spaceonfire\\Criteria\\": "src/Criteria/src",
-      "spaceonfire\\DataSource\\": "src/DataSource/src",
-      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/src",
-      "spaceonfire\\MonologBridge\\": "src/MonologBridge/src",
-      "spaceonfire\\Type\\": "src/Type/src",
-      "spaceonfire\\ValueObject\\": "src/ValueObject/src"
+      "spaceonfire\\Collection\\": "pkg/collection/src",
+      "spaceonfire\\CommandBus\\": "pkg/command-bus/src",
+      "spaceonfire\\Common\\": "pkg/common/src",
+      "spaceonfire\\Container\\": "pkg/container/src",
+      "spaceonfire\\Criteria\\": "pkg/criteria/src",
+      "spaceonfire\\DataSource\\": "pkg/data-source/src",
+      "spaceonfire\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/src",
+      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/src",
+      "spaceonfire\\Type\\": "pkg/type/src",
+      "spaceonfire\\ValueObject\\": "pkg/value-object/src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Collection\\": "src/Collection/tests",
-      "spaceonfire\\CommandBus\\": "src/CommandBus/tests",
-      "spaceonfire\\Common\\": "src/Common/tests",
-      "spaceonfire\\Container\\": "src/Container/tests",
-      "spaceonfire\\Criteria\\": "src/Criteria/tests",
-      "spaceonfire\\DataSource\\": "src/DataSource/tests",
-      "spaceonfire\\LaminasHydratorBridge\\": "src/LaminasHydratorBridge/tests",
-      "spaceonfire\\MonologBridge\\": "src/MonologBridge/tests",
-      "spaceonfire\\Type\\": "src/Type/tests",
-      "spaceonfire\\ValueObject\\": "src/ValueObject/tests"
+      "spaceonfire\\Collection\\": "pkg/collection/tests",
+      "spaceonfire\\CommandBus\\": "pkg/command-bus/tests",
+      "spaceonfire\\Common\\": "pkg/common/tests",
+      "spaceonfire\\Container\\": "pkg/container/tests",
+      "spaceonfire\\Criteria\\": "pkg/criteria/tests",
+      "spaceonfire\\DataSource\\": "pkg/data-source/tests",
+      "spaceonfire\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/tests",
+      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/tests",
+      "spaceonfire\\Type\\": "pkg/type/tests",
+      "spaceonfire\\ValueObject\\": "pkg/value-object/tests"
     }
   },
   "replace": {

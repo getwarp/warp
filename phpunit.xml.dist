@@ -13,65 +13,65 @@
 >
     <testsuites>
         <testsuite name="collection">
-            <directory>src/Collection/tests</directory>
+            <directory>pkg/collection/tests</directory>
         </testsuite>
         <testsuite name="command-bus">
-            <directory>src/CommandBus/tests</directory>
+            <directory>pkg/command-bus/tests</directory>
         </testsuite>
         <testsuite name="common">
-            <directory>src/Common/tests</directory>
+            <directory>pkg/common/tests</directory>
         </testsuite>
         <testsuite name="container">
-            <directory>src/Container/tests</directory>
+            <directory>pkg/container/tests</directory>
         </testsuite>
         <testsuite name="criteria">
-            <directory>src/Criteria/tests</directory>
+            <directory>pkg/criteria/tests</directory>
         </testsuite>
         <testsuite name="data-source">
-            <directory>src/DataSource/tests</directory>
+            <directory>pkg/data-source/tests</directory>
         </testsuite>
         <testsuite name="laminas-hydrator-bridge">
-            <directory>src/LaminasHydratorBridge/tests</directory>
+            <directory>pkg/laminas-hydrator-bridge/tests</directory>
         </testsuite>
         <testsuite name="monolog-bridge">
-            <directory>src/MonologBridge/tests</directory>
+            <directory>pkg/monolog-bridge/tests</directory>
         </testsuite>
         <testsuite name="type">
-            <directory>src/Type/tests</directory>
+            <directory>pkg/type/tests</directory>
         </testsuite>
         <testsuite name="value-object">
-            <directory>src/ValueObject/tests</directory>
+            <directory>pkg/value-object/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">src/Collection/src/</directory>
-            <directory suffix=".php">src/CommandBus/src/</directory>
-            <directory suffix=".php">src/Common/src/</directory>
-            <directory suffix=".php">src/Container/src/</directory>
-            <directory suffix=".php">src/Criteria/src/</directory>
-            <directory suffix=".php">src/DataSource/src/</directory>
-            <directory suffix=".php">src/LaminasHydratorBridge/src/</directory>
-            <directory suffix=".php">src/MonologBridge/src/</directory>
-            <directory suffix=".php">src/Type/src/</directory>
-            <directory suffix=".php">src/ValueObject/src/</directory>
+            <directory suffix=".php">pkg/collection/src/</directory>
+            <directory suffix=".php">pkg/command-bus/src/</directory>
+            <directory suffix=".php">pkg/common/src/</directory>
+            <directory suffix=".php">pkg/container/src/</directory>
+            <directory suffix=".php">pkg/criteria/src/</directory>
+            <directory suffix=".php">pkg/data-source/src/</directory>
+            <directory suffix=".php">pkg/laminas-hydrator-bridge/src/</directory>
+            <directory suffix=".php">pkg/monolog-bridge/src/</directory>
+            <directory suffix=".php">pkg/type/src/</directory>
+            <directory suffix=".php">pkg/value-object/src/</directory>
             <exclude>
-                <file>src/Container/src/ContainerChain.php</file>
-                <file>src/Container/src/Argument/ArgumentValue.php</file>
-                <directory>src/Criteria/src/Adapter/</directory>
-                <directory>src/DataSource/src/Adapters/</directory>
-                <file>src/DataSource/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php</file>
-                <directory>src/ValueObject/src/Integrations/</directory>
-                <file>src/ValueObject/src/Bridge/LaminasHydrator/BooleanStrategy.php</file>
-                <file>src/ValueObject/src/Bridge/LaminasHydrator/NullableStrategy.php</file>
-                <file>src/CommandBus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php</file>
-                <file>src/CommandBus/src/Bridge/PsrLog/MayBeLoggedMessage.php</file>
-                <file>src/CommandBus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php</file>
-                <file>src/CommandBus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php</file>
-                <file>src/CommandBus/src/Exception.php</file>
-                <file>src/CommandBus/src/Mapping/CommandToHandlerMapping.php</file>
-                <file>src/CommandBus/src/Middleware.php</file>
-                <file>src/Type/src/Type.php</file>
+                <file>pkg/container/src/ContainerChain.php</file>
+                <file>pkg/container/src/Argument/ArgumentValue.php</file>
+                <directory>pkg/criteria/src/Adapter/</directory>
+                <directory>pkg/data-source/src/Adapters/</directory>
+                <file>pkg/data-source/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php</file>
+                <directory>pkg/value-object/src/Integrations/</directory>
+                <file>pkg/value-object/src/Bridge/LaminasHydrator/BooleanStrategy.php</file>
+                <file>pkg/value-object/src/Bridge/LaminasHydrator/NullableStrategy.php</file>
+                <file>pkg/command-bus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php</file>
+                <file>pkg/command-bus/src/Bridge/PsrLog/MayBeLoggedMessage.php</file>
+                <file>pkg/command-bus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php</file>
+                <file>pkg/command-bus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php</file>
+                <file>pkg/command-bus/src/Exception.php</file>
+                <file>pkg/command-bus/src/Mapping/CommandToHandlerMapping.php</file>
+                <file>pkg/command-bus/src/Middleware.php</file>
+                <file>pkg/type/src/Type.php</file>
             </exclude>
         </whitelist>
     </filter>

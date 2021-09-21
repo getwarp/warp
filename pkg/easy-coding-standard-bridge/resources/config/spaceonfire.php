@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\VersionControl\GitMergeConflictSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\LanguageConstructSpacingSniff;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\WhiteSpace\SuperfluousWhitespaceSniff;
@@ -91,7 +90,6 @@ use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
 use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
-use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DisallowCommentAfterCodeSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\EmptyCommentSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff;
@@ -126,13 +124,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [
             [
                 'syntax' => 'short',
-            ]
+            ],
         ]);
     $services->set(TrailingCommaInMultilineFixer::class)
         ->call('configure', [
             [
                 'elements' => [TrailingCommaInMultilineFixer::ELEMENTS_ARRAYS],
-            ]
+            ],
         ]);
 
     // Comments
@@ -148,7 +146,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(StandardizeIncrementFixer::class);
     $services->set(SelfAccessorFixer::class);
     $services->set(MagicConstantCasingFixer::class);
-    $services->set(AssignmentInConditionSniff::class);
+//    $services->set(AssignmentInConditionSniff::class);
     $services->set(NoUselessElseFixer::class);
     $services->set(SingleQuoteFixer::class);
     $services->set(YodaStyleFixer::class)
@@ -157,7 +155,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'equal' => true,
                 'identical' => true,
                 'less_and_greater' => true,
-            ]
+            ],
         ]);
     $services->set(OrderedClassElementsFixer::class);
     // TODO: check this sniff
@@ -174,8 +172,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ClassAttributesSeparationFixer::class)
         ->call('configure', [
             [
-                'elements' => ['const', 'property', 'method'],
-            ]
+                'elements' => [
+                    'const' => 'one',
+                    'property' => 'one',
+                    'method' => 'one',
+                ],
+            ],
         ]);
     $services->set(SuperfluousWhitespaceSniff::class)
         ->property('ignoreBlankLines', false);
@@ -183,7 +185,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [
             [
                 'space' => 'none',
-            ]
+            ],
         ]);
 
     $services->set(ClassAttributesSeparationFixer::class);
@@ -198,11 +200,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // TODO: check this sniffs
     $services->set(ParentCallSpacingSniff::class);
     $services->set(DuplicateSpacesSniff::class);
-    $services->set(TraitUseSpacingSniff::class)
-        ->property('linesCountAfterLastUse', 1)
-        ->property('linesCountAfterLastUseWhenLastInClass', 0)
-        ->property('linesCountBeforeFirstUse', 0)
-        ->property('linesCountBetweenUses', 0);
 
     // Strict
     $services->set(StrictComparisonFixer::class);
@@ -286,7 +283,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [
             [
                 'single_line' => true,
-            ]
+            ],
         ]);
     $services->set(VisibilityRequiredFixer::class)
         ->call('configure', [
@@ -310,7 +307,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->call('configure', [
             [
                 'space' => 'none',
-            ]
+            ],
         ]);
     $services->set(BracesFixer::class)
         ->call('configure', [
@@ -319,7 +316,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'position_after_functions_and_oop_constructs' => 'next',
                 'position_after_control_structures' => 'same',
                 'position_after_anonymous_constructs' => 'same',
-            ]
+            ],
         ]);
     $services->set(BinaryOperatorSpacesFixer::class)
         ->call('configure', [
@@ -328,13 +325,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     '=>' => 'single_space',
                     '=' => 'single_space',
                 ],
-            ]
+            ],
         ]);
     $services->set(ConcatSpaceFixer::class)
         ->call('configure', [
             [
                 'spacing' => 'one',
-            ]
+            ],
         ]);
     $services->set(LineLengthFixer::class)
         ->call('configure', [

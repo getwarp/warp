@@ -96,7 +96,7 @@ abstract class AbstractCycleRepository implements RepositoryInterface
             throw new RuntimeException('Entity must define role or class name');
         }
 
-        static::setRole($role);
+        self::setRole($role);
 
         if (!$e->getMapper()) {
             $e->setMapper(null === $e->getClass() ? StdClassCycleMapper::class : BasicCycleMapper::class);
@@ -236,8 +236,8 @@ abstract class AbstractCycleRepository implements RepositoryInterface
      */
     public function getMapper(): MapperInterface
     {
-        /** @var MapperInterface $mapper */
-        $mapper = $this->orm->getMapper(static::getRole());
+        $mapper = $this->orm->getMapper(self::getRole());
+        \assert($mapper instanceof MapperInterface);
         return $mapper;
     }
 
