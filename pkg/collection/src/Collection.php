@@ -10,6 +10,8 @@ use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
 use spaceonfire\Criteria\CriteriaInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 use Traversable;
 
 /**
@@ -480,9 +482,25 @@ final class Collection implements CollectionInterface
         }
 
         if ([] !== $orderBy = $criteria->getOrderBy()) {
-            foreach ($orderBy as $key => $direction) {
-                $result = $result->sortBy($key, $direction);
-            }
+            $result = $result->sortBy(
+                \array_map(static function (string $key) {
+                    if (!\class_exists(PropertyAccess::class)) {
+                        return $key;
+                    }
+
+                    return static function ($element) use ($key) {
+                        $accessor = PropertyAccess::createPropertyAccessor();
+                        $key = new PropertyPath($key);
+
+                        if ($accessor->isReadable($element, $key)) {
+                            return $accessor->getValue($element, $key);
+                        }
+
+                        return null;
+                    };
+                }, \array_keys($orderBy)),
+                \array_values($orderBy)
+            );
         }
 
         return $result->slice($criteria->getOffset(), $criteria->getLimit());
