@@ -9,10 +9,13 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
     use TypeFactoryTrait;
 
     /**
-     * @var string
+     * @var non-empty-string
      */
     protected $delimiter;
 
+    /**
+     * @param non-empty-string $delimiter
+     */
     public function __construct(string $delimiter)
     {
         $this->delimiter = $delimiter;
@@ -61,6 +64,6 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
 
     private function split(string $string): array
     {
-        return (explode($this->delimiter, $string, 2) ?: []) + ['', ''];
+        return explode($this->delimiter, $string, 2) + ['', ''];
     }
 }

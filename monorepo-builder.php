@@ -26,7 +26,7 @@ $defaultComposerJson = [
     ],
     ComposerJsonSection::REQUIRE_DEV => [
         'roave/security-advisories' => 'dev-latest',
-        'phpunit/phpunit' => '^8.5|^9.5',
+        'phpunit/phpunit' => '^8.5.20|^9.5',
         'phpspec/prophecy' => '^1.13',
         'phpspec/prophecy-phpunit' => '^1.1|^2.0',
         'phpstan/phpstan' => '^0.12.84',
@@ -75,7 +75,7 @@ return static function (ContainerConfigurator $containerConfigurator) use ($defa
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::PACKAGE_DIRECTORIES, [
-        __DIR__ . '/src',
+        __DIR__ . '/pkg',
     ]);
 
     $parameters->set(Option::DATA_TO_APPEND, $defaultComposerJson);

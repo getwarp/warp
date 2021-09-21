@@ -8,20 +8,16 @@ parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
     paths:
-        - src/Collection/src/
-        - src/CommandBus/src/
-        - src/Common/src/
-        - src/Container/src/
-        - src/Criteria/src/
-        - src/DataSource/src/
-        - src/Type/src/
-        - src/ValueObject/src/
-        - src/LaminasHydratorBridge/src/
-        - src/MonologBridge/src/
-        - src/EasyCodingStandardBridge/bin/
-        - src/EasyCodingStandardBridge/resources/
-    excludes_analyse:
-        - src/EasyCodingStandardBridge/resources/stubs/bad-code/
+        - pkg/collection/src/
+        - pkg/command-bus/src/
+        - pkg/common/src/
+        - pkg/container/src/
+        - pkg/criteria/src/
+        - pkg/data-source/src/
+        - pkg/type/src/
+        - pkg/value-object/src/
+        - pkg/laminas-hydrator-bridge/src/
+        - pkg/monolog-bridge/src/
     ignoreErrors:
         - '/^Unsafe usage of new static/'
         - '/^Property spaceonfire\\CommandBus\\Mapping\\ClassName\\ReplacementClassNameMapping::\$replace \(array\<string\>\|string\) does not accept array\<string\>\|string\|null.$/'
@@ -30,48 +26,46 @@ parameters:
         -
             message: '/^If condition is always false\.$/'
             paths:
-                - src/Container/src/ContainerChain.php
-                - src/Container/src/Argument/ArgumentValue.php
+                - pkg/container/src/ContainerChain.php
+                - pkg/container/src/Argument/ArgumentValue.php
         - '/^Method (.*) should return static\((.*)\) but returns (.*)\.$/'
         -
             message: '/^If condition is always false\.$/'
-            path: src/Criteria/src/Adapter/*
+            path: pkg/criteria/src/Adapter/*
         - '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
         - '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
         - '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
         -
             message: '/^If condition is always false\.$/'
             paths:
-                - src/DataSource/src/Adapters/*
-                - src/DataSource/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php
+                - pkg/data-source/src/Adapters/*
+                - pkg/data-source/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php
         - '/^Method (.*)::create\(\) should return (.*) but returns spaceonfire\\Type\\TypeInterface.$/'
         -
             message: '/^Cannot call method make\(\) on spaceonfire\\Type\\Factory\\TypeFactoryInterface\|null.$/'
-            path: src/Type/src/Factory/*.php
+            path: pkg/type/src/Factory/*.php
         - '/^PHPDoc tag \@param for parameter (.*) with type (.*)\|string is not subtype of native type string.$/'
         -
             message: '/^Call to an undefined method object::value\(\).$/'
-            path: src/ValueObject/src/Bridge/LaminasHydrator/ValueObjectStrategy.php
+            path: pkg/value-object/src/Bridge/LaminasHydrator/ValueObjectStrategy.php
         -
             message: '/^If condition is always false\.$/'
             paths:
-                - src/ValueObject/src/Integrations/*
-                - src/ValueObject/src/Bridge/LaminasHydrator/BooleanStrategy.php
-                - src/ValueObject/src/Bridge/LaminasHydrator/NullableStrategy.php
-        -
-            message: '/^Empty array passed to foreach\.$/'
-            path: src/EasyCodingStandardBridge/resources/templates/ecs-baseline.php
+                - pkg/value-object/src/Integrations/*
+                - pkg/value-object/src/Bridge/LaminasHydrator/BooleanStrategy.php
+                - pkg/value-object/src/Bridge/LaminasHydrator/NullableStrategy.php
         -
             message: '/^Call to an undefined static method Dotenv\\Repository\\RepositoryBuilder::create\(\)\.$/'
-            path: src/Common/src/Env/env.php
+            path: pkg/common/src/Env/env.php
         -
             message: '/^If condition is always false\.$/'
             paths:
-                - src/CommandBus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php
-                - src/CommandBus/src/Bridge/PsrLog/MayBeLoggedMessage.php
-                - src/CommandBus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php
-                - src/CommandBus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php
-                - src/CommandBus/src/Exception.php
-                - src/CommandBus/src/Mapping/CommandToHandlerMapping.php
-                - src/CommandBus/src/Middleware.php
-                - src/Type/src/Type.php
+                - pkg/command-bus/src/Bridge/PsrLog/LoggerMiddlewareMessagePredicate.php
+                - pkg/command-bus/src/Bridge/PsrLog/MayBeLoggedMessage.php
+                - pkg/command-bus/src/Bridge/SymfonyStopwatch/MayBeProfiledMessage.php
+                - pkg/command-bus/src/Bridge/SymfonyStopwatch/ProfilerMiddlewareMessagePredicate.php
+                - pkg/command-bus/src/Exception.php
+                - pkg/command-bus/src/Mapping/CommandToHandlerMapping.php
+                - pkg/command-bus/src/Middleware.php
+                - pkg/type/src/Type.php
+        - '/^Class (.*) extends \@final class/'
