@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Collection;
 
 use spaceonfire\Common\Field\FieldInterface;
+use spaceonfire\Criteria\CriteriaInterface;
+use spaceonfire\Criteria\FilterableInterface;
 
 /**
  * Collection interface.
@@ -13,7 +15,7 @@ use spaceonfire\Common\Field\FieldInterface;
  * @extends \IteratorAggregate<int,V>
  * @extends MutableInterface<V>
  */
-interface CollectionInterface extends MutableInterface, \IteratorAggregate, \Countable, \JsonSerializable
+interface CollectionInterface extends MutableInterface, FilterableInterface, \IteratorAggregate, \Countable, \JsonSerializable
 {
     /**
      * @template T
@@ -67,6 +69,12 @@ interface CollectionInterface extends MutableInterface, \IteratorAggregate, \Cou
      * @return static<V>
      */
     public function slice(int $offset, ?int $limit = null): self;
+
+    /**
+     * @param CriteriaInterface $criteria
+     * @return CollectionInterface<V>
+     */
+    public function matching(CriteriaInterface $criteria): self;
 
     /**
      * @return array<int,V>

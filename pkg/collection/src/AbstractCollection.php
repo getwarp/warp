@@ -8,7 +8,6 @@ use spaceonfire\Collection\Iterator\ArrayCacheIterator;
 use spaceonfire\Common\Field\FieldFactoryInterface;
 use spaceonfire\Common\Field\FieldInterface;
 use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\FilterableInterface;
 use spaceonfire\Type\MixedType;
 use spaceonfire\Type\TypeInterface;
 
@@ -16,7 +15,7 @@ use spaceonfire\Type\TypeInterface;
  * @template V
  * @implements CollectionInterface<V>
  */
-abstract class AbstractCollection implements CollectionInterface, FilterableInterface
+abstract class AbstractCollection implements CollectionInterface
 {
     /**
      * @var \Traversable<int,V>
@@ -109,10 +108,6 @@ abstract class AbstractCollection implements CollectionInterface, FilterableInte
         return $this->applyOperation(new Operation\SliceOperation($offset, $limit));
     }
 
-    /**
-     * @param CriteriaInterface $criteria
-     * @return CollectionInterface<V>
-     */
     public function matching(CriteriaInterface $criteria): CollectionInterface
     {
         return $this->applyOperation(new Operation\MatchingOperation($criteria, $this->fieldFactory));
