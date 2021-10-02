@@ -10,6 +10,7 @@ use Cycle\ORM\TransactionInterface;
 use spaceonfire\Bridge\Cycle\CycleEntityManager;
 use spaceonfire\Collection\CollectionInterface;
 use spaceonfire\Criteria\CriteriaInterface;
+use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
 use spaceonfire\DataSource\RepositoryInterface;
 
 /**
@@ -34,13 +35,14 @@ abstract class AbstractRepository implements RepositoryInterface
     public function __construct(
         string $role,
         ORMInterface $orm,
-        int $transactionMode = TransactionInterface::MODE_CASCADE
+        int $transactionMode = TransactionInterface::MODE_CASCADE,
+        ?EntityNotFoundExceptionFactoryInterface $notFoundExceptionFactory = null
     ) {
         /** @phpstan-var class-string<E> $role */
         $role = $orm->resolveRole($role);
         $this->orm = $orm;
         $this->role = $role;
-        $this->em = new CycleEntityManager($this->orm, $transactionMode);
+        $this->em = new CycleEntityManager($this->orm, $transactionMode, $notFoundExceptionFactory);
     }
 
     public function findByPrimary($primary, ?CriteriaInterface $criteria = null): object
