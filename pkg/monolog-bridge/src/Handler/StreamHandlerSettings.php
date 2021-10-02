@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Handler;
+namespace spaceonfire\Bridge\Monolog\Handler;
 
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ObjectPropertyHydrator;

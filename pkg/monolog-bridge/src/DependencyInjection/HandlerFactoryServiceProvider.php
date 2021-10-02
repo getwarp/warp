@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\DependencyInjection;
+namespace spaceonfire\Bridge\Monolog\DependencyInjection;
 
+use spaceonfire\Bridge\Monolog\Handler;
 use spaceonfire\Container\Factory\DefinitionTag;
 use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
-use spaceonfire\MonologBridge\Handler;
 use Symfony\Bridge\Monolog\Handler\MailerHandler;
 use Symfony\Component\Console\Logger\ConsoleLogger;
 

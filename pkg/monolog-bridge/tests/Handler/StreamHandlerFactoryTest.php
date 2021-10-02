@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Handler;
+namespace spaceonfire\Bridge\Monolog\Handler;
 
 use Monolog\Logger;
 use Monolog\Test\TestCase;
-use spaceonfire\MonologBridge\Fixture\FixtureFormatter;
+use spaceonfire\Bridge\Monolog\Fixture\FixtureFormatter;
 
 class StreamHandlerFactoryTest extends TestCase
 {

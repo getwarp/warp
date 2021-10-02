@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\DependencyInjection;
+namespace spaceonfire\Bridge\Monolog\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
+use spaceonfire\Bridge\Monolog\Handler;
 use spaceonfire\Container\DefinitionContainer;
 use spaceonfire\Container\Factory\DefinitionTag;
-use spaceonfire\MonologBridge\Handler;
 
 class HandlerFactoryServiceProviderTest extends TestCase
 {

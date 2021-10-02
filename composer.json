@@ -93,7 +93,7 @@
       "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/src",
       "spaceonfire\\Exception\\": "pkg/exception/src",
       "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/src",
-      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/src",
+      "spaceonfire\\Bridge\\Monolog\\": "pkg/monolog-bridge/src",
       "spaceonfire\\Type\\": "pkg/type/src",
       "spaceonfire\\ValueObject\\": "pkg/value-object/src"
     },
@@ -114,7 +114,7 @@
       "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/tests",
       "spaceonfire\\Exception\\": "pkg/exception/tests",
       "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/tests",
-      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/tests",
+      "spaceonfire\\Bridge\\Monolog\\": "pkg/monolog-bridge/tests",
       "spaceonfire\\Type\\": "pkg/type/tests",
       "spaceonfire\\ValueObject\\": "pkg/value-object/tests"
     },

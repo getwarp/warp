@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Fixture;
+namespace spaceonfire\Bridge\Monolog\Fixture;
 
 use Monolog\Formatter\FormatterInterface;
 

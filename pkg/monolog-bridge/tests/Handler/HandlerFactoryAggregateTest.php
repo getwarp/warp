@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Handler;
+namespace spaceonfire\Bridge\Monolog\Handler;
 
 use Monolog\Handler\PsrHandler;
 use Monolog\Test\TestCase;
-use spaceonfire\MonologBridge\Exception\UnknownHandlerTypeException;
+use spaceonfire\Bridge\Monolog\Exception\UnknownHandlerTypeException;
 use Symfony\Component\Console\Output\NullOutput;
 
 class HandlerFactoryAggregateTest extends TestCase

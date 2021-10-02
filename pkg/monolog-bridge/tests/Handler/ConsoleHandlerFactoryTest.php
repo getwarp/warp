@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Handler;
+namespace spaceonfire\Bridge\Monolog\Handler;
 
 use Monolog\Logger;
 use Monolog\Test\TestCase;
 use Psr\Log\LogLevel;
-use spaceonfire\MonologBridge\Fixture\FixtureFormatter;
+use spaceonfire\Bridge\Monolog\Fixture\FixtureFormatter;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 

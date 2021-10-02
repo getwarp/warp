@@ -40,12 +40,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\MonologBridge\\": "src"
+      "spaceonfire\\Bridge\\Monolog\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\MonologBridge\\": "tests"
+      "spaceonfire\\Bridge\\Monolog\\": "tests"
     }
   },
   "config": {

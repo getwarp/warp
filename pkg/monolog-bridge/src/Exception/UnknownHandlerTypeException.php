@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\MonologBridge\Exception;
+namespace spaceonfire\Bridge\Monolog\Exception;
 
 use spaceonfire\Exception\FriendlyExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
