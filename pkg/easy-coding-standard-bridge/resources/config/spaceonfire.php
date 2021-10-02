@@ -29,6 +29,7 @@ use PhpCsFixer\Fixer\ClassNotation\SingleClassElementPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\SingleTraitInsertPerStatementFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer;
+use PhpCsFixer\Fixer\ConstantNotation\NativeConstantInvocationFixer;
 use PhpCsFixer\Fixer\ControlStructure\ElseifFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoBreakCommentFixer;
 use PhpCsFixer\Fixer\ControlStructure\NoUnneededControlParenthesesFixer;
@@ -41,6 +42,7 @@ use PhpCsFixer\Fixer\ControlStructure\YodaStyleFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\FunctionTypehintSpaceFixer;
 use PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer;
+use PhpCsFixer\Fixer\FunctionNotation\NativeFunctionInvocationFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NoSpacesAfterFunctionNameFixer;
 use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
@@ -174,6 +176,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'import_functions' => false,
             ],
         ]);
+    $services->set(NativeFunctionInvocationFixer::class)
+        ->call('configure', [
+            [
+                'include' => ['@all'],
+                'scope' => 'namespaced',
+            ],
+        ]);
+    $services->set(NativeConstantInvocationFixer::class)
+        ->call('configure', [
+            [
+                'scope' => 'namespaced',
+            ],
+        ]);
 
     // Spaces
     $services->set(StandaloneLinePromotedPropertyFixer::class);
@@ -206,8 +221,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NoWhitespaceInBlankLineFixer::class);
     $services->set(SpaceAfterSemicolonFixer::class);
     $services->set(LanguageConstructSpacingSniff::class);
-//    $services->set(FullyQualifiedGlobalFunctionsSniff::class);
-//    $services->set(FullyQualifiedGlobalConstantsSniff::class);
     // TODO: check this sniffs
     $services->set(ParentCallSpacingSniff::class);
     $services->set(DuplicateSpacesSniff::class);

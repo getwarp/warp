@@ -115,7 +115,7 @@ final class ComposerPackagesCollation
         $lockFileContent = \file_get_contents($lockFilename);
         \assert(\is_string($lockFileContent));
 
-        $lock = \json_decode($lockFileContent, true, 512, JSON_THROW_ON_ERROR);
+        $lock = \json_decode($lockFileContent, true, 512, \JSON_THROW_ON_ERROR);
 
         foreach ($lock['packages'] as $package) {
             foreach ($package[$section]['psr-4'] ?? [] as $dirs) {

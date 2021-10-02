@@ -69,7 +69,7 @@ final class JsonApiCriteriaBuilder
      */
     public function withPageSizeRange(array $pageSizeRange): self
     {
-        \assert(2 === count($pageSizeRange));
+        \assert(2 === \count($pageSizeRange));
 
         $pageSizeRange = \array_values($pageSizeRange);
         if ($pageSizeRange[0] > $pageSizeRange[1]) {

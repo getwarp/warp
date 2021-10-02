@@ -260,7 +260,7 @@ final class ProjectsSplitCommand extends Command
             return $vars['name'];
         }
 
-        throw new RuntimeException(sprintf('Cannot extract branch name from "%s"', $fullname));
+        throw new RuntimeException(\sprintf('Cannot extract branch name from "%s"', $fullname));
     }
 
     private function formatCommitAuthor(Commit $commit): string

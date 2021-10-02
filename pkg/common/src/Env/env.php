@@ -20,10 +20,10 @@ function env(string $name, $default = null)
     static $dotEnv;
 
     if (null === $dotEnv) {
-        $envFileName = \defined('SOF_ENV_FILE_NAME') ? \SOF_ENV_FILE_NAME : null;
+        $envFileName = \defined('SOF_ENV_FILE_NAME') ? SOF_ENV_FILE_NAME : null;
 
         /** @var string[] $envPath */
-        $envPath = \defined('SOF_ENV_PATH') ? \SOF_ENV_PATH : [];
+        $envPath = \defined('SOF_ENV_PATH') ? SOF_ENV_PATH : [];
 
         if (!\is_array($envPath)) {
             $envPath = [$envPath];
