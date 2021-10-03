@@ -7,6 +7,9 @@ namespace spaceonfire\ValueObject;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Psr\Http\Message\UriInterface;
 
+/**
+ * @extends AbstractValueObject<UriInterface>
+ */
 class UriValue extends AbstractValueObject
 {
     public function value(): UriInterface

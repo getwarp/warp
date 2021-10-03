@@ -7,17 +7,20 @@ namespace spaceonfire\ValueObject;
 use spaceonfire\Common\Factory\SingletonStorageTrait;
 use spaceonfire\Common\Factory\StaticConstructorInterface;
 
+/**
+ * @template T of scalar|\Stringable
+ */
 abstract class AbstractValueObject implements \Stringable, \JsonSerializable, StaticConstructorInterface
 {
     use SingletonStorageTrait;
 
     /**
-     * @var scalar|\Stringable
+     * @var T
      */
     protected $value;
 
     /**
-     * @param scalar|\Stringable $value
+     * @param T $value
      */
     final private function __construct($value)
     {
@@ -58,7 +61,7 @@ abstract class AbstractValueObject implements \Stringable, \JsonSerializable, St
 
     /**
      * Returns inner value of VO
-     * @return mixed
+     * @return T
      */
     public function value()
     {
@@ -67,7 +70,7 @@ abstract class AbstractValueObject implements \Stringable, \JsonSerializable, St
 
     /**
      * Checks that current VO is equals to given one.
-     * @param static $other
+     * @param static<T> $other
      * @return bool
      */
     public function equals($other): bool
@@ -84,7 +87,7 @@ abstract class AbstractValueObject implements \Stringable, \JsonSerializable, St
     /**
      * Cast input value to supported type by class
      * @param mixed $value input value
-     * @return scalar|\Stringable casted value
+     * @return T casted value
      */
     protected static function cast($value)
     {

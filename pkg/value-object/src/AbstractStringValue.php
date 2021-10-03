@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace spaceonfire\ValueObject;
 
+/**
+ * @extends AbstractValueObject<string>
+ */
 abstract class AbstractStringValue extends AbstractValueObject
 {
-    public function value(): string
-    {
-        return parent::value();
-    }
-
     public function jsonSerialize(): string
     {
         return (string)$this->value;

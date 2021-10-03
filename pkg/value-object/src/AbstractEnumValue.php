@@ -6,10 +6,14 @@ namespace spaceonfire\ValueObject;
 
 use function Symfony\Component\String\s;
 
+/**
+ * @template T of scalar
+ * @extends AbstractValueObject<T>
+ */
 abstract class AbstractEnumValue extends AbstractValueObject
 {
     /**
-     * @var array<class-string<static>,array<string,scalar>>
+     * @var array<class-string<static>,array<string,T>>
      */
     protected static array $cache = [];
 
@@ -17,7 +21,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
      * Magic factory.
      * @param string $name
      * @param array{} $args
-     * @return static
+     * @return static<T>
      */
     public static function __callStatic(string $name, array $args): self
     {
@@ -26,7 +30,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
 
     /**
      * Returns values array for this enum class.
-     * @return array<string,scalar>
+     * @return array<string,T>
      */
     public static function values(): array
     {
@@ -43,7 +47,9 @@ abstract class AbstractEnumValue extends AbstractValueObject
                         continue;
                     }
 
-                    if (!\is_scalar($constant->getValue())) {
+                    $value = $constant->getValue();
+
+                    if (!\is_scalar($value)) {
                         throw new \LogicException(\sprintf(
                             '%s enum option %s expected to be scalar. Got: %s.',
                             $class,
@@ -52,7 +58,9 @@ abstract class AbstractEnumValue extends AbstractValueObject
                         ));
                     }
 
-                    self::$cache[$class][self::keysFormatter($constant->getName())] = $constant->getValue();
+                    /** @phpstan-var T $value */
+
+                    self::$cache[$class][self::keysFormatter($constant->getName())] = $value;
                 }
             }
         } catch (\ReflectionException $e) {
@@ -63,7 +71,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
     }
 
     /**
-     * @return scalar
+     * @return T
      */
     public function jsonSerialize()
     {
@@ -73,7 +81,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
 
     /**
      * Returns random value for this enum class.
-     * @return scalar
+     * @return T
      */
     public static function randomValue()
     {
@@ -82,7 +90,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
 
     /**
      * Creates new enum VO with random value.
-     * @return static
+     * @return static<T>
      */
     public static function random(): self
     {
