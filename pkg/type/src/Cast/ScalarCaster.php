@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spaceonfire\Type\Cast;
 
 use spaceonfire\Type\BuiltinType;
+use spaceonfire\Type\TypeInterface;
 
 final class ScalarCaster implements CasterInterface
 {
@@ -17,13 +18,19 @@ final class ScalarCaster implements CasterInterface
 
     private BuiltinType $type;
 
-    public function __construct(BuiltinType $type)
+    public function __construct(TypeInterface $type)
     {
-        if (!isset(self::SCALAR_TYPES[(string)$type])) {
+        if (!self::isScalar($type)) {
             throw new \InvalidArgumentException(\sprintf('Non scalar type (%s) given to ScalarCaster.', $type));
         }
 
+        \assert($type instanceof BuiltinType);
         $this->type = $type;
+    }
+
+    public static function isScalar(TypeInterface $type): bool
+    {
+        return $type instanceof BuiltinType && isset(self::SCALAR_TYPES[(string)$type]);
     }
 
     public function accepts($value): bool
@@ -34,8 +41,8 @@ final class ScalarCaster implements CasterInterface
             case BuiltinType::FLOAT:
                 return false !== \filter_var($value, \FILTER_VALIDATE_FLOAT);
             case BuiltinType::STRING:
-                return null === $value
-                    || \is_scalar($value)
+                return \is_string($value)
+                    || \is_numeric($value)
                     || (\is_object($value) && \method_exists($value, '__toString'));
             case BuiltinType::BOOL:
                 return null !== \filter_var($value, \FILTER_VALIDATE_BOOL, \FILTER_NULL_ON_FAILURE);

@@ -25,7 +25,6 @@ class ScalarCasterTest extends TestCase
             [BuiltinType::string(), $this->makeStringable('string'), 'string'],
             [BuiltinType::string(), 1.1, '1.1'],
             [BuiltinType::string(), 1, '1'],
-            [BuiltinType::string(), null, ''],
             [BuiltinType::bool(), true, true],
             [BuiltinType::bool(), false, false],
             [BuiltinType::bool(), 1, true],
@@ -44,6 +43,7 @@ class ScalarCasterTest extends TestCase
             [BuiltinType::int(), '1.1'],
             [BuiltinType::string(), []],
             [BuiltinType::string(), (object)[]],
+            [BuiltinType::string(), null],
             [BuiltinType::bool(), 10],
             [BuiltinType::bool(), []],
         ];

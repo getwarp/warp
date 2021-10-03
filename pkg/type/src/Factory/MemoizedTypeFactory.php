@@ -8,7 +8,7 @@ use spaceonfire\Type\TypeInterface;
 
 final class MemoizedTypeFactory implements TypeFactoryInterface
 {
-    private TypeFactoryInterface $underlyingFactory;
+    private TypeFactoryInterface $innerFactory;
 
     /**
      * @var array<string,bool>
@@ -20,16 +20,16 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
      */
     private array $cacheMake = [];
 
-    public function __construct(TypeFactoryInterface $underlyingFactory)
+    public function __construct(TypeFactoryInterface $innerFactory)
     {
-        $this->underlyingFactory = $underlyingFactory;
-        $this->underlyingFactory->setParent($this);
+        $this->innerFactory = $innerFactory;
+        $this->innerFactory->setParent($this);
     }
 
     public function supports(string $type): bool
     {
         if (!isset($this->cacheSupports[$type])) {
-            $this->cacheSupports[$type] = $this->underlyingFactory->supports($type);
+            $this->cacheSupports[$type] = $this->innerFactory->supports($type);
         }
 
         return $this->cacheSupports[$type];
@@ -38,7 +38,7 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
     public function make(string $type): TypeInterface
     {
         if (!isset($this->cacheMake[$type])) {
-            $this->cacheMake[$type] = $this->underlyingFactory->make($type);
+            $this->cacheMake[$type] = $this->innerFactory->make($type);
         }
 
         return $this->cacheMake[$type];
@@ -46,6 +46,6 @@ final class MemoizedTypeFactory implements TypeFactoryInterface
 
     public function setParent(TypeFactoryInterface $parent): void
     {
-        $this->underlyingFactory->setParent($parent);
+        $this->innerFactory->setParent($parent);
     }
 }

@@ -20,7 +20,6 @@ class CasterAggregateTest extends TestCase
             ['1.1', 1.1],
             ['string', 'string'],
             [$this->makeStringable('string'), 'string'],
-            [null, ''],
         ];
     }
 
@@ -29,6 +28,7 @@ class CasterAggregateTest extends TestCase
         return [
             [[]],
             [(object)[]],
+            [null],
         ];
     }
 
@@ -51,13 +51,11 @@ class CasterAggregateTest extends TestCase
      */
     public function testAccept($input): void
     {
-        $innerCasters = [
+        $caster = new CasterAggregate(
             new ScalarCaster(BuiltinType::int()),
             new ScalarCaster(BuiltinType::float()),
             new ScalarCaster(BuiltinType::string()),
-        ];
-
-        $caster = new CasterAggregate(...$innerCasters);
+        );
 
         self::assertTrue($caster->accepts($input));
     }
@@ -69,13 +67,11 @@ class CasterAggregateTest extends TestCase
      */
     public function testCast($input, $expected): void
     {
-        $innerCasters = [
+        $caster = new CasterAggregate(
             new ScalarCaster(BuiltinType::int()),
             new ScalarCaster(BuiltinType::float()),
             new ScalarCaster(BuiltinType::string()),
-        ];
-
-        $caster = new CasterAggregate(...$innerCasters);
+        );
 
         self::assertSame($expected, $caster->cast($input));
     }
@@ -86,13 +82,11 @@ class CasterAggregateTest extends TestCase
      */
     public function testNotAccept($input): void
     {
-        $innerCasters = [
+        $caster = new CasterAggregate(
             new ScalarCaster(BuiltinType::int()),
             new ScalarCaster(BuiltinType::float()),
             new ScalarCaster(BuiltinType::string()),
-        ];
-
-        $caster = new CasterAggregate(...$innerCasters);
+        );
 
         self::assertFalse($caster->accepts($input));
     }
@@ -103,13 +97,11 @@ class CasterAggregateTest extends TestCase
      */
     public function testCastInvalid($input): void
     {
-        $innerCasters = [
+        $caster = new CasterAggregate(
             new ScalarCaster(BuiltinType::int()),
             new ScalarCaster(BuiltinType::float()),
             new ScalarCaster(BuiltinType::string()),
-        ];
-
-        $caster = new CasterAggregate(...$innerCasters);
+        );
 
         $this->expectException(\InvalidArgumentException::class);
         $caster->cast($input);

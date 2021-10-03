@@ -27,9 +27,9 @@ final class TypeFactoryAggregate implements TypeFactoryInterface
     }
 
     /**
-     * @return TypeFactoryInterface[]
+     * @return \Generator<TypeFactoryInterface>
      */
-    public static function defaultFactories(): iterable
+    public static function defaultFactories(): \Generator
     {
         yield new CollectionTypeFactory();
         yield new GroupTypeFactory();
