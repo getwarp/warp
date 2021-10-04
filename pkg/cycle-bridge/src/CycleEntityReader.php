@@ -20,7 +20,6 @@ use spaceonfire\Criteria\CriteriaInterface;
 use spaceonfire\DataSource\DefaultEntityNotFoundExceptionFactory;
 use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
 use spaceonfire\DataSource\EntityReaderInterface;
-use spaceonfire\Type\InstanceOfType;
 use spaceonfire\Type\TypeInterface;
 
 /**
@@ -130,7 +129,9 @@ final class CycleEntityReader implements EntityReaderInterface
 
     private function getEntityType(): ?TypeInterface
     {
-        return null === $this->classname ? null : InstanceOfType::new($this->classname);
+        // TODO: handle type for children entities
+        return null;
+        // return null === $this->classname ? null : InstanceOfType::new($this->classname);
     }
 
     private function findReferenceInHeap(ReferenceInterface $reference): ?object
