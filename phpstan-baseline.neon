@@ -41,11 +41,6 @@ parameters:
 			path: pkg/cycle-bridge/src/CycleEntityManager.php
 
 		-
-			message: "#^Method spaceonfire\\\\Bridge\\\\Cycle\\\\CycleEntityReader\\:\\:getEntityType\\(\\) never returns spaceonfire\\\\Type\\\\TypeInterface so it can be removed from the return typehint\\.$#"
-			count: 1
-			path: pkg/cycle-bridge/src/CycleEntityReader.php
-
-		-
 			message: "#^Method spaceonfire\\\\ValueObject\\\\AbstractValueObject\\:\\:singletonAttach\\(\\) has parameter \\$item with generic class spaceonfire\\\\ValueObject\\\\AbstractValueObject but does not specify its types\\: T$#"
 			count: 1
 			path: pkg/value-object/src/AbstractValueObject.php

@@ -20,6 +20,7 @@ use spaceonfire\Criteria\CriteriaInterface;
 use spaceonfire\DataSource\DefaultEntityNotFoundExceptionFactory;
 use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
 use spaceonfire\DataSource\EntityReaderInterface;
+use spaceonfire\Type\InstanceOfType;
 use spaceonfire\Type\TypeInterface;
 
 /**
@@ -55,7 +56,7 @@ final class CycleEntityReader implements EntityReaderInterface
         $this->orm = $orm;
         $this->role = $this->orm->resolveRole($role);
         $this->primaryBuilder = new PrimaryBuilder($this->orm, $this->role);
-        $this->classname = $this->orm->getSchema()->define($this->role, SchemaInterface::ENTITY);
+        $this->classname = $this->resolveEntityClass($role);
         $this->notFoundExceptionFactory = $notFoundExceptionFactory ?? new DefaultEntityNotFoundExceptionFactory();
     }
 
@@ -129,13 +130,31 @@ final class CycleEntityReader implements EntityReaderInterface
 
     private function getEntityType(): ?TypeInterface
     {
-        // TODO: handle type for children entities
-        return null;
-        // return null === $this->classname ? null : InstanceOfType::new($this->classname);
+        return null === $this->classname ? null : InstanceOfType::new($this->classname);
     }
 
     private function findReferenceInHeap(ReferenceInterface $reference): ?object
     {
         return $this->orm->get($reference->__role(), $reference->__scope(), false);
+    }
+
+    /**
+     * @param string|class-string<E> $role
+     * @return class-string<E>|null
+     */
+    private function resolveEntityClass(string $role): ?string
+    {
+        if (\class_exists($role)) {
+            /** @phpstan-var class-string<E> $role */
+            return $role;
+        }
+
+        $class = $this->orm->getSchema()->define($role, SchemaInterface::ENTITY);
+        if (\is_string($class) && \class_exists($class)) {
+            /** @phpstan-var class-string<E> $class */
+            return $class;
+        }
+
+        return null;
     }
 }

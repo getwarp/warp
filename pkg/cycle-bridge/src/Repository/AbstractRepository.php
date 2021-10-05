@@ -38,9 +38,8 @@ abstract class AbstractRepository implements RepositoryInterface
         int $transactionMode = TransactionInterface::MODE_CASCADE,
         ?EntityNotFoundExceptionFactoryInterface $notFoundExceptionFactory = null
     ) {
-        /** @phpstan-var class-string<E> $role */
-        $role = $orm->resolveRole($role);
         $this->orm = $orm;
+        // @phpstan-ignore-next-line
         $this->role = $role;
         $this->em = new CycleEntityManager($this->orm, $transactionMode, $notFoundExceptionFactory);
     }
