@@ -20,7 +20,7 @@ trait FriendlyExceptionTrait
 
     public function getName(): string
     {
-        return (string)($this->name ?? self::getDefaultName());
+        return (string)($this->name ?? static::getDefaultName());
     }
 
     public function getSolution(): ?string
