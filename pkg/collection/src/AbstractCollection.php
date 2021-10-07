@@ -306,7 +306,7 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * @return ArrayCacheIterator<int,V>
      */
-    private function prepareIterator(): ArrayCacheIterator
+    protected function prepareIterator(): ArrayCacheIterator
     {
         $this->sourcePrepared = $this->sourcePrepared && $this->source instanceof ArrayCacheIterator;
 

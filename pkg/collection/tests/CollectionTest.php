@@ -187,6 +187,18 @@ class CollectionTest extends TestCase
         self::assertSame(\range(1, 10000), $mapCollection->all());
     }
 
+    public function testIterateAfterSomeOperation(): void
+    {
+        $collection = Collection::new(\range(0, 10000));
+
+        $powItems = $collection
+            ->map(static fn ($i) => $i ** $i)
+            ->all();
+
+        self::assertCount(10001, $powItems);
+        self::assertSame(\range(0, 10000), $collection->all());
+    }
+
     public function testReverse(): void
     {
         $collection = Collection::new(\range(0, 9));
