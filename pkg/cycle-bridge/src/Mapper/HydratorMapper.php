@@ -129,7 +129,7 @@ class HydratorMapper extends Mapper
         return $event->getCommand();
     }
 
-    public static function getPropertyExtractor(MapperInterface $mapper): PropertyExtractorInterface
+    public static function getPropertyExtractor(?MapperInterface $mapper): PropertyExtractorInterface
     {
         if ($mapper instanceof Mapper) {
             return new LaminasPropertyExtractor($mapper->hydrator);
@@ -138,7 +138,7 @@ class HydratorMapper extends Mapper
         return new IdenticalPropertyExtractor();
     }
 
-    public static function getNamingStrategy(MapperInterface $mapper): NamingStrategyInterface
+    public static function getNamingStrategy(?MapperInterface $mapper): NamingStrategyInterface
     {
         if ($mapper instanceof Mapper && $mapper->hydrator instanceof NamingStrategyEnabledInterface) {
             return $mapper->hydrator->getNamingStrategy();

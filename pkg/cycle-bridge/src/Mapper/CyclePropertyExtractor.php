@@ -72,7 +72,9 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
     private function getPropertyExtractor(?string $relation = null): PropertyExtractorInterface
     {
         if (null === $relation) {
-            return HydratorMapper::getPropertyExtractor($this->orm->getMapper($this->role));
+            return HydratorMapper::getPropertyExtractor(
+                $this->orm->getSchema()->defines($this->role) ? $this->orm->getMapper($this->role) : null
+            );
         }
 
         $relSchema = $this->orm->getSchema()->defineRelation($this->role, $relation);
