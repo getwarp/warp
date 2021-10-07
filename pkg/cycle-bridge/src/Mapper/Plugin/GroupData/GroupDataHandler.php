@@ -21,10 +21,19 @@ final class GroupDataHandler
 
     public function onHydrate(HydrateBeforeEvent $event): void
     {
-        $namingStrategy = HydratorMapper::getNamingStrategy($this->orm->getMapper($event->getEntity()));
+        $entity = $event->getEntity();
+        $mapper = $this->orm->getMapper($entity);
+        $namingStrategy = HydratorMapper::getNamingStrategy($mapper);
+        // Extract entity fields to prevent issues with partial hydration on update.
+        // Also, some hydrators can throw exception, if it is just instantiated empty entity.
+        try {
+            $extractedData = $mapper->extract($entity);
+        } catch (\Throwable $exception) {
+            $extractedData = [];
+        }
 
         $data = \iterator_to_array($this->replaceKeys(
-            $event->getData(),
+            \array_merge($extractedData, $event->getData()),
             static fn (string $offset) => $namingStrategy->hydrate($offset),
         ));
 

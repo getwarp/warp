@@ -15,6 +15,7 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
+use spaceonfire\Bridge\LaminasHydrator\SafeReflectionHydrator;
 use spaceonfire\DataSource\IdenticalPropertyExtractor;
 use spaceonfire\DataSource\LaminasPropertyExtractor;
 use spaceonfire\DataSource\PropertyExtractorInterface;
@@ -31,7 +32,7 @@ class HydratorMapper extends Mapper
     ) {
         parent::__construct($orm, $role);
 
-        $this->hydrator = $hydrator ?? $this->hydrator;
+        $this->hydrator = $hydrator ?? new SafeReflectionHydrator();
         $this->plugin = $plugin ?? new Plugin\NoopMapperPlugin();
     }
 

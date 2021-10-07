@@ -20,7 +20,8 @@ class GroupDataPluginTest extends AbstractTestCase
      */
     public function testPlugin(OrmCapsule $capsule): void
     {
-        $entity = new TodoItem(null, 'FooBar');
+        $reflection = new \ReflectionClass(TodoItem::class);
+        $entity = $reflection->newInstanceWithoutConstructor();
 
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addSubscriber(new GroupDataPlugin(new GroupDataHandler($capsule->orm())));
@@ -37,14 +38,13 @@ class GroupDataPluginTest extends AbstractTestCase
             'updatedBy' => null,
         ]));
 
+        self::assertArrayHasKey('blame', $event->getData());
         self::assertSame([
-            'blame' => [
-                'createdAt' => $createdAt,
-                'updatedAt' => $updatedAt,
-                'createdBy' => null,
-                'updatedBy' => null,
-            ],
-        ], $event->getData());
+            'createdAt' => $createdAt,
+            'updatedAt' => $updatedAt,
+            'createdBy' => null,
+            'updatedBy' => null,
+        ], $event->getData()['blame']);
 
         /** @var HydrateBeforeEvent $event */
         $event = $mapperPlugin->dispatch(new ExtractAfterEvent($entity, [
