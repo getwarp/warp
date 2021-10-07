@@ -68,7 +68,7 @@ abstract class AbstractCollection implements CollectionInterface
     public function applyOperation(OperationInterface $operation): CollectionInterface
     {
         return $this->withSource(
-            $operation->apply($this->source),
+            new Iterator\OperationIterator($this->source, $operation),
             $operation instanceof AlterValueTypeOperationInterface ? MixedType::new() : null
         );
     }

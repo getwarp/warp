@@ -45,9 +45,6 @@ final class Collection extends AbstractCollection implements StaticConstructorIn
 
     protected function withSource(\Traversable $source, ?TypeInterface $valueType = null): AbstractCollection
     {
-        // We need to prepare iterator of current collection, in case it will be used later
-        $this->prepareIterator();
-
         return new self($source, $valueType ?? $this->valueType);
     }
 

@@ -189,11 +189,9 @@ class CollectionTest extends TestCase
 
     public function testIterateAfterSomeOperation(): void
     {
-        $collection = Collection::new(\range(0, 10000));
+        $collection = Collection::new(\range(0, 10000))->map(static fn ($i) => $i);
 
-        $powItems = $collection
-            ->map(static fn ($i) => $i ** $i)
-            ->all();
+        $powItems = $collection->map(static fn ($i) => $i ** $i)->all();
 
         self::assertCount(10001, $powItems);
         self::assertSame(\range(0, 10000), $collection->all());
