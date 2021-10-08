@@ -21,7 +21,7 @@
     "cycle/schema-builder": "^1.2",
     "doctrine/collections": "^1.5",
     "gitonomy/gitlib": "^1.2",
-    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "laminas/laminas-hydrator": "^4.0",
     "monolog/monolog": "^2.1",
     "nikic/php-parser": "^4.10",
     "php-http/discovery": "^1.11",

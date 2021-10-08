@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "laminas/laminas-hydrator": "^4.0",
     "monolog/monolog": "^2.1",
     "psr/log": "^1.1",
     "spaceonfire/exception": "^3.0",

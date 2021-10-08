@@ -31,7 +31,7 @@
     "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {
-    "laminas/laminas-hydrator": "^3.0|^4.0",
+    "laminas/laminas-hydrator": "^4.0",
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-latest"
   },
