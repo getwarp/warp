@@ -13,4 +13,10 @@ interface EntityReferenceInterface
      * @return E
      */
     public function getEntity(): object;
+
+    /**
+     * @param self<E> $other
+     * @return bool
+     */
+    public function equals(self $other): bool;
 }

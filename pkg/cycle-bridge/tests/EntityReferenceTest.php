@@ -9,6 +9,8 @@ use Cycle\ORM\Promise\Reference;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
 use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use spaceonfire\DataSource\EntityNotFoundException;
+use spaceonfire\DataSource\EntityReferenceInterface;
 
 class EntityReferenceTest extends TestCase
 {
@@ -32,9 +34,7 @@ class EntityReferenceTest extends TestCase
         self::assertTrue($ref->__loaded());
         self::assertSame($entity, $ref->__resolve());
         self::assertSame(TodoItem::class, $ref->__role());
-
-        $this->expectException(\RuntimeException::class);
-        $ref->__scope();
+        self::assertSame([], $ref->__scope());
     }
 
     public function testFromReference(): void
@@ -53,9 +53,18 @@ class EntityReferenceTest extends TestCase
         ], $ref->__scope());
     }
 
+    public function testFromReferenceNotFound(): void
+    {
+        $ref = EntityReference::fromReference(TodoItem::class, $this->promisize(null, TodoItemId::ROLE, [
+            'id' => 'e4cd452f-5b98-4ffb-8c94-a4012e735860',
+        ]));
+
+        $this->expectException(EntityNotFoundException::class);
+        $ref->__resolve();
+    }
+
     public function testFromReferenceNotLoadable(): void
     {
-        $entity = new TodoItem(TodoItemId::new('e4cd452f-5b98-4ffb-8c94-a4012e735860'), 'cycle-bridge');
         $ref = EntityReference::fromReference(TodoItem::class, new Reference(TodoItemId::ROLE, [
             'id' => 'e4cd452f-5b98-4ffb-8c94-a4012e735860',
         ]));
@@ -64,15 +73,67 @@ class EntityReferenceTest extends TestCase
         $ref->__resolve();
     }
 
-    private function promisize(object $entity, string $role, array $scope): PromiseInterface
+    public function testEquals(): void
+    {
+        $entity = new TodoItem(TodoItemId::new('e4cd452f-5b98-4ffb-8c94-a4012e735860'), 'cycle-bridge');
+        $promise = $this->promisize($entity, TodoItemId::ROLE, [
+            'id' => 'e4cd452f-5b98-4ffb-8c94-a4012e735860',
+        ]);
+
+        $fromEntity = EntityReference::fromEntity($entity, $entity->getId());
+
+        self::assertTrue($fromEntity->equals($fromEntity));
+
+        $fromNotLoadedPromise = EntityReference::fromReference(TodoItem::class, clone $promise);
+
+        self::assertTrue($fromEntity->equals($fromNotLoadedPromise));
+        self::assertTrue($fromNotLoadedPromise->equals($fromEntity));
+
+        $loadedPromise = clone $promise;
+        $loadedPromise->__resolve();
+        $fromLoadedPromise = EntityReference::fromReference(TodoItem::class, $loadedPromise);
+
+        self::assertTrue($fromEntity->equals($fromLoadedPromise));
+        self::assertTrue($fromNotLoadedPromise->equals($fromLoadedPromise));
+
+        $otherEntity = new TodoItem(TodoItemId::new('be8db328-e99a-4da3-b289-5381025ca850'), 'cycle-bridge');
+        $fromOtherEntity = EntityReference::fromEntity($otherEntity, $otherEntity->getId());
+
+        $promiseOtherId = EntityReference::fromReference(TodoItem::class, $this->promisize($otherEntity, TodoItemId::ROLE, [
+            'id' => 'be8db328-e99a-4da3-b289-5381025ca850',
+        ]));
+
+        self::assertFalse($fromEntity->equals($fromOtherEntity));
+        self::assertFalse($fromEntity->equals($promiseOtherId));
+
+        $promiseOtherRole = EntityReference::fromReference(\stdClass::class, $this->promisize((object)[], 'tag', [
+            'id' => 'e4cd452f-5b98-4ffb-8c94-a4012e735860',
+        ]));
+
+        self::assertFalse($fromEntity->equals($promiseOtherRole));
+
+        self::assertFalse($fromEntity->equals(new class implements EntityReferenceInterface {
+            public function getEntity(): object
+            {
+                throw new \LogicException('not implemented');
+            }
+
+            public function equals(EntityReferenceInterface $other): bool
+            {
+                return false;
+            }
+        }));
+    }
+
+    private function promisize(?object $entity, string $role, array $scope): PromiseInterface
     {
         return new class($entity, $role, $scope) implements PromiseInterface {
             private string $role;
             private array $scope;
-            private object $entity;
+            private ?object $entity;
             private bool $loaded = false;
 
-            public function __construct(object $entity, string $role, array $scope)
+            public function __construct(?object $entity, string $role, array $scope)
             {
                 $this->entity = $entity;
                 $this->role = $role;
@@ -84,7 +145,7 @@ class EntityReferenceTest extends TestCase
                 return $this->loaded;
             }
 
-            public function __resolve(): object
+            public function __resolve(): ?object
             {
                 $this->loaded = true;
                 return $this->entity;

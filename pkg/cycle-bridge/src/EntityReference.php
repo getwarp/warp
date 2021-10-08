@@ -6,6 +6,7 @@ namespace spaceonfire\Bridge\Cycle;
 
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
+use spaceonfire\DataSource\EntityNotFoundException;
 use spaceonfire\DataSource\EntityReferenceInterface;
 
 /**
@@ -47,7 +48,21 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
      */
     public function __resolve(): object
     {
-        return $this->getEntity();
+        if (null !== $this->entity) {
+            return $this->entity;
+        }
+
+        if ($this->reference instanceof PromiseInterface) {
+            $entity = $this->reference->__resolve();
+
+            if (null === $entity) {
+                throw EntityNotFoundException::byPrimary($this->__role(), \implode(',', $this->__scope()));
+            }
+
+            return $this->entity = $entity;
+        }
+
+        throw new \RuntimeException('Unable to resolve reference.');
     }
 
     public function __role(): string
@@ -68,20 +83,26 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
             return $this->reference->__scope();
         }
 
-        throw new \RuntimeException('Reference has no scope.');
+        return [];
     }
 
     public function getEntity(): object
     {
-        if (null !== $this->entity) {
-            return $this->entity;
+        return $this->__resolve();
+    }
+
+    public function equals(EntityReferenceInterface $other): bool
+    {
+        if (!$other instanceof self) {
+            return false;
         }
 
-        if ($this->reference instanceof PromiseInterface) {
-            return $this->entity = $this->reference->__resolve();
+        if ($this->__loaded() && $other->__loaded()) {
+            return $this->__resolve() === $other->__resolve();
         }
 
-        throw new \RuntimeException('Unable to resolve reference.');
+        return ($this->__role() === $other->__role() || $this->class === $other->class)
+            && $this->__scope() === $other->__scope();
     }
 
     /**
