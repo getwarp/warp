@@ -154,7 +154,9 @@ class EntityEventsPluginTest extends AbstractTestCase
     public function testPluginWithDelete(OrmCapsule $capsule): void
     {
         $entity = new TodoItem(null, 'FooBar');
+        $entity->markDone();
         $entity->releaseEvents();
+        $entity->unmarkDone();
 
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addSubscriber(new EntityEventsPlugin(new EntityEventsHandler($eventDispatcher)));
@@ -236,5 +238,37 @@ class EntityEventsPluginTest extends AbstractTestCase
         $command = $event->getCommand();
 
         self::assertSame($insert, $command);
+    }
+
+    /**
+     * @dataProvider ormCapsuleProvider
+     */
+    public function testPluginHandlerSkippedNoEvents(OrmCapsule $capsule): void
+    {
+        $entity = new TodoItem(null, 'FooBar');
+        $entity->releaseEvents();
+
+        $eventDispatcher = new EventDispatcher();
+        $eventDispatcher->addSubscriber(new EntityEventsPlugin(new EntityEventsHandler($eventDispatcher)));
+        $mapperPlugin = new DispatcherMapperPlugin($eventDispatcher);
+
+        $node = new Node(Node::SCHEDULED_UPDATE, [], TodoItemId::ROLE);
+
+        /** @var QueueAfterEvent $event */
+        $event = $mapperPlugin->dispatch(new QueueAfterEvent(
+            $entity,
+            $node,
+            $node->getState(),
+            $update = new Update(
+                $capsule->database(),
+                $capsule->orm()->getSchema()->define($node->getRole(), Schema::TABLE),
+                [],
+                $entity->getId()->__scope(),
+            )
+        ));
+
+        $command = $event->getCommand();
+
+        self::assertSame($update, $command);
     }
 }

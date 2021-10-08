@@ -25,8 +25,13 @@ final class EntityEventsHandler
             return;
         }
 
+        $events = $entity->releaseEvents();
+        if (0 === \count($events)) {
+            return;
+        }
+
         $command = $event->makeSequence($event->getCommand());
-        $command->addCommand(new DispatchEventsCommand($entity->releaseEvents(), $this->dispatcher));
+        $command->addCommand(new DispatchEventsCommand($events, $this->dispatcher));
 
         $event->replaceCommand($command);
     }
