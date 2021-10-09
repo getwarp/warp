@@ -59,6 +59,7 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
                 throw EntityNotFoundException::byPrimary($this->__role(), \implode(',', $this->__scope()));
             }
 
+            /** @phpstan-var E $entity */
             return $this->entity = $entity;
         }
 
@@ -106,22 +107,30 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
     }
 
     /**
-     * @param E $entity
+     * @template T of object
+     * @param T $entity
      * @param ReferenceInterface|null $reference
-     * @return self<E>
+     * @return self<T>
      */
     public static function fromEntity(object $entity, ?ReferenceInterface $reference = null): self
     {
-        return new self(\get_class($entity), $entity, $reference);
+        /** @phpstan-var self<T> $ref */
+        $ref = new self(\get_class($entity), $entity, $reference);
+        \assert(true);
+        return $ref;
     }
 
     /**
-     * @param class-string<E> $class
+     * @template T of object
+     * @param class-string<T> $class
      * @param ReferenceInterface $reference
-     * @return self<E>
+     * @return self<T>
      */
     public static function fromReference(string $class, ReferenceInterface $reference): self
     {
-        return new self($class, null, $reference);
+        /** @phpstan-var self<T> $ref */
+        $ref = new self($class, null, $reference);
+        \assert(true);
+        return $ref;
     }
 }
