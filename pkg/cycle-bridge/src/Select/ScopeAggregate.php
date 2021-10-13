@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Select;
 
+use Cycle\ORM\Select;
+use Cycle\ORM\Select\AbstractLoader;
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\ScopeInterface;
 
 /**
  * @implements \IteratorAggregate<ScopeInterface>
  */
-final class ScopeAggregate implements ScopeInterface, \IteratorAggregate
+final class ScopeAggregate implements ScopeInterface, PrepareSelectScopeInterface, PrepareLoaderScopeInterface, \IteratorAggregate
 {
     /**
      * @var \SplObjectStorage<ScopeInterface,null>|null
@@ -55,6 +57,24 @@ final class ScopeAggregate implements ScopeInterface, \IteratorAggregate
     {
         foreach ($this->getIterator() as $scope) {
             $scope->apply($query);
+        }
+    }
+
+    public function prepareLoader(AbstractLoader $loader): void
+    {
+        foreach ($this->getIterator() as $scope) {
+            if ($scope instanceof PrepareLoaderScopeInterface) {
+                $scope->prepareLoader($loader);
+            }
+        }
+    }
+
+    public function prepareSelect(Select $select): void
+    {
+        foreach ($this->getIterator() as $scope) {
+            if ($scope instanceof PrepareSelectScopeInterface) {
+                $scope->prepareSelect($select);
+            }
         }
     }
 

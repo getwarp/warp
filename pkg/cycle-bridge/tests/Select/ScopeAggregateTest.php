@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Select;
 
-use Cycle\ORM\Select\QueryConstrain;
+use Cycle\ORM\Select\QueryScope;
 use PHPUnit\Framework\TestCase;
 
 class ScopeAggregateTest extends TestCase
 {
     public function testAggregateMultipleScopes(): void
     {
-        $scope1 = new QueryConstrain([]);
-        $scope2 = new QueryConstrain([]);
-        $scope3 = new QueryConstrain([]);
+        $scope1 = new QueryScope([]);
+        $scope2 = new QueryScope([]);
+        $scope3 = new QueryScope([]);
 
         $aggregate1 = new ScopeAggregate($scope1, $scope2);
         $aggregate2 = new ScopeAggregate($scope2, $scope3);

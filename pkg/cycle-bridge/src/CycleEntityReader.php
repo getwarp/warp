@@ -117,12 +117,10 @@ final class CycleEntityReader implements EntityReaderInterface
         }
 
         if (null !== $criteria) {
-            $scope->add(new CriteriaScope($criteria, $this->orm, $this->role));
-
-            // TODO: if only this can be done in CriteriaScope through QueryBuilder.
-            $select->load($criteria->getInclude());
+            $scope->add(new CriteriaScope($criteria, $this->orm));
         }
 
+        $scope->prepareSelect($select);
         $select->scope($scope);
 
         return $select;
