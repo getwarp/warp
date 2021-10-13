@@ -7,6 +7,7 @@ namespace spaceonfire\Bridge\Monolog\Handler;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\PsrHandler;
 use Symfony\Component\Console\Logger\ConsoleLogger;
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class ConsoleHandlerFactory implements HandlerFactoryInterface
@@ -31,8 +32,7 @@ final class ConsoleHandlerFactory implements HandlerFactoryInterface
     {
         $config = new ConsoleHandlerSettings($settings);
 
-        $output = $config->output ?? $this->output;
-        \assert(null !== $output);
+        $output = $config->output ?? $this->output ?? new NullOutput();
 
         $logger = new ConsoleLogger(
             $output,
