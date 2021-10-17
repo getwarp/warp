@@ -36,6 +36,10 @@ final class ArraySchemaRegistryFactory extends AbstractRegistryFactory
             $this->autocompleteEntity($e);
             $registry->register($e);
             $registry->linkTable($e, $entity[EntityDto::DATABASE] ?? null, $entity[EntityDto::TABLE]);
+
+            foreach (EntityDto::makeChildren($entity) as $child) {
+                $registry->registerChild($e, $child);
+            }
         }
 
         return $registry;

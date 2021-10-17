@@ -10,7 +10,8 @@ use Cycle\Schema\Definition\Entity;
  * @see Entity
  * @phpstan-import-type FieldShape from FieldDto
  * @phpstan-import-type RelationShape from RelationDto
- * @phpstan-type EntityShape=array{role?:string,database?:string,table:string,class?:class-string,mapper?:class-string,source?:class-string,scope?:class-string,repository?:class-string,fields?:FieldShape[],relations?:RelationShape[],schema?:array<array-key,mixed>,options?:array<array-key,mixed>,}
+ * @phpstan-type EntityShape=array{role?:string,database?:string,table:string,class?:class-string,mapper?:class-string,source?:class-string,scope?:class-string,repository?:class-string,fields?:FieldShape[],relations?:RelationShape[],schema?:array<array-key,mixed>,options?:array<array-key,mixed>}
+ * @phpstan-type EntityChildrenShape=array{children?:EntityShape[]}
  */
 final class EntityDto
 {
@@ -37,6 +38,8 @@ final class EntityDto
     public const SCHEMA = 'schema';
 
     public const OPTIONS = 'options';
+
+    public const CHILDREN = 'children';
 
     /**
      * @param EntityShape $data
@@ -82,5 +85,16 @@ final class EntityDto
         }
 
         return $entity;
+    }
+
+    /**
+     * @param EntityChildrenShape $data
+     * @return \Generator<Entity>
+     */
+    public static function makeChildren(array $data): \Generator
+    {
+        foreach ($data[self::CHILDREN] ?? [] as $child) {
+            yield self::makeSchema($child);
+        }
     }
 }
