@@ -12,14 +12,14 @@ use spaceonfire\Criteria\FilterableInterface;
  * Collection interface.
  *
  * @template V
- * @extends \IteratorAggregate<int,V>
+ * @extends \IteratorAggregate<array-key,V>
  * @extends MutableInterface<V>
  */
 interface CollectionInterface extends MutableInterface, FilterableInterface, \IteratorAggregate, \Countable, \JsonSerializable
 {
     /**
      * @template T
-     * @param OperationInterface<int,V,int,T> $operation
+     * @param OperationInterface<array-key,V,array-key,T> $operation
      * @return static<T>
      */
     public function applyOperation(OperationInterface $operation): self;
@@ -34,7 +34,7 @@ interface CollectionInterface extends MutableInterface, FilterableInterface, \It
     /**
      * Map collection.
      * @template M
-     * @param callable(V,int):M $callback
+     * @param callable(V,array-key):M $callback
      * @return static<M>
      */
     public function map(callable $callback): self;
@@ -77,7 +77,7 @@ interface CollectionInterface extends MutableInterface, FilterableInterface, \It
     public function matching(CriteriaInterface $criteria): self;
 
     /**
-     * @return array<int,V>
+     * @return array<array-key,V>
      */
     public function all(): array;
 
@@ -161,7 +161,7 @@ interface CollectionInterface extends MutableInterface, FilterableInterface, \It
     public function groupBy($keyExtractor): MapInterface;
 
     /**
-     * @return \Traversable<int,V>
+     * @return \Traversable<array-key,V>
      */
     public function getIterator(): \Traversable;
 }
