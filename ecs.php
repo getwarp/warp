@@ -27,6 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
         StrictComparisonFixer::class => [
             __DIR__ . '/pkg/laminas-hydrator-bridge/src/Strategy/BooleanStrategy.php',
+            __DIR__ . '/pkg/cycle-bridge/src/Collection/Relation/NodeHelper.php',
         ],
         'Class LoggerMiddleware contains unused private method compareLogLevel().' => [
             __DIR__ . '/pkg/command-bus/src/Middleware/Logger/LoggerMiddleware.php',

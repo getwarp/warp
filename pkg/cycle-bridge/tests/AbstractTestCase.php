@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle;
 
-use Cycle\ORM\Factory;
 use Cycle\ORM\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Schema;
 use Cycle\Schema\Generator;
 use PHPUnit\Framework\TestCase;
+use spaceonfire\Bridge\Cycle\Factory\OrmFactory;
 use spaceonfire\Bridge\Cycle\Factory\SpiralFactory;
 use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
 use spaceonfire\Bridge\Cycle\Fixtures\PluginsProvider;
@@ -56,7 +56,7 @@ abstract class AbstractTestCase extends TestCase
         );
 
         $orm = new ORM(
-            new Factory($dbal, null, $factory),
+            new OrmFactory($dbal, null, $factory),
             new Schema($schemaFactory->compile()),
         );
         $orm = $orm->withPromiseFactory(new EntityReferenceFactory());

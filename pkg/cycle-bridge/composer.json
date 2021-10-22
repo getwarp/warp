@@ -19,7 +19,7 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "cycle/orm": "^1.6",
+    "cycle/orm": "dev-master as 1.6.1",
     "cycle/schema-builder": "^1.2",
     "spaceonfire/collection": "^3.0",
     "spaceonfire/common": "^3.0",
