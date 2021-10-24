@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Collection\Doctrine;
 
+use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\ArrayCollection;
 use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
 use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
@@ -12,9 +13,9 @@ use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
  * @template T of object
  * @template P
  * @implements ObjectCollectionInterface<T,P>
- * @extends ArrayCollection<array-key,T>
+ * @extends AbstractLazyCollection<array-key,T>
  */
-final class DoctrineObjectCollection extends ArrayCollection implements ObjectCollectionInterface
+final class DoctrineObjectCollection extends AbstractLazyCollection implements ObjectCollectionInterface
 {
     /**
      * @var ObjectStorage<T,P|null>
@@ -29,9 +30,7 @@ final class DoctrineObjectCollection extends ArrayCollection implements ObjectCo
     {
         // @phpstan-ignore-next-line
         $this->storage = ObjectStorage::snapshot($storage ?? $elements);
-        $elements = \is_array($elements) ? $elements : \iterator_to_array($elements);
-
-        parent::__construct($elements);
+        $this->collection = new ArrayCollection(\is_array($elements) ? $elements : \iterator_to_array($elements));
     }
 
     public function clear(): void
@@ -102,29 +101,8 @@ final class DoctrineObjectCollection extends ArrayCollection implements ObjectCo
         return $this->storage->getPivotContext();
     }
 
-    /**
-     * @param array<T> $elements
-     * @return self<T,P>
-     */
-    protected function createFrom(array $elements): self
+    protected function doInitialize(): void
     {
-        return new self($elements, self::filterStorage($this->storage->getPivotContext(), $elements));
-    }
-
-    /**
-     * @param \SplObjectStorage<T,P|null> $storage
-     * @param T[] $elements
-     * @return \SplObjectStorage<T,P|null>
-     */
-    private static function filterStorage(\SplObjectStorage $storage, array $elements): \SplObjectStorage
-    {
-        /** @phpstan-var \SplObjectStorage<T,P|null> $output */
-        $output = new \SplObjectStorage();
-
-        foreach ($elements as $element) {
-            $output->attach($element, $storage[$element] ?? null);
-        }
-
-        return $output;
+        // nothing to do.
     }
 }
