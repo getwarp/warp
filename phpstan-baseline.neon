@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property spaceonfire\\\\Collection\\\\Iterator\\\\ArrayCacheIterator\\<K of \\(int\\|string\\),V\\>\\:\\:\\$array \\(array\\<K of \\(int\\|string\\), V\\>\\) does not accept array\\.$#"
-			count: 1
-			path: pkg/collection/src/Iterator/ArrayCacheIterator.php
-
-		-
 			message: "#^Parameter \\#1 \\$commandClass of method spaceonfire\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ClassNameMappingInterface\\:\\:getClassName\\(\\) expects class\\-string, string given\\.$#"
 			count: 1
 			path: pkg/command-bus/src/Mapping/ClassName/ClassNameMappingChain.php

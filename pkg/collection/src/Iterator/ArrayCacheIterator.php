@@ -7,9 +7,9 @@ namespace spaceonfire\Collection\Iterator;
 /**
  * @template K of array-key
  * @template V
- * @implements \IteratorAggregate<K,V>
+ * @implements \Iterator<K,V>
  */
-final class ArrayCacheIterator implements \IteratorAggregate, \Countable
+final class ArrayCacheIterator implements \Iterator, \Countable
 {
     /**
      * @var \Iterator<K,V>|null
@@ -17,9 +17,16 @@ final class ArrayCacheIterator implements \IteratorAggregate, \Countable
     private ?\Iterator $iterator;
 
     /**
-     * @var array<K,V>
+     * @var array<int,K>
      */
-    private array $array = [];
+    private array $keys = [];
+
+    /**
+     * @var array<int,V>
+     */
+    private array $values = [];
+
+    private int $pos = 0;
 
     /**
      * @param \Iterator<K,V> $iterator
@@ -29,7 +36,10 @@ final class ArrayCacheIterator implements \IteratorAggregate, \Countable
         $this->iterator = $iterator;
 
         if ($iterator instanceof \ArrayIterator) {
-            $this->array = $iterator->getArrayCopy();
+            $array = $iterator->getArrayCopy();
+            // @phpstan-ignore-next-line
+            $this->keys = \array_keys($array);
+            $this->values = \array_values($array);
             $this->iterator = null;
         }
     }
@@ -37,7 +47,9 @@ final class ArrayCacheIterator implements \IteratorAggregate, \Countable
     public function __destruct()
     {
         $this->iterator = null;
-        $this->array = [];
+        $this->keys = [];
+        $this->values = [];
+        $this->pos = 0;
     }
 
     /**
@@ -59,36 +71,79 @@ final class ArrayCacheIterator implements \IteratorAggregate, \Countable
         return new self($iterator);
     }
 
-    /**
-     * @return \Generator<K,V>
-     */
-    public function getIterator(): \Generator
+    public function rewind(): void
     {
-        yield from $this->array;
+        $this->pos = 0;
+        $this->cacheTuple($this->pos);
+    }
+
+    public function valid(): bool
+    {
+        return isset($this->keys[$this->pos]) || (null !== $this->iterator && $this->iterator->valid());
+    }
+
+    /**
+     * @return V
+     */
+    public function current()
+    {
+        $this->cacheTuple($this->pos);
+        return $this->values[$this->pos];
+    }
+
+    /**
+     * @return K
+     */
+    public function key()
+    {
+        $this->cacheTuple($this->pos);
+        return $this->keys[$this->pos];
+    }
+
+    public function next(): void
+    {
+        ++$this->pos;
 
         if (null === $this->iterator) {
             return;
         }
 
-        while ($this->iterator->valid()) {
-            $offset = $this->iterator->key();
-            $value = $this->iterator->current();
-
-            yield $offset => $value;
-            $this->array[$offset] = $value;
-
-            $this->iterator->next();
+        if (isset($this->keys[$this->pos])) {
+            return;
         }
 
-        $this->iterator = null;
+        $this->iterator->next();
+
+        if ($this->iterator->valid()) {
+            $this->cacheTuple($this->pos);
+        } else {
+            $this->iterator = null;
+        }
     }
 
     public function count(): int
     {
-        if (null !== $this->array && null === $this->iterator) {
-            return \count($this->array);
+        if (null !== $this->keys && null === $this->iterator) {
+            return \count($this->keys);
         }
 
-        return \iterator_count($this->getIterator());
+        $pos = $this->pos;
+        $count = \iterator_count($this);
+        $this->pos = $pos;
+        return $count;
+    }
+
+    private function cacheTuple(int $pos): void
+    {
+        if (isset($this->keys[$pos])) {
+            return;
+        }
+
+        if (null === $this->iterator || !$this->iterator->valid()) {
+            return;
+        }
+
+        $this->keys[$pos] = $this->iterator->key();
+        $this->values[$pos] = $this->iterator->current();
     }
 }

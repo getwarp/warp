@@ -717,6 +717,17 @@ class CollectionTest extends TestCase
         );
     }
 
+    public function testIterateAndCount(): void
+    {
+        $collection = Collection::new(\range(0, 9));
+
+        $i = -1;
+        foreach ($collection as $item) {
+            self::assertSame(++$i, $item);
+            self::assertCount(10, $collection);
+        }
+    }
+
     private function skipIfXdebugEnabled(): void
     {
         if (!\extension_loaded('xdebug')) {
