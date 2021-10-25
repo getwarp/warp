@@ -148,7 +148,7 @@ final class OnfireObjectCollectionPromise extends AbstractCollectionDecorator im
 
     public function matching(CriteriaInterface $criteria): CollectionInterface
     {
-        if ($this->__loaded()) {
+        if ($this->__loaded() || $this->changes->hasChanges()) {
             return parent::matching($criteria);
         }
 
