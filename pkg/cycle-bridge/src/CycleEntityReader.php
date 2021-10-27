@@ -22,6 +22,7 @@ use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
 use spaceonfire\DataSource\EntityReaderInterface;
 use spaceonfire\Type\InstanceOfType;
 use spaceonfire\Type\TypeInterface;
+use Webmozart\Expression\Logic\AlwaysTrue;
 
 /**
  * @template E of object
@@ -65,7 +66,7 @@ final class CycleEntityReader implements EntityReaderInterface
         $primaryBuilder = $this->primaryBuilder->withScope($primary);
 
         /** @phpstan-var E|null $entity */
-        $entity = $this->findReferenceInHeap($primaryBuilder->getReference())
+        $entity = $this->findReferenceInHeap($primaryBuilder->getReference(), $criteria)
             ?? $this->findOne($primaryBuilder->getCriteria($criteria));
 
         if (null === $entity) {
@@ -131,9 +132,13 @@ final class CycleEntityReader implements EntityReaderInterface
         return null === $this->classname ? null : InstanceOfType::new($this->classname);
     }
 
-    private function findReferenceInHeap(ReferenceInterface $reference): ?object
+    private function findReferenceInHeap(ReferenceInterface $reference, ?CriteriaInterface $criteria = null): ?object
     {
-        return $this->orm->get($reference->__role(), $reference->__scope(), false);
+        $object = $this->orm->get($reference->__role(), $reference->__scope(), false);
+
+        $filter = (null !== $criteria ? $criteria->getWhere() : null) ?? new AlwaysTrue();
+
+        return \is_object($object) && $filter->evaluate($object) ? $object : null;
     }
 
     /**
