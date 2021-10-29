@@ -60,7 +60,7 @@ class EntityReferenceTest extends TestCase
         ]));
 
         $this->expectException(EntityNotFoundException::class);
-        $ref->__resolve();
+        $ref->getEntity();
     }
 
     public function testFromReferenceNotLoadable(): void
@@ -116,6 +116,11 @@ class EntityReferenceTest extends TestCase
             public function getEntity(): object
             {
                 throw new \LogicException('not implemented');
+            }
+
+            public function getEntityOrNull(): ?object
+            {
+                return $this->getEntity();
             }
 
             public function equals(EntityReferenceInterface $other): bool

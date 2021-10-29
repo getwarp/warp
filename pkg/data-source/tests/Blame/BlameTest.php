@@ -33,6 +33,11 @@ class BlameTest extends TestCase
                 return $this->entity;
             }
 
+            public function getEntityOrNull(): ?object
+            {
+                return $this->getEntity();
+            }
+
             public function equals(EntityReferenceInterface $other): bool
             {
                 return $other instanceof self && $this->entity === $other->entity;

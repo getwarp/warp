@@ -15,6 +15,11 @@ interface EntityReferenceInterface
     public function getEntity(): object;
 
     /**
+     * @return E|null
+     */
+    public function getEntityOrNull(): ?object;
+
+    /**
      * @param self<E> $other
      * @return bool
      */

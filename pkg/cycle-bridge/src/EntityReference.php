@@ -27,6 +27,8 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
 
     private ?ReferenceInterface $reference;
 
+    private bool $loaded;
+
     /**
      * @param class-string<E> $class
      * @param E|null $entity
@@ -36,30 +38,27 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
         $this->class = $class;
         $this->entity = $entity;
         $this->reference = $reference;
+        $this->loaded = null !== $this->entity;
     }
 
     public function __loaded(): bool
     {
-        return null !== $this->entity;
+        return $this->loaded;
     }
 
     /**
-     * @return E
+     * @return E|null
      */
-    public function __resolve(): object
+    public function __resolve(): ?object
     {
-        if (null !== $this->entity) {
+        if ($this->loaded) {
             return $this->entity;
         }
 
         if ($this->reference instanceof PromiseInterface) {
-            $entity = $this->reference->__resolve();
-
-            if (null === $entity) {
-                throw EntityNotFoundException::byPrimary($this->__role(), \implode(',', $this->__scope()));
-            }
-
             /** @phpstan-var E $entity */
+            $entity = $this->reference->__resolve();
+            $this->loaded = true;
             return $this->entity = $entity;
         }
 
@@ -88,6 +87,15 @@ final class EntityReference implements EntityReferenceInterface, PromiseInterfac
     }
 
     public function getEntity(): object
+    {
+        if (null === $entity = $this->getEntityOrNull()) {
+            throw EntityNotFoundException::byPrimary($this->__role(), \implode(',', $this->__scope()));
+        }
+
+        return $entity;
+    }
+
+    public function getEntityOrNull(): ?object
     {
         return $this->__resolve();
     }
