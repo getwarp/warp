@@ -8,21 +8,20 @@ final class FrozenClock implements ClockInterface
 {
     private ClockInterface $clock;
 
-    private DateTimeImmutableValue $now;
+    private ?DateTimeImmutableValue $now = null;
 
     public function __construct(ClockInterface $clock)
     {
         $this->clock = $clock;
-        $this->now = $clock->now();
     }
 
     public function reset(): void
     {
-        $this->now = $this->clock->now();
+        $this->now = null;
     }
 
     public function now(): DateTimeImmutableValue
     {
-        return $this->now;
+        return $this->now ??= $this->clock->now();
     }
 }
