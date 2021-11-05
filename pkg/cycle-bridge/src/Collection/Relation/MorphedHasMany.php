@@ -49,7 +49,7 @@ class MorphedHasMany extends HasMany
     protected function areNodesLinked(Node $parentNode, Node $relatedNode): bool
     {
         return parent::areNodesLinked($parentNode, $relatedNode)
-            && 0 === NodeHelper::compare($this->fetchKey($parentNode, $this->morphKey), $relatedNode->getRole());
+            && 0 === Node::compare($this->fetchKey($relatedNode, $this->morphKey), $parentNode->getRole());
     }
 
     protected function getWhereScope(Node $parentNode): array

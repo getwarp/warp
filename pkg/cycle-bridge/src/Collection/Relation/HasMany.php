@@ -257,7 +257,7 @@ class HasMany extends AbstractToManyRelation
         $left = $this->fetchKey($parentNode, $this->innerKey);
         $right = $this->fetchKey($relatedNode, $this->outerKey);
 
-        return 0 === NodeHelper::compare($left, $right);
+        return 0 === Node::compare($left, $right);
     }
 
     /**
