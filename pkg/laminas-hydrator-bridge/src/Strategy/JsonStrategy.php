@@ -14,8 +14,14 @@ final class JsonStrategy implements StrategyInterface
 
     private int $encodeFlags;
 
+    /**
+     * @phpstan-var positive-int
+     */
     private int $depth;
 
+    /**
+     * @phpstan-param positive-int $depth
+     */
     public function __construct(
         bool $associative = true,
         int $decodeFlags = 0,

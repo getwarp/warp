@@ -42,7 +42,7 @@
     "nyholm/psr7": "^1.4",
     "phpspec/prophecy": "^1.13",
     "phpspec/prophecy-phpunit": "^2.0",
-    "phpstan/phpstan": "^0.12.84",
+    "phpstan/phpstan": "^1.0",
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-latest",
     "slevomat/coding-standard": "^7.0",
@@ -194,7 +194,7 @@
       "require-dev": {
         "phpspec/prophecy": "^1.13",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpstan/phpstan": "^0.12.84",
+        "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest"
       }

@@ -16,17 +16,17 @@ parameters:
 			path: pkg/command-bus/src/Mapping/ClassName/SuffixClassNameMapping.php
 
 		-
-			message: "#^Parameter \\#1 \\$callable of method spaceonfire\\\\Container\\\\InvokerInterface\\:\\:invoke\\(\\) expects callable\\(\\)\\: mixed, array\\(T of object, string\\) given\\.$#"
+			message: "#^Parameter \\#1 \\$callable of method spaceonfire\\\\Container\\\\InvokerInterface\\:\\:invoke\\(\\) expects callable\\(\\)\\: mixed, array\\{T of object, string\\} given\\.$#"
 			count: 1
 			path: pkg/container/src/Factory/Reflection/ReflectionFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\(spaceonfire\\\\Criteria\\\\Expression\\\\ExpressionFactory, string\\) given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{spaceonfire\\\\Criteria\\\\Expression\\\\ExpressionFactory, string\\} given\\.$#"
 			count: 1
 			path: pkg/criteria/src/Expression/AbstractExpressionDecorator.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\('Webmozart\\\\\\\\Expression\\\\\\\\Expr', string\\) given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{'Webmozart\\\\\\\\Expression\\\\\\\\Expr', string\\} given\\.$#"
 			count: 1
 			path: pkg/criteria/src/Expression/ExpressionFactory.php
 
