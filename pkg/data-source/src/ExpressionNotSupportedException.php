@@ -29,7 +29,12 @@ final class ExpressionNotSupportedException extends \InvalidArgumentException im
 
     public static function new(Expression $expression): self
     {
-        return new self(\sprintf('Not supported expression class: "%s".', \get_class($expression)));
+        return new self(\sprintf('Not supported expression class: %s.', \get_class($expression)));
+    }
+
+    public static function cannotBeNegated(Expression $expression): self
+    {
+        return new self(\sprintf('Cannot negate expression: %s.', \get_class($expression)));
     }
 
     protected static function getDefaultName(): string

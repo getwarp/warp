@@ -9,6 +9,7 @@ use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\Select;
+use spaceonfire\Bridge\Cycle\NodeHelper;
 use Spiral\Database\Injection\Parameter;
 
 /**

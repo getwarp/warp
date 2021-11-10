@@ -7,6 +7,7 @@ namespace spaceonfire\Bridge\Cycle\Mapper;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Relation;
 use Cycle\ORM\SchemaInterface;
+use spaceonfire\Bridge\Cycle\NodeHelper;
 use spaceonfire\DataSource\PropertyExtractorInterface;
 
 /**
@@ -28,13 +29,6 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
     {
         $name = $this->getPropertyExtractor()->extractName($name);
         [$relation, $property] = $this->splitName($name);
-
-        if (null === $relation && $this->hasRelation($property)) {
-            $relation = $property;
-            $property = $this->getRelationPK($relation);
-            $value = $this->extractRelationPK($relation, $value);
-        }
-
         return $this->getPropertyExtractor($relation)->extractValue($property, $value);
     }
 
@@ -42,14 +36,51 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
     {
         $name = $this->getPropertyExtractor()->extractName($name);
         [$relation, $property] = $this->splitName($name);
+        $extractor = $this->getPropertyExtractor($relation);
+        $field = $extractor->extractName($property);
+        ($extractor instanceof self ? $extractor : $this)->assertFieldDefined($field);
+        return (null === $relation ? '' : $relation . '.') . $field;
+    }
 
-        if (null === $relation && $this->hasRelation($property)) {
-            $relation = $property;
-            $property = $this->getRelationPK($relation);
+    /**
+     * @param string $name
+     * @return array<array-key,mixed>|null
+     */
+    public function getRelationSchemaIfExists(string $name): ?array
+    {
+        $name = $this->getPropertyExtractor()->extractName($name);
+        [$relation, $property] = $this->splitName($name);
+
+        if (null !== $relation) {
+            return $this->getRelationPropertyExtractor($relation)->getRelationSchemaIfExists($property);
         }
 
-        $hydrator = $this->getPropertyExtractor($relation);
-        return (null === $relation ? '' : $relation . '.') . $hydrator->extractName($property);
+        if (!$this->hasRelation($property)) {
+            return null;
+        }
+
+        return $this->orm->getSchema()->defineRelation($this->role, $property);
+    }
+
+    /**
+     * @param string $key
+     * @param object $entity
+     * @return mixed
+     */
+    public function fetchKey(string $key, object $entity)
+    {
+        $node = $this->orm->getHeap()->get($entity);
+
+        if (null === $node || !NodeHelper::nodePersisted($node)) {
+            throw new \RuntimeException('Could not fetch key from entity, because it not managed by orm.');
+        }
+
+        return $node->getData()[$key];
+    }
+
+    public function getRole(object $entity): string
+    {
+        return $this->orm->resolveRole($entity);
     }
 
     /**
@@ -71,15 +102,18 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
 
     private function getPropertyExtractor(?string $relation = null): PropertyExtractorInterface
     {
-        $schema = $this->orm->getSchema();
-
-        if (null === $relation) {
-            return HydratorMapper::getPropertyExtractor(
-                $schema->defines($this->role) ? $this->orm->getMapper($this->role) : null
-            );
+        if (null !== $relation) {
+            return $this->getRelationPropertyExtractor($relation);
         }
 
-        $relSchema = $schema->defineRelation($this->role, $relation);
+        return HydratorMapper::getPropertyExtractor(
+            $this->orm->getSchema()->defines($this->role) ? $this->orm->getMapper($this->role) : null
+        );
+    }
+
+    private function getRelationPropertyExtractor(string $relation): self
+    {
+        $relSchema = $this->orm->getSchema()->defineRelation($this->role, $relation);
 
         return new self($this->orm, $relSchema[Relation::TARGET]);
     }
@@ -90,28 +124,15 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
         return $schema->defines($this->role) && \in_array($relation, $schema->getRelations($this->role), true);
     }
 
-    private function getRelationPK(string $relation): string
+    private function assertFieldDefined(string $field, ?string $role = null): void
     {
-        $relSchema = $this->orm->getSchema()->defineRelation($this->role, $relation);
-        return $this->getPK($relSchema[Relation::TARGET]);
-    }
+        $role ??= $this->role;
+        $fields = $this->orm->getSchema()->define($role, SchemaInterface::COLUMNS);
 
-    private function getPK(string $role): string
-    {
-        return $this->orm->getSchema()->define($role, SchemaInterface::PRIMARY_KEY);
-    }
+        if (isset($fields[$field]) || \in_array($field, $fields, true)) {
+            return;
+        }
 
-    /**
-     * @param string $relation
-     * @param mixed $value
-     * @return mixed
-     */
-    private function extractRelationPK(string $relation, $value)
-    {
-        $relSchema = $this->orm->getSchema()->defineRelation($this->role, $relation);
-        $mapper = $this->orm->getMapper($relSchema[Relation::TARGET]);
-        $extractedData = $mapper->extract($value);
-        $pk = $this->getPK($relSchema[Relation::TARGET]);
-        return $extractedData[$pk];
+        throw new \InvalidArgumentException(\sprintf('Entity "%s" has not field "%s".', $role, $field));
     }
 }

@@ -114,15 +114,9 @@ abstract class AbstractExpressionVisitor
             throw ExpressionNotSupportedException::new($selector);
         }
 
-        $expression = $selector->getExpression();
-        $isNegated = false;
+        [$expression, $isNegated] = $this->prepareNegatedExpression($selector->getExpression());
 
-        if ($expression instanceof Logic\Not) {
-            $expression = $expression->getNegatedExpression();
-            $isNegated = true;
-        }
-
-        return $this->visitComparison($selector->getField(), $expression, $isNegated);
+        return $this->visitComparison($selector->getField(), $this->simplifyExpression($expression), $isNegated);
     }
 
     /**
@@ -138,32 +132,74 @@ abstract class AbstractExpressionVisitor
         bool $isNegated = false
     ): callable;
 
-    final protected function negateExpression(Expression $expressionToNegate): Expression
+    /**
+     * @param Expression $expression
+     * @return array{Expression,bool}
+     */
+    private function prepareNegatedExpression(Expression $expression): array
     {
-        if ($expressionToNegate instanceof Constraint\Equals) {
-            return new Constraint\NotEquals($expressionToNegate->getComparedValue());
+        if (!$expression instanceof Logic\Not) {
+            return [$expression, false];
         }
 
-        if ($expressionToNegate instanceof Constraint\Same) {
-            return new Constraint\NotSame($expressionToNegate->getComparedValue());
+        $expression = $expression->getNegatedExpression();
+
+        if ($expression instanceof Constraint\Equals) {
+            return [$this->expressionFactory->notEquals($expression->getComparedValue()), false];
         }
 
-        if ($expressionToNegate instanceof Constraint\GreaterThan) {
-            return new Constraint\LessThanEqual($expressionToNegate->getComparedValue());
+        if ($expression instanceof Constraint\Same) {
+            return [$this->expressionFactory->notSame($expression->getComparedValue()), false];
         }
 
-        if ($expressionToNegate instanceof Constraint\GreaterThanEqual) {
-            return new Constraint\LessThan($expressionToNegate->getComparedValue());
+        if ($expression instanceof Constraint\NotEquals) {
+            return [$this->expressionFactory->equals($expression->getComparedValue()), false];
         }
 
-        if ($expressionToNegate instanceof Constraint\LessThan) {
-            return new Constraint\GreaterThanEqual($expressionToNegate->getComparedValue());
+        if ($expression instanceof Constraint\NotSame) {
+            return [$this->expressionFactory->same($expression->getComparedValue()), false];
         }
 
-        if ($expressionToNegate instanceof Constraint\LessThanEqual) {
-            return new Constraint\GreaterThan($expressionToNegate->getComparedValue());
+        if ($expression instanceof Constraint\GreaterThan) {
+            return [$this->expressionFactory->lessThanEqual($expression->getComparedValue()), false];
         }
 
-        return $expressionToNegate;
+        if ($expression instanceof Constraint\GreaterThanEqual) {
+            return [$this->expressionFactory->lessThan($expression->getComparedValue()), false];
+        }
+
+        if ($expression instanceof Constraint\LessThan) {
+            return [$this->expressionFactory->greaterThanEqual($expression->getComparedValue()), false];
+        }
+
+        if ($expression instanceof Constraint\LessThanEqual) {
+            return [$this->expressionFactory->greaterThan($expression->getComparedValue()), false];
+        }
+
+        if (
+            $expression instanceof Constraint\Contains ||
+            $expression instanceof Constraint\EndsWith ||
+            $expression instanceof Constraint\StartsWith ||
+            $expression instanceof Constraint\In
+        ) {
+            return [$expression, true];
+        }
+
+        throw ExpressionNotSupportedException::cannotBeNegated($expression);
+    }
+
+    private function simplifyExpression(Expression $expression): Expression
+    {
+        if ($expression instanceof Constraint\In) {
+            $acceptedValues = $expression->getAcceptedValues();
+
+            if (1 === \count($acceptedValues)) {
+                return $expression->isStrict()
+                    ? $this->expressionFactory->same(\reset($acceptedValues))
+                    : $this->expressionFactory->equals(\reset($acceptedValues));
+            }
+        }
+
+        return $expression;
     }
 }

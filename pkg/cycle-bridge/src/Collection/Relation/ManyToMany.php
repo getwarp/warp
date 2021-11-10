@@ -23,6 +23,7 @@ use spaceonfire\Bridge\Cycle\Collection\CollectionFactoryInterface;
 use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
 use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
 use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
+use spaceonfire\Bridge\Cycle\NodeHelper;
 use spaceonfire\Bridge\Cycle\Select\PrepareLoaderScopeInterface;
 use spaceonfire\Bridge\Cycle\Select\ReferenceScope;
 use spaceonfire\Bridge\Cycle\Select\ScopeAggregate;

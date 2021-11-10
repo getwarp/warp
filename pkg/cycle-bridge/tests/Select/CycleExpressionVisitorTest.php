@@ -6,9 +6,11 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Select;
 
+use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Select;
 use spaceonfire\Bridge\Cycle\AbstractTestCase;
 use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
+use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
 use spaceonfire\Bridge\Cycle\Fixtures\User;
 use spaceonfire\Bridge\Cycle\Mapper\CyclePropertyExtractor;
 use spaceonfire\Criteria\Expression\AbstractExpressionDecorator;
@@ -54,13 +56,15 @@ class CycleExpressionVisitorTest extends AbstractTestCase
      * @dataProvider errorDataProvider
      * @param OrmCapsule $capsule
      * @param Expression $expression
+     * @param class-string<\Throwable> $expectedException
      */
-    public function testDispatchUnknown(OrmCapsule $capsule, Expression $expression): void
+    public function testDispatchUnknown(OrmCapsule $capsule, Expression $expression, string $expectedException = \InvalidArgumentException::class): void
     {
-        [$visitor] = $this->bootstrapVisitor($capsule, 'post');
+        [$visitor, $select] = $this->bootstrapVisitor($capsule, 'post');
 
-        $this->expectException(\InvalidArgumentException::class);
-        $visitor->dispatch($expression);
+        $this->expectException($expectedException);
+        $select->where($visitor->dispatch($expression));
+        $select->buildQuery();
     }
 
     public function successDataProvider(): \Generator
@@ -197,21 +201,63 @@ class CycleExpressionVisitorTest extends AbstractTestCase
         ];
         yield [
             $capsule,
-            $ef->property('author', $ef->same($capsule->orm()->make(User::class, [
-                'id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
-                'name' => 'Admin User',
-            ]))),
-            'SELECT * FROM "post" AS "post" INNER JOIN "user" AS "post_author" ON "post_author"."id" = "post"."author_id" WHERE ("post_author"."id" = \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
-        ];
-        yield [
-            $capsule,
             $ef->true(),
-            'SELECT * FROM "post" AS "post" WHERE (1 = 1  )',
+            'SELECT * FROM "post" AS "post"',
         ];
         yield [
             $capsule,
             $ef->false(),
             'SELECT * FROM "post" AS "post" WHERE (1 = 0  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->in([])),
+            'SELECT * FROM "post" AS "post" WHERE (1 = 0  )',
+        ];
+
+        $user1 = $capsule->orm()->make(User::class, [
+            'id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+            'name' => 'Admin User',
+        ], Node::MANAGED);
+        $user2 = $capsule->orm()->make(User::class, [
+            'id' => 'beef6393-506a-4bc5-8b41-af35e877cfe2',
+            'name' => 'Admin User',
+        ], Node::MANAGED);
+
+        yield [
+            $capsule,
+            $ef->property('author', $ef->same($user1)),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" = \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->in([$user1])),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" = \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->not($ef->in([$user1]))),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" <> \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->in([$user1, $user1])),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" = \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->not($ef->in([$user1, $user1]))),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" <> \'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->in([$user1, $user2])),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" IN (\'35a60006-c34a-4c0b-8e9d-7759f6d0c09b\' ,\'beef6393-506a-4bc5-8b41-af35e877cfe2\')  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->null()),
+            'SELECT * FROM "post" AS "post" WHERE ("post"."author_id" IS NULL  )',
         ];
     }
 
@@ -236,6 +282,26 @@ class CycleExpressionVisitorTest extends AbstractTestCase
         yield [
             $capsule,
             $ef->property('id', $ef->not($ef->isInstanceOf(self::class))),
+        ];
+        yield [
+            $capsule,
+            $ef->property('unknown', $ef->null()),
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->greaterThan(0)),
+        ];
+        yield [
+            $capsule,
+            $ef->property('author', $ef->same(0)),
+            \RuntimeException::class,
+        ];
+
+        $todo = new TodoItem(null, 'FooBar');
+        yield [
+            $capsule,
+            $ef->property('author', $ef->same($todo)),
+            \RuntimeException::class,
         ];
     }
 }
