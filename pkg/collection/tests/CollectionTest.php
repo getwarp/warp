@@ -664,7 +664,7 @@ class CollectionTest extends TestCase
     {
         $collection = Collection::new(\range(0, 9));
 
-        self::assertSame(\range(0, 9), iterator_to_array($collection->getIterator()));
+        self::assertSame(\range(0, 9), \iterator_to_array($collection->getIterator()));
     }
 
     public function testGetIteratorMultiple(): void
@@ -678,7 +678,7 @@ class CollectionTest extends TestCase
         $i = 5000;
 
         while ($i > 0) {
-            self::assertSame($range, iterator_to_array($collection->getIterator()));
+            self::assertSame($range, \iterator_to_array($collection->getIterator()));
             $i--;
         }
     }
@@ -726,6 +726,17 @@ class CollectionTest extends TestCase
             self::assertSame(++$i, $item);
             self::assertCount(10, $collection);
         }
+    }
+
+    public function testIterateAndRemove(): void
+    {
+        $collection = Collection::new(\range(0, 9));
+
+        foreach ($collection as $value) {
+            $collection->remove($value);
+        }
+
+        self::assertCount(0, $collection);
     }
 
     private function skipIfXdebugEnabled(): void

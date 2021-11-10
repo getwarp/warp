@@ -96,12 +96,12 @@ abstract class AbstractMap implements MapInterface
 
     public function firstKey()
     {
-        return \array_key_first($this->source->getIterator()->getArrayCopy());
+        return \array_key_first($this->source->getArrayCopy());
     }
 
     public function lastKey()
     {
-        return \array_key_last($this->source->getIterator()->getArrayCopy());
+        return \array_key_last($this->source->getArrayCopy());
     }
 
     public function getIterator(): \Traversable
@@ -119,7 +119,7 @@ abstract class AbstractMap implements MapInterface
      */
     public function jsonSerialize(): array
     {
-        return $this->source->getIterator()->getArrayCopy();
+        return $this->source->getArrayCopy();
     }
 
     /**

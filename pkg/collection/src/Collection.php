@@ -52,7 +52,7 @@ final class Collection extends AbstractCollection implements StaticConstructorIn
     {
         return $this->source instanceof MutableInterface
             ? $this->source
-            : new ArrayIterator(\iterator_to_array($this->source, false));
+            : new ArrayIterator($this->prepareIterator()->getArrayCopy());
     }
 
     protected function makeMap(iterable $elements = [], ?TypeInterface $valueType = null): MapInterface

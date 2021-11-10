@@ -133,6 +133,17 @@ final class ArrayCacheIterator implements \Iterator, \Countable
         return $count;
     }
 
+    /**
+     * @return array<K,V>
+     */
+    public function getArrayCopy(): array
+    {
+        $pos = $this->pos;
+        $array = \iterator_to_array($this);
+        $this->pos = $pos;
+        return $array;
+    }
+
     private function cacheTuple(int $pos): void
     {
         if (isset($this->keys[$pos])) {

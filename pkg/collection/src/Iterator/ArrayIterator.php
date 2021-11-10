@@ -103,11 +103,19 @@ final class ArrayIterator implements \IteratorAggregate, \ArrayAccess, \Countabl
     }
 
     /**
-     * @return \ArrayIterator<K,V>
+     * @return array<K,V>
      */
-    public function getIterator(): \ArrayIterator
+    public function getArrayCopy(): array
     {
-        return $this->iterator;
+        return $this->iterator->getArrayCopy();
+    }
+
+    /**
+     * @return \Generator<K,V>
+     */
+    public function getIterator(): \Generator
+    {
+        return yield from $this->getArrayCopy();
     }
 
     public function count(): int

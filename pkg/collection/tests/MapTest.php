@@ -263,4 +263,18 @@ class MapTest extends TestCase
             \json_encode($map, JSON_THROW_ON_ERROR)
         );
     }
+
+    public function testIterateAndUnset(): void
+    {
+        $map = Map::new([
+            'value1' => 'value1',
+            'value2' => 'value2',
+        ]);
+
+        foreach ($map->values() as $value) {
+            $map->unset($value);
+        }
+
+        self::assertCount(0, $map);
+    }
 }
