@@ -126,6 +126,10 @@ final class CyclePropertyExtractor implements PropertyExtractorInterface
 
     private function assertFieldDefined(string $field, ?string $role = null): void
     {
+        if (\str_contains($field, '.')) {
+            return;
+        }
+
         $role ??= $this->role;
         $fields = $this->orm->getSchema()->define($role, SchemaInterface::COLUMNS);
 

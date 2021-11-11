@@ -28,6 +28,7 @@
     "spaceonfire/laminas-hydrator-bridge": "^3.0",
     "spaceonfire/type": "^3.0",
     "symfony/event-dispatcher-contracts": "^2.0",
+    "symfony/polyfill-php80": "^1.22",
     "webmozart/expression": "^1.0"
   },
   "require-dev": {
