@@ -25,6 +25,16 @@ final class CycleEntityPersister implements EntityPersisterInterface
         $this->transactionMode = $transactionMode;
     }
 
+    public function persistCascade(): void
+    {
+        $this->transactionMode = TransactionInterface::MODE_CASCADE;
+    }
+
+    public function persistSingle(): void
+    {
+        $this->transactionMode = TransactionInterface::MODE_ENTITY_ONLY;
+    }
+
     /**
      * @inheritDoc
      * @throws \Throwable

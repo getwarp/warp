@@ -8,8 +8,8 @@ interface EntityPersisterAggregateInterface
 {
     /**
      * @template E of object
-     * @param class-string<E> $entity
+     * @param class-string<E>|null $entity
      * @return EntityPersisterInterface<E>
      */
-    public function getPersister(string $entity): EntityPersisterInterface;
+    public function getPersister(?string $entity = null): EntityPersisterInterface;
 }

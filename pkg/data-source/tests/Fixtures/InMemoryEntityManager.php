@@ -48,7 +48,7 @@ final class InMemoryEntityManager implements EntityReaderAggregateInterface, Ent
         }
     }
 
-    public function getPersister(string $entity): EntityPersisterInterface
+    public function getPersister(?string $entity = null): EntityPersisterInterface
     {
         return $this;
     }

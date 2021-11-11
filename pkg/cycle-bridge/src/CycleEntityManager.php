@@ -42,9 +42,9 @@ final class CycleEntityManager implements
         return new CycleEntityReader($this->orm, $entity, $this->notFoundExceptionFactory);
     }
 
-    public function getPersister(?string $entity = null): EntityPersisterInterface
+    public function getPersister(?string $entity = null, ?int $transactionMode = null): EntityPersisterInterface
     {
-        return new CycleEntityPersister($this->orm, $this->transactionMode);
+        return new CycleEntityPersister($this->orm, $transactionMode ?? $this->transactionMode);
     }
 
     public function save(object $entity, object ...$entities): void
