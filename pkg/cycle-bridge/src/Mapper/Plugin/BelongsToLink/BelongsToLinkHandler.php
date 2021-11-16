@@ -131,6 +131,10 @@ final class BelongsToLinkHandler
         $node->forward($innerKey, $command, $innerColumn);
         $rNode->forward($outerKey, $node, $innerKey, true);
 
+        if (null !== $rNode->getState()->getCommand()) {
+            $command->waitContext($innerColumn, !$nullable);
+        }
+
         if (null === $morphKey) {
             return;
         }

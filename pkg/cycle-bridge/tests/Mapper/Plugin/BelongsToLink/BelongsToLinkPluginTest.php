@@ -79,7 +79,8 @@ class BelongsToLinkPluginTest extends AbstractTestCase
         self::assertSame([
             'author_id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
         ], $command->getContext());
-        self::assertTrue($command->isReady());
+        // Command waits to author store first
+        self::assertFalse($command->isReady());
     }
 
     /**
