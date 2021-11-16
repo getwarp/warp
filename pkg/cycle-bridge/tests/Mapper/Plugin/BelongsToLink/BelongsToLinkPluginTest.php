@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
 
 use Cycle\ORM\Heap\Node;
+use Cycle\ORM\Promise\PromiseInterface;
+use Cycle\ORM\Promise\Reference;
 use Cycle\ORM\TransactionInterface;
 use spaceonfire\Bridge\Cycle\AbstractTestCase;
 use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
@@ -102,6 +104,68 @@ class BelongsToLinkPluginTest extends AbstractTestCase
 
         // context empty, command ready and SQL query will fail
         self::assertSame([], $command->getContext());
+        self::assertTrue($command->isReady());
+    }
+
+    /**
+     * @dataProvider ormCapsuleProvider
+     */
+    public function testPluginLinkPromise(OrmCapsule $capsule): void
+    {
+        $mapperPlugin = $this->makePlugin($capsule);
+
+        /** @var PromiseInterface $authorPromise */
+        $authorPromise = $capsule->orm()->promise(User::class, [
+            'id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+        ]);
+
+        $post = $capsule->orm()->make(Post::class, [
+            'id' => '0279d9bb-41e4-4fd0-ba05-87a2e112c7c2',
+            'title' => 'Yet another blog post',
+            'author' => $authorPromise,
+        ]);
+
+        $command = $capsule->orm()->queueStore($post, TransactionInterface::MODE_ENTITY_ONLY);
+        $node = $capsule->orm()->getHeap()->get($post);
+
+        $mapperPlugin->dispatch(new QueueAfterEvent($post, $node, $node->getState(), $command));
+
+        self::assertSame([
+            'author_id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+        ], $command->getContext());
+        self::assertTrue($command->isReady());
+    }
+
+    /**
+     * @dataProvider ormCapsuleProvider
+     */
+    public function testPluginLinkReference(OrmCapsule $capsule): void
+    {
+        $mapperPlugin = $this->makePlugin($capsule);
+
+        $capsule->orm()->make(User::class, [
+            'id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+            'name' => 'Admin User',
+        ], Node::MANAGED);
+
+        $authorRef = new Reference($capsule->orm()->resolveRole(User::class), [
+            'id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+        ]);
+
+        $post = $capsule->orm()->make(Post::class, [
+            'id' => '0279d9bb-41e4-4fd0-ba05-87a2e112c7c2',
+            'title' => 'Yet another blog post',
+            'author' => $authorRef,
+        ]);
+
+        $command = $capsule->orm()->queueStore($post, TransactionInterface::MODE_ENTITY_ONLY);
+        $node = $capsule->orm()->getHeap()->get($post);
+
+        $mapperPlugin->dispatch(new QueueAfterEvent($post, $node, $node->getState(), $command));
+
+        self::assertSame([
+            'author_id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+        ], $command->getContext());
         self::assertTrue($command->isReady());
     }
 }
