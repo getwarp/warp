@@ -24,19 +24,16 @@ final class OnfireObjectCollection extends AbstractCollectionDecorator implement
      */
     private ObjectIterator $storage;
 
-    /**
-     * @var CollectionInterface<V>
-     */
-    private CollectionInterface $collection;
+    private ?TypeInterface $valueType;
 
     /**
      * @param ObjectIterator<V,P> $storage
-     * @param CollectionInterface<V> $collection
+     * @param TypeInterface|null $valueType
      */
-    private function __construct(ObjectIterator $storage, CollectionInterface $collection)
+    private function __construct(ObjectIterator $storage, ?TypeInterface $valueType = null)
     {
         $this->storage = $storage;
-        $this->collection = $collection;
+        $this->valueType = $valueType;
     }
 
     /**
@@ -47,9 +44,7 @@ final class OnfireObjectCollection extends AbstractCollectionDecorator implement
      */
     public static function new(iterable $elements = [], ?TypeInterface $valueType = null): self
     {
-        $iterator = new ObjectIterator($elements);
-        $collection = Collection::new($iterator, $valueType);
-        return new self($iterator, $collection);
+        return new self(new ObjectIterator($elements), $valueType);
     }
 
     public function hasPivot(object $element): bool
@@ -74,6 +69,6 @@ final class OnfireObjectCollection extends AbstractCollectionDecorator implement
 
     protected function getCollection(): CollectionInterface
     {
-        return $this->collection;
+        return Collection::new($this->storage, $this->valueType);
     }
 }
