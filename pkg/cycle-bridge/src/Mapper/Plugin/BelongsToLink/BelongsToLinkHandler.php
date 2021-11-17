@@ -131,7 +131,7 @@ final class BelongsToLinkHandler
         $node->forward($innerKey, $command, $innerColumn);
         $rNode->forward($outerKey, $node, $innerKey, true);
 
-        if (null !== $rNode->getState()->getCommand()) {
+        if (!\array_key_exists($outerKey, $rNode->getInitialData())) {
             $command->waitContext($innerColumn, !$nullable);
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
 
+use Cycle\ORM\Command\Branch\ContextSequence;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\Reference;
@@ -81,6 +82,34 @@ class BelongsToLinkPluginTest extends AbstractTestCase
         ], $command->getContext());
         // Command waits to author store first
         self::assertFalse($command->isReady());
+    }
+
+    /**
+     * @dataProvider ormCapsuleProvider
+     */
+    public function testPluginLinkScheduledCascade(OrmCapsule $capsule): void
+    {
+        $mapperPlugin = $this->makePlugin($capsule);
+
+        $author = new User('35a60006-c34a-4c0b-8e9d-7759f6d0c09b', 'Admin User');
+
+        $post = new Post(
+            '0279d9bb-41e4-4fd0-ba05-87a2e112c7c2',
+            'Yet another blog post',
+            $author,
+        );
+
+        $command = $capsule->orm()->queueStore($post);
+        $node = $capsule->orm()->getHeap()->get($post);
+
+        $mapperPlugin->dispatch(new QueueAfterEvent($post, $node, $node->getState(), $command));
+
+        self::assertInstanceOf(ContextSequence::class, $command);
+        self::assertSame([
+            'author_id' => '35a60006-c34a-4c0b-8e9d-7759f6d0c09b',
+        ], $command->getPrimary()->getContext());
+        // Command waits to author store first
+        self::assertFalse($command->getPrimary()->isReady());
     }
 
     /**
