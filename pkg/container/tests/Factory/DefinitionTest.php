@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Factory;
 
+use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\FactoryAggregateInterface;
@@ -15,7 +16,6 @@ use spaceonfire\Container\Fixtures\ArrayContainer;
 use spaceonfire\Container\Fixtures\ArrayFactoryAggregate;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\InvokerInterface;
-use spaceonfire\Container\RawValueHolder;
 
 class DefinitionTest extends TestCase
 {
@@ -113,7 +113,7 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionPredefinedNonObject(): void
     {
-        $def = new Definition('foo', new RawValueHolder('bar'));
+        $def = new Definition('foo', new Some('bar'));
 
         self::assertSame('bar', $def->make());
     }

@@ -8,6 +8,7 @@ use Cycle\ORM\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Schema;
 use Cycle\Schema\Generator;
+use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Bridge\Cycle\Factory\OrmFactory;
 use spaceonfire\Bridge\Cycle\Factory\SpiralFactory;
@@ -19,7 +20,6 @@ use spaceonfire\Container\DefinitionContainer;
 use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
 use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
 use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\RawValueHolder;
 use Spiral\Database\Config\DatabaseConfig;
 use Spiral\Database\DatabaseManager;
 use Spiral\Database\DatabaseProviderInterface;
@@ -61,8 +61,8 @@ abstract class AbstractTestCase extends TestCase
         );
         $orm = $orm->withPromiseFactory(new EntityReferenceFactory());
 
-        $container->define(ORMInterface::class, new RawValueHolder($orm), true);
-        $container->define(DatabaseProviderInterface::class, new RawValueHolder($dbal), true);
+        $container->define(ORMInterface::class, new Some($orm), true);
+        $container->define(DatabaseProviderInterface::class, new Some($dbal), true);
 
         return new OrmCapsule($dbal, $orm);
     }

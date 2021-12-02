@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Factory\Reflection;
 
+use PhpOption\Some;
 use Psr\Container\ContainerInterface;
 use spaceonfire\Container\Factory\Argument;
 use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\RawValueHolder;
 use spaceonfire\Type\AbstractAggregatedType;
 use spaceonfire\Type\BuiltinType;
 use spaceonfire\Type\DisjunctionType;
@@ -59,7 +59,7 @@ final class ReflectionDependencyResolver
             $parameter->getName(),
             $location,
             self::convertReflectionType($parameter->getType()),
-            $parameter->isDefaultValueAvailable() ? new RawValueHolder($parameter->getDefaultValue()) : null,
+            $parameter->isDefaultValueAvailable() ? new Some($parameter->getDefaultValue()) : null,
             $parameter->isVariadic(),
         );
     }

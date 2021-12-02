@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spaceonfire\Common\Kernel;
 
+use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use spaceonfire\Container\CompositeContainer;
 use spaceonfire\Container\DefinitionContainer;
 use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\RawValueHolder;
 use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
 
 class KernelTest extends TestCase
@@ -30,9 +30,9 @@ class KernelTest extends TestCase
 
                         public function register(): void
                         {
-                            $this->getContainer()->define('foo', new RawValueHolder('bar'));
+                            $this->getContainer()->define('foo', new Some('bar'));
                         }
-                    }
+                    },
                 ];
             }
         };

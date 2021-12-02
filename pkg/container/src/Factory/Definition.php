@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Factory;
 
+use PhpOption\None;
+use PhpOption\Option;
+use PhpOption\Some;
 use spaceonfire\Container\ContainerAwareTrait;
 use spaceonfire\Container\DefinitionInterface;
 use spaceonfire\Container\Exception\ContainerException;
@@ -14,7 +17,6 @@ use spaceonfire\Container\FactoryOptionsInterface;
 use spaceonfire\Container\InstanceOfAliasContainer;
 use spaceonfire\Container\InvokerInterface;
 use spaceonfire\Container\InvokerOptionsInterface;
-use spaceonfire\Container\RawValueHolder;
 
 /**
  * @template T
@@ -44,22 +46,24 @@ final class Definition implements DefinitionInterface
     private array $tags = [];
 
     /**
-     * @var RawValueHolder<T>|null
+     * @var Option<T>
      */
-    private ?RawValueHolder $resolved = null;
+    private Option $resolved;
 
     /**
      * Definition constructor.
      * @param string|class-string<T> $abstract
-     * @param T|RawValueHolder<T>|string|class-string<T>|callable():T|null $concrete
+     * @param T|Option<T>|string|class-string<T>|callable():T|null $concrete
      * @param bool $shared
      */
     public function __construct(string $abstract, $concrete = null, bool $shared = false)
     {
+        $this->resolved = None::create();
+
         $concrete ??= $abstract;
 
-        if ($concrete instanceof RawValueHolder) {
-            /** @phpstan-var RawValueHolder<T> $concrete */
+        if ($concrete instanceof Option) {
+            /** @phpstan-var Option<T> $concrete */
             $this->resolved = $concrete;
             $concrete = null;
             $shared = true;
@@ -67,7 +71,7 @@ final class Definition implements DefinitionInterface
 
         if (\is_object($concrete) && !\is_callable($concrete)) {
             /** @phpstan-var T $concrete */
-            $this->resolved = new RawValueHolder($concrete);
+            $this->resolved = new Some($concrete);
             $concrete = null;
             $shared = true;
         }
@@ -196,14 +200,14 @@ final class Definition implements DefinitionInterface
 
     public function make(?FactoryOptionsInterface $options = null)
     {
-        if (null !== $this->resolved) {
-            return $this->resolved->getValue();
+        if ($this->resolved->isDefined()) {
+            return $this->resolved->get();
         }
 
         $resolved = $this->resolve($options);
 
         if ($this->shared) {
-            $this->resolved = new RawValueHolder($resolved);
+            $this->resolved = new Some($resolved);
             $this->concrete = null;
         }
 

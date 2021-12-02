@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace spaceonfire\DevTool;
 
 use Composer\Autoload\ClassLoader;
-use spaceonfire\Container\RawValueHolder;
+use PhpOption\Some;
 use spaceonfire\DevTool\Console\ComposerHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -19,7 +19,7 @@ unset($composerFinder);
 
 $kernel = new DevToolKernel();
 
-$kernel->getContainer()->define(ClassLoader::class, new RawValueHolder($classLoader), true);
+$kernel->getContainer()->define(ClassLoader::class, new Some($classLoader), true);
 
 $kernel->configureConsoleApplication(
     $console = new Application(),

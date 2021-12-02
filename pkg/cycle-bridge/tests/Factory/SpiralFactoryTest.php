@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace spaceonfire\Bridge\Cycle\Factory;
 
 use Cycle\ORM\ORMInterface;
+use PhpOption\Some;
 use spaceonfire\Bridge\Cycle\AbstractTestCase;
 use spaceonfire\Bridge\Cycle\Fixtures\Mapper\UserMapper;
 use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
 use spaceonfire\Container\CompositeContainer;
 use spaceonfire\Container\DefinitionContainer;
 use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\RawValueHolder;
 
 class SpiralFactoryTest extends AbstractTestCase
 {
@@ -25,7 +25,7 @@ class SpiralFactoryTest extends AbstractTestCase
             new FactoryContainer(),
         );
 
-        $container->define(ORMInterface::class, new RawValueHolder($capsule->orm()), true);
+        $container->define(ORMInterface::class, new Some($capsule->orm()), true);
 
         $factory = new SpiralFactory($container);
 

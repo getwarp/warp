@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Factory;
 
+use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Container\CompositeContainer;
 use spaceonfire\Container\DefinitionContainer;
@@ -15,7 +16,6 @@ use spaceonfire\Container\Fixtures\AbstractClass\AbstractClass;
 use spaceonfire\Container\Fixtures\ArrayContainer;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Container\RawValueHolder;
 use spaceonfire\Type\BuiltinType;
 use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\InstanceOfType;
@@ -111,7 +111,7 @@ class ArgumentTest extends TestCase
     {
         $obj = new AA();
         yield [
-            new Argument('', '', InstanceOfType::new(AA::class), new RawValueHolder($obj)),
+            new Argument('', '', InstanceOfType::new(AA::class), new Some($obj)),
             [$obj],
         ];
 

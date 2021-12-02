@@ -26,6 +26,7 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
+    "phpoption/phpoption": "^1.7",
     "psr/container": "^1.1|^2.0",
     "spaceonfire/common": "^3.0",
     "spaceonfire/exception": "^3.0",

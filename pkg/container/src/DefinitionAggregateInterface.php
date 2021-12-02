@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container;
 
+use PhpOption\Option;
+
 interface DefinitionAggregateInterface
 {
     /**
      * Register definition.
      * @template T
      * @param string|class-string<T> $id
-     * @param T|RawValueHolder<T>|string|class-string<T>|callable():T|null $concrete
+     * @param T|Option<T>|string|class-string<T>|callable():T|null $concrete
      * @param boolean $shared
      * @return DefinitionInterface<T>
      */

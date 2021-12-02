@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace spaceonfire\Container\Factory;
 
+use PhpOption\None;
+use PhpOption\Option;
+use PhpOption\Some;
 use Psr\Container\ContainerInterface;
 use spaceonfire\Container\ContainerAwareInterface;
 use spaceonfire\Container\DefinitionAggregateInterface;
@@ -12,7 +15,6 @@ use spaceonfire\Container\Exception\CannotResolveArgumentException;
 use spaceonfire\Container\Exception\ContainerException;
 use spaceonfire\Container\FactoryOptionsInterface;
 use spaceonfire\Container\InstanceOfAliasContainer;
-use spaceonfire\Container\RawValueHolder;
 use spaceonfire\Type\AbstractAggregatedType;
 use spaceonfire\Type\InstanceOfType;
 use spaceonfire\Type\MixedType;
@@ -30,9 +32,9 @@ final class Argument implements ContainerAwareInterface
     private TypeInterface $type;
 
     /**
-     * @var RawValueHolder<A>|RawValueHolder<A[]>|null
+     * @var Option<A>
      */
-    private ?RawValueHolder $defaultValue;
+    private Option $defaultValue;
 
     private bool $variadic;
 
@@ -42,31 +44,31 @@ final class Argument implements ContainerAwareInterface
      * @param string $name
      * @param string $location
      * @param TypeInterface|null $type
-     * @param RawValueHolder<A>|RawValueHolder<A[]>|null $defaultValue
+     * @param Option<A>|null $defaultValue
      * @param bool $variadic
      */
     public function __construct(
         string $name,
         string $location,
         ?TypeInterface $type = null,
-        ?RawValueHolder $defaultValue = null,
+        ?Option $defaultValue = null,
         bool $variadic = false
     ) {
         $type ??= MixedType::new();
 
         if ($variadic) {
-            $defaultValue ??= new RawValueHolder([]);
+            $defaultValue ??= new Some([]);
         }
 
         if ($type->check(null)) {
-            $defaultValue ??= new RawValueHolder(null);
+            $defaultValue ??= new Some(null);
         }
 
         $this->name = $name;
         $this->location = $location;
         $this->type = $type;
-        /** @phpstan-var RawValueHolder<A>|RawValueHolder<A[]>|null $defaultValue */
-        $this->defaultValue = $defaultValue;
+        /** @phpstan-var Option<A>|null $defaultValue */
+        $this->defaultValue = $defaultValue ?? None::create();
         $this->variadic = $variadic;
     }
 
@@ -86,11 +88,12 @@ final class Argument implements ContainerAwareInterface
      */
     public function resolve(?FactoryOptionsInterface $options = null): \Generator
     {
-        $valueContainer = $this->resolveUsingOptions($options)
-            ?? $this->resolveUsingType($this->type)
-            ?? $this->defaultValue;
+        /** @var Option<A> $value */
+        $value = Option::ensure(fn () => $this->resolveUsingOptions($options))
+            ->orElse(Option::ensure(fn () => $this->resolveUsingType($this->type)))
+            ->orElse(Option::ensure(fn () => $this->defaultValue));
 
-        if (null === $valueContainer) {
+        if (!$value->isDefined()) {
             throw new CannotResolveArgumentException(
                 $this,
                 null,
@@ -98,13 +101,12 @@ final class Argument implements ContainerAwareInterface
             );
         }
 
-        $value = $valueContainer->getValue();
+        $value = $value->get();
 
         if ($this->variadic && \is_iterable($value)) {
             return yield from $value;
         }
 
-        /** @phpstan-var A $value */
         return yield $value;
     }
 
@@ -124,16 +126,16 @@ final class Argument implements ContainerAwareInterface
 
     /**
      * @param FactoryOptionsInterface|null $options
-     * @return RawValueHolder<A>|RawValueHolder<A[]>|null
+     * @return Option<A>
      */
-    private function resolveUsingOptions(?FactoryOptionsInterface $options = null): ?RawValueHolder
+    private function resolveUsingOptions(?FactoryOptionsInterface $options = null): Option
     {
         if (null === $options) {
-            return null;
+            return None::create();
         }
 
         if ($options->hasArgument($this->name)) {
-            return new RawValueHolder($options->getArgument($this->name));
+            return new Some($options->getArgument($this->name));
         }
 
         if ($this->variadic && null !== $tag = $options->getArgumentTag($this->name)) {
@@ -144,18 +146,20 @@ final class Argument implements ContainerAwareInterface
             return $this->resolveFromContainer($alias);
         }
 
-        return null;
+        return None::create();
     }
 
     /**
      * @param TypeInterface $type
-     * @return RawValueHolder<A>|RawValueHolder<A[]>|null
+     * @return Option<A>
      */
-    private function resolveUsingType(TypeInterface $type): ?RawValueHolder
+    private function resolveUsingType(TypeInterface $type): Option
     {
         if ($type instanceof AbstractAggregatedType) {
             foreach ($type as $subtype) {
-                if (null === $output = $this->resolveUsingType($subtype)) {
+                $output = $this->resolveUsingType($subtype);
+
+                if ($output->isEmpty()) {
                     continue;
                 }
 
@@ -167,31 +171,35 @@ final class Argument implements ContainerAwareInterface
             $key = (string)$type;
 
             if ($this->variadic) {
-                return $this->resolveFromContainerByTag($key) ?? $this->resolveFromContainer($key);
+                $output = $this->resolveFromContainerByTag($key);
+
+                if ($output->isDefined()) {
+                    return $output;
+                }
             }
 
             return $this->resolveFromContainer($key);
         }
 
-        return null;
+        return None::create();
     }
 
     /**
      * @param string|class-string<A> $alias
-     * @return RawValueHolder<A>|null
+     * @return Option<A>
      */
-    private function resolveFromContainer(string $alias): ?RawValueHolder
+    private function resolveFromContainer(string $alias): Option
     {
         try {
             $container = $this->getContainer();
 
             if (!$container->has($alias)) {
-                return null;
+                return None::create();
             }
 
-            return new RawValueHolder($container->get($alias));
+            return new Some($container->get($alias));
         } catch (CannotInstantiateAbstractClassException $e) {
-            return null;
+            return None::create();
         } catch (\Throwable $e) {
             throw new CannotResolveArgumentException($this, $e);
         }
@@ -199,30 +207,28 @@ final class Argument implements ContainerAwareInterface
 
     /**
      * @param string $tag
-     * @return RawValueHolder<A[]>|null
+     * @return Option<A>
      */
-    private function resolveFromContainerByTag(string $tag): ?RawValueHolder
+    private function resolveFromContainerByTag(string $tag): Option
     {
         try {
             $container = $this->getContainer();
 
             if (!$container->has(DefinitionAggregateInterface::class)) {
-                return null;
+                return None::create();
             }
 
             /** @var DefinitionAggregateInterface $definitionContainer */
             $definitionContainer = $container->get(DefinitionAggregateInterface::class);
 
             if (!$definitionContainer->hasTagged($tag)) {
-                return null;
+                return None::create();
             }
 
-            /** @var array<A> $items */
-            $items = \iterator_to_array($definitionContainer->getTagged($tag), false);
-
-            return new RawValueHolder($items);
+            // @phpstan-ignore-next-line
+            return new Some(\iterator_to_array($definitionContainer->getTagged($tag), false));
         } catch (CannotInstantiateAbstractClassException $e) {
-            return null;
+            return None::create();
         } catch (\Throwable $e) {
             throw new CannotResolveArgumentException($this, $e);
         }
