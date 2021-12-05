@@ -74,6 +74,7 @@ trait DateTimeTrait
         return new static($s);
     }
 
+    #[\ReturnTypeWillChange]
     public static function createFromFormat($format, $time, ?\DateTimeZone $timezone = null): ?self
     {
         $date = parent::createFromFormat($format, $time, $timezone ?? new \DateTimeZone(\date_default_timezone_get()));

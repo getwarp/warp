@@ -73,6 +73,7 @@ abstract class AbstractEnumValue extends AbstractValueObject
     /**
      * @return T
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         \assert(\is_scalar($this->value));

@@ -31,6 +31,8 @@
     "spaceonfire/common": "^3.0",
     "spaceonfire/exception": "^3.0",
     "spaceonfire/type": "^3.0",
+    "symfony/polyfill-php80": "^1.22",
+    "symfony/polyfill-php81": "^1.22",
     "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {

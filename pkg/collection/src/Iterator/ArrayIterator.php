@@ -80,6 +80,7 @@ final class ArrayIterator implements \IteratorAggregate, \ArrayAccess, \Countabl
      * @param K $offset
      * @return V|null
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->iterator->offsetGet($offset);

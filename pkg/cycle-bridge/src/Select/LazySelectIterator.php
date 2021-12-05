@@ -31,6 +31,7 @@ final class LazySelectIterator implements \Iterator, \Countable
         $this->select = $select;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->getIterator()->current();
@@ -41,6 +42,7 @@ final class LazySelectIterator implements \Iterator, \Countable
         $this->getIterator()->next();
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->getIterator()->key();

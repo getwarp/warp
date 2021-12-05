@@ -85,6 +85,7 @@ final class ArrayCacheIterator implements \Iterator, \Countable
     /**
      * @return V
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $this->cacheTuple($this->pos);
@@ -94,6 +95,7 @@ final class ArrayCacheIterator implements \Iterator, \Countable
     /**
      * @return K
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         $this->cacheTuple($this->pos);
