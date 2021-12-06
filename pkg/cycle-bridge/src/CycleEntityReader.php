@@ -96,11 +96,11 @@ final class CycleEntityReader implements EntityReaderInterface
 
     public function count(?CriteriaInterface $criteria = null): int
     {
-        if (null !== $criteria) {
-            $criteria = $criteria->limit(null)->offset(null);
-        }
-
-        return $this->makeSelect($criteria)->count();
+        return $this->makeSelect(
+            null !== $criteria && null !== $criteria->getWhere()
+                ? Criteria::new($criteria->getWhere())
+                : null
+        )->count();
     }
 
     /**
