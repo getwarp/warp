@@ -80,7 +80,7 @@ final class BelongsToLinkHandler
         ?string $morphKey,
         bool $nullable
     ): void {
-        if (null !== $entity = $this->orm->get($related->__role(), $related->__scope(), false)) {
+        if (null !== $entity = $this->resolveReference($related, false)) {
             $this->linkByEntity($command, $node, $entity, $innerKey, $outerKey, $morphKey, $nullable);
             return;
         }
@@ -103,7 +103,7 @@ final class BelongsToLinkHandler
             return;
         }
 
-        if (null !== $entity = $this->loadReference($related)) {
+        if (null !== $entity = $this->resolveReference($related)) {
             $this->linkByEntity($command, $node, $entity, $innerKey, $outerKey, $morphKey, $nullable);
             return;
         }
@@ -145,16 +145,16 @@ final class BelongsToLinkHandler
         $node->register($morphKey, $rNode->getRole(), true);
     }
 
-    private function loadReference(ReferenceInterface $reference): ?object
+    private function resolveReference(ReferenceInterface $reference, bool $load = true): ?object
     {
-        if (!$this->loadReferences) {
-            return null;
-        }
+        $load = $load && $this->loadReferences;
 
         if ($reference instanceof PromiseInterface) {
-            return $reference->__resolve();
+            if ($load || $reference->__loaded()) {
+                return $reference->__resolve();
+            }
         }
 
-        return $this->orm->get($reference->__role(), $reference->__scope());
+        return $this->orm->get($reference->__role(), $reference->__scope(), $load);
     }
 }
