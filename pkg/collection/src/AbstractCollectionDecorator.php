@@ -115,7 +115,7 @@ abstract class AbstractCollectionDecorator implements CollectionInterface
 
     public function min(?FieldInterface $field = null)
     {
-        return $this->getCollection()->max($field);
+        return $this->getCollection()->min($field);
     }
 
     public function indexBy($keyExtractor): MapInterface
