@@ -130,7 +130,7 @@ final class ReflectionFactory implements FactoryInterface
         }
 
         return $this->reflection->newInstanceArgs(
-            [...$this->dependencyResolver->resolveDependencies($constructor, $options)],
+            \iterator_to_array($this->dependencyResolver->resolveDependencies($constructor, $options), false),
         );
     }
 

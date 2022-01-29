@@ -189,7 +189,7 @@ final class ManyToManyPivotLoader
 
         $pNode = $this->getNode($pivot, $this->role);
         if (null !== $offset = $this->fetchKey($pNode, $this->throughOuterKey)) {
-            $this->loadedPivots[$offset] = $pivot;
+            $this->loadedPivots[(string)$offset] = $pivot;
         }
 
         $relationStorage->offsetSet($target, $pivot);

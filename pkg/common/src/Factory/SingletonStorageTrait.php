@@ -31,6 +31,7 @@ trait SingletonStorageTrait
     private static function singletonAttach(self $item): void
     {
         $key = static::singletonKey($item);
+        // @phpstan-ignore-next-line
         self::$storage[\get_class($item)][$key] = \WeakReference::create($item);
     }
 

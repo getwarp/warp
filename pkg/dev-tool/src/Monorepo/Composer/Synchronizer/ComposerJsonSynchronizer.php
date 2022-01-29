@@ -66,10 +66,19 @@ final class ComposerJsonSynchronizer
 
         $monorepoConfig = MonorepoConfig::fromComposer($this->rootComposer);
 
+        /**
+         * @phpstan-var string $package
+         * @phpstan-var string $version
+         */
         foreach ($monorepoConfig->getSection(MonorepoConfig::REQUIRE, []) as $package => $version) {
             $this->require[$package] ??= [];
             $this->require[$package][$version] = true;
         }
+
+        /**
+         * @phpstan-var string $package
+         * @phpstan-var string $version
+         */
         foreach ($monorepoConfig->getSection(MonorepoConfig::REQUIRE_DEV, []) as $package => $version) {
             $this->requireDev[$package] ??= [];
             $this->requireDev[$package][$version] = true;
@@ -277,11 +286,19 @@ final class ComposerJsonSynchronizer
 
         $this->projects->attach($project, $projectComposer);
 
+        /**
+         * @phpstan-var string $package
+         * @phpstan-var string $version
+         */
         foreach ($projectComposer->getSection(ComposerJson::REQUIRE, []) as $package => $version) {
             $this->require[$package] ??= [];
             $this->require[$package][$version] = true;
         }
 
+        /**
+         * @phpstan-var string $package
+         * @phpstan-var string $version
+         */
         foreach ($projectComposer->getSection(ComposerJson::REQUIRE_DEV, []) as $package => $version) {
             $this->requireDev[$package] ??= [];
             $this->requireDev[$package][$version] = true;
@@ -303,6 +320,7 @@ final class ComposerJsonSynchronizer
         );
 
         $extra = $projectComposer->getSection(ComposerJson::EXTRA, []);
+        /** @var array<string,string> $branchAlias */
         $branchAlias = $extra['branch-alias'] ?? [];
         $branch = isset($branchAlias['dev-master']) ? 'dev-master' : \array_key_first($branchAlias);
         $alias = null === $branch ? 'null' : $branchAlias[$branch];
