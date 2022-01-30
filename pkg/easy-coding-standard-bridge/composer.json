@@ -18,7 +18,7 @@
   "require-dev": {
     "roave/security-advisories": "dev-latest",
     "slevomat/coding-standard": "^7.0",
-    "symfony/var-exporter": "^5.1",
+    "symfony/var-exporter": "^5.2|^6.0",
     "symplify/easy-coding-standard": "^9.4"
   },
   "suggest": {

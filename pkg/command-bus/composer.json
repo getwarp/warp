@@ -29,7 +29,7 @@
     "phpunit/phpunit": "^9.5",
     "psr/log": "^1.1",
     "roave/security-advisories": "dev-latest",
-    "symfony/stopwatch": "^5.2"
+    "symfony/stopwatch": "^5.2|^6.0"
   },
   "suggest": {
     "psr/log-implementation": "Required for LoggerMiddleware and ProfilerMiddleware",

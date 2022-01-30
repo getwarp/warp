@@ -31,12 +31,12 @@
     "spaceonfire/exception": "^3.0",
     "symfony/polyfill-php80": "^1.22",
     "symfony/polyfill-php81": "^1.22",
-    "symfony/string": "^5.2"
+    "symfony/string": "^5.2|^6.0"
   },
   "require-dev": {
     "nyholm/psr7": "^1.4",
     "phpunit/phpunit": "^9.5",
-    "symfony/uid": "^5.2"
+    "symfony/uid": "^5.2|^6.0"
   },
   "suggest": {
     "symfony/uid": "To use UuidValue",

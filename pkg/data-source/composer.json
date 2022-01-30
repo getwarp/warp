@@ -26,7 +26,7 @@
     "spaceonfire/criteria": "^3.0",
     "spaceonfire/exception": "^3.0",
     "spaceonfire/value-object": "^3.0",
-    "symfony/translation-contracts": "^2.3",
+    "symfony/translation-contracts": "^2.3|^3.0",
     "webmozart/expression": "^1.0",
     "yiisoft/friendly-exception": "^1.0"
   },

@@ -23,9 +23,9 @@
     "spaceonfire/container": "^3.0",
     "spaceonfire/criteria": "^3.0",
     "spaceonfire/type": "^3.0",
-    "symfony/console": "^5.2",
-    "symfony/filesystem": "^5.2",
-    "symfony/finder": "^5.2"
+    "symfony/console": "^5.2|^6.0",
+    "symfony/filesystem": "^5.2|^6.0",
+    "symfony/finder": "^5.2|^6.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
