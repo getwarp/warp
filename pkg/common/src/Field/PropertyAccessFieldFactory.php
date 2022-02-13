@@ -11,13 +11,17 @@ use Symfony\Component\PropertyAccess\PropertyPath;
 
 final class PropertyAccessFieldFactory implements FieldFactoryInterface
 {
+    private static ?bool $enabled = null;
+
     private static ?PropertyAccessorInterface $defaultPropertyAccessor = null;
 
-    private PropertyAccessorInterface $propertyAccessor;
+    private ?PropertyAccessorInterface $propertyAccessor;
 
     public function __construct(?PropertyAccessorInterface $propertyAccessor = null)
     {
-        $this->propertyAccessor = $propertyAccessor ?? self::getDefaultPropertyAccessor();
+        self::init();
+
+        $this->propertyAccessor = $propertyAccessor ?? self::$defaultPropertyAccessor;
     }
 
     public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor): void
@@ -27,7 +31,7 @@ final class PropertyAccessFieldFactory implements FieldFactoryInterface
 
     public function enabled(): bool
     {
-        return \class_exists(PropertyAccess::class);
+        return self::$enabled ?? false;
     }
 
     public function make(string $field): PropertyAccessField
@@ -41,6 +45,21 @@ final class PropertyAccessFieldFactory implements FieldFactoryInterface
 
     public static function getDefaultPropertyAccessor(): PropertyAccessorInterface
     {
-        return self::$defaultPropertyAccessor ??= PropertyAccess::createPropertyAccessor();
+        self::init();
+
+        if (null === self::$defaultPropertyAccessor) {
+            throw PackageMissingException::new('symfony/property-access', null, self::class);
+        }
+
+        return self::$defaultPropertyAccessor;
+    }
+
+    private static function init(): void
+    {
+        self::$enabled ??= \class_exists(PropertyAccess::class);
+
+        if (self::$enabled) {
+            self::$defaultPropertyAccessor ??= PropertyAccess::createPropertyAccessor();
+        }
     }
 }
