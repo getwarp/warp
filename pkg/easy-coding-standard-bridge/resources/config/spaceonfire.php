@@ -353,6 +353,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'operators' => [
                     '=>' => 'single_space',
                     '=' => 'single_space',
+                    '|' => 'no_space',
+                    '&' => 'no_space',
                 ],
             ],
         ]);
