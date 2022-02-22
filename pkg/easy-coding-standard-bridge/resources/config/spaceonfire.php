@@ -60,7 +60,6 @@ use PhpCsFixer\Fixer\ListNotation\ListSyntaxFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\BlankLineAfterNamespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\NoLeadingNamespaceWhitespaceFixer;
 use PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer;
-use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
 use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
 use PhpCsFixer\Fixer\Operator\StandardizeIncrementFixer;
@@ -345,17 +344,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'position_after_functions_and_oop_constructs' => 'next',
                 'position_after_control_structures' => 'same',
                 'position_after_anonymous_constructs' => 'same',
-            ],
-        ]);
-    $services->set(BinaryOperatorSpacesFixer::class)
-        ->call('configure', [
-            [
-                'operators' => [
-                    '=>' => 'single_space',
-                    '=' => 'single_space',
-                    '|' => 'no_space',
-                    '&' => 'no_space',
-                ],
             ],
         ]);
     $services->set(ConcatSpaceFixer::class)
