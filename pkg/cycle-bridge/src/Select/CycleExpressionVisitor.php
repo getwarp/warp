@@ -6,6 +6,7 @@ namespace spaceonfire\Bridge\Cycle\Select;
 
 use Cycle\ORM\Relation;
 use Cycle\ORM\Select\QueryBuilder;
+use Cycle\ORM\Select\ScopeInterface;
 use spaceonfire\Bridge\Cycle\Mapper\CyclePropertyExtractor;
 use spaceonfire\Common\Field\FieldInterface;
 use spaceonfire\Criteria\Expression\ExpressionFactory;
@@ -32,6 +33,23 @@ final class CycleExpressionVisitor extends AbstractExpressionVisitor
         parent::__construct($expressionFactory);
 
         $this->propertyExtractor = $propertyExtractor;
+    }
+
+    public function dispatch(Expression $expression): callable
+    {
+        if ($expression instanceof ScopeInterface) {
+            return $this->visitScope($expression);
+        }
+
+        return parent::dispatch($expression);
+    }
+
+    public function visitScope(ScopeInterface $expression): callable
+    {
+        return static function (QueryBuilder $queryBuilder) use ($expression) {
+            $out = $expression->apply($queryBuilder);
+            return $out instanceof QueryBuilder ? $out : $queryBuilder;
+        };
     }
 
     public function visitConjunction(Logic\AndX $expression): callable
