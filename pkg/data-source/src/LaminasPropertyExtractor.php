@@ -28,10 +28,43 @@ final class LaminasPropertyExtractor implements PropertyExtractorInterface
 
     public function extractName(string $name): string
     {
-        if ($this->hydrator instanceof NamingStrategyEnabledInterface && $this->hydrator->hasNamingStrategy()) {
-            return $this->hydrator->getNamingStrategy()->extract($name);
+        if (!$this->hydrator instanceof NamingStrategyEnabledInterface || !$this->hydrator->hasNamingStrategy()) {
+            return $name;
+        }
+
+        foreach ($this->splitName($name) as [$left, $right]) {
+            $extracted = $this->hydrator->getNamingStrategy()->extract($left);
+            if ($extracted === $left) {
+                continue;
+            }
+            return \rtrim($extracted . '.' . $right, '.');
         }
 
         return $name;
+    }
+
+    /**
+     * @return array<array{string,string}>
+     */
+    private function splitName(string $name): array
+    {
+        $left = $name;
+        $right = '';
+
+        $output = [];
+
+        while (true) {
+            $output[] = [$left, $right];
+
+            $rightDot = \strrpos($left, '.');
+            if (false === $rightDot) {
+                break;
+            }
+
+            $right = \rtrim(\substr($left, $rightDot + 1) . '.' . $right, '.');
+            $left = \substr($left, 0, $rightDot);
+        }
+
+        return $output;
     }
 }
