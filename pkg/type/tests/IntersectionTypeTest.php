@@ -8,20 +8,20 @@ use Iterator;
 use JsonSerializable;
 use Traversable;
 
-class ConjunctionTypeTest extends AbstractTestCase
+class IntersectionTypeTest extends AbstractTestCase
 {
     public function testFactoryOneArgument(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        ConjunctionType::new(
+        IntersectionType::new(
             BuiltinType::new(BuiltinType::INT),
         );
     }
 
     public function testCheck(): void
     {
-        $type = ConjunctionType::new(
+        $type = IntersectionType::new(
             InstanceOfType::new(JsonSerializable::class),
             InstanceOfType::new(Traversable::class),
         );
@@ -35,7 +35,7 @@ class ConjunctionTypeTest extends AbstractTestCase
 
     public function testStringify(): void
     {
-        $type = ConjunctionType::new(
+        $type = IntersectionType::new(
             InstanceOfType::new(JsonSerializable::class),
             InstanceOfType::new(Traversable::class),
         );

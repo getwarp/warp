@@ -52,7 +52,7 @@ class CollectionTypeTest extends TestCase
         self::assertSame('ArrayIterator<int>', (string)$arrayIteratorInteger);
 
         $arrayOfBoolOrInt = CollectionType::new(
-            DisjunctionType::new(
+            UnionType::new(
                 BuiltinType::new(BuiltinType::BOOL),
                 BuiltinType::new(BuiltinType::INT),
             ),

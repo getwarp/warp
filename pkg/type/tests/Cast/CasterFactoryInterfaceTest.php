@@ -6,7 +6,7 @@ namespace spaceonfire\Type\Cast;
 
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\DisjunctionType;
+use spaceonfire\Type\UnionType;
 
 class CasterFactoryInterfaceTest extends TestCase
 {
@@ -14,7 +14,7 @@ class CasterFactoryInterfaceTest extends TestCase
     {
         $factory = CasterFactoryAggregate::default();
 
-        $caster = $factory->make(DisjunctionType::new(BuiltinType::string(), BuiltinType::null()));
+        $caster = $factory->make(UnionType::new(BuiltinType::string(), BuiltinType::null()));
 
         self::assertNotNull($caster);
 

@@ -10,10 +10,10 @@ use spaceonfire\Container\Factory\Argument;
 use spaceonfire\Container\FactoryOptionsInterface;
 use spaceonfire\Type\AbstractAggregatedType;
 use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\InstanceOfType;
 use spaceonfire\Type\MixedType;
 use spaceonfire\Type\TypeInterface;
+use spaceonfire\Type\UnionType;
 
 /**
  * @internal
@@ -67,13 +67,13 @@ final class ReflectionDependencyResolver
     private static function convertReflectionType(?\ReflectionType $reflectionType): ?TypeInterface
     {
         $addNullable = null !== $reflectionType && $reflectionType->allowsNull()
-            ? static fn (TypeInterface $t) => self::aggregateTypes(DisjunctionType::class, $t, BuiltinType::null())
+            ? static fn (TypeInterface $t) => self::aggregateTypes(UnionType::class, $t, BuiltinType::null())
             : static fn (TypeInterface $t) => $t;
 
         if ($reflectionType instanceof \ReflectionUnionType) {
             /** @var TypeInterface[] $subtypes */
             $subtypes = \array_map([self::class, 'convertReflectionType'], $reflectionType->getTypes());
-            return $addNullable(self::aggregateTypes(DisjunctionType::class, ...$subtypes));
+            return $addNullable(self::aggregateTypes(UnionType::class, ...$subtypes));
         }
 
         if ($reflectionType instanceof \ReflectionNamedType) {

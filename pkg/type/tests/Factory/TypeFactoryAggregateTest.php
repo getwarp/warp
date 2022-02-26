@@ -8,11 +8,11 @@ use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Type\BuiltinType;
 use spaceonfire\Type\CollectionType;
-use spaceonfire\Type\ConjunctionType;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
 use spaceonfire\Type\InstanceOfType;
+use spaceonfire\Type\IntersectionType;
 use spaceonfire\Type\MixedType;
+use spaceonfire\Type\UnionType;
 use spaceonfire\Type\VoidType;
 use Traversable;
 
@@ -40,13 +40,13 @@ class TypeFactoryAggregateTest extends TestCase
         $factory = TypeFactoryAggregate::default();
 
         self::assertInstanceOf(CollectionType::class, $factory->make('int[]'));
-        self::assertInstanceOf(ConjunctionType::class, $factory->make(JsonSerializable::class . '&' . Traversable::class));
-        self::assertInstanceOf(DisjunctionType::class, $factory->make(JsonSerializable::class . '|' . Traversable::class));
+        self::assertInstanceOf(IntersectionType::class, $factory->make(JsonSerializable::class . '&' . Traversable::class));
+        self::assertInstanceOf(UnionType::class, $factory->make(JsonSerializable::class . '|' . Traversable::class));
         self::assertInstanceOf(InstanceOfType::class, $factory->make(JsonSerializable::class));
         self::assertInstanceOf(BuiltinType::class, $factory->make('int'));
         self::assertInstanceOf(MixedType::class, $factory->make('mixed'));
         self::assertInstanceOf(VoidType::class, $factory->make('void'));
-        self::assertInstanceOf(DisjunctionType::class, $factory->make('int|string|array<bool|int>|string|null'));
+        self::assertInstanceOf(UnionType::class, $factory->make('int|string|array<bool|int>|string|null'));
     }
 
     public function testMakeException(): void

@@ -6,15 +6,15 @@ namespace spaceonfire\Type\Factory;
 
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\ConjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
+use spaceonfire\Type\IntersectionType;
 use Traversable;
 
-class ConjunctionTypeFactoryTest extends TestCase
+class IntersectionTypeFactoryTest extends TestCase
 {
-    private function makeFactory(): ConjunctionTypeFactory
+    private function makeFactory(): IntersectionTypeFactory
     {
-        $factory = new ConjunctionTypeFactory();
+        $factory = new IntersectionTypeFactory();
         $factory->setParent(TypeFactoryAggregate::default());
         return $factory;
     }
@@ -30,14 +30,14 @@ class ConjunctionTypeFactoryTest extends TestCase
 
     public function testNoSupportsWithoutParent(): void
     {
-        $factory = new ConjunctionTypeFactory();
+        $factory = new IntersectionTypeFactory();
         self::assertFalse($factory->supports(JsonSerializable::class . '&' . Traversable::class));
     }
 
     public function testMake(): void
     {
         $factory = $this->makeFactory();
-        self::assertInstanceOf(ConjunctionType::class, $factory->make(JsonSerializable::class . '&' . Traversable::class));
+        self::assertInstanceOf(IntersectionType::class, $factory->make(JsonSerializable::class . '&' . Traversable::class));
     }
 
     public function testMakeException(): void

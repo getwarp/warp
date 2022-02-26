@@ -6,15 +6,15 @@ namespace spaceonfire\Type\Factory;
 
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
+use spaceonfire\Type\UnionType;
 use Traversable;
 
-class DisjunctionTypeFactoryTest extends TestCase
+class UnionTypeFactoryTest extends TestCase
 {
-    private function makeFactory(): DisjunctionTypeFactory
+    private function makeFactory(): UnionTypeFactory
     {
-        $factory = new DisjunctionTypeFactory();
+        $factory = new UnionTypeFactory();
         $factory->setParent(TypeFactoryAggregate::default());
         return $factory;
     }
@@ -30,14 +30,14 @@ class DisjunctionTypeFactoryTest extends TestCase
 
     public function testNoSupportsWithoutParent(): void
     {
-        $factory = new DisjunctionTypeFactory();
+        $factory = new UnionTypeFactory();
         self::assertFalse($factory->supports(JsonSerializable::class . '|' . Traversable::class));
     }
 
     public function testMake(): void
     {
         $factory = $this->makeFactory();
-        self::assertInstanceOf(DisjunctionType::class, $factory->make(JsonSerializable::class . '|' . Traversable::class));
+        self::assertInstanceOf(UnionType::class, $factory->make(JsonSerializable::class . '|' . Traversable::class));
     }
 
     public function testMakeException(): void

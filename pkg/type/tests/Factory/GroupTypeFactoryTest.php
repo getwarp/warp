@@ -6,9 +6,9 @@ namespace spaceonfire\Type\Factory;
 
 use PHPUnit\Framework\TestCase;
 use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\ConjunctionType;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\Exception\TypeNotSupportedException;
+use spaceonfire\Type\IntersectionType;
+use spaceonfire\Type\UnionType;
 
 class GroupTypeFactoryTest extends TestCase
 {
@@ -43,8 +43,8 @@ class GroupTypeFactoryTest extends TestCase
         $factory = $this->makeFactory();
 
         self::assertInstanceOf(BuiltinType::class, $factory->make('(int)'));
-        self::assertInstanceOf(DisjunctionType::class, $factory->make('(int|string)'));
-        self::assertInstanceOf(ConjunctionType::class, $factory->make('(int&string)'));
+        self::assertInstanceOf(UnionType::class, $factory->make('(int|string)'));
+        self::assertInstanceOf(IntersectionType::class, $factory->make('(int&string)'));
     }
 
     public function testMakeException(): void

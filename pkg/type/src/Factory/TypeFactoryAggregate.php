@@ -33,8 +33,8 @@ final class TypeFactoryAggregate implements TypeFactoryInterface
     {
         yield new CollectionTypeFactory();
         yield new GroupTypeFactory();
-        yield new ConjunctionTypeFactory();
-        yield new DisjunctionTypeFactory();
+        yield new IntersectionTypeFactory();
+        yield new UnionTypeFactory();
         yield new InstanceOfTypeFactory();
         yield new BuiltinTypeFactory();
         yield new MixedTypeFactory();

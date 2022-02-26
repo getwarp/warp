@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace spaceonfire\Type\Cast;
 
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\TypeInterface;
+use spaceonfire\Type\UnionType;
 
-final class DisjunctionCasterFactory implements CasterFactoryInterface, CasterFactoryAwareInterface
+final class UnionTypeCasterFactory implements CasterFactoryInterface, CasterFactoryAwareInterface
 {
     use CasterFactoryAwareTrait;
 
     public function make(TypeInterface $type): ?CasterInterface
     {
-        if (!$type instanceof DisjunctionType) {
+        if (!$type instanceof UnionType) {
             return null;
         }
 

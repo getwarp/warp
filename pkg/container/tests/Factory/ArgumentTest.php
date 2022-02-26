@@ -17,8 +17,8 @@ use spaceonfire\Container\Fixtures\ArrayContainer;
 use spaceonfire\Container\Fixtures\B;
 use spaceonfire\Container\Fixtures\MyClass;
 use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\InstanceOfType;
+use spaceonfire\Type\UnionType;
 
 class ArgumentTest extends TestCase
 {
@@ -70,7 +70,7 @@ class ArgumentTest extends TestCase
     {
         $container = $this->makeContainer();
 
-        $argument = new Argument('arg', '', DisjunctionType::new(
+        $argument = new Argument('arg', '', UnionType::new(
             InstanceOfType::new(A::class),
             InstanceOfType::new(B::class),
             InstanceOfType::new(MyClass::class),
@@ -78,14 +78,14 @@ class ArgumentTest extends TestCase
         $argument->setContainer($container);
         self::assertInstanceOf(A::class, $argument->resolve()->current());
 
-        $argument = new Argument('arg', '', DisjunctionType::new(
+        $argument = new Argument('arg', '', UnionType::new(
             InstanceOfType::new(B::class),
             InstanceOfType::new(MyClass::class),
         ));
         $argument->setContainer($container);
         self::assertInstanceOf(B::class, $argument->resolve()->current());
 
-        $argument = new Argument('arg', '', DisjunctionType::new(
+        $argument = new Argument('arg', '', UnionType::new(
             InstanceOfType::new(MyClass::class),
             InstanceOfType::new(B::class),
         ));
@@ -116,7 +116,7 @@ class ArgumentTest extends TestCase
         ];
 
         yield [
-            new Argument('', '', DisjunctionType::new(InstanceOfType::new(MyClass::class), BuiltinType::null())),
+            new Argument('', '', UnionType::new(InstanceOfType::new(MyClass::class), BuiltinType::null())),
             [null],
         ];
 

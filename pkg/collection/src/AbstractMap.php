@@ -6,9 +6,9 @@ namespace spaceonfire\Collection;
 
 use spaceonfire\Collection\Iterator\ArrayIterator;
 use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\DisjunctionType;
 use spaceonfire\Type\MixedType;
 use spaceonfire\Type\TypeInterface;
+use spaceonfire\Type\UnionType;
 
 /**
  * @template K of array-key
@@ -184,7 +184,7 @@ abstract class AbstractMap implements MapInterface
      */
     final protected static function getKeyType(): TypeInterface
     {
-        return self::$keyType ??= DisjunctionType::new(
+        return self::$keyType ??= UnionType::new(
             BuiltinType::new(BuiltinType::INT),
             BuiltinType::new(BuiltinType::STRING),
         );

@@ -6,20 +6,20 @@ namespace spaceonfire\Type;
 
 use PHPUnit\Framework\TestCase;
 
-class DisjunctionTypeTest extends TestCase
+class UnionTypeTest extends TestCase
 {
     public function testFactoryOneArgument(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        DisjunctionType::new(
+        UnionType::new(
             BuiltinType::new(BuiltinType::INT),
         );
     }
 
     public function testCheck(): void
     {
-        $type = DisjunctionType::new(
+        $type = UnionType::new(
             BuiltinType::new(BuiltinType::INT),
             BuiltinType::new(BuiltinType::NULL),
         );
@@ -30,7 +30,7 @@ class DisjunctionTypeTest extends TestCase
 
     public function testStringify(): void
     {
-        $type = DisjunctionType::new(
+        $type = UnionType::new(
             BuiltinType::new(BuiltinType::INT),
             BuiltinType::new(BuiltinType::NULL),
         );

@@ -65,7 +65,7 @@ final class CasterFactoryAggregate implements CasterFactoryInterface, \IteratorA
      */
     public static function defaultFactories(): \Generator
     {
-        yield new DisjunctionCasterFactory();
+        yield new UnionTypeCasterFactory();
         yield new ScalarCasterFactory();
         yield new NullCasterFactory();
     }
