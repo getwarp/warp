@@ -18,7 +18,6 @@
     "ext-json": "*",
     "composer/semver": "^3.0",
     "cycle/orm": "^1.7",
-    "cycle/schema-builder": "^1.2",
     "doctrine/collections": "^1.5",
     "gitonomy/gitlib": "^1.2",
     "laminas/laminas-hydrator": "^4.0",
@@ -41,6 +40,9 @@
     "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {
+    "cycle/migrations": "^2.0",
+    "cycle/schema-builder": "^1.2",
+    "cycle/schema-migrations-generator": "^1.0",
     "nyholm/psr7": "^1.4",
     "phpspec/prophecy": "^1.13",
     "phpspec/prophecy-phpunit": "^2.0",
@@ -49,6 +51,7 @@
     "roave/security-advisories": "dev-latest",
     "slevomat/coding-standard": "^7.0",
     "symfony/event-dispatcher": "^5.2|^6.0",
+    "symfony/lock": "^5.2|^6.0",
     "symfony/mailer": "^5.2|^6.0",
     "symfony/monolog-bridge": "^5.2|^6.0",
     "symfony/property-access": "^5.2|^6.0",

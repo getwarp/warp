@@ -20,11 +20,11 @@
   "require": {
     "php": "^7.4|^8.0",
     "cycle/orm": "^1.7",
-    "cycle/schema-builder": "^1.2",
     "spaceonfire/collection": "^3.0",
     "spaceonfire/common": "^3.0",
     "spaceonfire/criteria": "^3.0",
     "spaceonfire/data-source": "^3.0",
+    "spaceonfire/exception": "^3.0",
     "spaceonfire/laminas-hydrator-bridge": "^3.0",
     "spaceonfire/type": "^3.0",
     "symfony/event-dispatcher-contracts": "^2.0|^3.0",
@@ -33,13 +33,25 @@
     "webmozart/expression": "^1.0"
   },
   "require-dev": {
+    "cycle/migrations": "^2.0",
+    "cycle/schema-builder": "^1.2",
+    "cycle/schema-migrations-generator": "^1.0",
     "phpunit/phpunit": "^9.5",
     "psr/log": "^1.1",
     "roave/security-advisories": "dev-latest",
     "spaceonfire/container": "^3.0",
     "spaceonfire/value-object": "^3.0",
+    "symfony/console": "^5.2|^6.0",
     "symfony/event-dispatcher": "^5.2|^6.0",
+    "symfony/lock": "^5.2|^6.0",
     "symfony/uid": "^5.2|^6.0"
+  },
+  "suggest": {
+    "cycle/migrations": "^2.0",
+    "cycle/schema-builder": "^1.2",
+    "cycle/schema-migrations-generator": "^1.0",
+    "symfony/console": "^5.2|^6.0",
+    "symfony/lock": "^5.2|^6.0"
   },
   "autoload": {
     "psr-4": {
