@@ -11,6 +11,7 @@ use spaceonfire\Container\FactoryOptionsInterface;
 use spaceonfire\Type\AbstractAggregatedType;
 use spaceonfire\Type\BuiltinType;
 use spaceonfire\Type\InstanceOfType;
+use spaceonfire\Type\IntersectionType;
 use spaceonfire\Type\MixedType;
 use spaceonfire\Type\TypeInterface;
 use spaceonfire\Type\UnionType;
@@ -74,6 +75,12 @@ final class ReflectionDependencyResolver
             /** @var TypeInterface[] $subtypes */
             $subtypes = \array_map([self::class, 'convertReflectionType'], $reflectionType->getTypes());
             return $addNullable(self::aggregateTypes(UnionType::class, ...$subtypes));
+        }
+
+        if ($reflectionType instanceof \ReflectionIntersectionType) {
+            /** @var TypeInterface[] $subtypes */
+            $subtypes = \array_map([self::class, 'convertReflectionType'], $reflectionType->getTypes());
+            return $addNullable(self::aggregateTypes(IntersectionType::class, ...$subtypes));
         }
 
         if ($reflectionType instanceof \ReflectionNamedType) {
