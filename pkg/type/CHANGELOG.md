@@ -4,11 +4,24 @@ All notable changes to `type` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- Rename `DisjunctionType` to `UnionType` and all related classes.
+- Rename `ConjunctionType` to `IntersectionType` and all related classes.
+- Rename `CompositeTypeFactory` to `TypeFactoryAggregate`.
+- New static constructor style which allow type objects to be lazy singletons.
+- `UnionType` and `IntersectionType` constructors now accepts variadic arguments.
+- Introduce separate type casters which replace old `BuiltinType::cast()`.
+
 ## [2.5.1] - 2021-06-13
 
 ### Added
 
--   `Interface` suffix added to type interface.
+- `Interface` suffix added to type interface.
 
 ## [2.5.0] - 2021-04-21
 

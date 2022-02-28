@@ -4,11 +4,21 @@ All notable changes to `command-bus` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- Move middlewares to corresponding namespaces.
+- Add `Interface` and `Exception` suffix where missing them.
+- Support for symfony v6 components.
+
 ## [2.5.1] - 2021-06-13
 
 ### Added
 
--   `Interface` suffix added to all interfaces that missing it.
+- `Interface` suffix added to all interfaces that missing it.
 
 ## [2.5.0] - 2021-04-21
 

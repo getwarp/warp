@@ -4,11 +4,21 @@ All notable changes to `spaceonfire/collection` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- New Collection API: with generics, lazy operations based on generators and mutation methods available.
+- Introduce Map API: when you need to operate with key-value data.
+- New static constructor style.
+
 ## [2.5.1] - 2021-06-13
 
 ### Added
 
--   Changes caused by minor updates in `spaceonfire/type` library.
+- Changes caused by minor updates in `spaceonfire/type` library.
 
 ## [2.5.0] - 2021-04-21
 

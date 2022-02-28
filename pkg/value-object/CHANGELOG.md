@@ -4,11 +4,27 @@ All notable changes to `spaceonfire/value-object` will be documented in this fil
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- New static constructor style which allows value objects to be lazy singletons.
+- Replace `ramsey/uuid` with `symfony/uid`.
+- Replace `jawira/case-converter` with `symfony/string`.
+- Laminas Hydrator strategies moved to `laminas-hydrator-bridge` package.
+- Reorganize code structure.
+
+### Added
+
+- Clock API.
+
 ## [2.5.1] - 2021-06-13
 
 ### Fixed
 
--   Update date value strategy for more flexible hydration.
+- Update date value strategy for more flexible hydration.
 
 ## [2.5.0] - 2021-04-21
 

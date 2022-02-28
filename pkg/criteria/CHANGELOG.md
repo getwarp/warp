@@ -4,11 +4,28 @@ All notable changes to `criteria` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- New static constructor style.
+- Immutable criteria design.
+- Expression factory is lazy singleton now.
+- Selector expression use fields API.
+
+### Removed
+
+- Criteria decorators.
+- Doctrine expression converter.
+- `JsonApiCriteriaBuilder` class.
+
 ## [2.5.1] - 2021-06-13
 
 ### Fixed
 
--   Code style fixes.
+- Code style fixes.
 
 ## [2.5.0] - 2021-04-21
 

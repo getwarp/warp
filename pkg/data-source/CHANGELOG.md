@@ -4,11 +4,31 @@ All notable changes to `spaceonfire/data-source` will be documented in this file
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.0] - Not Released Yet
+
+### Changed
+
+- Minimal supported PHP version bumped up to 7.4.
+- Use typehints and static analysis by PHPStan as much as possible.
+- Extract `cycle-bridge` package.
+- Split repository interface to separate reader and persister interfaces.
+- Replace mapper interface with property extractor interface.
+
+### Added
+
+- Blame API
+
+### Removed
+
+- Removed query interface
+- Removed entity interface and its default implementation
+- Removed nette-utils integration
+
 ## [2.5.0] - 2021-04-21
 
 ### Added
 
--   First release from monorepo.
+- First release from monorepo.
 
 ## [1.4.1] - 2021-02-25
 
