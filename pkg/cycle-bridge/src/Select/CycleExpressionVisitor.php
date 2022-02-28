@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Select;
 
+use Cycle\Database\Injection\Fragment;
+use Cycle\Database\Injection\Parameter;
 use Cycle\ORM\Relation;
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\ScopeInterface;
@@ -12,8 +14,6 @@ use spaceonfire\Common\Field\FieldInterface;
 use spaceonfire\Criteria\Expression\ExpressionFactory;
 use spaceonfire\DataSource\AbstractExpressionVisitor;
 use spaceonfire\DataSource\ExpressionNotSupportedException;
-use Spiral\Database\Injection\Fragment;
-use Spiral\Database\Injection\Parameter;
 use Webmozart\Expression\Constraint;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;

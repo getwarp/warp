@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Fixtures;
 
+use Cycle\Database\DatabaseInterface;
+use Cycle\Database\DatabaseManager;
+use Cycle\Database\DatabaseProviderInterface;
 use Cycle\ORM\ORM;
-use Spiral\Database\DatabaseInterface;
-use Spiral\Database\DatabaseManager;
-use Spiral\Database\DatabaseProviderInterface;
 
 final class OrmCapsule implements DatabaseProviderInterface
 {

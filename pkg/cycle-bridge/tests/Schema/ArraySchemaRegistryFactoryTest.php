@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Schema;
 
+use Cycle\Database\Schema\AbstractColumn;
 use Cycle\ORM\Relation;
 use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Select\Repository;
@@ -16,7 +17,6 @@ use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
 use spaceonfire\Bridge\Cycle\Fixtures\Post;
 use spaceonfire\Bridge\Cycle\Fixtures\User;
 use spaceonfire\Bridge\Cycle\Mapper\StdClassMapper;
-use Spiral\Database\Schema\AbstractColumn;
 
 class ArraySchemaRegistryFactoryTest extends AbstractTestCase
 {

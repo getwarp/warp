@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use Cycle\Database\Schema\AbstractColumn;
 use spaceonfire\Bridge\Cycle\Fixtures\Mapper\TodoItemMapper;
 use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
 use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
 use spaceonfire\Bridge\Cycle\Schema\EntityDto;
 use spaceonfire\Bridge\Cycle\Schema\FieldDto;
 use spaceonfire\Bridge\Cycle\Schema\RelationDto;
-use Spiral\Database\Schema\AbstractColumn;
 
 return [
     EntityDto::ROLE => TodoItemId::ROLE,

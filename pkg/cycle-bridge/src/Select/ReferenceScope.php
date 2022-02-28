@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Select;
 
+use Cycle\Database\Query\SelectQuery;
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\ScopeInterface;
-use Spiral\Database\Query\SelectQuery;
 
 final class ReferenceScope implements ScopeInterface
 {

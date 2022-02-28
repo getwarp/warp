@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Schema;
 
+use Cycle\Database\DatabaseProviderInterface;
 use Cycle\Schema\Compiler;
 use Cycle\Schema\Definition\Entity;
 use Cycle\Schema\GeneratorInterface;
 use Cycle\Schema\Registry;
 use spaceonfire\Bridge\Cycle\Mapper\HydratorMapper;
 use spaceonfire\Bridge\Cycle\Mapper\StdClassMapper;
-use Spiral\Database\DatabaseProviderInterface;
 
 abstract class AbstractRegistryFactory
 {

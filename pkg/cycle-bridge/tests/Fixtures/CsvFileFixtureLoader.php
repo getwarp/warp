@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Fixtures;
 
-use Spiral\Database\DatabaseInterface;
+use Cycle\Database\DatabaseInterface;
 
 final class CsvFileFixtureLoader
 {

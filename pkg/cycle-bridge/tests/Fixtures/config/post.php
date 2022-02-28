@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
+use Cycle\Database\Schema\AbstractColumn;
 use spaceonfire\Bridge\Cycle\Fixtures\Mapper\PostMapper;
 use spaceonfire\Bridge\Cycle\Fixtures\Post;
 use spaceonfire\Bridge\Cycle\Schema\EntityDto;
 use spaceonfire\Bridge\Cycle\Schema\FieldDto;
 use spaceonfire\Bridge\Cycle\Schema\RelationDto;
-use Spiral\Database\Schema\AbstractColumn;
 
 return [
     EntityDto::ROLE => 'post',

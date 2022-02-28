@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Spiral\Database\Driver\SQLite\SQLiteDriver;
+use Cycle\Database\Driver\SQLite\SQLiteDriver;
 
 return [
     'default' => 'default',

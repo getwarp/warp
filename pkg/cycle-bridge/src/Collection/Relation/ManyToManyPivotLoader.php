@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Collection\Relation;
 
+use Cycle\Database\Injection\Parameter;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\Select;
 use spaceonfire\Bridge\Cycle\NodeHelper;
-use Spiral\Database\Injection\Parameter;
 
 /**
  * @internal

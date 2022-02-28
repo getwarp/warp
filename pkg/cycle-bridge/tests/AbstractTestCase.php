@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle;
 
+use Cycle\Database\Config\DatabaseConfig;
+use Cycle\Database\DatabaseManager;
+use Cycle\Database\DatabaseProviderInterface;
 use Cycle\ORM\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Schema;
@@ -20,9 +23,6 @@ use spaceonfire\Container\DefinitionContainer;
 use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
 use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
 use spaceonfire\Container\FactoryContainer;
-use Spiral\Database\Config\DatabaseConfig;
-use Spiral\Database\DatabaseManager;
-use Spiral\Database\DatabaseProviderInterface;
 
 abstract class AbstractTestCase extends TestCase
 {

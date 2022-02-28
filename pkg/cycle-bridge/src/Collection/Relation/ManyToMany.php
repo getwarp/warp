@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Collection\Relation;
 
+use Cycle\Database\Query\SelectQuery;
 use Cycle\ORM\Command\Branch\Nil;
 use Cycle\ORM\Command\Branch\Sequence;
 use Cycle\ORM\Command\CommandInterface;
@@ -27,7 +28,6 @@ use spaceonfire\Bridge\Cycle\NodeHelper;
 use spaceonfire\Bridge\Cycle\Select\PrepareLoaderScopeInterface;
 use spaceonfire\Bridge\Cycle\Select\ReferenceScope;
 use spaceonfire\Bridge\Cycle\Select\ScopeAggregate;
-use Spiral\Database\Query\SelectQuery;
 
 class ManyToMany extends AbstractToManyRelation
 {

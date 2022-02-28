@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace spaceonfire\Bridge\Cycle\Factory;
 
+use Cycle\Database\DatabaseInterface;
+use Cycle\Database\DatabaseProviderInterface;
 use Cycle\ORM\Config\RelationConfig;
 use Cycle\ORM\FactoryInterface;
 use Cycle\ORM\Mapper\Mapper;
@@ -23,8 +25,6 @@ use spaceonfire\Bridge\Cycle\Collection\Relation\SchemaExtra;
 use Spiral\Core\Container;
 use Spiral\Core\Container\Autowire;
 use Spiral\Core\FactoryInterface as CoreFactory;
-use Spiral\Database\DatabaseInterface;
-use Spiral\Database\DatabaseProviderInterface;
 
 final class OrmFactory implements FactoryInterface
 {
