@@ -25,7 +25,7 @@ interface ToManyRelationInterface extends RelationInterface, ChangesCheckerInter
 
     /**
      * @param ObjectCollectionPromiseInterface<object,mixed> $collection
-     * @return int
+     * @return int<0,max>
      */
     public function countCollection(ObjectCollectionPromiseInterface $collection): int;
 }

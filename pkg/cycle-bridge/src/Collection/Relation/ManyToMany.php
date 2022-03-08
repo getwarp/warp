@@ -160,6 +160,7 @@ class ManyToMany extends AbstractToManyRelation
         $loader = $this->makeCollectionLoader($collection->getScope());
         $query = $this->makeQuery($loader, $innerKey);
 
+        // @phpstan-ignore-next-line
         return $query->count();
     }
 

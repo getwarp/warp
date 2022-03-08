@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$commandClass of method spaceonfire\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ClassNameMappingInterface\\:\\:getClassName\\(\\) expects class\\-string, string given\\.$#"
-			count: 1
-			path: pkg/command-bus/src/Mapping/ClassName/ClassNameMappingChain.php
-
-		-
 			message: "#^Method spaceonfire\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ReplacementClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
 			count: 1
 			path: pkg/command-bus/src/Mapping/ClassName/ReplacementClassNameMapping.php

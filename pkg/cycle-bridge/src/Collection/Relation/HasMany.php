@@ -131,6 +131,7 @@ class HasMany extends AbstractToManyRelation
             return 0;
         }
 
+        // @phpstan-ignore-next-line
         return $this->makeCollectionLoader($collection->getScope())->buildQuery()->count();
     }
 

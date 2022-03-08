@@ -28,8 +28,7 @@ final class DefinitionContainer implements
     private InvokerInterface $invoker;
 
     /**
-     * @template T
-     * @var array<string,Definition<T>>
+     * @var array<string,Definition<mixed>>
      */
     private array $definitions = [];
 
@@ -93,7 +92,6 @@ final class DefinitionContainer implements
 
         $def = new Definition($id, $concrete, $shared);
 
-        // @phpstan-ignore-next-line
         $this->definitions[$def->getId()] = $def;
 
         return $def;

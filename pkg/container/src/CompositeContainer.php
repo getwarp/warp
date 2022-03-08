@@ -24,8 +24,7 @@ final class CompositeContainer implements
     private ContainerInterface $rootContainer;
 
     /**
-     * @template T
-     * @var array<class-string<T>,array{T,int}>
+     * @var array<class-string,array{object,int}>
      */
     private array $activeInstances = [];
 
