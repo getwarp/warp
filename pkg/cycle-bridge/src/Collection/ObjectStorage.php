@@ -71,13 +71,11 @@ final class ObjectStorage implements ObjectCollectionInterface, \IteratorAggrega
     }
 
     /**
-     * @return \Generator<V>
+     * @return \SplFixedArray<V>
      */
-    public function getIterator(): \Generator
+    public function getIterator(): \SplFixedArray
     {
-        foreach ($this->storage as $element) {
-            yield $element;
-        }
+        return \SplFixedArray::fromArray(\iterator_to_array($this->storage, false));
     }
 
     public function count(): int
