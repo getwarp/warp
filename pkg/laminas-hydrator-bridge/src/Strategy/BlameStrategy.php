@@ -6,9 +6,9 @@ namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\DefaultStrategy;
 use Laminas\Hydrator\Strategy\StrategyInterface;
+use spaceonfire\Clock\ClockInterface;
 use spaceonfire\DataSource\Blame\Blame;
 use spaceonfire\DataSource\Blame\BlameImmutableInterface;
-use spaceonfire\ValueObject\Date\ClockInterface;
 
 /**
  * @template T of object

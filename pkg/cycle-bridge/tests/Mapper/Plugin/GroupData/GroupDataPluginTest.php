@@ -10,7 +10,7 @@ use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
+use spaceonfire\Clock\DateTimeImmutableValue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class GroupDataPluginTest extends AbstractTestCase

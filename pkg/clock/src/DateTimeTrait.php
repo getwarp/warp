@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Date;
+namespace spaceonfire\Clock;
 
 /**
  * Trait DateTimeTrait
@@ -28,6 +28,11 @@ trait DateTimeTrait
     public function __toString(): string
     {
         return $this->format('Y-m-d H:i:s');
+    }
+
+    public static function now(?\DateTimeZone $timezone = null): self
+    {
+        return new self('now', $timezone);
     }
 
     public static function from($time): self

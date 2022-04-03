@@ -16,9 +16,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Laminas Hydrator strategies moved to `laminas-hydrator-bridge` package.
 - Reorganize code structure.
 
-### Added
+### Removed
 
-- Clock API.
+- DateTime objects extracted to separate package `spaceonfire/clock`.
 
 ## [2.5.1] - 2021-06-13
 

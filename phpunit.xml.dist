@@ -12,6 +12,9 @@
     stopOnFailure="false"
 >
     <testsuites>
+        <testsuite name="clock">
+            <directory>pkg/clock/tests</directory>
+        </testsuite>
         <testsuite name="collection">
             <directory>pkg/collection/tests</directory>
         </testsuite>
@@ -51,6 +54,7 @@
     </testsuites>
     <filter>
         <whitelist>
+            <directory suffix=".php">pkg/clock/src/</directory>
             <directory suffix=".php">pkg/collection/src/</directory>
             <directory suffix=".php">pkg/command-bus/src/</directory>
             <directory suffix=".php">pkg/common/src/</directory>

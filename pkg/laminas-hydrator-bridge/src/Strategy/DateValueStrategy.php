@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
-use spaceonfire\ValueObject\Date\DateTimeValueInterface;
+use spaceonfire\Clock\DateTimeImmutableValue;
+use spaceonfire\Clock\DateTimeValueInterface;
 
 /**
  * @template T of DateTimeValueInterface

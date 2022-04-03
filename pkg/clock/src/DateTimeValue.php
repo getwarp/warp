@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Date;
+namespace spaceonfire\Clock;
 
 class DateTimeValue extends \DateTime implements DateTimeValueInterface
 {

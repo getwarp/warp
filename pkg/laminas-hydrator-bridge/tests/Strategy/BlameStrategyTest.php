@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
 
 use PHPUnit\Framework\TestCase;
+use spaceonfire\Clock\DateTimeImmutableValue;
 use spaceonfire\DataSource\Blame\Blame;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
 
 class BlameStrategyTest extends TestCase
 {

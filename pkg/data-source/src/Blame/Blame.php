@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Blame;
 
+use spaceonfire\Clock\ClockInterface;
+use spaceonfire\Clock\DateTimeImmutableValue;
+use spaceonfire\Clock\FrozenClock;
+use spaceonfire\Clock\SystemClock;
 use spaceonfire\Common\Factory\StaticConstructorInterface;
 use spaceonfire\DataSource\EntityReferenceInterface;
-use spaceonfire\ValueObject\Date\ClockInterface;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
-use spaceonfire\ValueObject\Date\FrozenClock;
-use spaceonfire\ValueObject\Date\SystemClock;
 
 /**
  * @template T of object

@@ -7,10 +7,7 @@
     "string",
     "int",
     "uuid",
-    "enum",
-    "date",
-    "time",
-    "datetime"
+    "enum"
   ],
   "homepage": "https://github.com/spaceonfire/value-object",
   "license": "MIT",

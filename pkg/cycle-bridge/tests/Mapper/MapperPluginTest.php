@@ -19,7 +19,7 @@ use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\NoopMapperPlugin;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
 use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
+use spaceonfire\Clock\DateTimeImmutableValue;
 
 class MapperPluginTest extends AbstractTestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Date;
+namespace spaceonfire\Clock;
 
 class DateTimeImmutableValue extends \DateTimeImmutable implements DateTimeValueInterface
 {

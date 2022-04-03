@@ -64,6 +64,7 @@
     "yiisoft/arrays": "^1.0"
   },
   "replace": {
+    "spaceonfire/clock": "self.version",
     "spaceonfire/collection": "self.version",
     "spaceonfire/command-bus": "self.version",
     "spaceonfire/common": "self.version",
@@ -87,6 +88,7 @@
   ],
   "autoload": {
     "psr-4": {
+      "spaceonfire\\Clock\\": "pkg/clock/src",
       "spaceonfire\\Collection\\": "pkg/collection/src",
       "spaceonfire\\CommandBus\\": "pkg/command-bus/src",
       "spaceonfire\\Common\\": "pkg/common/src",
@@ -108,6 +110,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "spaceonfire\\Clock\\": "pkg/clock/tests",
       "spaceonfire\\Collection\\": "pkg/collection/tests",
       "spaceonfire\\CommandBus\\": "pkg/command-bus/tests",
       "spaceonfire\\Common\\": "pkg/common/tests",
@@ -135,6 +138,10 @@
   "extra": {
     "monorepo": {
       "projects": [
+        {
+          "dir": "pkg/clock",
+          "git": "https://github.com/spaceonfire/clock.git"
+        },
         {
           "dir": "pkg/collection",
           "git": "https://github.com/spaceonfire/collection.git"

@@ -1,0 +1,39 @@
+{
+  "name": "spaceonfire/clock",
+  "description": "Enhanced DateTime classes and Clock API implementation",
+  "type": "library",
+  "keywords": [
+    "date",
+    "time",
+    "datetime",
+    "clock"
+  ],
+  "homepage": "https://github.com/spaceonfire/clock",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Constantine Karnaukhov",
+      "email": "genteelknight@gmail.com",
+      "homepage": "https://www.onfire.space/",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "ext-json": "*"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "spaceonfire\\Clock\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spaceonfire\\Clock\\": "tests"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

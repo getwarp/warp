@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Date;
+namespace spaceonfire\Clock;
 
 interface DateTimeValueInterface extends \DateTimeInterface, \Stringable, \JsonSerializable
 {
@@ -35,6 +35,12 @@ interface DateTimeValueInterface extends \DateTimeInterface, \Stringable, \JsonS
      * @var int average year in seconds
      */
     public const YEAR = 31_557_600;
+
+    /**
+     * Creates DateTime object with current time and optionally specified timezone.
+     * @return static
+     */
+    public static function now(?\DateTimeZone $timezone = null): self;
 
     /**
      * DateTime object factory.

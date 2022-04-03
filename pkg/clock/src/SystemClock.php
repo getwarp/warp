@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Date;
+namespace spaceonfire\Clock;
 
 final class SystemClock implements ClockInterface
 {
@@ -25,6 +25,6 @@ final class SystemClock implements ClockInterface
 
     public function now(): DateTimeImmutableValue
     {
-        return new DateTimeImmutableValue('now', $this->timezone);
+        return DateTimeImmutableValue::now($this->timezone);
     }
 }

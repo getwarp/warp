@@ -12,11 +12,11 @@ use spaceonfire\Bridge\Cycle\Fixtures\Post;
 use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
 use spaceonfire\Bridge\Cycle\Fixtures\User;
 use spaceonfire\Bridge\Cycle\Fixtures\UserId;
+use spaceonfire\Clock\DateTimeImmutableValue;
 use spaceonfire\Collection\Map;
 use spaceonfire\Criteria\Criteria;
 use spaceonfire\Criteria\Expression\ExpressionFactory;
 use spaceonfire\DataSource\EntityNotFoundException;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
 
 /**
  * @todo: add test with both criteria and source scope applied

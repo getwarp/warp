@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Blame;
 
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
+use spaceonfire\Clock\DateTimeImmutableValue;
 
 /**
  * @template T of object

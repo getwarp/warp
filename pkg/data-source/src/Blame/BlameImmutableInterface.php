@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace spaceonfire\DataSource\Blame;
 
+use spaceonfire\Clock\DateTimeImmutableValue;
 use spaceonfire\DataSource\EntityReferenceInterface;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
 
 /**
  * @template T of object

@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Custom mappers with plugins support: domain events, blame (timestamps), entity reference, fields grouping, belongs-to
   autolink.
 - Custom to-many relations with lazy collections support.
+- Entity reference wrapper.
 - Integration with `criteria` package: convert expressions to query builder filters, support filter by relation using
   entity object.
 - CLI commands for cycle/migrations with lock support.
