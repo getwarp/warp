@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use ArrayAccess;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\FilterableInterface;
 use Traversable;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Criteria\FilterableInterface;
 
 /**
  * CollectionInterface.

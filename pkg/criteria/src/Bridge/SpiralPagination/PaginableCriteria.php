@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Bridge\SpiralPagination;
+namespace Warp\Criteria\Bridge\SpiralPagination;
 
-use spaceonfire\Criteria\AbstractCriteriaDecorator;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\CriteriaInterface;
 use Spiral\Pagination\PaginableInterface;
 use Spiral\Pagination\Paginator;
 use Spiral\Pagination\PaginatorInterface;
+use Warp\Criteria\AbstractCriteriaDecorator;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\CriteriaInterface;
 
 class PaginableCriteria extends AbstractCriteriaDecorator implements PaginableInterface, PaginatorInterface
 {

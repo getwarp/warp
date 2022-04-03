@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Adapters\CycleOrm\Mapper\Hydrator;
+namespace Warp\DataSource\Adapters\CycleOrm\Mapper\Hydrator;
 
 use function class_alias;
 
 class_alias(
-    \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator::class,
+    \Warp\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator::class,
     __NAMESPACE__ . '\StdClassHydrator'
 );
 
 if (false) {
     /**
      * @deprecated Will be dropped in next major release.
-     * Use \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator instead.
+     * Use \Warp\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator instead.
      */
-    class StdClassHydrator extends \spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator
+    class StdClassHydrator extends \Warp\DataSource\Bridge\CycleOrm\Mapper\Hydrator\StdClassHydrator
     {
     }
 }

@@ -1,28 +1,25 @@
-# Easy Coding Standard Bridge by spaceonfire
+<div align="center">
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Total Downloads][ico-downloads]][link-packagist]
+# getwarp/easy-coding-standard-bridge
 
-## Установка
+Warp config for [Easy Coding Standard][link-ecs]
+
+[GitHub][link-github] •
+[Packagist][link-packagist] •
+[Installation](#installation) •
+[Usage](#usage)
+
+</div>
+
+## Installation
 
 Установите зависимости для разработки:
 
 ```bash
-composer require --dev spaceonfire/easy-coding-standard-bridge symplify/easy-coding-standard symfony/var-exporter
+composer require --dev getwarp/easy-coding-standard-bridge symplify/easy-coding-standard symfony/var-exporter
 ```
 
-Добавить скрипт в `composer.json`
-
-```json
-{
-    "scripts": {
-        "codestyle": "@php -d xdebug.mode=off `which ecs` check --ansi"
-    }
-}
-```
-
-## Использование
+## Usage
 
 Чтобы скопировать базовые конфиги для Easy Coding Standard и EditorConfig, выполните команду из директории репозитория.
 
@@ -81,7 +78,7 @@ stages:
 
 .php-job:
     extends: .in-docker-job
-    image: spaceonfire/nginx-php-fpm:latest-7.4
+    image: ghcr.io/getwarp/warp-php-devcontainer:7.4
 
 .composer-job:
     extends: .php-job
@@ -102,7 +99,7 @@ codestyle:
         - composer codestyle -- --no-progress-bar --no-interaction
 ```
 
-При указании docker образа, в котором будет выполняться задание, вместо `spaceonfire/nginx-php-fpm:latest-7.4` можно
+При указании docker образа, в котором будет выполняться задание, вместо `ghcr.io/getwarp/warp-php-devcontainer:7.4` можно
 указать тег с версией php для проекта (доступны `7.2`, `7.3`, `7.4`) либо другой образ с `php` и `composer`.
 
 ## Change log
@@ -111,26 +108,25 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-[Report issues][link-issues] and [send Pull Requests][link-pulls] in the [main spaceonfire repository][link-monorepo].
-Please see [CONTRIBUTING][link-contributing] and [CODE_OF_CONDUCT][link-code-of-conduct] for details.
+[Report issues][link-issues] and [send pull requests][link-pulls] in the [main Warp repository][link-monorepo]. Please
+see [contributing guide][link-contributing] and [code of conduct][link-code-of-conduct] for details.
 
 ## Credits
 
--   [Constantine Karnaukhov][link-author]
--   [All Contributors][link-contributors]
+- [Constantine Karnaukhov][link-author]
+- [All Contributors][link-contributors]
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [license file](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/spaceonfire/easy-coding-standard-bridge.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/easy-coding-standard-bridge.svg?style=flat-square
-[link-packagist]: https://packagist.org/packages/spaceonfire/easy-coding-standard-bridge
+[link-github]: https://github.com/getwarp/easy-coding-standard-bridge
+[link-packagist]: https://packagist.org/packages/getwarp/easy-coding-standard-bridge
 [link-author]: https://github.com/hustlahusky
 [link-contributors]: ../../contributors
-[link-monorepo]: https://github.com/spaceonfire/spaceonfire
-[link-issues]: https://github.com/spaceonfire/spaceonfire/issues
-[link-pulls]: https://github.com/spaceonfire/spaceonfire/pulls
-[link-contributing]: https://github.com/spaceonfire/spaceonfire/blob/master/CONTRIBUTING.md
-[link-code-of-conduct]: https://github.com/spaceonfire/spaceonfire/blob/master/CODE_OF_CONDUCT.md
+[link-monorepo]: https://github.com/getwarp/warp
+[link-issues]: https://github.com/getwarp/warp/issues
+[link-pulls]: https://github.com/getwarp/warp/pulls
+[link-contributing]: https://github.com/getwarp/warp/blob/2.5.x/CONTRIBUTING.md
+[link-code-of-conduct]: https://github.com/getwarp/.github/blob/main/CODE_OF_CONDUCT.md
+[link-ecs]: https://github.com/symplify/easy-coding-standard

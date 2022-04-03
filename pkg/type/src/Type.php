@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
 \class_alias(
     TypeInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\Type;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\Type\TypeInterface} instead.
+     * @deprecated Use {@see \Warp\Type\TypeInterface} instead.
      */
     interface Type extends TypeInterface
     {

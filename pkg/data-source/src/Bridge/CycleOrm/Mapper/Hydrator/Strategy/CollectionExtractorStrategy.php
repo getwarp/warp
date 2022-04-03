@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\Strategy;
+namespace Warp\DataSource\Bridge\CycleOrm\Mapper\Hydrator\Strategy;
 
 use Cycle\ORM\Promise\Collection\CollectionPromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
@@ -12,8 +12,8 @@ use Cycle\ORM\Relation\Pivoted\PivotedCollection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotAwareInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\DataSource\Bridge\CycleOrm\Collection\PivotAwareInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,7 +29,7 @@ class CollectionExtractorStrategy implements StrategyInterface
     /**
      * @inheritDoc
      *
-     * Convert spaceonfire collection to doctrine collection for proper relations handling by Cycle ORM
+     * Convert warp collection to doctrine collection for proper relations handling by Cycle ORM
      *
      * @param CollectionInterface|null|mixed $value
      * @return DoctrineCollection|mixed

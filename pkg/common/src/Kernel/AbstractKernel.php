@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\Container;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\ContainerWithServiceProvidersInterface;
-use spaceonfire\Container\ReflectionContainer;
-use spaceonfire\Container\ServiceProvider\ServiceProviderInterface;
+use Warp\Container\CompositeContainer;
+use Warp\Container\Container;
+use Warp\Container\ContainerInterface;
+use Warp\Container\ContainerWithServiceProvidersInterface;
+use Warp\Container\ReflectionContainer;
+use Warp\Container\ServiceProvider\ServiceProviderInterface;
 
 abstract class AbstractKernel
 {

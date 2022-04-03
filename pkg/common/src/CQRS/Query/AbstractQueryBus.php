@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Query;
+namespace Warp\Common\CQRS\Query;
 
-use spaceonfire\CommandBus\CommandBus as MessageBus;
+use Warp\CommandBus\CommandBus as MessageBus;
 
 abstract class AbstractQueryBus implements QueryBusInterface
 {

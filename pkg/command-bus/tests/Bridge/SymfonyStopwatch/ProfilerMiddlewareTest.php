@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
+namespace Warp\CommandBus\Bridge\SymfonyStopwatch;
 
 use Psr\Log\Test\TestLogger;
-use spaceonfire\CommandBus\_Fixtures\Bridge\SymfonyStopwatch\FixtureMayBeProfiledMessage;
-use spaceonfire\CommandBus\AbstractTestCase;
+use Warp\CommandBus\_Fixtures\Bridge\SymfonyStopwatch\FixtureMayBeProfiledMessage;
+use Warp\CommandBus\AbstractTestCase;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProfilerMiddlewareTest extends AbstractTestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
-use spaceonfire\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
+use Warp\DataSource\Bridge\NetteUtils\SmartArrayAccessObject;
 
 abstract class AbstractEntity implements EntityInterface, \ArrayAccess, \JsonSerializable
 {

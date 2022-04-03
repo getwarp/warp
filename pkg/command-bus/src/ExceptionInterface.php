@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 use Throwable;
 

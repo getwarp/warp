@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
 use RuntimeException;
-use spaceonfire\CommandBus\ExceptionInterface;
+use Warp\CommandBus\ExceptionInterface;
 
 final class FailedToMapCommand extends RuntimeException implements ExceptionInterface
 {

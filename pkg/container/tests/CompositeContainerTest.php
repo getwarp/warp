@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use ArrayIterator;
 use Prophecy\Argument;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Fixtures\AbstractClass\AbstractClass;
-use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
-use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
+use Warp\Collection\Collection;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Fixtures\AbstractClass\AbstractClass;
+use Warp\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
+use Warp\Container\Fixtures\AbstractClass\RequiresAbstractClass;
 
 class CompositeContainerTest extends AbstractTestCase
 {

@@ -1,0 +1,54 @@
+{
+  "sub-splits": [
+    {
+      "name": "collection",
+      "directory": "pkg/collection",
+      "target": "git@github.com:getwarp/collection.git"
+    },
+    {
+      "name": "command-bus",
+      "directory": "pkg/command-bus",
+      "target": "git@github.com:getwarp/command-bus.git"
+    },
+    {
+      "name": "common",
+      "directory": "pkg/common",
+      "target": "git@github.com:getwarp/common.git"
+    },
+    {
+      "name": "container",
+      "directory": "pkg/container",
+      "target": "git@github.com:getwarp/container.git"
+    },
+    {
+      "name": "criteria",
+      "directory": "pkg/criteria",
+      "target": "git@github.com:getwarp/criteria.git"
+    },
+    {
+      "name": "data-source",
+      "directory": "pkg/data-source",
+      "target": "git@github.com:getwarp/data-source.git"
+    },
+    {
+      "name": "easy-coding-standard-bridge",
+      "directory": "pkg/easy-coding-standard-bridge",
+      "target": "git@github.com:getwarp/easy-coding-standard-bridge.git"
+    },
+    {
+      "name": "laminas-hydrator-bridge",
+      "directory": "pkg/laminas-hydrator-bridge",
+      "target": "git@github.com:getwarp/laminas-hydrator-bridge.git"
+    },
+    {
+      "name": "type",
+      "directory": "pkg/type",
+      "target": "git@github.com:getwarp/type.git"
+    },
+    {
+      "name": "value-object",
+      "directory": "pkg/value-object",
+      "target": "git@github.com:getwarp/value-object.git"
+    }
+  ]
+}

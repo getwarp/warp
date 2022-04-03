@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Bridge\DoctrineCollections;
+namespace Warp\Criteria\Bridge\DoctrineCollections;
 
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\CriteriaInterface;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\CriteriaInterface;
 
 class DoctrineCollectionsCriteriaConverter
 {
     /**
-     * Converts Doctrine criteria to spaceonfire criteria
+     * Converts Doctrine criteria to warp criteria
      * @param DoctrineCriteria $doctrineCriteria
      * @param string $comparisonMethod
      * @return CriteriaInterface

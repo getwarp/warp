@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\_Fixtures\CQRS\Query;
+namespace Warp\Common\_Fixtures\CQRS\Query;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\CommandBus\CommandBus as MessageBus;
-use spaceonfire\CommandBus\Mapping\ClassName\SuffixClassNameMapping;
-use spaceonfire\CommandBus\Mapping\CompositeMapping;
-use spaceonfire\CommandBus\Mapping\Method\StaticMethodNameMapping;
-use spaceonfire\Common\CQRS\Query\AbstractQueryBus;
+use Warp\CommandBus\CommandBus as MessageBus;
+use Warp\CommandBus\Mapping\ClassName\SuffixClassNameMapping;
+use Warp\CommandBus\Mapping\CompositeMapping;
+use Warp\CommandBus\Mapping\Method\StaticMethodNameMapping;
+use Warp\Common\CQRS\Query\AbstractQueryBus;
 
 final class FixtureQueryBus extends AbstractQueryBus
 {

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Generator;
 use IteratorAggregate;
 use Psr\Container\ContainerInterface as PsrContainerInterface;
-use spaceonfire\Collection\ArrayHelper;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Container\Definition\DefinitionInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
 use Traversable;
+use Warp\Collection\ArrayHelper;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Container\Definition\DefinitionInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
 
 /**
  * Class CompositeContainer

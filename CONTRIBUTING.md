@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/spaceonfire/spaceonfire).
+We accept contributions via Pull Requests on [Github](https://github.com/getwarp/warp).
 
 ## Pull Requests
 
@@ -17,34 +17,32 @@ We accept contributions via Pull Requests on [Github](https://github.com/spaceon
 Clone your fork repository:
 
 ```bash
-git clone git@github.com:<your-github-username>/spaceonfire.git
-cd spaceonfire
+git clone git@github.com:<your-github-username>/warp.git
+cd warp
 ```
 
 We recommend to use Docker for your dev environment.
 
 ```bash
 cp .env.example .env
-docker-compose build
 docker-compose up -d
 ```
 
-This will start docker container with minimal supported by our packages version of PHP (7.2). You can select different
-version of base image by running this commands:
+You are also able to modify `docker-compose.override.yml` file like you want due it ignored by git. For example,
+You can select different PHP version by changing docker image tag:
 
-```bash
-# cp docker-compose.<php-version>.yml docker-compose.override.yml
-cp docker-compose.8.0.yml docker-compose.override.yml
-docker-compose build
-docker-compose up -d
+```yaml
+version: '3'
+
+services:
+    dev:
+        image: ghcr.io/getwarp/warp-php-devcontainer:8.0
 ```
-
-You can also modify `docker-compose.override.yml` file like you want due it ignored by git.
 
 To enter docker container use this command:
 
 ```bash
-docker-compose exec app su-exec nginx bash
+docker compose exec dev bash
 ```
 
 Now you can install composer dependencies, run tests and static analysis, etc.

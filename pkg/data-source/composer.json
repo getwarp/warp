@@ -1,22 +1,19 @@
 {
-  "name": "spaceonfire/data-source",
-  "type": "library",
+  "name": "getwarp/data-source",
   "description": "Useful interfaces and abstracts to design your domain model",
+  "type": "library",
   "keywords": [
-    "DDD",
     "domain",
     "entity",
-    "mapper",
-    "repository",
-    "query"
+    "repository"
   ],
-  "homepage": "https://github.com/spaceonfire/data-source",
+  "homepage": "https://github.com/getwarp/data-source",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -25,9 +22,9 @@
     "ext-json": "*",
     "guzzlehttp/psr7": "^1.6",
     "jawira/case-converter": "^3.4",
-    "spaceonfire/collection": "^2.5",
-    "spaceonfire/criteria": "^2.5",
-    "spaceonfire/laminas-hydrator-bridge": "^2.5",
+    "getwarp/collection": "^2.5",
+    "getwarp/criteria": "^2.5",
+    "getwarp/laminas-hydrator-bridge": "^2.5",
     "webmozart/assert": "^1.6"
   },
   "require-dev": {
@@ -36,11 +33,11 @@
     "nette/utils": "^3.0",
     "ramsey/uuid": "^3.9|^4.0",
     "roave/security-advisories": "dev-latest",
-    "spaceonfire/value-object": "^2.5",
+    "getwarp/value-object": "^2.5",
     "spiral/pagination": "^2.7"
   },
   "suggest": {
-    "spaceonfire/value-object": "",
+    "getwarp/value-object": "",
     "ramsey/uuid": "",
     "spiral/pagination": "Needed for QueryInterface",
     "cycle/orm": "There are adapters available to use with Cycle ORM",
@@ -49,17 +46,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\DataSource\\": "src"
+      "Warp\\DataSource\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\DataSource\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
+      "Warp\\DataSource\\": "tests"
     }
   },
   "config": {

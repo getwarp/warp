@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Collection;
+namespace Warp\DataSource\Bridge\CycleOrm\Collection;
 
-use spaceonfire\Collection\AbstractCollectionDecorator;
+use Warp\Collection\AbstractCollectionDecorator;
 
 /**
  * Class PivotedCollection

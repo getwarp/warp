@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\LaminasHydratorBridge\Strategy;
+namespace Warp\LaminasHydratorBridge\Strategy;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;

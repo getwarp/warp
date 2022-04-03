@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
 use ArrayIterator;
 use IteratorAggregate;

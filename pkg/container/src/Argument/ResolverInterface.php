@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
 use ReflectionFunctionAbstract;
-use spaceonfire\Container\ContainerAwareInterface;
+use Warp\Container\ContainerAwareInterface;
 
 interface ResolverInterface extends ContainerAwareInterface
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
-use spaceonfire\Criteria\Criteria;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Warp\Criteria\Criteria;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
 

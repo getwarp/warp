@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
-use spaceonfire\Type\Factory\CompositeTypeFactory;
-use spaceonfire\Type\Factory\ConjunctionTypeFactory;
+use Warp\Type\Factory\CompositeTypeFactory;
+use Warp\Type\Factory\ConjunctionTypeFactory;
 
 final class ConjunctionType extends AbstractAggregatedType
 {

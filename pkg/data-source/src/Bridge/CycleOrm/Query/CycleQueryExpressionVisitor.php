@@ -4,11 +4,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Query;
+namespace Warp\DataSource\Bridge\CycleOrm\Query;
 
 use Cycle\ORM\Select\QueryBuilder;
-use spaceonfire\DataSource\Query\AbstractExpressionVisitor;
 use Spiral\Database\Injection\Parameter;
+use Warp\DataSource\Query\AbstractExpressionVisitor;
 use Webmozart\Expression\Constraint;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use InvalidArgumentException;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
+use Warp\Type\BuiltinType;
 use stdClass;
 
 class TypedCollectionTest extends TestCase

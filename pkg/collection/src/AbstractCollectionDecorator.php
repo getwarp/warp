@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
-use spaceonfire\Criteria\CriteriaInterface;
 use Traversable;
+use Warp\Criteria\CriteriaInterface;
 
 /**
  * Class AbstractCollectionDecorator.

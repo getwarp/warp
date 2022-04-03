@@ -1,7 +1,7 @@
 {
-  "name": "spaceonfire/container",
+  "name": "getwarp/container",
+  "description": "Decent dependency injection container compatible with PSR-11",
   "type": "library",
-  "description": "Small yet powerful implementation of PSR-11 compatible dependency injection container",
   "keywords": [
     "container",
     "psr-11",
@@ -14,20 +14,20 @@
     "service",
     "provider"
   ],
-  "homepage": "https://github.com/spaceonfire/container",
+  "homepage": "https://github.com/getwarp/container",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space/",
+      "homepage": "https://getwarp.dev/",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.2|^8.0",
     "psr/container": "^1.0",
-    "spaceonfire/collection": "^2.5"
+    "getwarp/collection": "^2.5"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
@@ -37,17 +37,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Container\\": "src"
+      "Warp\\Container\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Container\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
+      "Warp\\Container\\": "tests"
     }
   },
   "config": {

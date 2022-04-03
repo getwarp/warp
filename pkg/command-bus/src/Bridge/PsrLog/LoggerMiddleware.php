@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\PsrLog;
+namespace Warp\CommandBus\Bridge\PsrLog;
 
 use InvalidArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use spaceonfire\CommandBus\MiddlewareInterface;
 use Throwable;
+use Warp\CommandBus\MiddlewareInterface;
 
 final class LoggerMiddleware implements MiddlewareInterface, LoggerAwareInterface
 {

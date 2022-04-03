@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Traits;
+namespace Warp\DataSource\Traits;
 
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Exceptions\PostNotFoundException;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
-use spaceonfire\DataSource\RepositoryInterface;
+use Warp\Criteria\Criteria;
+use Warp\DataSource\Fixtures\Domain\Post\Exceptions\PostNotFoundException;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\RepositoryInterface;
 
 trait RepositoryTestTrait
 {

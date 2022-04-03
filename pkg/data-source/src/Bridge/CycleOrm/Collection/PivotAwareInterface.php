@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Collection;
+namespace Warp\DataSource\Bridge\CycleOrm\Collection;
 
-use spaceonfire\Collection\CollectionInterface;
 use SplObjectStorage;
+use Warp\Collection\CollectionInterface;
 
 /**
  * Carries pivot data associated with each element.

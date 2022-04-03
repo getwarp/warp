@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use InvalidArgumentException;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Container\Argument\ArgumentResolver;
-use spaceonfire\Container\Argument\ResolverInterface;
-use spaceonfire\Container\Definition\DefinitionAggregate;
-use spaceonfire\Container\Definition\DefinitionAggregateInterface;
-use spaceonfire\Container\Definition\DefinitionInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Reflection\ReflectionFactory;
-use spaceonfire\Container\Reflection\ReflectionInvoker;
-use spaceonfire\Container\ServiceProvider\ServiceProviderAggregate;
-use spaceonfire\Container\ServiceProvider\ServiceProviderAggregateInterface;
-use spaceonfire\Container\ServiceProvider\ServiceProviderInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Container\Argument\ArgumentResolver;
+use Warp\Container\Argument\ResolverInterface;
+use Warp\Container\Definition\DefinitionAggregate;
+use Warp\Container\Definition\DefinitionAggregateInterface;
+use Warp\Container\Definition\DefinitionInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Reflection\ReflectionFactory;
+use Warp\Container\Reflection\ReflectionInvoker;
+use Warp\Container\ServiceProvider\ServiceProviderAggregate;
+use Warp\Container\ServiceProvider\ServiceProviderAggregateInterface;
+use Warp\Container\ServiceProvider\ServiceProviderInterface;
 
 final class Container implements ContainerWithServiceProvidersInterface, ContainerAwareInterface
 {

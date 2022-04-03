@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
 use ReflectionNamedType;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\RawValueHolder;
 use Throwable;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\RawValueHolder;
 
 final class ArgumentResolver implements ResolverInterface
 {

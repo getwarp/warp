@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
 use PHPUnit\Framework\TestCase;
 use Webmozart\Expression\Constraint\EndsWith;

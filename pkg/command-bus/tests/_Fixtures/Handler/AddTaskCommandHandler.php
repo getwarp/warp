@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\_Fixtures\Handler;
+namespace Warp\CommandBus\_Fixtures\Handler;
 
-use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\_Fixtures\Command\AddTaskCommand;
 
 class AddTaskCommandHandler
 {

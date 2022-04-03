@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
-use spaceonfire\Container\RawValueHolder;
+use Warp\Container\RawValueHolder;
 use function class_alias;
 
 class_alias(RawValueHolder::class, __NAMESPACE__ . '\ArgumentValue');
@@ -12,7 +12,7 @@ class_alias(RawValueHolder::class, __NAMESPACE__ . '\ArgumentValue');
 if (false) {
     /**
      * @deprecated Will be dropped in next major release.
-     * Use \spaceonfire\Container\RawValueHolder instead.
+     * Use \Warp\Container\RawValueHolder instead.
      */
     final class ArgumentValue extends RawValueHolder
     {

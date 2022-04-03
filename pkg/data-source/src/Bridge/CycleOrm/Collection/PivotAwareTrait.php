@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Collection;
+namespace Warp\DataSource\Bridge\CycleOrm\Collection;
 
 use RuntimeException;
 use SplObjectStorage;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Psr\Container\ContainerInterface as PsrContainerInterface;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Container\Definition\DefinitionInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Container\Definition\DefinitionInterface;
 
 interface ContainerInterface extends PsrContainerInterface
 {

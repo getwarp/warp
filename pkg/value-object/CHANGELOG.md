@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `spaceonfire/value-object` will be documented in this file.
+All notable changes to `getwarp/value-object` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -34,24 +34,24 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
--   Enum value object now accept only public constants ([#5](https://github.com/spaceonfire/value-object/issues/5)).
+-   Enum value object now accept only public constants ([#5](https://github.com/getwarp/value-object/issues/5)).
 -   Enum value objects now strictly compared due to new method `equals()`.
 
 ## [1.6.0] - 2020-10-06
 
 ### Deprecated
 
--   Classes `spaceonfire\ValueObject\Bridge\LaminasHydrator\BooleanStrategy`
-    and `spaceonfire\ValueObject\Bridge\LaminasHydrator\NullableStrategy`
-    were moved to `spaceonfire/laminas-hydrator-bridge` library. Class alias provided for backwards compatibility, but
+-   Classes `Warp\ValueObject\Bridge\LaminasHydrator\BooleanStrategy`
+    and `Warp\ValueObject\Bridge\LaminasHydrator\NullableStrategy`
+    were moved to `getwarp/laminas-hydrator-bridge` library. Class alias provided for backwards compatibility, but
     will be removed in next major release.
 
 ## [1.5.0] - 2020-09-27
 
 ### Deprecated
 
--   Namespace `spaceonfire\ValueObject\Integrations\HydratorStrategy` renamed
-    to `spaceonfire\ValueObject\Bridge\LaminasHydrator`. Class aliases provided for backwards compatibility, but will be
+-   Namespace `Warp\ValueObject\Integrations\HydratorStrategy` renamed
+    to `Warp\ValueObject\Bridge\LaminasHydrator`. Class aliases provided for backwards compatibility, but will be
     removed in next major release.
 
 ## [1.4.0] - 2020-08-09

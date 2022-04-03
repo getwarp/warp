@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
-use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
-use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\InMemoryPostRepository;
-use spaceonfire\DataSource\Traits\RepositoryTestTrait;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
+use Warp\DataSource\Fixtures\Infrastructure\Persistence\Post\InMemoryPostRepository;
+use Warp\DataSource\Traits\RepositoryTestTrait;
 
 class RepositoryTest extends TestCase
 {

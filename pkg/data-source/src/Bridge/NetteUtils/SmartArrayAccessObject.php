@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\NetteUtils;
+namespace Warp\DataSource\Bridge\NetteUtils;
 
 use Nette\SmartObject;
 use Nette\Utils\ObjectHelpers;

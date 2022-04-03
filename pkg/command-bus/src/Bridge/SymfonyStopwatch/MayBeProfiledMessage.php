@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
+namespace Warp\CommandBus\Bridge\SymfonyStopwatch;
 
 \class_alias(
     MayBeProfiledMessageInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageInterface} instead.
+     * @deprecated Use {@see \Warp\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageInterface} instead.
      */
     interface MayBeProfiledMessage extends MayBeProfiledMessageInterface
     {

@@ -1,7 +1,7 @@
 {
-  "name": "spaceonfire/easy-coding-standard-bridge",
+  "name": "getwarp/easy-coding-standard-bridge",
+  "description": "Warp config for Easy Coding Standard",
   "type": "library",
-  "description": "Easy Coding Standard Bridge by spaceonfire",
   "keywords": [
     "code-style",
     "code-standard",
@@ -10,7 +10,7 @@
     "baseline",
     "editorconfig"
   ],
-  "homepage": "https://github.com/spaceonfire/easy-coding-standard-bridge",
+  "homepage": "https://github.com/getwarp/easy-coding-standard-bridge",
   "license": "MIT",
   "require": {
     "php": "^7.2|^8.0"
@@ -30,11 +30,6 @@
     "bin/ecs-baseliner.php",
     "bin/ecs-init.php"
   ],
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
-    }
-  },
   "config": {
     "sort-packages": true
   }

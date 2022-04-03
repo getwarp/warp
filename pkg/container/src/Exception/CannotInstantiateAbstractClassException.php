@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Exception;
+namespace Warp\Container\Exception;
 
 use LogicException;
 use Psr\Container\ContainerExceptionInterface;

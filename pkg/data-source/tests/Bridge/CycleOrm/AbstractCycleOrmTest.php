@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm;
+namespace Warp\DataSource\Bridge\CycleOrm;
 
 use BadMethodCallException;
 use Cycle\ORM\ORM;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use spaceonfire\DataSource\RepositoryInterface;
+use Warp\DataSource\RepositoryInterface;
 use Spiral\Database\DatabaseManager;
 use Spiral\Database\Driver\Driver;
 use Spiral\Database\Driver\DriverInterface;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
-use spaceonfire\Type\Factory\CompositeTypeFactory;
-use spaceonfire\Type\Factory\DisjunctionTypeFactory;
+use Warp\Type\Factory\CompositeTypeFactory;
+use Warp\Type\Factory\DisjunctionTypeFactory;
 
 final class DisjunctionType extends AbstractAggregatedType
 {

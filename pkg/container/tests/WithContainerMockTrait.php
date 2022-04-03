@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
-use spaceonfire\Container\Exception\NotFoundException;
+use Warp\Container\Exception\NotFoundException;
 
 trait WithContainerMockTrait
 {
@@ -17,7 +17,7 @@ trait WithContainerMockTrait
      */
     protected function createContainerMock(array $definitions = [], $interface = ContainerInterface::class): ObjectProphecy
     {
-        $isSpaceonfireContainer = $interface === ContainerInterface::class || is_subclass_of($interface, ContainerInterface::class);
+        $isWarpContainer = $interface === ContainerInterface::class || is_subclass_of($interface, ContainerInterface::class);
 
         $otherInterfaces = [];
         if (is_array($interface)) {
@@ -34,7 +34,7 @@ trait WithContainerMockTrait
         $prophecy->has(Argument::type('string'))->willReturn(false);
 
         $prophecy->get(Argument::type('string'))->willThrow(new NotFoundException());
-        if ($isSpaceonfireContainer) {
+        if ($isWarpContainer) {
             $prophecy->get(Argument::type('string'), Argument::type('array'))->willThrow(new NotFoundException());
         }
 

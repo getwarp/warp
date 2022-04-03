@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
+namespace Warp\CommandBus\Bridge\SymfonyStopwatch;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use spaceonfire\CommandBus\MiddlewareInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Warp\CommandBus\MiddlewareInterface;
 
 final class ProfilerMiddleware implements MiddlewareInterface, LoggerAwareInterface
 {

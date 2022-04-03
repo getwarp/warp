@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Bridge\SpiralPagination;
+namespace Warp\Criteria\Bridge\SpiralPagination;
 
-use spaceonfire\Criteria\AbstractCriteriaTest;
-use spaceonfire\Criteria\CriteriaInterface;
+use Warp\Criteria\AbstractCriteriaTest;
+use Warp\Criteria\CriteriaInterface;
 use Spiral\Pagination\PaginableInterface;
 use Spiral\Pagination\Paginator;
 

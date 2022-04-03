@@ -1,15 +1,15 @@
 {
-  "name": "spaceonfire/spaceonfire",
+  "name": "getwarp/warp",
   "type": "project",
   "description": "",
   "keywords": [],
-  "homepage": "https://github.com/spaceonfire/spaceonfire",
+  "homepage": "https://github.com/getwarp/warp",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -52,7 +52,6 @@
     "symfony/stopwatch": "^5.1",
     "symfony/var-exporter": "^5.1",
     "symplify/easy-coding-standard": "^9.2",
-    "symplify/monorepo-builder": "^8.3|^9.2",
     "vlucas/phpdotenv": "^4.1|^5.2"
   },
   "scripts": {
@@ -60,60 +59,55 @@
     "codestyle": "@php -d xdebug.mode=off `which ecs` check --ansi",
     "lint": "@php -d xdebug.mode=off `which phpstan` analyze --memory-limit=512M --ansi"
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
-    }
-  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "autoload": {
     "files": [
       "pkg/common/functions.php"
     ],
     "psr-4": {
-      "spaceonfire\\Collection\\": "pkg/collection/src",
-      "spaceonfire\\CommandBus\\": "pkg/command-bus/src",
-      "spaceonfire\\Common\\": "pkg/common/src",
-      "spaceonfire\\Container\\": "pkg/container/src",
-      "spaceonfire\\Criteria\\": "pkg/criteria/src",
-      "spaceonfire\\DataSource\\": "pkg/data-source/src",
-      "spaceonfire\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/src",
-      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/src",
-      "spaceonfire\\Type\\": "pkg/type/src",
-      "spaceonfire\\ValueObject\\": "pkg/value-object/src"
+      "Warp\\Collection\\": "pkg/collection/src",
+      "Warp\\CommandBus\\": "pkg/command-bus/src",
+      "Warp\\Common\\": "pkg/common/src",
+      "Warp\\Container\\": "pkg/container/src",
+      "Warp\\Criteria\\": "pkg/criteria/src",
+      "Warp\\DataSource\\": "pkg/data-source/src",
+      "Warp\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/src",
+      "Warp\\Type\\": "pkg/type/src",
+      "Warp\\ValueObject\\": "pkg/value-object/src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Collection\\": "pkg/collection/tests",
-      "spaceonfire\\CommandBus\\": "pkg/command-bus/tests",
-      "spaceonfire\\Common\\": "pkg/common/tests",
-      "spaceonfire\\Container\\": "pkg/container/tests",
-      "spaceonfire\\Criteria\\": "pkg/criteria/tests",
-      "spaceonfire\\DataSource\\": "pkg/data-source/tests",
-      "spaceonfire\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/tests",
-      "spaceonfire\\MonologBridge\\": "pkg/monolog-bridge/tests",
-      "spaceonfire\\Type\\": "pkg/type/tests",
-      "spaceonfire\\ValueObject\\": "pkg/value-object/tests"
+      "Warp\\Collection\\": "pkg/collection/tests",
+      "Warp\\CommandBus\\": "pkg/command-bus/tests",
+      "Warp\\Common\\": "pkg/common/tests",
+      "Warp\\Container\\": "pkg/container/tests",
+      "Warp\\Criteria\\": "pkg/criteria/tests",
+      "Warp\\DataSource\\": "pkg/data-source/tests",
+      "Warp\\LaminasHydratorBridge\\": "pkg/laminas-hydrator-bridge/tests",
+      "Warp\\Type\\": "pkg/type/tests",
+      "Warp\\ValueObject\\": "pkg/value-object/tests"
     }
   },
   "replace": {
-    "spaceonfire/collection": "self.version",
-    "spaceonfire/command-bus": "self.version",
-    "spaceonfire/common": "self.version",
-    "spaceonfire/container": "self.version",
-    "spaceonfire/criteria": "self.version",
-    "spaceonfire/data-source": "self.version",
-    "spaceonfire/easy-coding-standard-bridge": "self.version",
-    "spaceonfire/laminas-hydrator-bridge": "self.version",
-    "spaceonfire/monolog-bridge": "self.version",
-    "spaceonfire/spaceonfire": "self.version",
-    "spaceonfire/type": "self.version",
-    "spaceonfire/value-object": "self.version"
+    "getwarp/collection": "self.version",
+    "getwarp/command-bus": "self.version",
+    "getwarp/common": "self.version",
+    "getwarp/container": "self.version",
+    "getwarp/criteria": "self.version",
+    "getwarp/data-source": "self.version",
+    "getwarp/easy-coding-standard-bridge": "self.version",
+    "getwarp/laminas-hydrator-bridge": "self.version",
+    "getwarp/warp": "self.version",
+    "getwarp/type": "self.version",
+    "getwarp/value-object": "self.version"
   }
 }

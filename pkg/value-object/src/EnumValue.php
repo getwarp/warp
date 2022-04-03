@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 use InvalidArgumentException;
 use Jawira\CaseConverter\Convert;
 use ReflectionClass;
 use ReflectionException;
-use spaceonfire\ValueObject\Helpers\StringHelper;
+use Warp\ValueObject\Helpers\StringHelper;
 
 abstract class EnumValue extends BaseValueObject
 {

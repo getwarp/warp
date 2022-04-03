@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 \class_alias(
     ExceptionInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\CommandBus;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\CommandBus\ExceptionInterface} instead.
+     * @deprecated Use {@see \Warp\CommandBus\ExceptionInterface} instead.
      */
     interface Exception extends ExceptionInterface
     {

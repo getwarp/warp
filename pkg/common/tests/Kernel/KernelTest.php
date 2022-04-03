@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\RawValueHolder;
-use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
+use Warp\Container\RawValueHolder;
+use Warp\Container\ServiceProvider\AbstractServiceProvider;
 
 class KernelTest extends TestCase
 {

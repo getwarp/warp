@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;

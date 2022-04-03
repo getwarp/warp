@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
 use Countable;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\FilterableInterface;
 use Spiral\Pagination\PaginableInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Criteria\FilterableInterface;
 
 interface QueryInterface extends Countable, PaginableInterface, FilterableInterface
 {

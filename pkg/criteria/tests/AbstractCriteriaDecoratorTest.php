@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria;
+namespace Warp\Criteria;
 
 class AbstractCriteriaDecoratorTest extends AbstractCriteriaTest
 {

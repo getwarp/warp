@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
 use Prophecy\Argument;
-use spaceonfire\Container\AbstractTestCase;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Definition\Definition;
-use spaceonfire\Container\Exception\ContainerException;
+use Warp\Container\AbstractTestCase;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Definition\Definition;
+use Warp\Container\Exception\ContainerException;
 
 class ServiceProviderAggregateTest extends AbstractTestCase
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use Prophecy\Argument;
-use spaceonfire\Type\AbstractTestCase;
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\AbstractTestCase;
+use Warp\Type\TypeInterface;
 
 class MemoizedTypeFactoryTest extends AbstractTestCase
 {

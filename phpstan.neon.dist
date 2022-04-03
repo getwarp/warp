@@ -17,11 +17,10 @@ parameters:
         - pkg/type/src/
         - pkg/value-object/src/
         - pkg/laminas-hydrator-bridge/src/
-        - pkg/monolog-bridge/src/
     ignoreErrors:
         - '/^Unsafe usage of new static/'
-        - '/^Property spaceonfire\\CommandBus\\Mapping\\ClassName\\ReplacementClassNameMapping::\$replace \(array\<string\>\|string\) does not accept array\<string\>\|string\|null.$/'
-        - '/^Method spaceonfire\\CommandBus\\CommandBus::createCommandHandler\(\) should return callable\(\): mixed but returns array\(object, string\).$/'
+        - '/^Property Warp\\CommandBus\\Mapping\\ClassName\\ReplacementClassNameMapping::\$replace \(array\<string\>\|string\) does not accept array\<string\>\|string\|null.$/'
+        - '/^Method Warp\\CommandBus\\CommandBus::createCommandHandler\(\) should return callable\(\): mixed but returns array\(object, string\).$/'
         - '/expects callable(.*) array(.*) given\.$/'
         -
             message: '/^If condition is always false\.$/'
@@ -32,7 +31,7 @@ parameters:
         -
             message: '/^If condition is always false\.$/'
             path: pkg/criteria/src/Adapter/*
-        - '/^PHPDoc tag \@return with type (.*)\|string\|null is not subtype of native type string\|null\.$/'
+        - '/^PHPDoc tag \@return with type string\|(.*)\|null is not subtype of native type string\|null\.$/'
         - '/^Call to an undefined method Cycle\\ORM\\RepositoryInterface::select\(\)\.$/'
         - '/^Parameter #2 \$class of static method Webmozart\\Assert\\Assert::isInstanceOf\(\) expects class-string\<object\>, (.*) given.$/'
         -
@@ -40,11 +39,11 @@ parameters:
             paths:
                 - pkg/data-source/src/Adapters/*
                 - pkg/data-source/src/Bridge/CycleOrm/Mapper/Hydrator/StdClassHydrator.php
-        - '/^Method (.*)::create\(\) should return (.*) but returns spaceonfire\\Type\\TypeInterface.$/'
+        - '/^Method (.*)::create\(\) should return (.*) but returns Warp\\Type\\TypeInterface.$/'
         -
-            message: '/^Cannot call method make\(\) on spaceonfire\\Type\\Factory\\TypeFactoryInterface\|null.$/'
+            message: '/^Cannot call method make\(\) on Warp\\Type\\Factory\\TypeFactoryInterface\|null.$/'
             path: pkg/type/src/Factory/*.php
-        - '/^PHPDoc tag \@param for parameter (.*) with type (.*)\|string is not subtype of native type string.$/'
+        - '/^PHPDoc tag \@param for parameter (.*) with type string\|(.*) is not subtype of native type string.$/'
         -
             message: '/^Call to an undefined method object::value\(\).$/'
             path: pkg/value-object/src/Bridge/LaminasHydrator/ValueObjectStrategy.php

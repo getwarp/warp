@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
 \class_alias(
     CommandToHandlerMappingInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\CommandBus\Mapping;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\CommandBus\Mapping\CommandToHandlerMappingInterface} instead.
+     * @deprecated Use {@see \Warp\CommandBus\Mapping\CommandToHandlerMappingInterface} instead.
      */
     interface CommandToHandlerMapping extends CommandToHandlerMappingInterface
     {

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Reflection;
+namespace Warp\Container\Reflection;
 
 use Closure;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
-use spaceonfire\Container\Argument\Argument;
-use spaceonfire\Container\Argument\ResolverInterface;
-use spaceonfire\Container\ContainerAwareInterface;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
+use Warp\Container\Argument\Argument;
+use Warp\Container\Argument\ResolverInterface;
+use Warp\Container\ContainerAwareInterface;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
 
 final class ReflectionInvoker implements ContainerAwareInterface
 {

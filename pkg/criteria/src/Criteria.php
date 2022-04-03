@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria;
+namespace Warp\Criteria;
 
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Criteria\Expression\ExpressionFactory;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 

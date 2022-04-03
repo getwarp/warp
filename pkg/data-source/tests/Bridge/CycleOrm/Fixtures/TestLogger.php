@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Fixtures;
+namespace Warp\DataSource\Bridge\CycleOrm\Fixtures;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;

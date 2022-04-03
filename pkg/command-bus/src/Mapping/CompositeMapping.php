@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
-use spaceonfire\CommandBus\Mapping\ClassName\ClassNameMappingInterface;
-use spaceonfire\CommandBus\Mapping\Method\MethodNameMappingInterface;
+use Warp\CommandBus\Mapping\ClassName\ClassNameMappingInterface;
+use Warp\CommandBus\Mapping\Method\MethodNameMappingInterface;
 
 final class CompositeMapping implements CommandToHandlerMappingInterface
 {

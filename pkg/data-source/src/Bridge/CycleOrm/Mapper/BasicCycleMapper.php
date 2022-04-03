@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper;
+namespace Warp\DataSource\Bridge\CycleOrm\Mapper;
 
 use Cycle\ORM\Mapper\Mapper;
 use Laminas\Hydrator\AbstractHydrator;
-use spaceonfire\DataSource\MapperInterface;
+use Warp\DataSource\MapperInterface;
 
 class BasicCycleMapper extends Mapper implements MapperInterface
 {

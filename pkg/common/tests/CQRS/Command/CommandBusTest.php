@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Command;
+namespace Warp\Common\CQRS\Command;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommand;
-use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommandBus;
-use spaceonfire\Common\_Fixtures\CQRS\Command\FixtureCommandHandler;
-use spaceonfire\Common\AbstractTestCase;
+use Warp\Common\_Fixtures\CQRS\Command\FixtureCommand;
+use Warp\Common\_Fixtures\CQRS\Command\FixtureCommandBus;
+use Warp\Common\_Fixtures\CQRS\Command\FixtureCommandHandler;
+use Warp\Common\AbstractTestCase;
 
 class CommandBusTest extends AbstractTestCase
 {

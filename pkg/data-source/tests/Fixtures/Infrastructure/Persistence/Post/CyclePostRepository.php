@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post;
+namespace Warp\DataSource\Fixtures\Infrastructure\Persistence\Post;
 
 use Cycle\ORM\ORMInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepositoryAdapter;
-use spaceonfire\DataSource\Exceptions\NotFoundException;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Exceptions;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
-use spaceonfire\DataSource\Fixtures\Domain\Post\PostRepositoryInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\Bridge\CycleOrm\Repository\AbstractCycleRepositoryAdapter;
+use Warp\DataSource\Exceptions\NotFoundException;
+use Warp\DataSource\Fixtures\Domain\Post\Exceptions;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\Fixtures\Domain\Post\PostRepositoryInterface;
 
 class CyclePostRepository extends AbstractCycleRepositoryAdapter implements PostRepositoryInterface
 {

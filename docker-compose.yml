@@ -1,3 +1,15 @@
 version: '3'
 
-# Enable required services using COMPOSE_FILE environment variable in .env
+services:
+  dev:
+    image: ghcr.io/getwarp/warp-php-devcontainer:7.4
+    command: [ 'sleep', 'infinite' ]
+    environment:
+      # See https://xdebug.org/docs/all_settings for more
+      XDEBUG_CONFIG: 'idekey=warp client_host=host.docker.internal'
+      XDEBUG_MODE: '${XDEBUG_MODE:-debug}'
+    volumes:
+      - ./:/home/getwarp/app
+    restart: unless-stopped
+    extra_hosts:
+      - host.docker.internal:host-gateway

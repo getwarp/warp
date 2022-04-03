@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
 
 final class MixedTypeFactory implements TypeFactoryInterface
 {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Repository;
+namespace Warp\DataSource\Bridge\CycleOrm\Repository;
 
-use spaceonfire\Criteria\Bridge\SpiralPagination\PaginableCriteria;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
-use spaceonfire\DataSource\Exceptions\SaveException;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
-use spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;
-use spaceonfire\DataSource\Traits\RepositoryTestTrait;
+use Warp\Criteria\Bridge\SpiralPagination\PaginableCriteria;
+use Warp\Criteria\Criteria;
+use Warp\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use Warp\DataSource\Exceptions\SaveException;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\Fixtures\Infrastructure\Persistence\Post\CyclePostRepository;
+use Warp\DataSource\Traits\RepositoryTestTrait;
 
 class CycleRepositoryTest extends AbstractCycleOrmTest
 {

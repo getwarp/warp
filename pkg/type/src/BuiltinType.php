@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
 use InvalidArgumentException;
-use spaceonfire\Type\Factory\BuiltinTypeFactory;
+use Warp\Type\Factory\BuiltinTypeFactory;
 use Webmozart\Assert\Assert;
 
 final class BuiltinType implements TypeInterface

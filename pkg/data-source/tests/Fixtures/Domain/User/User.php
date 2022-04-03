@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Domain\User;
+namespace Warp\DataSource\Fixtures\Domain\User;
 
-use spaceonfire\DataSource\AbstractEntity;
+use Warp\DataSource\AbstractEntity;
 
 /**
  * @codeCoverageIgnore

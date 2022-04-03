@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Helpers;
+namespace Warp\ValueObject\Helpers;
 
 abstract class StringHelper
 {

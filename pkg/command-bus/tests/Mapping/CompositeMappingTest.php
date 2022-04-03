@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
-use spaceonfire\CommandBus\Mapping\ClassName\ClassNameMappingChain;
-use spaceonfire\CommandBus\Mapping\ClassName\ReplacementClassNameMapping;
-use spaceonfire\CommandBus\Mapping\ClassName\SuffixClassNameMapping;
-use spaceonfire\CommandBus\Mapping\Method\StaticMethodNameMapping;
+use Warp\CommandBus\_Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
+use Warp\CommandBus\Mapping\ClassName\ClassNameMappingChain;
+use Warp\CommandBus\Mapping\ClassName\ReplacementClassNameMapping;
+use Warp\CommandBus\Mapping\ClassName\SuffixClassNameMapping;
+use Warp\CommandBus\Mapping\Method\StaticMethodNameMapping;
 
 class CompositeMappingTest extends TestCase
 {
@@ -23,8 +23,8 @@ class CompositeMappingTest extends TestCase
         $this->mapping = new CompositeMapping(
             new ClassNameMappingChain([
                 new ReplacementClassNameMapping(
-                    'spaceonfire\CommandBus\_Fixtures\Command',
-                    'spaceonfire\CommandBus\_Fixtures\Handler'
+                    'Warp\CommandBus\_Fixtures\Command',
+                    'Warp\CommandBus\_Fixtures\Handler'
                 ),
                 new SuffixClassNameMapping('Handler'),
             ]),

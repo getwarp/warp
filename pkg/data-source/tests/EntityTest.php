@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
 use Nette\Utils\Json;
 use Nette\Utils\JsonException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
 
 class EntityTest extends TestCase
 {

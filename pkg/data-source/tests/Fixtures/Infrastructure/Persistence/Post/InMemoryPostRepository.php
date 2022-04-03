@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Infrastructure\Persistence\Post;
+namespace Warp\DataSource\Fixtures\Infrastructure\Persistence\Post;
 
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\EntityInterface;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Exceptions\PostNotFoundException;
-use spaceonfire\DataSource\Fixtures\Domain\Post\Post;
-use spaceonfire\DataSource\Fixtures\Domain\Post\PostRepositoryInterface;
-use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
-use spaceonfire\DataSource\MapperInterface;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\EntityInterface;
+use Warp\DataSource\Fixtures\Domain\Post\Exceptions\PostNotFoundException;
+use Warp\DataSource\Fixtures\Domain\Post\Post;
+use Warp\DataSource\Fixtures\Domain\Post\PostRepositoryInterface;
+use Warp\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
+use Warp\DataSource\MapperInterface;
 use Webmozart\Assert\Assert;
 
 class InMemoryPostRepository implements PostRepositoryInterface

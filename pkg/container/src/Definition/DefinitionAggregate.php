@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
-use spaceonfire\Collection\AbstractCollectionDecorator;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Collection\IndexedCollection;
-use spaceonfire\Collection\TypedCollection;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Type\InstanceOfType;
+use Warp\Collection\AbstractCollectionDecorator;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Collection\IndexedCollection;
+use Warp\Collection\TypedCollection;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Type\InstanceOfType;
 
 final class DefinitionAggregate extends AbstractCollectionDecorator implements DefinitionAggregateInterface
 {

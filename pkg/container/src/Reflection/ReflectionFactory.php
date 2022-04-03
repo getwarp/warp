@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Reflection;
+namespace Warp\Container\Reflection;
 
 use ReflectionClass;
 use ReflectionException;
-use spaceonfire\Container\Argument\Argument;
-use spaceonfire\Container\Argument\ResolverInterface;
-use spaceonfire\Container\Exception\CannotInstantiateAbstractClassException;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
+use Warp\Container\Argument\Argument;
+use Warp\Container\Argument\ResolverInterface;
+use Warp\Container\Exception\CannotInstantiateAbstractClassException;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
 
 final class ReflectionFactory
 {

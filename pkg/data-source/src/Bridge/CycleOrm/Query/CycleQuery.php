@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Query;
+namespace Warp\DataSource\Bridge\CycleOrm\Query;
 
 use Cycle\ORM\Select;
 use RuntimeException;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Collection\TypedCollection;
-use spaceonfire\Criteria\Bridge\SpiralPagination\PaginableCriteria;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\EntityInterface;
-use spaceonfire\DataSource\MapperInterface;
-use spaceonfire\DataSource\QueryInterface;
 use Spiral\Database\Query\SelectQuery;
+use Warp\Collection\CollectionInterface;
+use Warp\Collection\TypedCollection;
+use Warp\Criteria\Bridge\SpiralPagination\PaginableCriteria;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\EntityInterface;
+use Warp\DataSource\MapperInterface;
+use Warp\DataSource\QueryInterface;
 
 class CycleQuery implements QueryInterface
 {

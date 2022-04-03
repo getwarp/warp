@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
 use ArrayIterator;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\RawValueHolder;
+use Warp\Container\RawValueHolder;
 use stdClass;
 
 class ArgumentValueTest extends TestCase

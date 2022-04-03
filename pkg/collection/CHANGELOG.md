@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `spaceonfire/collection` will be documented in this file.
+All notable changes to `getwarp/collection` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
--   Changes caused by minor updates in `spaceonfire/type` library.
+-   Changes caused by minor updates in `getwarp/type` library.
 
 ## [2.5.0] - 2021-04-21
 
@@ -26,7 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
--   Update `spaceonfire/type` library up to `^1.2`. Replace deprecated static `TypeFactory` call in `TypedCollection`.
+-   Update `getwarp/type` library up to `^1.2`. Replace deprecated static `TypeFactory` call in `TypedCollection`.
 
 ## [2.0.1] - 2020-09-26
 
@@ -56,7 +56,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
--   Use `spaceonfire/type` for checking typed collection items type
+-   Use `getwarp/type` for checking typed collection items type
 
 ### Fixed
 
@@ -71,7 +71,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     -   update phpDoc comments
 -   Replace Closure with callable type
 -   Move collection aliases to trait
--   Implement FilterableInterface from `spaceonfire/criteria` by collection
+-   Implement FilterableInterface from `getwarp/criteria` by collection
 
 ### Fixed
 

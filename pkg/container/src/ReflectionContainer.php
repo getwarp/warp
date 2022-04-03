@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use BadMethodCallException;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Container\Argument\ArgumentResolver;
-use spaceonfire\Container\Argument\ResolverInterface;
-use spaceonfire\Container\Definition\DefinitionInterface;
-use spaceonfire\Container\Reflection\ReflectionFactory;
-use spaceonfire\Container\Reflection\ReflectionInvoker;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Container\Argument\ArgumentResolver;
+use Warp\Container\Argument\ResolverInterface;
+use Warp\Container\Definition\DefinitionInterface;
+use Warp\Container\Reflection\ReflectionFactory;
+use Warp\Container\Reflection\ReflectionInvoker;
 
 final class ReflectionContainer implements ContainerInterface, ContainerAwareInterface
 {

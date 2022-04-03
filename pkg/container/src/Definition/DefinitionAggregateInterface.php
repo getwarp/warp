@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
 use IteratorAggregate;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Container\ContainerInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Container\ContainerInterface;
 
 interface DefinitionAggregateInterface extends IteratorAggregate
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
+namespace Warp\ValueObject\Bridge\LaminasHydrator;
 
 use InvalidArgumentException;
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
-use spaceonfire\ValueObject\Date\DateTimeValue;
-use spaceonfire\ValueObject\Date\DateTimeValueInterface;
+use Warp\ValueObject\Date\DateTimeImmutableValue;
+use Warp\ValueObject\Date\DateTimeValue;
+use Warp\ValueObject\Date\DateTimeValueInterface;
 use Webmozart\Assert\Assert;
 
 /**

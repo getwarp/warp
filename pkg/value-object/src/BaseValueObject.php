@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 use InvalidArgumentException;
 use JsonSerializable;
-use spaceonfire\ValueObject\Helpers\StringHelper;
+use Warp\ValueObject\Helpers\StringHelper;
 
 abstract class BaseValueObject implements JsonSerializable
 {

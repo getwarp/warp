@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper;
+namespace Warp\DataSource\Bridge\CycleOrm\Mapper;
 
 use Cycle\ORM\Exception\MapperException;
-use spaceonfire\ValueObject\UuidValue;
 use Throwable;
+use Warp\ValueObject\UuidValue;
 
 class UuidCycleMapper extends BasicCycleMapper
 {

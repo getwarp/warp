@@ -1,5 +1,5 @@
 {
-  "name": "spaceonfire/common",
+  "name": "getwarp/common",
   "type": "library",
   "description": "Application kernel based on DI container and CQRS buses",
   "keywords": [
@@ -10,13 +10,13 @@
     "command",
     "query"
   ],
-  "homepage": "https://github.com/spaceonfire/common",
+  "homepage": "https://github.com/getwarp/common",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space/",
+      "homepage": "https://getwarp.dev/",
       "role": "Maintainer"
     }
   ],
@@ -26,8 +26,8 @@
   "require-dev": {
     "psr/log": "^1.1",
     "roave/security-advisories": "dev-latest",
-    "spaceonfire/command-bus": "^2.5",
-    "spaceonfire/container": "^2.5",
+    "getwarp/command-bus": "^2.5",
+    "getwarp/container": "^2.5",
     "symfony/console": "^5.1",
     "symfony/polyfill-php80": "^1.22",
     "symfony/stopwatch": "^5.1",
@@ -35,13 +35,13 @@
   },
   "suggest": {
     "vlucas/phpdotenv": "Required for env() function",
-    "spaceonfire/command-bus": "Used to organize CQRS buses",
-    "spaceonfire/container": "Used to organize Kernel",
+    "getwarp/command-bus": "Used to organize CQRS buses",
+    "getwarp/container": "Used to organize Kernel",
     "symfony/polyfill-php80": "^1.22"
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Common\\": "src"
+      "Warp\\Common\\": "src"
     },
     "files": [
       "functions.php"
@@ -49,12 +49,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Common\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
+      "Warp\\Common\\": "tests"
     }
   },
   "config": {

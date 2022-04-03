@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\PsrLog;
+namespace Warp\CommandBus\Bridge\PsrLog;
 
 \class_alias(
     MayBeLoggedMessageInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\CommandBus\Bridge\PsrLog;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\CommandBus\Bridge\PsrLog\MayBeLoggedMessageInterface} instead.
+     * @deprecated Use {@see \Warp\CommandBus\Bridge\PsrLog\MayBeLoggedMessageInterface} instead.
      */
     interface MayBeLoggedMessage extends MayBeLoggedMessageInterface
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 \class_alias(
     MiddlewareInterface::class,
@@ -11,7 +11,7 @@ namespace spaceonfire\CommandBus;
 
 if (false) {
     /**
-     * @deprecated Use {@see \spaceonfire\CommandBus\MiddlewareInterface} instead.
+     * @deprecated Use {@see \Warp\CommandBus\MiddlewareInterface} instead.
      */
     interface Middleware extends MiddlewareInterface
     {

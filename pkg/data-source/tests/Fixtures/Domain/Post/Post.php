@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Domain\Post;
+namespace Warp\DataSource\Fixtures\Domain\Post;
 
-use spaceonfire\DataSource\AbstractEntity;
+use Warp\DataSource\AbstractEntity;
 
 /**
  * @property string|null $id

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures;
+namespace Warp\Container\Fixtures;
 
-use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
+use Warp\Container\ServiceProvider\AbstractServiceProvider;
 
 class BadServiceProvider extends AbstractServiceProvider
 {

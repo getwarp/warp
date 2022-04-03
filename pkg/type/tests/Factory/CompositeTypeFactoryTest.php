@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\CollectionType;
-use spaceonfire\Type\ConjunctionType;
-use spaceonfire\Type\DisjunctionType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\VoidType;
+use Warp\Type\BuiltinType;
+use Warp\Type\CollectionType;
+use Warp\Type\ConjunctionType;
+use Warp\Type\DisjunctionType;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\InstanceOfType;
+use Warp\Type\MixedType;
+use Warp\Type\VoidType;
 use Traversable;
 
 class CompositeTypeFactoryTest extends TestCase

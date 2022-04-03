@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Env;
+namespace Warp\Common\Env;
 
 use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
@@ -29,8 +29,8 @@ function env(string $name, $default = null)
         }
 
         // @codeCoverageIgnoreStart
-        if (str_ends_with(__DIR__, 'vendor/spaceonfire/common/src/Env')) {
-            $envPath[] = dirname(__DIR__, 4);
+        if (str_ends_with(__DIR__, 'vendor/getwarp/common/src/Env')) {
+            $envPath[] = dirname(__DIR__, 5);
         }
 
         if (isset($_SERVER['DOCUMENT_ROOT'])) {

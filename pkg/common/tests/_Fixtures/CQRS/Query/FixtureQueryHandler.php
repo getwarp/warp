@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\_Fixtures\CQRS\Query;
+namespace Warp\Common\_Fixtures\CQRS\Query;
 
 final class FixtureQueryHandler
 {

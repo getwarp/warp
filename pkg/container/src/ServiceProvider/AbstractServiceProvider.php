@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
-use spaceonfire\Container\ContainerAwareTrait;
+use Warp\Container\ContainerAwareTrait;
 
 abstract class AbstractServiceProvider implements ServiceProviderInterface
 {

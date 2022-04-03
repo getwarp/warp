@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper;
+namespace Warp\DataSource\Bridge\CycleOrm\Mapper;
 
 use Cycle\ORM\ORMInterface;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use Laminas\Hydrator\Strategy\ClosureStrategy;
 use Nette\Utils\Strings;
-use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use Warp\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
 
 class CycleMapperTest extends AbstractCycleOrmTest
 {

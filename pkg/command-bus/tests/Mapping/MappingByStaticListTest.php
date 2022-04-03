@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\_Fixtures\Command\CompleteTaskCommand;
-use spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
+use Warp\CommandBus\_Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\_Fixtures\Command\CompleteTaskCommand;
+use Warp\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
 
 class MappingByStaticListTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
 {

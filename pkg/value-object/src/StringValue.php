@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 abstract class StringValue extends BaseValueObject
 {

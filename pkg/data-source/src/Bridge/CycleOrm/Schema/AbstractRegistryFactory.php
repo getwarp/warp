@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Schema;
+namespace Warp\DataSource\Bridge\CycleOrm\Schema;
 
 use Cycle\Schema\Definition\Entity;
 use Cycle\Schema\Registry;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper;
-use spaceonfire\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper;
+use Warp\DataSource\Bridge\CycleOrm\Mapper\BasicCycleMapper;
+use Warp\DataSource\Bridge\CycleOrm\Mapper\StdClassCycleMapper;
 
 abstract class AbstractRegistryFactory
 {

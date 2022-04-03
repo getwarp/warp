@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use BadMethodCallException;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
-use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
+use Warp\Container\Fixtures\AbstractClass\RequiresAbstractClass;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
 
 class ReflectionContainerTest extends AbstractTestCase
 {

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use ArrayIterator;
 use BadMethodCallException;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
-use spaceonfire\Criteria\CriteriaInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyPath;
 use Traversable;
+use Warp\Criteria\CriteriaInterface;
 
 /**
  * `Collection` class allows you to create in-place simple collection object.

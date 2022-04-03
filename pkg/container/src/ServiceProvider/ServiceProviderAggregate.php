@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
-use spaceonfire\Collection\AbstractCollectionDecorator;
-use spaceonfire\Collection\IndexedCollection;
-use spaceonfire\Collection\TypedCollection;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Type\InstanceOfType;
+use Warp\Collection\AbstractCollectionDecorator;
+use Warp\Collection\IndexedCollection;
+use Warp\Collection\TypedCollection;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\Exception\ContainerException;
+use Warp\Type\InstanceOfType;
 
 final class ServiceProviderAggregate extends AbstractCollectionDecorator implements ServiceProviderAggregateInterface
 {

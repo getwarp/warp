@@ -33,9 +33,6 @@
         <testsuite name="laminas-hydrator-bridge">
             <directory>pkg/laminas-hydrator-bridge/tests</directory>
         </testsuite>
-        <testsuite name="monolog-bridge">
-            <directory>pkg/monolog-bridge/tests</directory>
-        </testsuite>
         <testsuite name="type">
             <directory>pkg/type/tests</directory>
         </testsuite>
@@ -52,7 +49,6 @@
             <directory suffix=".php">pkg/criteria/src/</directory>
             <directory suffix=".php">pkg/data-source/src/</directory>
             <directory suffix=".php">pkg/laminas-hydrator-bridge/src/</directory>
-            <directory suffix=".php">pkg/monolog-bridge/src/</directory>
             <directory suffix=".php">pkg/type/src/</directory>
             <directory suffix=".php">pkg/value-object/src/</directory>
             <exclude>

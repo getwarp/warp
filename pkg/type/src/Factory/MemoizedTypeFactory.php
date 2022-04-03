@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\TypeInterface;
 
 final class MemoizedTypeFactory implements TypeFactoryInterface
 {

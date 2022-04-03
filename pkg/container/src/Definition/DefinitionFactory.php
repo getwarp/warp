@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
 final class DefinitionFactory implements DefinitionFactoryInterface
 {

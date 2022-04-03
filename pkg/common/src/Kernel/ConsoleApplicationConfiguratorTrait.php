@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Definition\DefinitionTag;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Definition\DefinitionTag;
 
 trait ConsoleApplicationConfiguratorTrait
 {

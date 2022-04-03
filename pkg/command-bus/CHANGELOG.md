@@ -1,8 +1,16 @@
 # Changelog
 
-All notable changes to `command-bus` will be documented in this file.
+All notable changes to `getwarp/command-bus` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+
+## [2.5.3] - 2022-04-22
+
+Release under a `warp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.1] - 2021-06-13
 

@@ -14,9 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::CACHE_DIRECTORY, __DIR__ . '/._ecs_cache');
 
-    $parameters->set(Option::PATHS, array_merge([
-        __DIR__ . '/bin',
-    ], glob(__DIR__ . '/pkg/*/src')));
+    $parameters->set(Option::PATHS, glob(__DIR__ . '/pkg/*/src'));
 
     $parameters->set(Option::SKIP, [
         'Unused variable $_.' => null,
@@ -55,7 +53,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
-    $containerConfigurator->import(__DIR__ . '/vendor/spaceonfire/easy-coding-standard-bridge/resources/config/spaceonfire.php', null, 'not_found');
-    $containerConfigurator->import(__DIR__ . '/pkg/easy-coding-standard-bridge/resources/config/spaceonfire.php', null, 'not_found');
+    $containerConfigurator->import(__DIR__ . '/vendor/getwarp/easy-coding-standard-bridge/resources/config/warp.php', null, 'not_found');
+    $containerConfigurator->import(__DIR__ . '/pkg/easy-coding-standard-bridge/resources/config/warp.php', null, 'not_found');
     $containerConfigurator->import(__DIR__ . '/ecs-baseline.php', null, 'not_found');
 };

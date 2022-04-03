@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Exception;
+namespace Warp\Type\Exception;
 
 use InvalidArgumentException;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\DisjunctionType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
+use Warp\Type\DisjunctionType;
+use Warp\Type\Exception\TypeNotSupportedException;
 use Traversable;
 
 class DisjunctionTypeFactoryTest extends TestCase

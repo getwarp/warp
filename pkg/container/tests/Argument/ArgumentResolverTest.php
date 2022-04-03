@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
 use ReflectionMethod;
-use spaceonfire\Container\AbstractTestCase;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Container\RawValueHolder;
+use Warp\Container\AbstractTestCase;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
+use Warp\Container\RawValueHolder;
 
 class ArgumentResolverTest extends AbstractTestCase
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
-use spaceonfire\Container\Argument\Argument;
-use spaceonfire\Container\ContainerInterface;
+use Warp\Container\Argument\Argument;
+use Warp\Container\ContainerInterface;
 
 interface DefinitionInterface
 {

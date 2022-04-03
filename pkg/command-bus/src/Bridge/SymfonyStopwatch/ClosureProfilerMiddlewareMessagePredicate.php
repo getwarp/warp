@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\SymfonyStopwatch;
+namespace Warp\CommandBus\Bridge\SymfonyStopwatch;
 
 final class ClosureProfilerMiddlewareMessagePredicate implements ProfilerMiddlewareMessagePredicateInterface
 {

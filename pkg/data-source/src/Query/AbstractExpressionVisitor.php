@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Query;
+namespace Warp\DataSource\Query;
 
 use InvalidArgumentException;
-use spaceonfire\Criteria\Expression\AbstractExpressionDecorator;
-use spaceonfire\Criteria\Expression\Selector;
-use spaceonfire\DataSource\MapperInterface;
+use Warp\Criteria\Expression\AbstractExpressionDecorator;
+use Warp\Criteria\Expression\Selector;
+use Warp\DataSource\MapperInterface;
 use Webmozart\Expression\Constraint;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;

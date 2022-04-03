@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Argument;
+namespace Warp\Container\Argument;
 
-use spaceonfire\Container\AbstractTestCase;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\RawValueHolder;
+use Warp\Container\AbstractTestCase;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\RawValueHolder;
 
 class ArgumentTest extends AbstractTestCase
 {

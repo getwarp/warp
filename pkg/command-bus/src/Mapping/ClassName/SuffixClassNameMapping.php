@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping\ClassName;
+namespace Warp\CommandBus\Mapping\ClassName;
 
 class SuffixClassNameMapping implements ClassNameMappingInterface
 {

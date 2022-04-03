@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\ConjunctionType;
-use spaceonfire\Type\DisjunctionType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
+use Warp\Type\BuiltinType;
+use Warp\Type\ConjunctionType;
+use Warp\Type\DisjunctionType;
+use Warp\Type\Exception\TypeNotSupportedException;
 
 class GroupTypeFactoryTest extends TestCase
 {

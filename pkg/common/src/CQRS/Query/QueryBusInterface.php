@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Query;
+namespace Warp\Common\CQRS\Query;
 
 interface QueryBusInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use InvalidArgumentException;
 use LogicException;
-use spaceonfire\Type\Factory\CompositeTypeFactory;
-use spaceonfire\Type\TypeInterface;
 use stdClass;
+use Warp\Type\Factory\CompositeTypeFactory;
+use Warp\Type\TypeInterface;
 
 /**
  * Class `TypedCollection` allows you to create collection witch items are the same type.

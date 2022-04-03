@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Criteria\Criteria;
+use Warp\Criteria\Criteria;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
 

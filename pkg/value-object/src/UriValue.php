@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 use GuzzleHttp\Psr7\Uri;
 use InvalidArgumentException;

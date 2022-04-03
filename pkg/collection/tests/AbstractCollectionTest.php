@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use ArrayIterator;
 use BadMethodCallException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Criteria\Criteria;
+use Warp\Criteria\Criteria;
 use stdClass;
 
 abstract class AbstractCollectionTest extends TestCase

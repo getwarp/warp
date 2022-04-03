@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Reflection;
+namespace Warp\Container\Reflection;
 
-use spaceonfire\Container\AbstractTestCase;
-use spaceonfire\Container\Argument\ArgumentResolver;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
+use Warp\Container\AbstractTestCase;
+use Warp\Container\Argument\ArgumentResolver;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
 
 class ReflectionInvokerTest extends AbstractTestCase
 {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Bridge\DoctrineCollections;
+namespace Warp\Criteria\Bridge\DoctrineCollections;
 
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\ExpressionVisitor;
 use Doctrine\Common\Collections\Expr\Value;
 use InvalidArgumentException;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\Expression\ExpressionFactory;
 use Webmozart\Assert\Assert;
 use Webmozart\Expression\Expression;
 

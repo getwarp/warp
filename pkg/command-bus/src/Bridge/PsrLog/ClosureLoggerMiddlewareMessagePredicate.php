@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\PsrLog;
+namespace Warp\CommandBus\Bridge\PsrLog;
 
 final class ClosureLoggerMiddlewareMessagePredicate implements LoggerMiddlewareMessagePredicateInterface
 {

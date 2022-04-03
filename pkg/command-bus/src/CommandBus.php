@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 use Closure;
 use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
-use spaceonfire\CommandBus\Mapping\CommandToHandlerMappingInterface;
+use Warp\CommandBus\Mapping\CommandToHandlerMappingInterface;
 use Webmozart\Assert\Assert;
 use function array_pop;
 use function get_class;

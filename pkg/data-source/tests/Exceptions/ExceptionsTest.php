@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Exceptions;
+namespace Warp\DataSource\Exceptions;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\ValueObject\UuidValue;
+use Warp\ValueObject\UuidValue;
 
 class ExceptionsTest extends TestCase
 {

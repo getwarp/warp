@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping\ClassName;
+namespace Warp\CommandBus\Mapping\ClassName;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\_Fixtures\Command\AddTaskCommand;
 
 class SuffixClassNameMappingTest extends TestCase
 {

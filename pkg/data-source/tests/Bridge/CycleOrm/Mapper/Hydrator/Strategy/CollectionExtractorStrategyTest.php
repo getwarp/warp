@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Mapper\Hydrator\Strategy;
+namespace Warp\DataSource\Bridge\CycleOrm\Mapper\Hydrator\Strategy;
 
 use Cycle\ORM\Promise\Collection\CollectionPromise;
 use Cycle\ORM\Promise\PromiseMany;
 use Cycle\ORM\Promise\Reference;
 use Cycle\ORM\Relation\Pivoted\PivotedCollection as CyclePivotedCollection;
-use spaceonfire\Collection\Collection;
-use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
-use spaceonfire\DataSource\Bridge\CycleOrm\Collection\PivotedCollection;
+use Warp\Collection\Collection;
+use Warp\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use Warp\DataSource\Bridge\CycleOrm\Collection\PivotedCollection;
 use SplObjectStorage;
 
 class CollectionExtractorStrategyTest extends AbstractCycleOrmTest
@@ -34,9 +34,9 @@ class CollectionExtractorStrategyTest extends AbstractCycleOrmTest
 
     public function testExtract(): void
     {
-        $spaceonfireCollection = new Collection([1, 2, 3]);
-        $doctrineCollection = $this->strategy->extract($spaceonfireCollection);
-        self::assertEquals($spaceonfireCollection->all(), iterator_to_array($doctrineCollection));
+        $warpCollection = new Collection([1, 2, 3]);
+        $doctrineCollection = $this->strategy->extract($warpCollection);
+        self::assertEquals($warpCollection->all(), iterator_to_array($doctrineCollection));
     }
 
     public function testExtractPromise(): void
@@ -53,11 +53,11 @@ class CollectionExtractorStrategyTest extends AbstractCycleOrmTest
 
     public function testExtractPivotedCollection(): void
     {
-        $spaceonfireCollection = new PivotedCollection([1, 2, 3]);
-        $spaceonfireCollection->setPivotContext(new SplObjectStorage());
-        $doctrineCollection = $this->strategy->extract($spaceonfireCollection);
+        $warpCollection = new PivotedCollection([1, 2, 3]);
+        $warpCollection->setPivotContext(new SplObjectStorage());
+        $doctrineCollection = $this->strategy->extract($warpCollection);
         self::assertInstanceOf(CyclePivotedCollection::class, $doctrineCollection);
-        self::assertEquals($spaceonfireCollection->all(), iterator_to_array($doctrineCollection));
-        self::assertEquals($spaceonfireCollection->getPivotContext(), $doctrineCollection->getPivotContext());
+        self::assertEquals($warpCollection->all(), iterator_to_array($doctrineCollection));
+        self::assertEquals($warpCollection->getPivotContext(), $doctrineCollection->getPivotContext());
     }
 }

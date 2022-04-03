@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
 interface BootableServiceProviderInterface extends ServiceProviderInterface
 {

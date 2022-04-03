@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
-use spaceonfire\Container\Exception\ContainerException;
+use Warp\Container\Exception\ContainerException;
 
 class ContainerAwareTraitTest extends AbstractTestCase
 {

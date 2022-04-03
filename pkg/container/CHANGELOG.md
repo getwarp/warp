@@ -1,8 +1,16 @@
 # Changelog
 
-All notable changes to `container` will be documented in this file.
+All notable changes to `getwarp/container` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+
+## [2.5.3] - 2022-04-22
+
+Release under a `warp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.1] - 2021-06-13
 
@@ -26,12 +34,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
--   `spaceonfire\Container\RawValueHolder` class added and can be used for definition of concrete value.
+-   `Warp\Container\RawValueHolder` class added and can be used for definition of concrete value.
 -   `null` used as default value for parameters that allows it.
 
 ### Deprecated
 
--   Class `spaceonfire\Container\Argument\ArgumentValue` replaced with `spaceonfire\Container\RawValueHolder`. Class alias
+-   Class `Warp\Container\Argument\ArgumentValue` replaced with `Warp\Container\RawValueHolder`. Class alias
     provided for backwards compatibility, but will be removed in next major release.
 -   `ContainerAwareInterface::setContainer()` should not be considered to return `$this`. It will be void in next major
     release.
@@ -39,20 +47,20 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 -   Reflection factory now does not try to instantiate abstract classes.
-    `spaceonfire\Container\Exception\CannotInstantiateAbstractClassException` threw instead.
+    `Warp\Container\Exception\CannotInstantiateAbstractClassException` threw instead.
 -   Argument resolves with default value for abstract classes when available.
 
 ## [2.3.0] - 2020-10-24
 
 ### Added
 
--   Added priority option for containers in `spaceonfire\Container\CompositeContainer`.
+-   Added priority option for containers in `Warp\Container\CompositeContainer`.
 
 ## [2.2.0] - 2020-10-22
 
 ### Deprecated
 
--   Class `spaceonfire\Container\ContainerChain` renamed to `spaceonfire\Container\CompositeContainer`. This name clearly
+-   Class `Warp\Container\ContainerChain` renamed to `Warp\Container\CompositeContainer`. This name clearly
     describes what this class does and just fits best. Class alias provided for backwards compatibility, but will be
     removed in next major release.
 

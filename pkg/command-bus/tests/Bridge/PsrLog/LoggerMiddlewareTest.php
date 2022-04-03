@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Bridge\PsrLog;
+namespace Warp\CommandBus\Bridge\PsrLog;
 
 use ArithmeticError;
 use BadFunctionCallException;
@@ -13,8 +13,8 @@ use LogicException;
 use Psr\Log\LogLevel;
 use Psr\Log\Test\TestLogger;
 use RuntimeException;
-use spaceonfire\CommandBus\_Fixtures\Bridge\PsrLog\FixtureMayBeLoggedMessage;
-use spaceonfire\CommandBus\AbstractTestCase;
+use Warp\CommandBus\_Fixtures\Bridge\PsrLog\FixtureMayBeLoggedMessage;
+use Warp\CommandBus\AbstractTestCase;
 use Throwable;
 use TypeError;
 

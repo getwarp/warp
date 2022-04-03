@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\_Fixtures\Bridge\SymfonyStopwatch;
+namespace Warp\CommandBus\_Fixtures\Bridge\SymfonyStopwatch;
 
-use spaceonfire\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageInterface;
-use spaceonfire\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageTrait;
+use Warp\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageInterface;
+use Warp\CommandBus\Bridge\SymfonyStopwatch\MayBeProfiledMessageTrait;
 
 class FixtureMayBeProfiledMessage implements MayBeProfiledMessageInterface
 {

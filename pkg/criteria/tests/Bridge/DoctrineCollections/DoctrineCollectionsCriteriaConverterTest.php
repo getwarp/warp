@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Bridge\DoctrineCollections;
+namespace Warp\Criteria\Bridge\DoctrineCollections;
 
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Criteria\Criteria;
+use Warp\Criteria\Criteria;
 
 class DoctrineCollectionsCriteriaConverterTest extends TestCase
 {

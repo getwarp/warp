@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
-use spaceonfire\Container\AbstractTestCase;
-use spaceonfire\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
+use Warp\Container\AbstractTestCase;
+use Warp\Container\ContainerInterface;
+use Warp\Container\Exception\ContainerException;
 
 class DefinitionAggregateTest extends AbstractTestCase
 {

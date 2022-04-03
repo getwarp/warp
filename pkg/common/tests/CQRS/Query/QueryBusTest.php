@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Query;
+namespace Warp\Common\CQRS\Query;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQuery;
-use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryBus;
-use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryHandler;
-use spaceonfire\Common\_Fixtures\CQRS\Query\FixtureQueryResponse;
-use spaceonfire\Common\AbstractTestCase;
+use Warp\Common\_Fixtures\CQRS\Query\FixtureQuery;
+use Warp\Common\_Fixtures\CQRS\Query\FixtureQueryBus;
+use Warp\Common\_Fixtures\CQRS\Query\FixtureQueryHandler;
+use Warp\Common\_Fixtures\CQRS\Query\FixtureQueryResponse;
+use Warp\Common\AbstractTestCase;
 
 class QueryBusTest extends AbstractTestCase
 {

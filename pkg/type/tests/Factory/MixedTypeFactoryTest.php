@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\MixedType;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\MixedType;
 
 class MixedTypeFactoryTest extends TestCase
 {

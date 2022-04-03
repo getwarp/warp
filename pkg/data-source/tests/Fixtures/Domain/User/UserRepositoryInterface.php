@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Domain\User;
+namespace Warp\DataSource\Fixtures\Domain\User;
 
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\RepositoryInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\RepositoryInterface;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {

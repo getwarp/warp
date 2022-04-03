@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use spaceonfire\CommandBus\_Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\_Fixtures\Command\CompleteTaskCommand;
-use spaceonfire\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
-use spaceonfire\CommandBus\Mapping\MapByStaticList;
+use Warp\CommandBus\_Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\_Fixtures\Command\CompleteTaskCommand;
+use Warp\CommandBus\_Fixtures\Handler\AddTaskCommandHandler;
+use Warp\CommandBus\Mapping\MapByStaticList;
 use stdClass;
 
 class CommandBusTest extends TestCase

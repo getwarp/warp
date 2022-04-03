@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Bridge\CycleOrm\Query;
+namespace Warp\DataSource\Bridge\CycleOrm\Query;
 
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\RootLoader;
 use InvalidArgumentException;
-use spaceonfire\Criteria\Expression\AbstractExpressionDecorator;
-use spaceonfire\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
-use spaceonfire\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
+use Warp\Criteria\Expression\AbstractExpressionDecorator;
+use Warp\DataSource\Bridge\CycleOrm\AbstractCycleOrmTest;
+use Warp\DataSource\Fixtures\Infrastructure\Mapper\StubMapper;
 use Spiral\Database\Query\SelectQuery;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Expression;

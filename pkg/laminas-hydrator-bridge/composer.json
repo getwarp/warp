@@ -1,20 +1,20 @@
 {
-  "name": "spaceonfire/laminas-hydrator-bridge",
+  "name": "getwarp/laminas-hydrator-bridge",
+  "description": "Integration for Laminas Hydrator with other Warp components",
   "type": "library",
-  "description": "Provides integration for Laminas Hydrator with some spaceonfire libraries",
   "keywords": [
-    "spaceonfire",
+    "warp",
     "laminas",
     "laminas-hydrator",
     "hydrator"
   ],
-  "homepage": "https://github.com/spaceonfire/laminas-hydrator-bridge",
+  "homepage": "https://github.com/getwarp/laminas-hydrator-bridge",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -24,24 +24,19 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "spaceonfire/type": "^2.5"
+    "getwarp/type": "^2.5"
   },
   "suggest": {
-    "spaceonfire/type": "Required to use ScalarStrategy"
+    "getwarp/type": "Required to use ScalarStrategy"
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\LaminasHydratorBridge\\": "src"
+      "Warp\\LaminasHydratorBridge\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\LaminasHydratorBridge\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "2.5-dev"
+      "Warp\\LaminasHydratorBridge\\": "tests"
     }
   },
   "config": {

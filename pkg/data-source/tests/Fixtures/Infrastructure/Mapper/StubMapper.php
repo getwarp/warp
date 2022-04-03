@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures\Infrastructure\Mapper;
+namespace Warp\DataSource\Fixtures\Infrastructure\Mapper;
 
-use spaceonfire\DataSource\MapperInterface;
+use Warp\DataSource\MapperInterface;
 
 /**
  * @codeCoverageIgnore

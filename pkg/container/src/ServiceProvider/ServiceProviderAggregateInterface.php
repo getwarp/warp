@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
 use IteratorAggregate;
-use spaceonfire\Container\ContainerAwareInterface;
+use Warp\Container\ContainerAwareInterface;
 
 interface ServiceProviderAggregateInterface extends ContainerAwareInterface, IteratorAggregate
 {

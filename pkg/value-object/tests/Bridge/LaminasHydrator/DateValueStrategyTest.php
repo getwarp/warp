@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
+namespace Warp\ValueObject\Bridge\LaminasHydrator;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\ValueObject\Date\DateTimeImmutableValue;
+use Warp\ValueObject\Date\DateTimeImmutableValue;
 
 class DateValueStrategyTest extends TestCase
 {

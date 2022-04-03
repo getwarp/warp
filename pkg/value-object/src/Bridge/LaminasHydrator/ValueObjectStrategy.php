@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Bridge\LaminasHydrator;
+namespace Warp\ValueObject\Bridge\LaminasHydrator;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\ValueObject\BaseValueObject;
+use Warp\ValueObject\BaseValueObject;
 use Webmozart\Assert\Assert;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Definition;
+namespace Warp\Container\Definition;
 
 /**
  * List of common definitions tags. Use these constants to prevent collision that can be caused by typos in tag names.
