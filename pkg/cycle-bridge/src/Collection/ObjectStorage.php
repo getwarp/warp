@@ -71,10 +71,11 @@ final class ObjectStorage implements ObjectCollectionInterface, \IteratorAggrega
     }
 
     /**
-     * @return \SplFixedArray<V>
+     * @return \Traversable<int,V>
      */
-    public function getIterator(): \SplFixedArray
+    public function getIterator(): \Traversable
     {
+        // @phpstan-ignore-next-line
         return \SplFixedArray::fromArray(\iterator_to_array($this->storage, false));
     }
 
