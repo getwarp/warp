@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
-use spaceonfire\Common\Field\FieldInterface;
-use spaceonfire\Criteria\CriteriaInterface;
+use Warp\Common\Field\FieldInterface;
+use Warp\Criteria\CriteriaInterface;
 
 /**
  * @template V

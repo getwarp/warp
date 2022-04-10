@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures;
+namespace Warp\Bridge\Cycle\Fixtures;
 
 class User
 {

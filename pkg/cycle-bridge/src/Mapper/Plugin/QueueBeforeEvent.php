@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin;
+namespace Warp\Bridge\Cycle\Mapper\Plugin;
 
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Heap\State;

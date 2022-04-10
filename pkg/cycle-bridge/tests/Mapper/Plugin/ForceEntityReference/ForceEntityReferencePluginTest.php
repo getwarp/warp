@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
 
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\EntityReference;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Post;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\EntityReference;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Post;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ForceEntityReferencePluginTest extends AbstractTestCase

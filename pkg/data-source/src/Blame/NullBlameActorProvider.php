@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Blame;
+namespace Warp\DataSource\Blame;
 
 /**
  * @implements BlameActorProviderInterface<object>

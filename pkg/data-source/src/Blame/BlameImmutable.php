@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Blame;
+namespace Warp\DataSource\Blame;
 
-use spaceonfire\Clock\DateTimeImmutableValue;
+use Warp\Clock\DateTimeImmutableValue;
 
 /**
  * @template T of object

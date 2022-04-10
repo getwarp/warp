@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Console;
+namespace Warp\DevTool\Console;
 
-use spaceonfire\DevTool\Monorepo\Composer\ComposerJson;
 use Symfony\Component\Console\Helper\Helper;
+use Warp\DevTool\Monorepo\Composer\ComposerJson;
 
 final class ComposerHelper extends Helper
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Field\DefaultField;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
-use spaceonfire\Type\BuiltinType;
+use Warp\Common\Field\DefaultField;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\Expression\ExpressionFactory;
+use Warp\Type\BuiltinType;
 
 class CollectionTest extends TestCase
 {

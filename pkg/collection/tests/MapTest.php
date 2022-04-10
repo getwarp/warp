@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
+use Warp\Type\BuiltinType;
 
 class MapTest extends TestCase
 {

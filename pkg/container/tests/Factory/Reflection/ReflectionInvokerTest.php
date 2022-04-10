@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory\Reflection;
+namespace Warp\Container\Factory\Reflection;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\ArrayContainer;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Container\Fixtures\PHP8\UnionTypes;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\FactoryContainer;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\ArrayContainer;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
+use Warp\Container\Fixtures\PHP8\UnionTypes;
 
 class ReflectionInvokerTest extends TestCase
 {
@@ -42,7 +42,7 @@ class ReflectionInvokerTest extends TestCase
 
         self::assertSame(
             42,
-            $invoker->invoke('\\spaceonfire\\Container\\Fixtures\\intval', FactoryOptions::wrap([
+            $invoker->invoke('\\Warp\\Container\\Fixtures\\intval', FactoryOptions::wrap([
                 'value' => '42',
                 'base' => 10,
             ]))

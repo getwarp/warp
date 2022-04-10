@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Exception;
+namespace Warp\Exception;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Exception\Fixture\FixtureTranslatorFactory;
+use Warp\Exception\Fixture\FixtureTranslatorFactory;
 
 class MessageTemplateTest extends TestCase
 {

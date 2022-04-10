@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Doctrine;
+namespace Warp\Bridge\Cycle\Collection\Doctrine;
 
 use Cycle\ORM\Heap\Node;
 use Doctrine\Common\Collections\Collection;
-use spaceonfire\Bridge\Cycle\Collection\Basic\BasicCollectionFactory;
-use spaceonfire\Bridge\Cycle\Collection\CollectionFactoryInterface;
-use spaceonfire\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
-use spaceonfire\Exception\PackageMissingException;
+use Warp\Bridge\Cycle\Collection\Basic\BasicCollectionFactory;
+use Warp\Bridge\Cycle\Collection\CollectionFactoryInterface;
+use Warp\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
+use Warp\Exception\PackageMissingException;
 
 final class DoctrineCollectionFactory implements CollectionFactoryInterface
 {

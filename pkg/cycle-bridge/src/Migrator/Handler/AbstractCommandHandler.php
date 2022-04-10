@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Handler;
+namespace Warp\Bridge\Cycle\Migrator\Handler;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

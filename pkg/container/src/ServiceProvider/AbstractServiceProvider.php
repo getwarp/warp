@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\ServiceProvider;
+namespace Warp\Container\ServiceProvider;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\DefinitionAggregateInterface;
-use spaceonfire\Container\Exception\ContainerException;
+use Warp\Container\DefinitionAggregateInterface;
+use Warp\Container\Exception\ContainerException;
 
 abstract class AbstractServiceProvider implements ServiceProviderInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Version;
+namespace Warp\DevTool\Version;
 
 use Symfony\Component\Console\Command\Command;
 

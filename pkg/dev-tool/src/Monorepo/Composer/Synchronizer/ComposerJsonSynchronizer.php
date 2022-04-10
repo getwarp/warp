@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo\Composer\Synchronizer;
+namespace Warp\DevTool\Monorepo\Composer\Synchronizer;
 
 use Composer\Semver\VersionParser;
-use spaceonfire\DevTool\Monorepo\Composer\ComposerJson;
-use spaceonfire\DevTool\Monorepo\Composer\MonorepoConfig;
-use spaceonfire\DevTool\Monorepo\Composer\MonorepoProject;
 use Symfony\Component\Filesystem\Filesystem;
+use Warp\DevTool\Monorepo\Composer\ComposerJson;
+use Warp\DevTool\Monorepo\Composer\MonorepoConfig;
+use Warp\DevTool\Monorepo\Composer\MonorepoProject;
 
 final class ComposerJsonSynchronizer
 {

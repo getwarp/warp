@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Factory;
+namespace Warp\Bridge\Cycle\Factory;
 
-use spaceonfire\Container\FactoryAggregateInterface;
 use Spiral\Core\FactoryInterface;
+use Warp\Container\FactoryAggregateInterface;
 
 final class SpiralFactory implements FactoryInterface
 {

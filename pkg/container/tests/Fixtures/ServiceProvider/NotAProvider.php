@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures\ServiceProvider;
+namespace Warp\Container\Fixtures\ServiceProvider;
 
 final class NotAProvider
 {

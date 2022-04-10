@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Exception;
+namespace Warp\CommandBus\Exception;
 
-use spaceonfire\Exception\FriendlyExceptionTrait;
+use Warp\Exception\FriendlyExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 /**

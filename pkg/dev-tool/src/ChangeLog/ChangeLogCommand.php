@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\ChangeLog;
+namespace Warp\DevTool\ChangeLog;
 
 use Gitonomy\Git\Commit;
 use Gitonomy\Git\Log;

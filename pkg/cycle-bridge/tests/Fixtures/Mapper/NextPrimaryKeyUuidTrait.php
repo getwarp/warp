@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures\Mapper;
+namespace Warp\Bridge\Cycle\Fixtures\Mapper;
 
 use Symfony\Component\Uid\Uuid;
 

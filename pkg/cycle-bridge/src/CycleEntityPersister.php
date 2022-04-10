@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Transaction;
 use Cycle\ORM\TransactionInterface;
-use spaceonfire\DataSource\EntityPersisterInterface;
+use Warp\DataSource\EntityPersisterInterface;
 
 /**
  * @template E of object

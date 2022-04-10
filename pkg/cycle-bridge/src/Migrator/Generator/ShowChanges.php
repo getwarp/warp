@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Generator;
+namespace Warp\Bridge\Cycle\Migrator\Generator;
 
 use Cycle\Database\Schema\AbstractTable;
 use Cycle\Schema\GeneratorInterface;

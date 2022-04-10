@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
 interface EntityReaderAggregateInterface
 {

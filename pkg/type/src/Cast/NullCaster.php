@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Cast;
+namespace Warp\Type\Cast;
 
 final class NullCaster implements CasterInterface
 {

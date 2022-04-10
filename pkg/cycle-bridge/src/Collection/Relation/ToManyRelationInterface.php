@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Relation;
+namespace Warp\Bridge\Cycle\Collection\Relation;
 
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Relation\ChangesCheckerInterface;
 use Cycle\ORM\Relation\RelationInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
-use spaceonfire\Bridge\Cycle\Select\ReferenceScope;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
+use Warp\Bridge\Cycle\Select\ReferenceScope;
 
 interface ToManyRelationInterface extends RelationInterface, ChangesCheckerInterface
 {

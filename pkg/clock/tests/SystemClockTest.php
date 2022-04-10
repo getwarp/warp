@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Clock;
+namespace Warp\Clock;
 
 use PHPUnit\Framework\TestCase;
 

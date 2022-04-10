@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\ORM\Promise\Reference;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\Expression\ExpressionFactory;
 
 class PrimaryBuilderTest extends AbstractTestCase
 {

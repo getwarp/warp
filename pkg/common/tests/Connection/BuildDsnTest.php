@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Connection;
+namespace Warp\Common\Connection;
 
 use PHPUnit\Framework\TestCase;
 

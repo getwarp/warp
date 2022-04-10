@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Blame;
+namespace Warp\DataSource\Blame;
 
-use spaceonfire\Clock\ClockInterface;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\Clock\FrozenClock;
-use spaceonfire\Clock\SystemClock;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\DataSource\EntityReferenceInterface;
+use Warp\Clock\ClockInterface;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\Clock\FrozenClock;
+use Warp\Clock\SystemClock;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\DataSource\EntityReferenceInterface;
 
 /**
  * @template T of object

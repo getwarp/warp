@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Iterator;
+namespace Warp\Collection\Iterator;
 
 /**
  * @template K of array-key

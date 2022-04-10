@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\UserMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Schema\EntityDto;
-use spaceonfire\Bridge\Cycle\Schema\FieldDto;
+use Warp\Bridge\Cycle\Fixtures\Mapper\UserMapper;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Schema\EntityDto;
+use Warp\Bridge\Cycle\Schema\FieldDto;
 
 return [
     EntityDto::ROLE => 'user',

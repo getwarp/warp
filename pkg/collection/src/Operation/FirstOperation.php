@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Operation;
+namespace Warp\Collection\Operation;
 
 /**
  * @template K of array-key

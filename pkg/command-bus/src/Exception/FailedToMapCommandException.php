@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Exception;
+namespace Warp\CommandBus\Exception;
 
 final class FailedToMapCommandException extends \RuntimeException
 {

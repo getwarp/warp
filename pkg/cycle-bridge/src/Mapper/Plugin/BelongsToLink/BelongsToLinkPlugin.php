@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
 
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
 
 final class BelongsToLinkPlugin implements EventSubscriberInterface
 {

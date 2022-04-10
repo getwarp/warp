@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Fixtures;
+namespace Warp\Type\Fixtures;
 
-final class InvalidAggregatedType extends \spaceonfire\Type\AbstractAggregatedType
+final class InvalidAggregatedType extends \Warp\Type\AbstractAggregatedType
 {
     public const DELIMITER = '';
 

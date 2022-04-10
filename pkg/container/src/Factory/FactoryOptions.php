@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\InvokerOptionsInterface;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\InvokerOptionsInterface;
 
 final class FactoryOptions implements FactoryOptionsInterface, StaticConstructorInterface
 {

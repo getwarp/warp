@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\AbstractAggregatedType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\AbstractAggregatedType;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\TypeInterface;
 
 abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
 {

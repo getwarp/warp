@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\UnionType;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\UnionType;
 use Traversable;
 
 class UnionTypeFactoryTest extends TestCase

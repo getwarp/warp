@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Cast;
+namespace Warp\Type\Cast;
 
-use spaceonfire\Type\TypeInterface;
-use spaceonfire\Type\UnionType;
+use Warp\Type\TypeInterface;
+use Warp\Type\UnionType;
 
 final class UnionTypeCasterFactory implements CasterFactoryInterface, CasterFactoryAwareInterface
 {

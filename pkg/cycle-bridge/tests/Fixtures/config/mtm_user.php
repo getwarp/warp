@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use spaceonfire\Bridge\Cycle\Fixtures\FixtureUser;
-use spaceonfire\Bridge\Cycle\Mapper\HydratorMapper;
-use spaceonfire\Bridge\Cycle\Schema\EntityDto;
-use spaceonfire\Bridge\Cycle\Schema\FieldDto;
-use spaceonfire\Bridge\Cycle\Schema\RelationDto;
+use Warp\Bridge\Cycle\Fixtures\FixtureUser;
+use Warp\Bridge\Cycle\Mapper\HydratorMapper;
+use Warp\Bridge\Cycle\Schema\EntityDto;
+use Warp\Bridge\Cycle\Schema\FieldDto;
+use Warp\Bridge\Cycle\Schema\RelationDto;
 
 return [
     EntityDto::ROLE => 'mtm_user',

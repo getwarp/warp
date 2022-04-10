@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Doctrine;
+namespace Warp\Bridge\Cycle\Collection\Doctrine;
 
 use Cycle\ORM\Select\ScopeInterface;
 use Doctrine\Common\Collections\AbstractLazyCollection;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
 
 /**
  * @template T of object

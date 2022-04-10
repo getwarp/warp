@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Operation;
+namespace Warp\Collection\Operation;
 
-use spaceonfire\Common\Field\FieldInterface;
+use Warp\Common\Field\FieldInterface;
 
 /**
  * @template K of array-key

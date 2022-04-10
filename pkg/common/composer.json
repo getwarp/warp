@@ -1,5 +1,5 @@
 {
-  "name": "spaceonfire/common",
+  "name": "getwarp/common",
   "description": "Application kernel based on DI container and CQRS buses",
   "type": "library",
   "keywords": [
@@ -10,19 +10,19 @@
     "command",
     "query"
   ],
-  "homepage": "https://github.com/spaceonfire/common",
+  "homepage": "https://github.com/getwarp/common",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space/",
+      "homepage": "https://getwarp.dev/",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "spaceonfire/exception": "^3.0",
+    "getwarp/exception": "^3.0",
     "symfony/polyfill-php80": "^1.22",
     "symfony/polyfill-php81": "^1.22"
   },
@@ -30,8 +30,8 @@
     "phpunit/phpunit": "^9.5",
     "psr/log": "^1.1",
     "roave/security-advisories": "dev-latest",
-    "spaceonfire/command-bus": "^3.0",
-    "spaceonfire/container": "^3.0",
+    "getwarp/command-bus": "^3.0",
+    "getwarp/container": "^3.0",
     "symfony/console": "^5.2|^6.0",
     "symfony/property-access": "^5.2|^6.0",
     "symfony/property-info": "^5.2|^6.0",
@@ -40,14 +40,14 @@
   },
   "suggest": {
     "vlucas/phpdotenv": "Required for env() function",
-    "spaceonfire/command-bus": "Used to organize CQRS buses",
-    "spaceonfire/container": "Used to organize Kernel",
+    "getwarp/command-bus": "Used to organize CQRS buses",
+    "getwarp/container": "Used to organize Kernel",
     "symfony/property-access": "^5.2|^6.0",
     "yiisoft/arrays": "^1.0"
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Common\\": "src"
+      "Warp\\Common\\": "src"
     },
     "files": [
       "functions.php"
@@ -55,7 +55,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Common\\": "tests"
+      "Warp\\Common\\": "tests"
     }
   },
   "config": {

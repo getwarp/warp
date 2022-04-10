@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper;
+namespace Warp\Bridge\Cycle\Mapper;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Relation;
 use Cycle\ORM\SchemaInterface;
-use spaceonfire\Bridge\Cycle\NodeHelper;
-use spaceonfire\DataSource\PropertyExtractorInterface;
+use Warp\Bridge\Cycle\NodeHelper;
+use Warp\DataSource\PropertyExtractorInterface;
 
 /**
  * @internal

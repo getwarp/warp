@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\Heap\Node;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
 
 final class FactoryContainer implements
     ContainerInterface,

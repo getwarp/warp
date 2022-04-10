@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Input;
+namespace Warp\Bridge\Cycle\Migrator\Input;
 
 use Cycle\Migrations\Config\MigrationConfig;
 use Psr\Container\ContainerInterface;
-use spaceonfire\Bridge\Cycle\Migrator\Exception\ConfirmationException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
+use Warp\Bridge\Cycle\Migrator\Exception\ConfirmationException;
 
 /**
  * @extends InputOption<bool>

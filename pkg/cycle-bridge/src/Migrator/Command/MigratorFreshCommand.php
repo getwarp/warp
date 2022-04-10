@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Command;
+namespace Warp\Bridge\Cycle\Migrator\Command;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Bridge\Cycle\Migrator\Handler;
-use spaceonfire\Bridge\Cycle\Migrator\Input;
-use spaceonfire\Bridge\Cycle\Migrator\LockFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Warp\Bridge\Cycle\Migrator\Handler;
+use Warp\Bridge\Cycle\Migrator\Input;
+use Warp\Bridge\Cycle\Migrator\LockFacade;
 
 final class MigratorFreshCommand extends Command implements MigratorApplyCommandInterface
 {

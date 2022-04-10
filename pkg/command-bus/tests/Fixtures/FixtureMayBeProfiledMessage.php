@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Fixtures;
+namespace Warp\CommandBus\Fixtures;
 
-use spaceonfire\CommandBus\Middleware\Profiler\MayBeProfiledMessageInterface;
-use spaceonfire\CommandBus\Middleware\Profiler\MayBeProfiledMessageTrait;
+use Warp\CommandBus\Middleware\Profiler\MayBeProfiledMessageInterface;
+use Warp\CommandBus\Middleware\Profiler\MayBeProfiledMessageTrait;
 
 class FixtureMayBeProfiledMessage implements MayBeProfiledMessageInterface
 {

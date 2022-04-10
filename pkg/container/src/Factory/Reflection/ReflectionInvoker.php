@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory\Reflection;
+namespace Warp\Container\Factory\Reflection;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\ContainerAwareInterface;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\InvokerInterface;
+use Warp\Container\ContainerAwareInterface;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\InvokerInterface;
 
 final class ReflectionInvoker implements ContainerAwareInterface, InvokerInterface
 {

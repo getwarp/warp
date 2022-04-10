@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Field\DefaultField;
-use spaceonfire\Common\Field\DefaultFieldFactory;
+use Warp\Common\Field\DefaultField;
+use Warp\Common\Field\DefaultFieldFactory;
 use Webmozart\Expression\Constraint\Same;
 
 class ExpressionFactoryTest extends TestCase
@@ -83,7 +83,7 @@ class ExpressionFactoryTest extends TestCase
         $ef = ExpressionFactory::new();
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage(
-            'Call to an undefined method spaceonfire\Criteria\Expression\ExpressionFactory::unknown().'
+            'Call to an undefined method Warp\Criteria\Expression\ExpressionFactory::unknown().'
         );
         $ef->unknown();
     }

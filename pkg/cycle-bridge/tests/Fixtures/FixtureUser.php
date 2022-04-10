@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures;
+namespace Warp\Bridge\Cycle\Fixtures;
 
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
 
 final class FixtureUser
 {

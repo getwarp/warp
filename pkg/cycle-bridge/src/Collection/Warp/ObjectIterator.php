@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Onfire;
+namespace Warp\Bridge\Cycle\Collection\Warp;
 
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
-use spaceonfire\Collection\MutableInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectStorage;
+use Warp\Collection\MutableInterface;
 
 /**
  * @template V of object

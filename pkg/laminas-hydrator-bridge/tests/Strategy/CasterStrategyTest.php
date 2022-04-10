@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\Cast\ScalarCaster;
+use Warp\Type\BuiltinType;
+use Warp\Type\Cast\ScalarCaster;
 
 class CasterStrategyTest extends TestCase
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\BuiltinType;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\TypeInterface;
 
 final class BuiltinTypeFactory implements TypeFactoryInterface
 {

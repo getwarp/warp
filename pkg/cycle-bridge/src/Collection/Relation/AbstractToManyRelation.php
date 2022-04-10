@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Relation;
+namespace Warp\Bridge\Cycle\Collection\Relation;
 
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Relation;
 use Cycle\ORM\Relation\AbstractRelation;
-use spaceonfire\Bridge\Cycle\Collection\CollectionFactoryInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
+use Warp\Bridge\Cycle\Collection\CollectionFactoryInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
+use Warp\Bridge\Cycle\Collection\ObjectStorage;
 
 abstract class AbstractToManyRelation extends AbstractRelation implements ToManyRelationInterface
 {

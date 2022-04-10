@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `spaceonfire/laminas-hydrator-bridge` will be documented in this file.
+All notable changes to `getwarp/laminas-hydrator-bridge` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Minimal supported PHP version bumped up to 7.4.
 - Use typehints and static analysis by PHPStan as much as possible.
-- Namespace changed: `spaceonfire\LaminasHydratorBridge` -> `spaceonfire\Bridge\LaminasHydrator`.
+- Namespace changed: `Warp\LaminasHydratorBridge` -> `Warp\Bridge\LaminasHydrator`.
 
 ### Added
 

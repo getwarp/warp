@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Doctrine;
+namespace Warp\Bridge\Cycle\Collection\Doctrine;
 
 use Doctrine\Common\Collections\AbstractLazyCollection;
 use Doctrine\Common\Collections\ArrayCollection;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectStorage;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectStorage;
 
 /**
  * @template T of object

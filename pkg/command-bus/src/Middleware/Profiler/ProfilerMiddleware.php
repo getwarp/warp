@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Profiler;
+namespace Warp\CommandBus\Middleware\Profiler;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Psr\Log\NullLogger;
-use spaceonfire\CommandBus\MiddlewareInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Warp\CommandBus\MiddlewareInterface;
 
 /**
  * @todo: get rid from logger dependency here.

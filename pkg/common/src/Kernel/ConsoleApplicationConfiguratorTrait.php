@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\DefinitionAggregateInterface;
-use spaceonfire\Container\Factory\DefinitionTag;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\InvokerInterface;
-use spaceonfire\Container\ServiceProviderAggregateInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Warp\Container\DefinitionAggregateInterface;
+use Warp\Container\Factory\DefinitionTag;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\InvokerInterface;
+use Warp\Container\ServiceProviderAggregateInterface;
 
 trait ConsoleApplicationConfiguratorTrait
 {

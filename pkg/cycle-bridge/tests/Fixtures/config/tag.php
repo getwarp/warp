@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use spaceonfire\Bridge\Cycle\Schema\EntityDto;
-use spaceonfire\Bridge\Cycle\Schema\FieldDto;
+use Warp\Bridge\Cycle\Schema\EntityDto;
+use Warp\Bridge\Cycle\Schema\FieldDto;
 
 return [
     EntityDto::ROLE => 'tag',

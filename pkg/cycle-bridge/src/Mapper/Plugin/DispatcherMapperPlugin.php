@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin;
+namespace Warp\Bridge\Cycle\Mapper\Plugin;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use spaceonfire\Bridge\Cycle\Mapper\MapperPluginInterface;
+use Warp\Bridge\Cycle\Mapper\MapperPluginInterface;
 
 final class DispatcherMapperPlugin implements MapperPluginInterface
 {

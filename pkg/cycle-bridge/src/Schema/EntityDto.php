@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Schema;
+namespace Warp\Bridge\Cycle\Schema;
 
 use Cycle\Schema\Definition\Entity;
 

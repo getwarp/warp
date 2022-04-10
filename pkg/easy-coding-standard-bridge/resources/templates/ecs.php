@@ -18,6 +18,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'Unused variable $_.' => null,
     ]);
 
-    $containerConfigurator->import(__DIR__ . '/vendor/spaceonfire/easy-coding-standard-bridge/resources/config/spaceonfire.php', null, 'not_found');
+    $containerConfigurator->import(__DIR__ . '/vendor/getwarp/easy-coding-standard-bridge/resources/config/warp.php', null, 'not_found');
     $containerConfigurator->import(__DIR__ . '/ecs-baseline.php', null, 'not_found');
 };

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
-use spaceonfire\Exception\PackageMissingException;
 use Symfony\Component\Uid\Uuid;
+use Warp\Exception\PackageMissingException;
 
 class UuidValue extends AbstractStringValue
 {

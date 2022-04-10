@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo\Project;
+namespace Warp\DevTool\Monorepo\Project;
 
 use Gitonomy\Git\Admin;
 use Gitonomy\Git\Commit;
@@ -13,9 +13,6 @@ use Gitonomy\Git\Reference\Branch;
 use Gitonomy\Git\Reference\Tag;
 use Gitonomy\Git\Repository;
 use Http\Discovery\Psr17FactoryDiscovery;
-use spaceonfire\DevTool\Console\ComposerHelper;
-use spaceonfire\DevTool\Monorepo\Composer\MonorepoConfig;
-use spaceonfire\DevTool\Monorepo\Composer\MonorepoProject;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,6 +21,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Mime\Address;
+use Warp\DevTool\Console\ComposerHelper;
+use Warp\DevTool\Monorepo\Composer\MonorepoConfig;
+use Warp\DevTool\Monorepo\Composer\MonorepoProject;
 
 final class ProjectsSplitCommand extends Command
 {

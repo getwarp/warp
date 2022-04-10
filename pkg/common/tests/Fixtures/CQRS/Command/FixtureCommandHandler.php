@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Fixtures\CQRS\Command;
+namespace Warp\Common\Fixtures\CQRS\Command;
 
-use spaceonfire\Common\CQRS\Command\CommandInterface;
+use Warp\Common\CQRS\Command\CommandInterface;
 use SplObjectStorage;
 
 final class FixtureCommandHandler

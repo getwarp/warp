@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures;
+namespace Warp\Container\Fixtures;
 
-use spaceonfire\Common\Factory\StaticConstructorInterface;
+use Warp\Common\Factory\StaticConstructorInterface;
 
 final class StaticConstructorClass implements StaticConstructorInterface
 {

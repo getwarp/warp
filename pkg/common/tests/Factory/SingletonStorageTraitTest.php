@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Factory;
+namespace Warp\Common\Factory;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Fixtures\SingletonValueObject;
+use Warp\Common\Fixtures\SingletonValueObject;
 
 class SingletonStorageTraitTest extends TestCase
 {

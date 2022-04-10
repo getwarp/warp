@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\Clock\DateTimeValueInterface;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\Clock\DateTimeValueInterface;
 
 /**
  * @template T of DateTimeValueInterface

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\NamingStrategy;
+namespace Warp\Bridge\LaminasHydrator\NamingStrategy;
 
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
 

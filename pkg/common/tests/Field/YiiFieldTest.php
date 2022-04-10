@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Field;
+namespace Warp\Common\Field;
 
 use PHPUnit\Framework\TestCase;
 
@@ -94,7 +94,7 @@ class YiiFieldTest extends TestCase
     }
 
     /**
-     * @dataProvider \spaceonfire\Common\Field\DefaultFieldTest::invalidFieldsProvider()
+     * @dataProvider \Warp\Common\Field\DefaultFieldTest::invalidFieldsProvider()
      * @param string $field
      */
     public function testInvalidField(string $field): void

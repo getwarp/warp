@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\Blame;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\Blame;
 
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
-use spaceonfire\DataSource\Blame\BlamableInterface;
-use spaceonfire\DataSource\Blame\BlameActorProviderInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
+use Warp\DataSource\Blame\BlamableInterface;
+use Warp\DataSource\Blame\BlameActorProviderInterface;
 
 /**
  * @template T of object

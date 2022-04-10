@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\ValueObject\Fixtures\FixtureString;
+use Warp\ValueObject\Fixtures\FixtureString;
 
 class StringValueTest extends TestCase
 {

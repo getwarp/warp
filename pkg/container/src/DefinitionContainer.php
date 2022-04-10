@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\Factory\Definition;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
-use spaceonfire\Container\ServiceProvider\BootableServiceProviderInterface;
-use spaceonfire\Container\ServiceProvider\ServiceProviderInterface;
+use Warp\Container\Factory\Definition;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\ServiceProvider\BootableServiceProviderInterface;
+use Warp\Container\ServiceProvider\ServiceProviderInterface;
 
 final class DefinitionContainer implements
     ContainerInterface,

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
-use spaceonfire\Common\Factory\SingletonStorageTrait;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
+use Warp\Common\Factory\SingletonStorageTrait;
+use Warp\Common\Factory\StaticConstructorInterface;
 
 /**
  * @template T of scalar|\Stringable

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Blame;
+namespace Warp\DataSource\Blame;
 
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\DataSource\EntityReferenceInterface;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\DataSource\EntityReferenceInterface;
 
 /**
  * @template T of object

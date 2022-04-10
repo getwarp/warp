@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Promise\Reference;
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\SchemaInterface;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Criteria\Expression\ExpressionFactory;
 
 /**
  * @internal

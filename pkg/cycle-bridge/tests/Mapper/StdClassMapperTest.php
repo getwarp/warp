@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper;
+namespace Warp\Bridge\Cycle\Mapper;
 
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
 
 class StdClassMapperTest extends AbstractTestCase
 {

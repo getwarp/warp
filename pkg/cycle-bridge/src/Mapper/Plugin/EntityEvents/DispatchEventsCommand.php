@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\EntityEvents;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\EntityEvents;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use spaceonfire\Bridge\Cycle\Mapper\AbstractCommand;
+use Warp\Bridge\Cycle\Mapper\AbstractCommand;
 
 final class DispatchEventsCommand extends AbstractCommand
 {

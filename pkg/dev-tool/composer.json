@@ -1,15 +1,15 @@
 {
-  "name": "spaceonfire/dev-tool",
+  "name": "getwarp/dev-tool",
   "description": "",
   "type": "library",
   "keywords": [],
-  "homepage": "https://github.com/spaceonfire/spaceonfire",
+  "homepage": "https://github.com/getwarp/warp",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -19,10 +19,10 @@
     "composer/semver": "^3.0",
     "gitonomy/gitlib": "^1.2",
     "nikic/php-parser": "^4.10",
-    "spaceonfire/common": "^3.0",
-    "spaceonfire/container": "^3.0",
-    "spaceonfire/criteria": "^3.0",
-    "spaceonfire/type": "^3.0",
+    "getwarp/common": "^3.0",
+    "getwarp/container": "^3.0",
+    "getwarp/criteria": "^3.0",
+    "getwarp/type": "^3.0",
     "symfony/console": "^5.2|^6.0",
     "symfony/filesystem": "^5.2|^6.0",
     "symfony/finder": "^5.2|^6.0"
@@ -35,12 +35,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "spaceonfire\\DevTool\\": "src"
+      "Warp\\DevTool\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\DevTool\\": "tests"
+      "Warp\\DevTool\\": "tests"
     }
   },
   "minimum-stability": "dev",

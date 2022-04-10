@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\Fixtures\InvalidAggregatedTypeFactory;
+use Warp\Type\Fixtures\InvalidAggregatedTypeFactory;
 
 class AbstractAggregatedTypeFactoryTest extends TestCase
 {

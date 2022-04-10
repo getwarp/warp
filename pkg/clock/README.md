@@ -1,18 +1,22 @@
-# Clock by spaceonfire
+<div align="center">
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Total Downloads][ico-downloads]][link-packagist]
-![Code Coverage][ico-coverage]
+# getwarp/clock
 
-This component provides enhanced **DateTime** classes and **Clock** API implementations in PHP.
+Enhanced **DateTime** classes and **Clock** API implementation
 
-## Install
+[GitHub][link-github] •
+[Packagist][link-packagist] •
+[Installation](#installation) •
+[Usage](#usage)
+
+</div>
+
+## Installation
 
 Via Composer
 
 ```bash
-$ composer require spaceonfire/clock
+composer require getwarp/clock
 ```
 
 ## Usage
@@ -20,7 +24,7 @@ $ composer require spaceonfire/clock
 DateTime:
 
 ```php
-use spaceonfire\Clock\DateTimeImmutableValue;
+use Warp\Clock\DateTimeImmutableValue;
 
 $time = DateTimeImmutableValue::now();
 // $time = DateTimeImmutableValue::from('2020-02-02 20:22:02');
@@ -37,8 +41,8 @@ echo \json_encode($time);
 Clock:
 
 ```php
-use spaceonfire\Clock\FrozenClock;
-use spaceonfire\Clock\SystemClock;
+use Warp\Clock\FrozenClock;
+use Warp\Clock\SystemClock;
 
 $clock = new FrozenClock(SystemClock::fromUTC());
 $startedAt = $clock->now();
@@ -55,8 +59,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-[Report issues][link-issues] and [send Pull Requests][link-pulls] in the [main spaceonfire repository][link-monorepo].
-Please see [CONTRIBUTING][link-contributing] and [CODE_OF_CONDUCT][link-code-of-conduct] for details.
+[Report issues][link-issues] and [send pull requests][link-pulls] in the [main Warp repository][link-monorepo]. Please
+see [contributing guide][link-contributing] and [code of conduct][link-code-of-conduct] for details.
 
 ## Credits
 
@@ -65,17 +69,14 @@ Please see [CONTRIBUTING][link-contributing] and [CODE_OF_CONDUCT][link-code-of-
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [license file](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/spaceonfire/clock.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/spaceonfire/clock.svg?style=flat-square
-[ico-coverage]: https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fgist.githubusercontent.com%2Fhustlahusky%2Fd62607c1a2e4707959b0142e0ea876cd%2Fraw%2Fclock.json
-[link-packagist]: https://packagist.org/packages/spaceonfire/clock
+[link-github]: https://github.com/getwarp/clock
+[link-packagist]: https://packagist.org/packages/getwarp/clock
 [link-author]: https://github.com/hustlahusky
 [link-contributors]: ../../contributors
-[link-monorepo]: https://github.com/spaceonfire/spaceonfire
-[link-issues]: https://github.com/spaceonfire/spaceonfire/issues
-[link-pulls]: https://github.com/spaceonfire/spaceonfire/pulls
-[link-contributing]: https://github.com/spaceonfire/spaceonfire/blob/master/CONTRIBUTING.md
-[link-code-of-conduct]: https://github.com/spaceonfire/spaceonfire/blob/master/CODE_OF_CONDUCT.md
+[link-monorepo]: https://github.com/getwarp/warp
+[link-issues]: https://github.com/getwarp/warp/issues
+[link-pulls]: https://github.com/getwarp/warp/pulls
+[link-contributing]: https://github.com/getwarp/warp/blob/3.0.x/CONTRIBUTING.md
+[link-code-of-conduct]: https://github.com/getwarp/.github/blob/main/CODE_OF_CONDUCT.md

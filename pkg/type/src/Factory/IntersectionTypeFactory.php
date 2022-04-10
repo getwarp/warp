@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\IntersectionType;
+use Warp\Type\IntersectionType;
 
 final class IntersectionTypeFactory extends AbstractAggregatedTypeFactory
 {

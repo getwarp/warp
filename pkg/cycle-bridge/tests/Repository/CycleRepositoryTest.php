@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Repository;
+namespace Warp\Bridge\Cycle\Repository;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\CsvFileFixtureLoader;
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\PostMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Post;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Collection\Map;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
-use spaceonfire\DataSource\EntityNotFoundException;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\CsvFileFixtureLoader;
+use Warp\Bridge\Cycle\Fixtures\Mapper\PostMapper;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Post;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Collection\Map;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\Expression\ExpressionFactory;
+use Warp\DataSource\EntityNotFoundException;
 
 class CycleRepositoryTest extends AbstractTestCase
 {

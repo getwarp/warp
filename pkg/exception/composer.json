@@ -1,17 +1,17 @@
 {
-  "name": "spaceonfire/exception",
-  "description": "",
+  "name": "getwarp/exception",
+  "description": "Tools to design friendly and translatable exceptions",
   "type": "library",
   "keywords": [
     "exception"
   ],
-  "homepage": "https://github.com/spaceonfire/exception",
+  "homepage": "https://github.com/getwarp/exception",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Exception\\": "src"
+      "Warp\\Exception\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Exception\\": "tests"
+      "Warp\\Exception\\": "tests"
     }
   },
   "config": {

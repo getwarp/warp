@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Exception\Fixture;
+namespace Warp\Exception\Fixture;
 
-use spaceonfire\Exception\FriendlyExceptionTrait;
+use Warp\Exception\FriendlyExceptionTrait;
 use Throwable;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator;
+namespace Warp\Bridge\LaminasHydrator;
 
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
 use Laminas\Hydrator\Strategy\ClosureStrategy;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Bridge\LaminasHydrator\Fixtures\SimpleEntity;
+use Warp\Bridge\LaminasHydrator\Fixtures\SimpleEntity;
 
 class SafeReflectionHydratorTest extends TestCase
 {

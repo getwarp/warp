@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Fixtures\ArrayContainer;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Fixtures\ArrayContainer;
 
 class ContainerAwareTraitTest extends TestCase
 {

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\TransactionInterface;
-use spaceonfire\Bridge\Cycle\Fixtures\CsvFileFixtureLoader;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Post;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Fixtures\UserId;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\Collection\Map;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
-use spaceonfire\DataSource\EntityNotFoundException;
+use Warp\Bridge\Cycle\Fixtures\CsvFileFixtureLoader;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Post;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Fixtures\UserId;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\Collection\Map;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\Expression\ExpressionFactory;
+use Warp\DataSource\EntityNotFoundException;
 
 /**
  * @todo: add test with both criteria and source scope applied

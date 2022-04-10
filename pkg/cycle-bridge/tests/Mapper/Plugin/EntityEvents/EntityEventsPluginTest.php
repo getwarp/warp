@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\EntityEvents;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\EntityEvents;
 
 use Cycle\ORM\Command\Branch\ContextSequence;
 use Cycle\ORM\Command\Branch\Sequence;
@@ -11,14 +11,14 @@ use Cycle\ORM\Command\Database\Insert;
 use Cycle\ORM\Command\Database\Update;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Schema;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemCreatedEvent;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemDoneEvent;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemCreatedEvent;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemDoneEvent;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use Warp\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
-use spaceonfire\Collection\Iterator\ArrayIterator;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
-use spaceonfire\Type\UnionType;
+use Warp\Collection\Iterator\ArrayIterator;
+use Warp\Type\BuiltinType;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
+use Warp\Type\UnionType;
 
 /**
  * @template K of array-key

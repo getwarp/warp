@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Fixtures\Command;
+namespace Warp\CommandBus\Fixtures\Command;
 
 class AddTaskCommand
 {

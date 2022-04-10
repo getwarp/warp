@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory\Reflection;
+namespace Warp\Container\Factory\Reflection;
 
 use PhpOption\Some;
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\Factory\Argument;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Type\AbstractAggregatedType;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\IntersectionType;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
-use spaceonfire\Type\UnionType;
+use Warp\Container\Factory\Argument;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Type\AbstractAggregatedType;
+use Warp\Type\BuiltinType;
+use Warp\Type\InstanceOfType;
+use Warp\Type\IntersectionType;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
+use Warp\Type\UnionType;
 
 /**
  * @internal

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\Clock\DateTimeValue;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\Clock\DateTimeValue;
 
 class DateValueStrategyTest extends TestCase
 {
@@ -71,11 +71,11 @@ class DateValueStrategyTest extends TestCase
     public function testHydrateDateTimeInstance(): void
     {
         $system = new \DateTimeImmutable();
-        $spaceonfire = DateTimeImmutableValue::from($system);
+        $warp = DateTimeImmutableValue::from($system);
 
         $strategy = new DateValueStrategy('Y-m-d');
 
         self::assertEquals($system, $strategy->hydrate($system));
-        self::assertSame($spaceonfire, $strategy->hydrate($spaceonfire));
+        self::assertSame($warp, $strategy->hydrate($warp));
     }
 }

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures\Mapper;
+namespace Warp\Bridge\Cycle\Fixtures\Mapper;
 
 use Cycle\ORM\ORMInterface;
 use Laminas\Hydrator\NamingStrategy\MapNamingStrategy;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\HydratorMapper;
-use spaceonfire\Bridge\Cycle\Mapper\MapperPluginInterface;
-use spaceonfire\Bridge\LaminasHydrator\Strategy\BlameStrategy;
-use spaceonfire\Bridge\LaminasHydrator\Strategy\BooleanStrategy;
-use spaceonfire\Bridge\LaminasHydrator\Strategy\DateValueStrategy;
-use spaceonfire\Bridge\LaminasHydrator\Strategy\ValueObjectStrategy;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\HydratorMapper;
+use Warp\Bridge\Cycle\Mapper\MapperPluginInterface;
+use Warp\Bridge\LaminasHydrator\Strategy\BlameStrategy;
+use Warp\Bridge\LaminasHydrator\Strategy\BooleanStrategy;
+use Warp\Bridge\LaminasHydrator\Strategy\DateValueStrategy;
+use Warp\Bridge\LaminasHydrator\Strategy\ValueObjectStrategy;
 
 final class TodoItemMapper extends HydratorMapper
 {

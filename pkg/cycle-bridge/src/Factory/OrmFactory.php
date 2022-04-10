@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Factory;
+namespace Warp\Bridge\Cycle\Factory;
 
 use Cycle\Database\DatabaseInterface;
 use Cycle\Database\DatabaseProviderInterface;
@@ -20,11 +20,11 @@ use Cycle\ORM\Select\LoaderInterface;
 use Cycle\ORM\Select\Repository;
 use Cycle\ORM\Select\Source;
 use Cycle\ORM\Select\SourceInterface;
-use spaceonfire\Bridge\Cycle\Collection\Doctrine\DoctrineCollectionFactory;
-use spaceonfire\Bridge\Cycle\Collection\Relation\SchemaExtra;
 use Spiral\Core\Container;
 use Spiral\Core\Container\Autowire;
 use Spiral\Core\FactoryInterface as CoreFactory;
+use Warp\Bridge\Cycle\Collection\Doctrine\DoctrineCollectionFactory;
+use Warp\Bridge\Cycle\Collection\Relation\SchemaExtra;
 
 final class OrmFactory implements FactoryInterface
 {

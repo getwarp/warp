@@ -4,17 +4,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Select;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\CyclePropertyExtractor;
-use spaceonfire\Criteria\Expression\AbstractExpressionDecorator;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\CyclePropertyExtractor;
+use Warp\Criteria\Expression\AbstractExpressionDecorator;
+use Warp\Criteria\Expression\ExpressionFactory;
 use Webmozart\Expression\Expression;
 
 class CycleExpressionVisitorTest extends AbstractTestCase

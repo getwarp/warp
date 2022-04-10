@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Console;
+namespace Warp\DevTool\Console;
 
 use Symfony\Component\Console\Application;
 

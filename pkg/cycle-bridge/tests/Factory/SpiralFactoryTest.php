@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Factory;
+namespace Warp\Bridge\Cycle\Factory;
 
 use Cycle\ORM\ORMInterface;
 use PhpOption\Some;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\UserMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\DefinitionContainer;
-use spaceonfire\Container\FactoryContainer;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\Mapper\UserMapper;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Container\CompositeContainer;
+use Warp\Container\DefinitionContainer;
+use Warp\Container\FactoryContainer;
 
 class SpiralFactoryTest extends AbstractTestCase
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Operation;
+namespace Warp\Collection\Operation;
 
-use spaceonfire\Collection\AlterValueTypeOperationInterface;
+use Warp\Collection\AlterValueTypeOperationInterface;
 
 /**
  * @template K of array-key

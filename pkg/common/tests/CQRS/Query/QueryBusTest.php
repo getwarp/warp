@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Query;
+namespace Warp\Common\CQRS\Query;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Fixtures\CQRS\Query\FixtureQuery;
-use spaceonfire\Common\Fixtures\CQRS\Query\FixtureQueryBus;
-use spaceonfire\Common\Fixtures\CQRS\Query\FixtureQueryHandler;
-use spaceonfire\Common\Fixtures\CQRS\Query\FixtureQueryResponse;
-use spaceonfire\Container\FactoryInterface;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\Fixtures\ArrayFactoryAggregate;
+use Warp\Common\Fixtures\CQRS\Query\FixtureQuery;
+use Warp\Common\Fixtures\CQRS\Query\FixtureQueryBus;
+use Warp\Common\Fixtures\CQRS\Query\FixtureQueryHandler;
+use Warp\Common\Fixtures\CQRS\Query\FixtureQueryResponse;
+use Warp\Container\FactoryInterface;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\Fixtures\ArrayFactoryAggregate;
 
 /**
  * @todo: replace ArrayFactoryAggregate

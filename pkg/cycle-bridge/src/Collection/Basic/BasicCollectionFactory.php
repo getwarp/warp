@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Basic;
+namespace Warp\Bridge\Cycle\Collection\Basic;
 
 use Cycle\ORM\Heap\Node;
-use spaceonfire\Bridge\Cycle\Collection\CollectionFactoryInterface;
-use spaceonfire\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
+use Warp\Bridge\Cycle\Collection\CollectionFactoryInterface;
+use Warp\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
 
 final class BasicCollectionFactory implements CollectionFactoryInterface
 {

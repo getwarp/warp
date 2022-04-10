@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\GroupData;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\GroupData;
 
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
-use spaceonfire\Clock\DateTimeImmutableValue;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
+use Warp\Clock\DateTimeImmutableValue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class GroupDataPluginTest extends AbstractTestCase

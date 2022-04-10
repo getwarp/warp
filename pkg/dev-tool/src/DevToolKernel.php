@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool;
+namespace Warp\DevTool;
 
-use spaceonfire\Common\Kernel\AbstractKernel;
-use spaceonfire\Common\Kernel\ConsoleApplicationConfiguratorTrait;
+use Warp\Common\Kernel\AbstractKernel;
+use Warp\Common\Kernel\ConsoleApplicationConfiguratorTrait;
 
 final class DevToolKernel extends AbstractKernel
 {

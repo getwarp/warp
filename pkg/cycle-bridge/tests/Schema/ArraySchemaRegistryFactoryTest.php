@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Schema;
+namespace Warp\Bridge\Cycle\Schema;
 
 use Cycle\Database\Schema\AbstractColumn;
 use Cycle\ORM\Relation;
@@ -10,13 +10,13 @@ use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Select\Repository;
 use Cycle\ORM\Select\Source;
 use Cycle\Schema\Generator;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\PostMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\UserMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Post;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\StdClassMapper;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\Mapper\PostMapper;
+use Warp\Bridge\Cycle\Fixtures\Mapper\UserMapper;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Post;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\StdClassMapper;
 
 class ArraySchemaRegistryFactoryTest extends AbstractTestCase
 {

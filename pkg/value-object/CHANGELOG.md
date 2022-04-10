@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `spaceonfire/value-object` will be documented in this file.
+All notable changes to `getwarp/value-object` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -18,7 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Removed
 
-- DateTime objects extracted to separate package `spaceonfire/clock`.
+- DateTime objects extracted to separate package `getwarp/clock`.
 
 ## [2.5.1] - 2021-06-13
 

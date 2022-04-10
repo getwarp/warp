@@ -4,10 +4,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures\PHP8;
+namespace Warp\Container\Fixtures\PHP8;
 
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\B;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\B;
 
 final class UnionTypes
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Exception;
+namespace Warp\Exception;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Exception\Fixture\FixtureFriendlyException;
+use Warp\Exception\Fixture\FixtureFriendlyException;
 
 class FriendlyExceptionTraitTest extends TestCase
 {

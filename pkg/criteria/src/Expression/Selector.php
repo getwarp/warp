@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
-use spaceonfire\Common\Field\FieldInterface;
+use Warp\Common\Field\FieldInterface;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Logic\OrX;

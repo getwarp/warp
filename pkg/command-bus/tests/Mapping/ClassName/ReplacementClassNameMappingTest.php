@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping\ClassName;
+namespace Warp\CommandBus\Mapping\ClassName;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\Fixtures\Command\AddTaskCommand;
 
 class ReplacementClassNameMappingTest extends TestCase
 {
@@ -39,12 +39,12 @@ class ReplacementClassNameMappingTest extends TestCase
     {
         // Change namespace
         $mapping = new ReplacementClassNameMapping(
-            'spaceonfire\CommandBus\Fixtures\Command',
-            'spaceonfire\CommandBus\Fixtures\Handler',
+            'Warp\CommandBus\Fixtures\Command',
+            'Warp\CommandBus\Fixtures\Handler',
         );
 
         self::assertSame(
-            'spaceonfire\CommandBus\Fixtures\Handler\AddTaskCommand',
+            'Warp\CommandBus\Fixtures\Handler\AddTaskCommand',
             $mapping->getClassName(AddTaskCommand::class)
         );
     }

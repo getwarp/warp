@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\GroupData;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\GroupData;
 
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 
 final class GroupDataPlugin implements EventSubscriberInterface
 {

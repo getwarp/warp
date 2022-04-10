@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use spaceonfire\Bridge\Cycle\Mapper\StdClassMapper;
-use spaceonfire\Bridge\Cycle\Schema\EntityDto;
-use spaceonfire\Bridge\Cycle\Schema\FieldDto;
+use Warp\Bridge\Cycle\Mapper\StdClassMapper;
+use Warp\Bridge\Cycle\Schema\EntityDto;
+use Warp\Bridge\Cycle\Schema\FieldDto;
 
 return [
     EntityDto::ROLE => 'mtm_tag_user_map',

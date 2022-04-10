@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
-use spaceonfire\Collection\Iterator\ArrayCacheIterator;
-use spaceonfire\Collection\Iterator\ArrayIterator;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Collection\Iterator\ArrayCacheIterator;
+use Warp\Collection\Iterator\ArrayIterator;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
 
 /**
  * @template V

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection;
+namespace Warp\Bridge\Cycle\Collection;
 
 use Cycle\ORM\Heap\Node;
-use spaceonfire\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
+use Warp\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
 
 interface CollectionFactoryInterface
 {

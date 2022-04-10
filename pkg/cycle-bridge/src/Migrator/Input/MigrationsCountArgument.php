@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Input;
+namespace Warp\Bridge\Cycle\Migrator\Input;
 
 /**
  * @extends InputArgument<int|null>

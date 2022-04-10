@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Fixtures;
+namespace Warp\Type\Fixtures;
 
-final class InvalidAggregatedTypeFactory extends \spaceonfire\Type\Factory\AbstractAggregatedTypeFactory
+final class InvalidAggregatedTypeFactory extends \Warp\Type\Factory\AbstractAggregatedTypeFactory
 {
     protected const TYPE_CLASS = InvalidAggregatedType::class;
 }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection;
+namespace Warp\Collection;
 
-use spaceonfire\Collection\Iterator\ArrayCacheIterator;
-use spaceonfire\Common\Field\FieldFactoryInterface;
-use spaceonfire\Common\Field\FieldInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Collection\Iterator\ArrayCacheIterator;
+use Warp\Common\Field\FieldFactoryInterface;
+use Warp\Common\Field\FieldInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
 
 /**
  * @template V

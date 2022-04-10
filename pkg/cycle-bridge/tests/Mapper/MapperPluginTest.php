@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper;
+namespace Warp\Bridge\Cycle\Mapper;
 
 use Cycle\ORM\Command\Branch\ContextSequence;
 use Cycle\ORM\Command\Branch\Sequence;
@@ -10,16 +10,16 @@ use Cycle\ORM\Command\Database\Delete;
 use Cycle\ORM\Command\Database\Update;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Schema;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractBeforeEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\NoopMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
-use spaceonfire\Clock\DateTimeImmutableValue;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\ExtractBeforeEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\NoopMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
+use Warp\Clock\DateTimeImmutableValue;
 
 class MapperPluginTest extends AbstractTestCase
 {

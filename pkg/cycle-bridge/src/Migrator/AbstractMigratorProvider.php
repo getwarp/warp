@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator;
+namespace Warp\Bridge\Cycle\Migrator;
 
 use Cycle\Database\DatabaseManager;
 use Cycle\Migrations\Config\MigrationConfig;
@@ -10,19 +10,19 @@ use Cycle\Migrations\FileRepository;
 use Cycle\Migrations\Migrator;
 use Cycle\Schema\Generator\Migrations\GenerateMigrations;
 use Cycle\Schema\Registry;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorDownCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorFreshCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorGenerateCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorListCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorMakeCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorReplayCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorSyncCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorUpCommand;
-use spaceonfire\Container\DefinitionInterface;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Factory\DefinitionTag;
-use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
 use Symfony\Component\Console\Command\Command;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorDownCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorFreshCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorGenerateCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorListCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorMakeCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorReplayCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorSyncCommand;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorUpCommand;
+use Warp\Container\DefinitionInterface;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Factory\DefinitionTag;
+use Warp\Container\ServiceProvider\AbstractServiceProvider;
 
 abstract class AbstractMigratorProvider extends AbstractServiceProvider
 {

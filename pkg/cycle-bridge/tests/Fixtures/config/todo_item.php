@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use Cycle\Database\Schema\AbstractColumn;
-use spaceonfire\Bridge\Cycle\Fixtures\Mapper\TodoItemMapper;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
-use spaceonfire\Bridge\Cycle\Schema\EntityDto;
-use spaceonfire\Bridge\Cycle\Schema\FieldDto;
-use spaceonfire\Bridge\Cycle\Schema\RelationDto;
+use Warp\Bridge\Cycle\Fixtures\Mapper\TodoItemMapper;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use Warp\Bridge\Cycle\Schema\EntityDto;
+use Warp\Bridge\Cycle\Schema\FieldDto;
+use Warp\Bridge\Cycle\Schema\RelationDto;
 
 return [
     EntityDto::ROLE => TodoItemId::ROLE,

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Handler;
+namespace Warp\Bridge\Cycle\Migrator\Handler;
 
 use Cycle\Migrations\Migrator;
 use Cycle\Schema\Generator\Migrations\MigrationImage;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorMakeCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\OutputStyle;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorMakeCommand;
 
 final class MigratorMakeCommandHandler extends AbstractCommandHandler
 {

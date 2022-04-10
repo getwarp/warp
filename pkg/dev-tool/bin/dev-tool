@@ -3,11 +3,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool;
+namespace Warp\DevTool;
 
 use Composer\Autoload\ClassLoader;
 use PhpOption\Some;
-use spaceonfire\DevTool\Console\ComposerHelper;
+use Warp\DevTool\Console\ComposerHelper;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;

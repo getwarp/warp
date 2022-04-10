@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Relation;
 use Cycle\ORM\SchemaInterface;
-use spaceonfire\Bridge\Cycle\EntityReference;
-use spaceonfire\Bridge\Cycle\EntityReferenceFactory;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
+use Warp\Bridge\Cycle\EntityReference;
+use Warp\Bridge\Cycle\EntityReferenceFactory;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 
 final class ForceEntityReferenceHandler
 {

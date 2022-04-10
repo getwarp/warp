@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Profiler;
+namespace Warp\CommandBus\Middleware\Profiler;
 
 interface MayBeProfiledMessageInterface
 {

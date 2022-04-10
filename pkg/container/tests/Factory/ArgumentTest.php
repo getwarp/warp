@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
 use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\DefinitionContainer;
-use spaceonfire\Container\Exception\CannotResolveArgumentException;
-use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\AA;
-use spaceonfire\Container\Fixtures\AbstractClass\AbstractClass;
-use spaceonfire\Container\Fixtures\ArrayContainer;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\UnionType;
+use Warp\Container\CompositeContainer;
+use Warp\Container\DefinitionContainer;
+use Warp\Container\Exception\CannotResolveArgumentException;
+use Warp\Container\FactoryContainer;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\AA;
+use Warp\Container\Fixtures\AbstractClass\AbstractClass;
+use Warp\Container\Fixtures\ArrayContainer;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
+use Warp\Type\BuiltinType;
+use Warp\Type\InstanceOfType;
+use Warp\Type\UnionType;
 
 class ArgumentTest extends TestCase
 {

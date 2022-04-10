@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\SchemaInterface;
 use Cycle\ORM\Select;
-use spaceonfire\Bridge\Cycle\Select\CriteriaScope;
-use spaceonfire\Bridge\Cycle\Select\LazySelectIterator;
-use spaceonfire\Bridge\Cycle\Select\PrimaryBuilder;
-use spaceonfire\Bridge\Cycle\Select\ScopeAggregate;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Collection\Iterator\ArrayCacheIterator;
-use spaceonfire\Criteria\Criteria;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\DefaultEntityNotFoundExceptionFactory;
-use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
-use spaceonfire\DataSource\EntityReaderInterface;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Bridge\Cycle\Select\CriteriaScope;
+use Warp\Bridge\Cycle\Select\LazySelectIterator;
+use Warp\Bridge\Cycle\Select\PrimaryBuilder;
+use Warp\Bridge\Cycle\Select\ScopeAggregate;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Collection\Iterator\ArrayCacheIterator;
+use Warp\Criteria\Criteria;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\DefaultEntityNotFoundExceptionFactory;
+use Warp\DataSource\EntityNotFoundExceptionFactoryInterface;
+use Warp\DataSource\EntityReaderInterface;
+use Warp\Type\InstanceOfType;
+use Warp\Type\TypeInterface;
 use Webmozart\Expression\Logic\AlwaysTrue;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\ORM\Select\QueryScope;
 use PHPUnit\Framework\TestCase;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo\Composer\Synchronizer;
+namespace Warp\DevTool\Monorepo\Composer\Synchronizer;
 
 final class VersionConflict
 {

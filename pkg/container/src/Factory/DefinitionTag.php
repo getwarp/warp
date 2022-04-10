@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
 /**
  * List of common definitions tags. Use these constants to prevent collision that can be caused by typos in tag names.
@@ -16,10 +16,4 @@ abstract class DefinitionTag
      * @see https://symfony.com/doc/current/reference/dic_tags.html#console-command
      */
     public const CONSOLE_COMMAND = 'console.command';
-
-    /**
-     * Mark monolog handler factories from spaceonfire/monolog-bridge
-     * @var string
-     */
-    public const MONOLOG_HANDLER_FACTORY = 'monolog.handler.factory';
 }

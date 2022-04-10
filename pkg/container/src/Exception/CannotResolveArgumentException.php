@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Exception;
+namespace Warp\Container\Exception;
 
-use spaceonfire\Container\Factory\Argument;
+use Warp\Container\Factory\Argument;
 
 class CannotResolveArgumentException extends ContainerException
 {

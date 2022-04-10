@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
-use spaceonfire\Type\Exception\TypeNotSupportedException;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\Exception\TypeNotSupportedException;
+use Warp\Type\InstanceOfType;
+use Warp\Type\TypeInterface;
 
 final class InstanceOfTypeFactory implements TypeFactoryInterface
 {

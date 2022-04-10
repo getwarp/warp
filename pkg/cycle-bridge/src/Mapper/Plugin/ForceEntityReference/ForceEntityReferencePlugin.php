@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\ForceEntityReference;
 
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
 
 final class ForceEntityReferencePlugin implements EventSubscriberInterface
 {

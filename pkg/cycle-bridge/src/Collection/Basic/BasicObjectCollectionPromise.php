@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Basic;
+namespace Warp\Bridge\Cycle\Collection\Basic;
 
 use Cycle\ORM\Select\ScopeInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
-use spaceonfire\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
-use spaceonfire\Bridge\Cycle\Select\ReferenceScope;
-use spaceonfire\Bridge\Cycle\Select\ScopeAggregate;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
+use Warp\Bridge\Cycle\Collection\Relation\ToManyRelationInterface;
+use Warp\Bridge\Cycle\Select\ReferenceScope;
+use Warp\Bridge\Cycle\Select\ScopeAggregate;
 
 /**
  * @template T of object

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Repository;
+namespace Warp\Bridge\Cycle\Repository;
 
 use Cycle\ORM;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\TransactionInterface;
-use spaceonfire\Bridge\Cycle\CycleEntityManager;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
-use spaceonfire\DataSource\RepositoryInterface;
+use Warp\Bridge\Cycle\CycleEntityManager;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\EntityNotFoundExceptionFactoryInterface;
+use Warp\DataSource\RepositoryInterface;
 
 /**
  * @template E of object

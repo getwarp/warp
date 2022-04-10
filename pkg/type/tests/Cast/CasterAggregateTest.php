@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Cast;
+namespace Warp\Type\Cast;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
+use Warp\Type\BuiltinType;
 
 class CasterAggregateTest extends TestCase
 {

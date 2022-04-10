@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Factory;
+namespace Warp\Type\Factory;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\CollectionType;
-use spaceonfire\Type\Exception\TypeNotSupportedException;
+use Warp\Type\CollectionType;
+use Warp\Type\Exception\TypeNotSupportedException;
 
 class CollectionTypeFactoryTest extends TestCase
 {

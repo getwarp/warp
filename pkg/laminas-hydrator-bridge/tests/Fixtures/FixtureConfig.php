@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Fixtures;
+namespace Warp\Bridge\LaminasHydrator\Fixtures;
 
 use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\ObjectPropertyHydrator;
-use spaceonfire\Bridge\LaminasHydrator\HydrateConstructorTrait;
+use Warp\Bridge\LaminasHydrator\HydrateConstructorTrait;
 
 final class FixtureConfig
 {

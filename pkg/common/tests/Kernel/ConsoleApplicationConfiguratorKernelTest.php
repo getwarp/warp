@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Factory\DefinitionTag;
+use Warp\Container\Factory\DefinitionTag;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;

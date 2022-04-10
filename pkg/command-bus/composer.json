@@ -1,5 +1,5 @@
 {
-  "name": "spaceonfire/command-bus",
+  "name": "getwarp/command-bus",
   "description": "Simple and extendable command bus",
   "type": "library",
   "keywords": [
@@ -9,20 +9,20 @@
     "command",
     "query"
   ],
-  "homepage": "https://github.com/spaceonfire/command-bus",
+  "homepage": "https://github.com/getwarp/command-bus",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "spaceonfire/container": "^3.0",
-    "spaceonfire/exception": "^3.0",
+    "getwarp/container": "^3.0",
+    "getwarp/exception": "^3.0",
     "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {
@@ -37,12 +37,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\CommandBus\\": "src"
+      "Warp\\CommandBus\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\CommandBus\\": "tests"
+      "Warp\\CommandBus\\": "tests"
     }
   },
   "config": {

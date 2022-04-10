@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Logger;
+namespace Warp\CommandBus\Middleware\Logger;
 
 trait MayBeLoggedMessageTrait
 {

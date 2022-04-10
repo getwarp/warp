@@ -1,24 +1,25 @@
 {
-  "name": "spaceonfire/type",
-  "description": "Collection of objects that provides ability of checking value types",
+  "name": "getwarp/type",
+  "description": "Runtime type checking and casting in PHP",
   "type": "library",
   "keywords": [
     "type",
-    "type-check"
+    "type-check",
+    "cast"
   ],
-  "homepage": "https://github.com/spaceonfire/type",
+  "homepage": "https://github.com/getwarp/type",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "spaceonfire/common": "^3.0"
+    "getwarp/common": "^3.0"
   },
   "require-dev": {
     "ext-json": "*",
@@ -29,12 +30,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Type\\": "src"
+      "Warp\\Type\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Type\\": "tests"
+      "Warp\\Type\\": "tests"
     }
   },
   "config": {

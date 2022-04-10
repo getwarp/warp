@@ -1,0 +1,121 @@
+name: Quality Assurance
+
+on:
+  push:
+    paths:
+      - pkg/**/*.php
+      - .github/workflows/qa.yml
+  pull_request:
+    paths:
+      - pkg/**/*.php
+      - .github/workflows/qa.yml
+  workflow_dispatch:
+
+env:
+  XDEBUG_MODE: off
+
+jobs:
+  codestyle:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/getwarp/warp-php-devcontainer:8.1
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.1-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - name: Check coding standard
+        run: vendor/bin/ecs check --no-progress-bar --no-interaction
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/getwarp/warp-php-devcontainer:8.1
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-8.1-prefer-stable
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress --no-interaction
+
+  phpunit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - '7.4'
+          - '8.0'
+          - '8.1'
+        stability:
+          - prefer-lowest
+          - prefer-stable
+    container:
+      image: ghcr.io/getwarp/warp-php-devcontainer:${{ matrix.php-version }}
+      options: --user 1001
+    steps:
+      - id: excluded
+        if: format('{0}-{1}', matrix.php-version, matrix.stability) == '8.1-prefer-lowest'
+        run: echo "Exclude incompatible matrix cases"
+
+      - if: steps.excluded.conclusion == 'skipped'
+        name: Checkout
+        uses: actions/checkout@v2
+
+      - if: steps.excluded.conclusion == 'skipped'
+        name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        env:
+          COMPOSER_CACHE_KEY: composer-${{ matrix.php-version }}-${{ matrix.stability }}
+        with:
+          path: vendor
+          key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ env.COMPOSER_CACHE_KEY }}
+
+      - if: steps.excluded.conclusion == 'skipped'
+        name: Install dependencies
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction --no-progress
+
+      - if: steps.excluded.conclusion == 'skipped'
+        name: PHPUnit
+        run: vendor/bin/phpunit --no-interaction

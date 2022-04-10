@@ -1,22 +1,22 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method spaceonfire\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ReplacementClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
+			message: "#^Method Warp\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ReplacementClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
 			count: 1
 			path: pkg/command-bus/src/Mapping/ClassName/ReplacementClassNameMapping.php
 
 		-
-			message: "#^Method spaceonfire\\\\CommandBus\\\\Mapping\\\\ClassName\\\\SuffixClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
+			message: "#^Method Warp\\\\CommandBus\\\\Mapping\\\\ClassName\\\\SuffixClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
 			count: 1
 			path: pkg/command-bus/src/Mapping/ClassName/SuffixClassNameMapping.php
 
 		-
-			message: "#^Parameter \\#1 \\$callable of method spaceonfire\\\\Container\\\\InvokerInterface\\:\\:invoke\\(\\) expects callable\\(\\)\\: mixed, array\\{T of object, string\\} given\\.$#"
+			message: "#^Parameter \\#1 \\$callable of method Warp\\\\Container\\\\InvokerInterface\\:\\:invoke\\(\\) expects callable\\(\\)\\: mixed, array\\{T of object, string\\} given\\.$#"
 			count: 1
 			path: pkg/container/src/Factory/Reflection/ReflectionFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{spaceonfire\\\\Criteria\\\\Expression\\\\ExpressionFactory, string\\} given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{Warp\\\\Criteria\\\\Expression\\\\ExpressionFactory, string\\} given\\.$#"
 			count: 1
 			path: pkg/criteria/src/Expression/AbstractExpressionDecorator.php
 
@@ -26,17 +26,17 @@ parameters:
 			path: pkg/criteria/src/Expression/ExpressionFactory.php
 
 		-
-			message: "#^Method spaceonfire\\\\Bridge\\\\Cycle\\\\CycleEntityManager\\:\\:getPersister\\(\\) should return spaceonfire\\\\DataSource\\\\EntityPersisterInterface\\<E of object\\> but returns spaceonfire\\\\Bridge\\\\Cycle\\\\CycleEntityPersister\\<object\\>\\.$#"
+			message: "#^Method Warp\\\\Bridge\\\\Cycle\\\\CycleEntityManager\\:\\:getPersister\\(\\) should return Warp\\\\DataSource\\\\EntityPersisterInterface\\<E of object\\> but returns Warp\\\\Bridge\\\\Cycle\\\\CycleEntityPersister\\<object\\>\\.$#"
 			count: 1
 			path: pkg/cycle-bridge/src/CycleEntityManager.php
 
 		-
-			message: "#^Method spaceonfire\\\\ValueObject\\\\AbstractValueObject\\:\\:singletonAttach\\(\\) has parameter \\$item with generic class spaceonfire\\\\ValueObject\\\\AbstractValueObject but does not specify its types\\: T$#"
+			message: "#^Method Warp\\\\ValueObject\\\\AbstractValueObject\\:\\:singletonAttach\\(\\) has parameter \\$item with generic class Warp\\\\ValueObject\\\\AbstractValueObject but does not specify its types\\: T$#"
 			count: 1
 			path: pkg/value-object/src/AbstractValueObject.php
 
 		-
-			message: "#^Method spaceonfire\\\\ValueObject\\\\AbstractValueObject\\:\\:singletonDetach\\(\\) has parameter \\$item with generic class spaceonfire\\\\ValueObject\\\\AbstractValueObject but does not specify its types\\: T$#"
+			message: "#^Method Warp\\\\ValueObject\\\\AbstractValueObject\\:\\:singletonDetach\\(\\) has parameter \\$item with generic class Warp\\\\ValueObject\\\\AbstractValueObject but does not specify its types\\: T$#"
 			count: 1
 			path: pkg/value-object/src/AbstractValueObject.php
 

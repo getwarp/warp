@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Shared;
+namespace Warp\DevTool\Shared;
 
 abstract class AbstractConfig implements \JsonSerializable
 {

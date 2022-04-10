@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Exception;
+namespace Warp\Bridge\Cycle\Migrator\Exception;
 
-use spaceonfire\Bridge\Cycle\Migrator\Input\InputOption;
-use spaceonfire\Exception\FriendlyExceptionTrait;
-use spaceonfire\Exception\MessageTemplate;
-use spaceonfire\Exception\TranslatableExceptionTrait;
 use Symfony\Contracts\Translation\TranslatableInterface;
+use Warp\Bridge\Cycle\Migrator\Input\InputOption;
+use Warp\Exception\FriendlyExceptionTrait;
+use Warp\Exception\MessageTemplate;
+use Warp\Exception\TranslatableExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 final class ConfirmationException extends \RuntimeException implements

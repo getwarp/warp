@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory\Reflection;
+namespace Warp\Container\Factory\Reflection;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\ContainerAwareInterface;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryInterface;
+use Warp\Container\ContainerAwareInterface;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryInterface;
 
 final class ReflectionFactoryAggregate implements FactoryAggregateInterface, ContainerAwareInterface
 {

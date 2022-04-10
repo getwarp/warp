@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Exception;
+namespace Warp\Container\Exception;
 
 use Psr\Container\ContainerExceptionInterface;
-use spaceonfire\Exception\FriendlyExceptionTrait;
+use Warp\Exception\FriendlyExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 class ContainerException extends \RuntimeException implements ContainerExceptionInterface, FriendlyExceptionInterface

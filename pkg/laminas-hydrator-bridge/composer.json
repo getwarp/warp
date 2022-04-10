@@ -1,20 +1,20 @@
 {
-  "name": "spaceonfire/laminas-hydrator-bridge",
-  "description": "Provides integration for Laminas Hydrator with some spaceonfire libraries",
+  "name": "getwarp/laminas-hydrator-bridge",
+  "description": "Integration for Laminas Hydrator with other Warp components",
   "type": "library",
   "keywords": [
-    "spaceonfire",
+    "warp",
     "laminas",
     "laminas-hydrator",
     "hydrator"
   ],
-  "homepage": "https://github.com/spaceonfire/laminas-hydrator-bridge",
+  "homepage": "https://github.com/getwarp/laminas-hydrator-bridge",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -25,23 +25,23 @@
   "require-dev": {
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-latest",
-    "spaceonfire/data-source": "^3.0",
-    "spaceonfire/type": "^3.0",
-    "spaceonfire/value-object": "^3.0"
+    "getwarp/data-source": "^3.0",
+    "getwarp/type": "^3.0",
+    "getwarp/value-object": "^3.0"
   },
   "suggest": {
-    "spaceonfire/type": "Used with CasterStrategy",
-    "spaceonfire/value-object": "Used with ValueObjectStrategy",
-    "spaceonfire/data-source": "Used with BlameStrategy"
+    "getwarp/type": "Used with CasterStrategy",
+    "getwarp/value-object": "Used with ValueObjectStrategy",
+    "getwarp/data-source": "Used with BlameStrategy"
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Bridge\\LaminasHydrator\\": "src"
+      "Warp\\Bridge\\LaminasHydrator\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Bridge\\LaminasHydrator\\": "tests"
+      "Warp\\Bridge\\LaminasHydrator\\": "tests"
     }
   },
   "config": {

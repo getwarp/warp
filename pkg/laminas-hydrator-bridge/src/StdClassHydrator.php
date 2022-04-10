@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator;
+namespace Warp\Bridge\LaminasHydrator;
 
 use Laminas\Hydrator\AbstractHydrator;
 

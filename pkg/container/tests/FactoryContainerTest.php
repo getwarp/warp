@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Exception\CannotResolveArgumentException;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
-use spaceonfire\Container\Fixtures\AbstractClass\RequiresAbstractClass;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MethodsCallFixture;
-use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Container\Fixtures\StaticConstructorClass;
+use Warp\Container\Exception\CannotResolveArgumentException;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\AbstractClass\AcceptNullableAbstractClass;
+use Warp\Container\Fixtures\AbstractClass\RequiresAbstractClass;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MethodsCallFixture;
+use Warp\Container\Fixtures\MyClass;
+use Warp\Container\Fixtures\StaticConstructorClass;
 
 class FactoryContainerTest extends TestCase
 {
@@ -124,7 +124,7 @@ class FactoryContainerTest extends TestCase
 
         self::assertSame(
             42,
-            $container->invoke('\\spaceonfire\\Container\\Fixtures\\intval', FactoryOptions::wrap([
+            $container->invoke('\\Warp\\Container\\Fixtures\\intval', FactoryOptions::wrap([
                 'value' => '42',
                 'base' => 10,
             ]))

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Exception;
+namespace Warp\Exception;
 
 /**
  * Marks that error caused by invalid user data.

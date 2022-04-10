@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\Blame;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\Blame;
 
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
 
 /**
  * @template T of object

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Logger;
+namespace Warp\CommandBus\Middleware\Logger;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 use Psr\Log\Test\TestLogger;
-use spaceonfire\CommandBus\Fixtures\FixtureMayBeLoggedMessage;
+use Warp\CommandBus\Fixtures\FixtureMayBeLoggedMessage;
 
 class LoggerMiddlewareTest extends TestCase
 {

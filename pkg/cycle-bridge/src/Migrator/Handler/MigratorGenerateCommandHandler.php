@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Handler;
+namespace Warp\Bridge\Cycle\Migrator\Handler;
 
 use Cycle\Migrations\Migrator;
 use Cycle\Schema\Generator\Migrations\GenerateMigrations;
 use Cycle\Schema\Registry;
-use spaceonfire\Bridge\Cycle\Migrator\Command\MigratorGenerateCommand;
-use spaceonfire\Bridge\Cycle\Migrator\Generator\ShowChanges;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\OutputStyle;
+use Warp\Bridge\Cycle\Migrator\Command\MigratorGenerateCommand;
+use Warp\Bridge\Cycle\Migrator\Generator\ShowChanges;
 
 final class MigratorGenerateCommandHandler extends AbstractCommandHandler
 {

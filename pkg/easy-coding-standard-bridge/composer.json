@@ -1,6 +1,6 @@
 {
-  "name": "spaceonfire/easy-coding-standard-bridge",
-  "description": "Easy Coding Standard Bridge by spaceonfire",
+  "name": "getwarp/easy-coding-standard-bridge",
+  "description": "Warp config for Easy Coding Standard",
   "type": "library",
   "keywords": [
     "code-style",
@@ -10,7 +10,7 @@
     "baseline",
     "editorconfig"
   ],
-  "homepage": "https://github.com/spaceonfire/easy-coding-standard-bridge",
+  "homepage": "https://github.com/getwarp/easy-coding-standard-bridge",
   "license": "MIT",
   "require": {
     "php": "^7.4|^8.0"

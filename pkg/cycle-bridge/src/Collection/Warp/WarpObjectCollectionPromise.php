@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Onfire;
+namespace Warp\Bridge\Cycle\Collection\Warp;
 
 use Cycle\ORM\Select\ScopeInterface;
-use spaceonfire\Bridge\Cycle\Collection\Change;
-use spaceonfire\Bridge\Cycle\Collection\ChangesAggregate;
-use spaceonfire\Bridge\Cycle\Collection\ChangesEnabledInterface;
-use spaceonfire\Bridge\Cycle\Collection\ChangesPlayer;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
-use spaceonfire\Bridge\Cycle\Select\CriteriaScope;
-use spaceonfire\Collection\AbstractCollectionDecorator;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Type\TypeInterface;
+use Warp\Bridge\Cycle\Collection\Change;
+use Warp\Bridge\Cycle\Collection\ChangesAggregate;
+use Warp\Bridge\Cycle\Collection\ChangesEnabledInterface;
+use Warp\Bridge\Cycle\Collection\ChangesPlayer;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionPromiseInterface;
+use Warp\Bridge\Cycle\Select\CriteriaScope;
+use Warp\Collection\AbstractCollectionDecorator;
+use Warp\Collection\CollectionInterface;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Type\TypeInterface;
 
 /**
  * @template V of object
@@ -25,7 +25,7 @@ use spaceonfire\Type\TypeInterface;
  * @implements ChangesEnabledInterface<V,P>
  * @extends AbstractCollectionDecorator<V>
  */
-final class OnfireObjectCollectionPromise extends AbstractCollectionDecorator implements ObjectCollectionPromiseInterface, StaticConstructorInterface, ChangesEnabledInterface
+final class WarpObjectCollectionPromise extends AbstractCollectionDecorator implements ObjectCollectionPromiseInterface, StaticConstructorInterface, ChangesEnabledInterface
 {
     /**
      * @var ObjectCollectionPromiseInterface<V,P>
@@ -35,9 +35,9 @@ final class OnfireObjectCollectionPromise extends AbstractCollectionDecorator im
     private ?TypeInterface $valueType;
 
     /**
-     * @var OnfireObjectCollection<V,P>|null
+     * @var WarpObjectCollection<V,P>|null
      */
-    private ?OnfireObjectCollection $collection;
+    private ?WarpObjectCollection $collection;
 
     /**
      * @var ChangesAggregate<V,P>
@@ -47,13 +47,13 @@ final class OnfireObjectCollectionPromise extends AbstractCollectionDecorator im
     /**
      * @param ObjectCollectionPromiseInterface<V,P> $promise
      * @param TypeInterface|null $valueType
-     * @param OnfireObjectCollection<V,P>|null $collection
+     * @param WarpObjectCollection<V,P>|null $collection
      * @param ChangesAggregate<V,P>|null $changes
      */
     private function __construct(
         ObjectCollectionPromiseInterface $promise,
         ?TypeInterface $valueType = null,
-        ?OnfireObjectCollection $collection = null,
+        ?WarpObjectCollection $collection = null,
         ?ChangesAggregate $changes = null
     ) {
         $this->promise = $promise;
@@ -222,12 +222,12 @@ final class OnfireObjectCollectionPromise extends AbstractCollectionDecorator im
     }
 
     /**
-     * @return OnfireObjectCollection<V,P>
+     * @return WarpObjectCollection<V,P>
      */
-    protected function getCollection(): OnfireObjectCollection
+    protected function getCollection(): WarpObjectCollection
     {
         if (null === $this->collection) {
-            $this->collection = OnfireObjectCollection::new(
+            $this->collection = WarpObjectCollection::new(
                 (new ChangesPlayer())->play($this->promise->__resolve()->getPivotContext(), $this->releaseChanges()),
                 $this->valueType,
             );

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
-use spaceonfire\CommandBus\Exception\CannotInvokeHandlerException;
-use spaceonfire\CommandBus\Mapping\CommandToHandlerMappingInterface;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\FactoryOptionsInterface;
+use Warp\CommandBus\Exception\CannotInvokeHandlerException;
+use Warp\CommandBus\Mapping\CommandToHandlerMappingInterface;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryContainer;
+use Warp\Container\FactoryOptionsInterface;
 
 /**
  * Receives a command and sends it through a chain of middleware for processing.

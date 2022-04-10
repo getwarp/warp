@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Exception;
+namespace Warp\Exception;
 
 use function Symfony\Component\String\s;
 

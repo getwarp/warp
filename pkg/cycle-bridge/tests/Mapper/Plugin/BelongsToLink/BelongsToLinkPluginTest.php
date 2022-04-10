@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
 
 use Cycle\ORM\Command\Branch\ContextSequence;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\Reference;
 use Cycle\ORM\TransactionInterface;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\Post;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\Post;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class BelongsToLinkPluginTest extends AbstractTestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Exception;
+namespace Warp\Bridge\Cycle\Migrator\Exception;
 
-use spaceonfire\Exception\TranslatableExceptionTrait;
 use Symfony\Contracts\Translation\TranslatableInterface;
+use Warp\Exception\TranslatableExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 final class MigrationLockedException extends \RuntimeException implements

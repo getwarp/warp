@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
 
 /**
  * @template E of object

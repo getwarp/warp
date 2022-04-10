@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Field;
+namespace Warp\Common\Field;
 
-use spaceonfire\Exception\PackageMissingException;
+use Warp\Exception\PackageMissingException;
 use Yiisoft\Arrays\ArrayHelper;
 
 final class YiiField implements FieldInterface

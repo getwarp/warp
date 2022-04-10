@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\DataSource\Blame\Blame;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\DataSource\Blame\Blame;
 
 class BlameStrategyTest extends TestCase
 {

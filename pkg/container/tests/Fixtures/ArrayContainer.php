@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures;
+namespace Warp\Container\Fixtures;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\Exception\NotFoundException;
+use Warp\Container\Exception\NotFoundException;
 
 final class ArrayContainer implements ContainerInterface
 {

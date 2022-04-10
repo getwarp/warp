@@ -1,15 +1,15 @@
 {
-  "name": "spaceonfire/spaceonfire",
+  "name": "getwarp/warp",
   "description": "",
   "type": "project",
   "keywords": [],
-  "homepage": "https://github.com/spaceonfire/spaceonfire",
+  "homepage": "https://github.com/getwarp/warp",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
@@ -64,22 +64,20 @@
     "yiisoft/arrays": "^1.0"
   },
   "replace": {
-    "spaceonfire/clock": "self.version",
-    "spaceonfire/collection": "self.version",
-    "spaceonfire/command-bus": "self.version",
-    "spaceonfire/common": "self.version",
-    "spaceonfire/container": "self.version",
-    "spaceonfire/criteria": "self.version",
-    "spaceonfire/cycle-bridge": "self.version",
-    "spaceonfire/data-source": "self.version",
-    "spaceonfire/dev-tool": "self.version",
-    "spaceonfire/doctrine-bridge": "self.version",
-    "spaceonfire/easy-coding-standard-bridge": "self.version",
-    "spaceonfire/exception": "self.version",
-    "spaceonfire/laminas-hydrator-bridge": "self.version",
-    "spaceonfire/monolog-bridge": "self.version",
-    "spaceonfire/type": "self.version",
-    "spaceonfire/value-object": "self.version"
+    "getwarp/clock": "self.version",
+    "getwarp/collection": "self.version",
+    "getwarp/command-bus": "self.version",
+    "getwarp/common": "self.version",
+    "getwarp/container": "self.version",
+    "getwarp/criteria": "self.version",
+    "getwarp/cycle-bridge": "self.version",
+    "getwarp/data-source": "self.version",
+    "getwarp/dev-tool": "self.version",
+    "getwarp/easy-coding-standard-bridge": "self.version",
+    "getwarp/exception": "self.version",
+    "getwarp/laminas-hydrator-bridge": "self.version",
+    "getwarp/type": "self.version",
+    "getwarp/value-object": "self.version"
   },
   "bin": [
     "pkg/dev-tool/bin/dev-tool",
@@ -88,21 +86,19 @@
   ],
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Clock\\": "pkg/clock/src",
-      "spaceonfire\\Collection\\": "pkg/collection/src",
-      "spaceonfire\\CommandBus\\": "pkg/command-bus/src",
-      "spaceonfire\\Common\\": "pkg/common/src",
-      "spaceonfire\\Container\\": "pkg/container/src",
-      "spaceonfire\\Criteria\\": "pkg/criteria/src",
-      "spaceonfire\\Bridge\\Cycle\\": "pkg/cycle-bridge/src",
-      "spaceonfire\\DataSource\\": "pkg/data-source/src",
-      "spaceonfire\\DevTool\\": "pkg/dev-tool/src",
-      "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/src",
-      "spaceonfire\\Exception\\": "pkg/exception/src",
-      "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/src",
-      "spaceonfire\\Bridge\\Monolog\\": "pkg/monolog-bridge/src",
-      "spaceonfire\\Type\\": "pkg/type/src",
-      "spaceonfire\\ValueObject\\": "pkg/value-object/src"
+      "Warp\\Clock\\": "pkg/clock/src",
+      "Warp\\Collection\\": "pkg/collection/src",
+      "Warp\\CommandBus\\": "pkg/command-bus/src",
+      "Warp\\Common\\": "pkg/common/src",
+      "Warp\\Container\\": "pkg/container/src",
+      "Warp\\Criteria\\": "pkg/criteria/src",
+      "Warp\\Bridge\\Cycle\\": "pkg/cycle-bridge/src",
+      "Warp\\DataSource\\": "pkg/data-source/src",
+      "Warp\\DevTool\\": "pkg/dev-tool/src",
+      "Warp\\Exception\\": "pkg/exception/src",
+      "Warp\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/src",
+      "Warp\\Type\\": "pkg/type/src",
+      "Warp\\ValueObject\\": "pkg/value-object/src"
     },
     "files": [
       "pkg/common/functions.php"
@@ -110,21 +106,19 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Clock\\": "pkg/clock/tests",
-      "spaceonfire\\Collection\\": "pkg/collection/tests",
-      "spaceonfire\\CommandBus\\": "pkg/command-bus/tests",
-      "spaceonfire\\Common\\": "pkg/common/tests",
-      "spaceonfire\\Container\\": "pkg/container/tests",
-      "spaceonfire\\Criteria\\": "pkg/criteria/tests",
-      "spaceonfire\\Bridge\\Cycle\\": "pkg/cycle-bridge/tests",
-      "spaceonfire\\DataSource\\": "pkg/data-source/tests",
-      "spaceonfire\\DevTool\\": "pkg/dev-tool/tests",
-      "spaceonfire\\Bridge\\Doctrine\\": "pkg/doctrine-bridge/tests",
-      "spaceonfire\\Exception\\": "pkg/exception/tests",
-      "spaceonfire\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/tests",
-      "spaceonfire\\Bridge\\Monolog\\": "pkg/monolog-bridge/tests",
-      "spaceonfire\\Type\\": "pkg/type/tests",
-      "spaceonfire\\ValueObject\\": "pkg/value-object/tests"
+      "Warp\\Clock\\": "pkg/clock/tests",
+      "Warp\\Collection\\": "pkg/collection/tests",
+      "Warp\\CommandBus\\": "pkg/command-bus/tests",
+      "Warp\\Common\\": "pkg/common/tests",
+      "Warp\\Container\\": "pkg/container/tests",
+      "Warp\\Criteria\\": "pkg/criteria/tests",
+      "Warp\\Bridge\\Cycle\\": "pkg/cycle-bridge/tests",
+      "Warp\\DataSource\\": "pkg/data-source/tests",
+      "Warp\\DevTool\\": "pkg/dev-tool/tests",
+      "Warp\\Exception\\": "pkg/exception/tests",
+      "Warp\\Bridge\\LaminasHydrator\\": "pkg/laminas-hydrator-bridge/tests",
+      "Warp\\Type\\": "pkg/type/tests",
+      "Warp\\ValueObject\\": "pkg/value-object/tests"
     },
     "files": [
       "pkg/container/tests/autoload.php"
@@ -140,67 +134,59 @@
       "projects": [
         {
           "dir": "pkg/clock",
-          "git": "https://github.com/spaceonfire/clock.git"
+          "git": "https://github.com/getwarp/clock.git"
         },
         {
           "dir": "pkg/collection",
-          "git": "https://github.com/spaceonfire/collection.git"
+          "git": "https://github.com/getwarp/collection.git"
         },
         {
           "dir": "pkg/command-bus",
-          "git": "https://github.com/spaceonfire/command-bus.git"
+          "git": "https://github.com/getwarp/command-bus.git"
         },
         {
           "dir": "pkg/common",
-          "git": "https://github.com/spaceonfire/common.git"
+          "git": "https://github.com/getwarp/common.git"
         },
         {
           "dir": "pkg/container",
-          "git": "https://github.com/spaceonfire/container.git"
+          "git": "https://github.com/getwarp/container.git"
         },
         {
           "dir": "pkg/criteria",
-          "git": "https://github.com/spaceonfire/criteria.git"
+          "git": "https://github.com/getwarp/criteria.git"
         },
         {
           "dir": "pkg/cycle-bridge",
-          "git": "https://github.com/spaceonfire/cycle-bridge.git"
+          "git": "https://github.com/getwarp/cycle-bridge.git"
         },
         {
           "dir": "pkg/data-source",
-          "git": "https://github.com/spaceonfire/data-source.git"
+          "git": "https://github.com/getwarp/data-source.git"
         },
         {
           "dir": "pkg/dev-tool",
           "git": null
         },
         {
-          "dir": "pkg/doctrine-bridge",
-          "git": "https://github.com/spaceonfire/doctrine-bridge.git"
-        },
-        {
           "dir": "pkg/easy-coding-standard-bridge",
-          "git": "https://github.com/spaceonfire/easy-coding-standard-bridge.git"
+          "git": "https://github.com/getwarp/easy-coding-standard-bridge.git"
         },
         {
           "dir": "pkg/exception",
-          "git": "https://github.com/spaceonfire/exception.git"
+          "git": "https://github.com/getwarp/exception.git"
         },
         {
           "dir": "pkg/laminas-hydrator-bridge",
-          "git": "https://github.com/spaceonfire/laminas-hydrator-bridge.git"
-        },
-        {
-          "dir": "pkg/monolog-bridge",
-          "git": "https://github.com/spaceonfire/monolog-bridge.git"
+          "git": "https://github.com/getwarp/laminas-hydrator-bridge.git"
         },
         {
           "dir": "pkg/type",
-          "git": "https://github.com/spaceonfire/type.git"
+          "git": "https://github.com/getwarp/type.git"
         },
         {
           "dir": "pkg/value-object",
-          "git": "https://github.com/spaceonfire/value-object.git"
+          "git": "https://github.com/getwarp/value-object.git"
         }
       ],
       "require-dev": {
@@ -216,6 +202,9 @@
   "prefer-stable": true,
   "config": {
     "preferred-install": "dist",
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

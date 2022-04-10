@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type;
+namespace Warp\Type;
 
-use spaceonfire\Common\Factory\SingletonStorageTrait;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
+use Warp\Common\Factory\SingletonStorageTrait;
+use Warp\Common\Factory\StaticConstructorInterface;
 
 final class CollectionType implements TypeInterface, StaticConstructorInterface
 {

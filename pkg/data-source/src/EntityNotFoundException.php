@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource;
+namespace Warp\DataSource;
 
-use spaceonfire\Exception\ClientFriendlyExceptionInterface;
-use spaceonfire\Exception\FriendlyExceptionTrait;
-use spaceonfire\Exception\MessageTemplate;
-use spaceonfire\Exception\TranslatableExceptionTrait;
 use Symfony\Contracts\Translation\TranslatableInterface;
+use Warp\Exception\ClientFriendlyExceptionInterface;
+use Warp\Exception\FriendlyExceptionTrait;
+use Warp\Exception\MessageTemplate;
+use Warp\Exception\TranslatableExceptionTrait;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 class EntityNotFoundException extends \OutOfBoundsException implements

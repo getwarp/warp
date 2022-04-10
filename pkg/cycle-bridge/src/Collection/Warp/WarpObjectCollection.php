@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Onfire;
+namespace Warp\Bridge\Cycle\Collection\Warp;
 
-use spaceonfire\Bridge\Cycle\Collection\ObjectCollectionInterface;
-use spaceonfire\Collection\AbstractCollectionDecorator;
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Type\TypeInterface;
+use Warp\Bridge\Cycle\Collection\ObjectCollectionInterface;
+use Warp\Collection\AbstractCollectionDecorator;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Type\TypeInterface;
 
 /**
  * @template V of object
@@ -17,7 +17,7 @@ use spaceonfire\Type\TypeInterface;
  * @extends AbstractCollectionDecorator<V>
  * @implements ObjectCollectionInterface<V,P>
  */
-final class OnfireObjectCollection extends AbstractCollectionDecorator implements ObjectCollectionInterface, StaticConstructorInterface
+final class WarpObjectCollection extends AbstractCollectionDecorator implements ObjectCollectionInterface, StaticConstructorInterface
 {
     /**
      * @var ObjectIterator<V,P>

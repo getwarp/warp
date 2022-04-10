@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Profiler;
+namespace Warp\CommandBus\Middleware\Profiler;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
-use spaceonfire\CommandBus\Fixtures\FixtureMayBeProfiledMessage;
+use Warp\CommandBus\Fixtures\FixtureMayBeProfiledMessage;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProfilerMiddlewareTest extends TestCase

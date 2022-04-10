@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Field;
+namespace Warp\Common\Field;
 
-use spaceonfire\Exception\PackageMissingException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\PropertyAccess\PropertyPath;
+use Warp\Exception\PackageMissingException;
 
 final class PropertyAccessField implements FieldInterface
 {

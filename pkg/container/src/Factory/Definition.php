@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
 use PhpOption\None;
 use PhpOption\Option;
 use PhpOption\Some;
-use spaceonfire\Container\ContainerAwareTrait;
-use spaceonfire\Container\DefinitionInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\InstanceOfAliasContainer;
-use spaceonfire\Container\InvokerInterface;
-use spaceonfire\Container\InvokerOptionsInterface;
+use Warp\Container\ContainerAwareTrait;
+use Warp\Container\DefinitionInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\InstanceOfAliasContainer;
+use Warp\Container\InvokerInterface;
+use Warp\Container\InvokerOptionsInterface;
 
 /**
  * @template T

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo\Composer;
+namespace Warp\DevTool\Monorepo\Composer;
 
-use spaceonfire\DevTool\Console\ComposerHelper;
-use spaceonfire\DevTool\Monorepo\Composer\Synchronizer\ComposerJsonSynchronizer;
-use spaceonfire\DevTool\Monorepo\Composer\Synchronizer\VersionConflict;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Warp\DevTool\Console\ComposerHelper;
+use Warp\DevTool\Monorepo\Composer\Synchronizer\ComposerJsonSynchronizer;
+use Warp\DevTool\Monorepo\Composer\Synchronizer\VersionConflict;
 
 final class MonorepoComposerCommand extends Command
 {

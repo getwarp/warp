@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\DefinitionAggregateInterface;
-use spaceonfire\Container\DefinitionContainer;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\InvokerInterface;
-use spaceonfire\Container\ServiceProvider\ServiceProviderInterface;
-use spaceonfire\Container\ServiceProviderAggregateInterface;
+use Warp\Container\CompositeContainer;
+use Warp\Container\DefinitionAggregateInterface;
+use Warp\Container\DefinitionContainer;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryContainer;
+use Warp\Container\InvokerInterface;
+use Warp\Container\ServiceProvider\ServiceProviderInterface;
+use Warp\Container\ServiceProviderAggregateInterface;
 
 abstract class AbstractKernel
 {

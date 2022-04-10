@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Command;
+namespace Warp\Common\CQRS\Command;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Fixtures\CQRS\Command\FixtureCommand;
-use spaceonfire\Common\Fixtures\CQRS\Command\FixtureCommandBus;
-use spaceonfire\Common\Fixtures\CQRS\Command\FixtureCommandHandler;
-use spaceonfire\Container\FactoryInterface;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\Fixtures\ArrayFactoryAggregate;
+use Warp\Common\Fixtures\CQRS\Command\FixtureCommand;
+use Warp\Common\Fixtures\CQRS\Command\FixtureCommandBus;
+use Warp\Common\Fixtures\CQRS\Command\FixtureCommandHandler;
+use Warp\Container\FactoryInterface;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\Fixtures\ArrayFactoryAggregate;
 
 /**
  * @todo: replace ArrayFactoryAggregate

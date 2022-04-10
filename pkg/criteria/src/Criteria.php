@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria;
+namespace Warp\Criteria;
 
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Criteria\Expression\ExpressionFactory;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Criteria\Expression\ExpressionFactory;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Logic\OrX;

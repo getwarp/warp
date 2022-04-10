@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Fixtures;
+namespace Warp\ValueObject\Fixtures;
 
-use spaceonfire\ValueObject\AbstractEnumValue;
+use Warp\ValueObject\AbstractEnumValue;
 
 final class InvalidEnum extends AbstractEnumValue
 {

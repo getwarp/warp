@@ -16,9 +16,7 @@ parameters:
         - pkg/cycle-bridge/src/
         - pkg/data-source/src/
         - pkg/dev-tool/src/
+        - pkg/exception/src/
+        - pkg/laminas-hydrator-bridge/src/
         - pkg/type/src/
         - pkg/value-object/src/
-        - pkg/laminas-hydrator-bridge/src/
-        - pkg/monolog-bridge/src/
-        - pkg/exception/src/
-        - pkg/doctrine-bridge/src/

@@ -1,10 +1,10 @@
 # Changelog
 
-All notable changes to `criteria` will be documented in this file.
+All notable changes to `getwarp/criteria` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [3.0.0] - Not Released Yet
+## [3.0.0] - 2022-04-22
 
 ### Changed
 
@@ -20,6 +20,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Criteria decorators.
 - Doctrine expression converter.
 - `JsonApiCriteriaBuilder` class.
+
+## [2.5.3] - 2022-04-22
+
+Release under a `warp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.1] - 2021-06-13
 

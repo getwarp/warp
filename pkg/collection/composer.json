@@ -1,26 +1,29 @@
 {
-  "name": "spaceonfire/collection",
-  "description": "Framework agnostic PHP collections",
+  "name": "getwarp/collection",
+  "description": "Framework-agnostic PHP collections",
   "type": "library",
   "keywords": [
-    "collection"
+    "collection",
+    "list",
+    "map",
+    "generators"
   ],
-  "homepage": "https://github.com/spaceonfire/collection",
+  "homepage": "https://github.com/getwarp/collection",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "spaceonfire/common": "^3.0",
-    "spaceonfire/criteria": "^3.0",
-    "spaceonfire/type": "^3.0",
+    "getwarp/common": "^3.0",
+    "getwarp/criteria": "^3.0",
+    "getwarp/type": "^3.0",
     "symfony/polyfill-php80": "^1.22",
     "symfony/polyfill-php81": "^1.22"
   },
@@ -30,12 +33,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Collection\\": "src"
+      "Warp\\Collection\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Collection\\": "tests"
+      "Warp\\Collection\\": "tests"
     }
   },
   "minimum-stability": "dev",

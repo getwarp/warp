@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping\Method;
+namespace Warp\CommandBus\Mapping\Method;
 
 interface MethodNameMappingInterface
 {

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
 use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryInterface;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\Fixtures\A;
-use spaceonfire\Container\Fixtures\AA;
-use spaceonfire\Container\Fixtures\ArrayContainer;
-use spaceonfire\Container\Fixtures\ArrayFactoryAggregate;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\InvokerInterface;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryInterface;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\Fixtures\A;
+use Warp\Container\Fixtures\AA;
+use Warp\Container\Fixtures\ArrayContainer;
+use Warp\Container\Fixtures\ArrayFactoryAggregate;
+use Warp\Container\Fixtures\B;
+use Warp\Container\InvokerInterface;
 
 class DefinitionTest extends TestCase
 {

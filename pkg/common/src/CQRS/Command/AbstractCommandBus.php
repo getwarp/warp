@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\CQRS\Command;
+namespace Warp\Common\CQRS\Command;
 
-use spaceonfire\CommandBus\CommandBus as MessageBus;
+use Warp\CommandBus\CommandBus as MessageBus;
 
 abstract class AbstractCommandBus implements CommandBusInterface
 {

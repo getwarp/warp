@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
-use spaceonfire\Container\ServiceProvider\ServiceProviderInterface;
+use Warp\Container\ServiceProvider\ServiceProviderInterface;
 
 interface ServiceProviderAggregateInterface
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Operation;
+namespace Warp\Collection\Operation;
 
-use spaceonfire\Collection\AlterValueTypeOperationInterface;
-use spaceonfire\Common\Field\FieldInterface;
+use Warp\Collection\AlterValueTypeOperationInterface;
+use Warp\Common\Field\FieldInterface;
 
 /**
  * @template K of array-key

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo;
+namespace Warp\DevTool\Monorepo;
 
-use spaceonfire\DevTool\Monorepo\Composer\ComposerJson;
-use spaceonfire\DevTool\Monorepo\Composer\MonorepoConfig;
+use Warp\DevTool\Monorepo\Composer\ComposerJson;
+use Warp\DevTool\Monorepo\Composer\MonorepoConfig;
 
 final class ComposerPackagesCollation
 {

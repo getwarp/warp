@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures\Todo;
+namespace Warp\Bridge\Cycle\Fixtures\Todo;
 
 use Cycle\ORM\Promise\ReferenceInterface;
-use spaceonfire\ValueObject\UuidValue;
+use Warp\ValueObject\UuidValue;
 
 final class TodoItemId extends UuidValue implements ReferenceInterface
 {

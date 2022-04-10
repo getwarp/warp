@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures\Todo;
+namespace Warp\Bridge\Cycle\Fixtures\Todo;
 
 final class TodoItemUndoneEvent
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Blame;
+namespace Warp\DataSource\Blame;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Clock\DateTimeImmutableValue;
-use spaceonfire\Clock\FrozenClock;
-use spaceonfire\Clock\SystemClock;
-use spaceonfire\DataSource\EntityReferenceInterface;
-use spaceonfire\DataSource\Fixtures\User;
+use Warp\Clock\DateTimeImmutableValue;
+use Warp\Clock\FrozenClock;
+use Warp\Clock\SystemClock;
+use Warp\DataSource\EntityReferenceInterface;
+use Warp\DataSource\Fixtures\User;
 
 class BlameTest extends TestCase
 {

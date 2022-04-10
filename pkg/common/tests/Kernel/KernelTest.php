@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common\Kernel;
+namespace Warp\Common\Kernel;
 
 use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\DefinitionContainer;
-use spaceonfire\Container\FactoryContainer;
-use spaceonfire\Container\ServiceProvider\AbstractServiceProvider;
+use Warp\Container\CompositeContainer;
+use Warp\Container\DefinitionContainer;
+use Warp\Container\FactoryContainer;
+use Warp\Container\ServiceProvider\AbstractServiceProvider;
 
 class KernelTest extends TestCase
 {

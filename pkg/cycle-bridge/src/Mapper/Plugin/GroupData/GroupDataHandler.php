@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\GroupData;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\GroupData;
 
 use Cycle\ORM\ORMInterface;
-use spaceonfire\Bridge\Cycle\Mapper\HydratorMapper;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
-use spaceonfire\Common\ArrayHelper;
+use Warp\Bridge\Cycle\Mapper\HydratorMapper;
+use Warp\Bridge\Cycle\Mapper\Plugin\ExtractAfterEvent;
+use Warp\Bridge\Cycle\Mapper\Plugin\HydrateBeforeEvent;
+use Warp\Common\ArrayHelper;
 
 final class GroupDataHandler
 {

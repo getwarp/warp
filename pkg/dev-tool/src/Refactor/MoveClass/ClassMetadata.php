@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Refactor\MoveClass;
+namespace Warp\DevTool\Refactor\MoveClass;
 
 final class ClassMetadata
 {

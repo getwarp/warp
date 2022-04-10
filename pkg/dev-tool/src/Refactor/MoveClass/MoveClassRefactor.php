@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Refactor\MoveClass;
+namespace Warp\DevTool\Refactor\MoveClass;
 
 use Composer\Autoload\ClassLoader;
 use Symfony\Component\Filesystem\Filesystem;

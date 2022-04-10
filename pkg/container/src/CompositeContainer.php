@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
 
 /**
  * @implements \IteratorAggregate<ContainerInterface>

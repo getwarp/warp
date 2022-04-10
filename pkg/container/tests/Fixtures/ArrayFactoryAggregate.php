@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Fixtures;
+namespace Warp\Container\Fixtures;
 
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\FactoryAggregateInterface;
-use spaceonfire\Container\FactoryInterface;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\FactoryInterface;
 
 final class ArrayFactoryAggregate implements FactoryAggregateInterface
 {

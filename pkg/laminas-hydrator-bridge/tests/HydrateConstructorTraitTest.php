@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator;
+namespace Warp\Bridge\LaminasHydrator;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Bridge\LaminasHydrator\Fixtures\FixtureConfig;
+use Warp\Bridge\LaminasHydrator\Fixtures\FixtureConfig;
 
 class HydrateConstructorTraitTest extends TestCase
 {

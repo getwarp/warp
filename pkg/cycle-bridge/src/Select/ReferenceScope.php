@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\Database\Query\SelectQuery;
 use Cycle\ORM\Select\QueryBuilder;

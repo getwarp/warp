@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\Reference;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
-use spaceonfire\DataSource\EntityNotFoundException;
-use spaceonfire\DataSource\EntityReferenceInterface;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use Warp\DataSource\EntityNotFoundException;
+use Warp\DataSource\EntityReferenceInterface;
 
 class EntityReferenceTest extends TestCase
 {

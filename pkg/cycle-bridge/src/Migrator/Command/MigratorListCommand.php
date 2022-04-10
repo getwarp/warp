@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator\Command;
+namespace Warp\Bridge\Cycle\Migrator\Command;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Bridge\Cycle\Migrator\Handler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Warp\Bridge\Cycle\Migrator\Handler;
 
 final class MigratorListCommand extends Command
 {

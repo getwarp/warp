@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Cast;
+namespace Warp\Type\Cast;
 
-use spaceonfire\Type\TypeInterface;
+use Warp\Type\TypeInterface;
 
 final class ScalarCasterFactory implements CasterFactoryInterface
 {

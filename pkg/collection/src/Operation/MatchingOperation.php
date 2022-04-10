@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Collection\Operation;
+namespace Warp\Collection\Operation;
 
-use spaceonfire\Collection\OperationInterface;
-use spaceonfire\Common\Field\FieldFactoryAggregate;
-use spaceonfire\Common\Field\FieldFactoryInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\Criteria\FilterableInterface;
+use Warp\Collection\OperationInterface;
+use Warp\Common\Field\FieldFactoryAggregate;
+use Warp\Common\Field\FieldFactoryInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\Criteria\FilterableInterface;
 
 /**
  * @template K of array-key

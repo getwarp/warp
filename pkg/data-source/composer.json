@@ -1,31 +1,30 @@
 {
-  "name": "spaceonfire/data-source",
+  "name": "getwarp/data-source",
   "description": "Useful interfaces and abstracts to design your domain model",
   "type": "library",
   "keywords": [
-    "DDD",
     "domain",
     "entity",
     "repository"
   ],
-  "homepage": "https://github.com/spaceonfire/data-source",
+  "homepage": "https://github.com/getwarp/data-source",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "spaceonfire/collection": "^3.0",
-    "spaceonfire/common": "^3.0",
-    "spaceonfire/criteria": "^3.0",
-    "spaceonfire/exception": "^3.0",
-    "spaceonfire/value-object": "^3.0",
+    "getwarp/collection": "^3.0",
+    "getwarp/common": "^3.0",
+    "getwarp/criteria": "^3.0",
+    "getwarp/exception": "^3.0",
+    "getwarp/value-object": "^3.0",
     "symfony/translation-contracts": "^2.3|^3.0",
     "webmozart/expression": "^1.0",
     "yiisoft/friendly-exception": "^1.0"
@@ -37,16 +36,16 @@
   },
   "suggest": {
     "laminas/laminas-hydrator": "There are decorator for property hydrator using laminas-hydrator",
-    "spaceonfire/cycle-bridge": "Implementation of data source contracts for Cycle ORM"
+    "getwarp/cycle-bridge": "Implementation of data source contracts for Cycle ORM"
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\DataSource\\": "src"
+      "Warp\\DataSource\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\DataSource\\": "tests"
+      "Warp\\DataSource\\": "tests"
     }
   },
   "config": {

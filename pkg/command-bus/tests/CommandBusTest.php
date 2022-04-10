@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus;
+namespace Warp\CommandBus;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\CommandBus\Exception\CannotInvokeHandlerException;
-use spaceonfire\CommandBus\Fixtures\Command\AddTaskCommand;
-use spaceonfire\CommandBus\Fixtures\Command\CompleteTaskCommand;
-use spaceonfire\CommandBus\Fixtures\Handler\AddTaskCommandHandler;
-use spaceonfire\CommandBus\Fixtures\Handler\HandleMethodHandler;
-use spaceonfire\CommandBus\Mapping\MapByStaticList;
+use Warp\CommandBus\Exception\CannotInvokeHandlerException;
+use Warp\CommandBus\Fixtures\Command\AddTaskCommand;
+use Warp\CommandBus\Fixtures\Command\CompleteTaskCommand;
+use Warp\CommandBus\Fixtures\Handler\AddTaskCommandHandler;
+use Warp\CommandBus\Fixtures\Handler\HandleMethodHandler;
+use Warp\CommandBus\Mapping\MapByStaticList;
 
 class CommandBusTest extends TestCase
 {

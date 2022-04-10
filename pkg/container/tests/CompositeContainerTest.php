@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container;
+namespace Warp\Container;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\Exception\NotFoundException;
-use spaceonfire\Container\Factory\FactoryOptions;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
-use spaceonfire\Container\Fixtures\ArrayContainer;
-use spaceonfire\Container\Fixtures\B;
-use spaceonfire\Container\Fixtures\MyClass;
-use spaceonfire\Container\Fixtures\ServiceProvider\MyClassProvider;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\Exception\NotFoundException;
+use Warp\Container\Factory\FactoryOptions;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\Fixtures\ArrayContainer;
+use Warp\Container\Fixtures\B;
+use Warp\Container\Fixtures\MyClass;
+use Warp\Container\Fixtures\ServiceProvider\MyClassProvider;
 
 class CompositeContainerTest extends TestCase
 {
@@ -127,7 +127,7 @@ class CompositeContainerTest extends TestCase
 
         self::assertSame(
             42,
-            $container->invoke('\\spaceonfire\\Container\\Fixtures\\intval', FactoryOptions::wrap([
+            $container->invoke('\\Warp\\Container\\Fixtures\\intval', FactoryOptions::wrap([
                 'value' => '42',
                 'base' => 10,
             ]))

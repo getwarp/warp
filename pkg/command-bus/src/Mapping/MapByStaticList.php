@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Mapping;
+namespace Warp\CommandBus\Mapping;
 
-use spaceonfire\CommandBus\Exception\FailedToMapCommandException;
+use Warp\CommandBus\Exception\FailedToMapCommandException;
 
 final class MapByStaticList implements CommandToHandlerMappingInterface
 {

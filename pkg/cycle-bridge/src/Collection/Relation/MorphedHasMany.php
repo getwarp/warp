@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Relation;
+namespace Warp\Bridge\Cycle\Collection\Relation;
 
 use Cycle\ORM\Command\ContextCarrierInterface;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\Relation;
-use spaceonfire\Bridge\Cycle\Collection\CollectionFactoryInterface;
+use Warp\Bridge\Cycle\Collection\CollectionFactoryInterface;
 
 class MorphedHasMany extends HasMany
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\BelongsToLink;
 
 use Cycle\ORM\Command\ContextCarrierInterface;
 use Cycle\ORM\Heap\Node;
@@ -11,8 +11,8 @@ use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
 use Cycle\ORM\Relation;
 use Cycle\ORM\SchemaInterface;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
-use spaceonfire\Bridge\Cycle\NodeHelper;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
+use Warp\Bridge\Cycle\NodeHelper;
 
 final class BelongsToLinkHandler
 {

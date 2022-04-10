@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper;
+namespace Warp\Bridge\Cycle\Mapper;
 
 use Cycle\ORM\Command\CommandInterface;
 use Cycle\ORM\Command\ContextCarrierInterface;
@@ -15,10 +15,10 @@ use Laminas\Hydrator\HydratorInterface;
 use Laminas\Hydrator\NamingStrategy\IdentityNamingStrategy;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyEnabledInterface;
 use Laminas\Hydrator\NamingStrategy\NamingStrategyInterface;
-use spaceonfire\Bridge\LaminasHydrator\SafeReflectionHydrator;
-use spaceonfire\DataSource\IdenticalPropertyExtractor;
-use spaceonfire\DataSource\LaminasPropertyExtractor;
-use spaceonfire\DataSource\PropertyExtractorInterface;
+use Warp\Bridge\LaminasHydrator\SafeReflectionHydrator;
+use Warp\DataSource\IdenticalPropertyExtractor;
+use Warp\DataSource\LaminasPropertyExtractor;
+use Warp\DataSource\PropertyExtractorInterface;
 
 class HydratorMapper extends Mapper
 {

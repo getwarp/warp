@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory\Reflection;
+namespace Warp\Container\Factory\Reflection;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Container\Exception\CannotInstantiateAbstractClassException;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\FactoryInterface;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\InstanceOfAliasContainer;
-use spaceonfire\Container\InvokerInterface;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Container\Exception\CannotInstantiateAbstractClassException;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\FactoryInterface;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\InstanceOfAliasContainer;
+use Warp\Container\InvokerInterface;
 
 /**
  * @template T of object

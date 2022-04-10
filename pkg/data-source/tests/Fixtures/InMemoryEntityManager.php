@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DataSource\Fixtures;
+namespace Warp\DataSource\Fixtures;
 
-use spaceonfire\Collection\Collection;
-use spaceonfire\Collection\CollectionInterface;
-use spaceonfire\Criteria\CriteriaInterface;
-use spaceonfire\DataSource\EntityNotFoundException;
-use spaceonfire\DataSource\EntityPersisterAggregateInterface;
-use spaceonfire\DataSource\EntityPersisterInterface;
-use spaceonfire\DataSource\EntityReaderAggregateInterface;
-use spaceonfire\DataSource\EntityReaderInterface;
+use Warp\Collection\Collection;
+use Warp\Collection\CollectionInterface;
+use Warp\Criteria\CriteriaInterface;
+use Warp\DataSource\EntityNotFoundException;
+use Warp\DataSource\EntityPersisterAggregateInterface;
+use Warp\DataSource\EntityPersisterInterface;
+use Warp\DataSource\EntityReaderAggregateInterface;
+use Warp\DataSource\EntityReaderInterface;
 
 /**
  * @template E of object

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\Blame;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\Blame;
 
 use Cycle\ORM\Heap\Node;
-use spaceonfire\Bridge\Cycle\AbstractTestCase;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItem;
-use spaceonfire\Bridge\Cycle\Fixtures\Todo\TodoItemId;
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
-use spaceonfire\DataSource\Blame\BlameActorProviderInterface;
-use spaceonfire\DataSource\Blame\NullBlameActorProvider;
+use Warp\Bridge\Cycle\AbstractTestCase;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
+use Warp\Bridge\Cycle\Fixtures\Todo\TodoItemId;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\Bridge\Cycle\Mapper\Plugin\DispatcherMapperPlugin;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueBeforeEvent;
+use Warp\DataSource\Blame\BlameActorProviderInterface;
+use Warp\DataSource\Blame\NullBlameActorProvider;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class BlamePluginTest extends AbstractTestCase

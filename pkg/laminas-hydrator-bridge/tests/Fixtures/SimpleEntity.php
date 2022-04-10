@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Fixtures;
+namespace Warp\Bridge\LaminasHydrator\Fixtures;
 
 final class SimpleEntity
 {

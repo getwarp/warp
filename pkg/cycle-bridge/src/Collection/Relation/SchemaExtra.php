@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection\Relation;
+namespace Warp\Bridge\Cycle\Collection\Relation;
 
 use Cycle\ORM\Config\RelationConfig;
 use Cycle\ORM\Relation;

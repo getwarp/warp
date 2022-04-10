@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\DevTool\Monorepo\Composer;
+namespace Warp\DevTool\Monorepo\Composer;
 
-use spaceonfire\DevTool\Shared\AbstractConfig;
+use Warp\DevTool\Shared\AbstractConfig;
 
 final class MonorepoConfig extends AbstractConfig
 {

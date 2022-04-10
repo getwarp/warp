@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Common\Field\DefaultField;
+use Warp\Common\Field\DefaultField;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Logic\OrX;

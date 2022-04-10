@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Mapper\Plugin\EntityEvents;
+namespace Warp\Bridge\Cycle\Mapper\Plugin\EntityEvents;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use spaceonfire\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
-use spaceonfire\DataSource\EntityEventsInterface;
+use Warp\Bridge\Cycle\Mapper\Plugin\QueueAfterEvent;
+use Warp\DataSource\EntityEventsInterface;
 
 final class EntityEventsHandler
 {

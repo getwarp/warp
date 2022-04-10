@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Promise\ReferenceInterface;
-use spaceonfire\DataSource\EntityNotFoundException;
-use spaceonfire\DataSource\EntityReferenceInterface;
+use Warp\DataSource\EntityNotFoundException;
+use Warp\DataSource\EntityReferenceInterface;
 
 /**
  * @template E of object

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Select;
+namespace Warp\Bridge\Cycle\Select;
 
 use Cycle\Database\Query\SelectQuery;
 use Cycle\ORM\ORMInterface;
@@ -10,8 +10,8 @@ use Cycle\ORM\Select;
 use Cycle\ORM\Select\AbstractLoader;
 use Cycle\ORM\Select\QueryBuilder;
 use Cycle\ORM\Select\ScopeInterface;
-use spaceonfire\Bridge\Cycle\Mapper\CyclePropertyExtractor;
-use spaceonfire\Criteria\CriteriaInterface;
+use Warp\Bridge\Cycle\Mapper\CyclePropertyExtractor;
+use Warp\Criteria\CriteriaInterface;
 
 final class CriteriaScope implements ScopeInterface, PrepareSelectScopeInterface, PrepareLoaderScopeInterface
 {

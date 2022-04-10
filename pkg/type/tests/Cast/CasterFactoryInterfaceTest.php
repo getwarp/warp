@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Type\Cast;
+namespace Warp\Type\Cast;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Type\BuiltinType;
-use spaceonfire\Type\UnionType;
+use Warp\Type\BuiltinType;
+use Warp\Type\UnionType;
 
 class CasterFactoryInterfaceTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\Database\Config\DatabaseConfig;
 use Cycle\Database\DatabaseManager;
@@ -13,16 +13,16 @@ use Cycle\ORM\Schema;
 use Cycle\Schema\Generator;
 use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
-use spaceonfire\Bridge\Cycle\Factory\OrmFactory;
-use spaceonfire\Bridge\Cycle\Factory\SpiralFactory;
-use spaceonfire\Bridge\Cycle\Fixtures\OrmCapsule;
-use spaceonfire\Bridge\Cycle\Fixtures\PluginsProvider;
-use spaceonfire\Bridge\Cycle\Schema\ArraySchemaRegistryFactory;
-use spaceonfire\Container\CompositeContainer;
-use spaceonfire\Container\DefinitionContainer;
-use spaceonfire\Container\Factory\Reflection\ReflectionFactoryAggregate;
-use spaceonfire\Container\Factory\Reflection\ReflectionInvoker;
-use spaceonfire\Container\FactoryContainer;
+use Warp\Bridge\Cycle\Factory\OrmFactory;
+use Warp\Bridge\Cycle\Factory\SpiralFactory;
+use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
+use Warp\Bridge\Cycle\Fixtures\PluginsProvider;
+use Warp\Bridge\Cycle\Schema\ArraySchemaRegistryFactory;
+use Warp\Container\CompositeContainer;
+use Warp\Container\DefinitionContainer;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\Factory\Reflection\ReflectionInvoker;
+use Warp\Container\FactoryContainer;
 
 abstract class AbstractTestCase extends TestCase
 {

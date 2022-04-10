@@ -1,6 +1,6 @@
 {
-  "name": "spaceonfire/criteria",
-  "description": "Criteria help you to declare rules to filter datasets",
+  "name": "getwarp/criteria",
+  "description": "Define rules to filter datasets in declarative way",
   "type": "library",
   "keywords": [
     "criteria",
@@ -8,19 +8,19 @@
     "match",
     "pagination"
   ],
-  "homepage": "https://github.com/spaceonfire/criteria",
+  "homepage": "https://github.com/getwarp/criteria",
   "license": "MIT",
   "authors": [
     {
       "name": "Constantine Karnaukhov",
       "email": "genteelknight@gmail.com",
-      "homepage": "https://www.onfire.space",
+      "homepage": "https://getwarp.dev",
       "role": "Maintainer"
     }
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "spaceonfire/common": "^3.0",
+    "getwarp/common": "^3.0",
     "webmozart/expression": "^1.0"
   },
   "require-dev": {
@@ -29,12 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "spaceonfire\\Criteria\\": "src"
+      "Warp\\Criteria\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "spaceonfire\\Criteria\\": "tests"
+      "Warp\\Criteria\\": "tests"
     }
   },
   "config": {

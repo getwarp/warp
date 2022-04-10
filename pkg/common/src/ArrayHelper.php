@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Common;
+namespace Warp\Common;
 
 abstract class ArrayHelper
 {

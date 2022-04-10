@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\Type\Cast\CasterInterface;
+use Warp\Type\Cast\CasterInterface;
 
 final class CasterStrategy implements StrategyInterface
 {

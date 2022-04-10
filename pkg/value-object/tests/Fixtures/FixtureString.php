@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject\Fixtures;
+namespace Warp\ValueObject\Fixtures;
 
-use spaceonfire\ValueObject\AbstractStringValue;
+use Warp\ValueObject\AbstractStringValue;
 
 final class FixtureString extends AbstractStringValue
 {

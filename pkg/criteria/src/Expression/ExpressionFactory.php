@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Criteria\Expression;
+namespace Warp\Criteria\Expression;
 
-use spaceonfire\Common\Factory\SingletonStorageTrait;
-use spaceonfire\Common\Factory\StaticConstructorInterface;
-use spaceonfire\Common\Field\FieldFactoryAggregate;
-use spaceonfire\Common\Field\FieldFactoryInterface;
-use spaceonfire\Common\Field\FieldInterface;
+use Warp\Common\Factory\SingletonStorageTrait;
+use Warp\Common\Factory\StaticConstructorInterface;
+use Warp\Common\Field\FieldFactoryAggregate;
+use Warp\Common\Field\FieldFactoryInterface;
+use Warp\Common\Field\FieldInterface;
 use Webmozart\Expression\Constraint\Contains;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\Equals;

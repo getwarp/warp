@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Fixtures\Todo;
+namespace Warp\Bridge\Cycle\Fixtures\Todo;
 
-use spaceonfire\Bridge\Cycle\Fixtures\User;
-use spaceonfire\DataSource\Blame\BlamableInterface;
-use spaceonfire\DataSource\Blame\Blame;
-use spaceonfire\DataSource\Blame\BlameImmutable;
-use spaceonfire\DataSource\Blame\BlameImmutableInterface;
-use spaceonfire\DataSource\Blame\BlameInterface;
-use spaceonfire\DataSource\EntityEventsInterface;
-use spaceonfire\DataSource\EntityEventsTrait;
+use Warp\Bridge\Cycle\Fixtures\User;
+use Warp\DataSource\Blame\BlamableInterface;
+use Warp\DataSource\Blame\Blame;
+use Warp\DataSource\Blame\BlameImmutable;
+use Warp\DataSource\Blame\BlameImmutableInterface;
+use Warp\DataSource\Blame\BlameInterface;
+use Warp\DataSource\EntityEventsInterface;
+use Warp\DataSource\EntityEventsTrait;
 
 /**
  * @implements BlamableInterface<User>

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Migrator;
+namespace Warp\Bridge\Cycle\Migrator;
 
 use Psr\Container\ContainerInterface;
-use spaceonfire\Bridge\Cycle\Migrator\Exception\MigrationLockedException;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
+use Warp\Bridge\Cycle\Migrator\Exception\MigrationLockedException;
 
 final class LockFacade
 {

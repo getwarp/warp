@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Container\Factory;
+namespace Warp\Container\Factory;
 
 use PhpOption\None;
 use PhpOption\Option;
 use PhpOption\Some;
 use Psr\Container\ContainerInterface;
-use spaceonfire\Container\ContainerAwareInterface;
-use spaceonfire\Container\DefinitionAggregateInterface;
-use spaceonfire\Container\Exception\CannotInstantiateAbstractClassException;
-use spaceonfire\Container\Exception\CannotResolveArgumentException;
-use spaceonfire\Container\Exception\ContainerException;
-use spaceonfire\Container\FactoryOptionsInterface;
-use spaceonfire\Container\InstanceOfAliasContainer;
-use spaceonfire\Type\AbstractAggregatedType;
-use spaceonfire\Type\InstanceOfType;
-use spaceonfire\Type\MixedType;
-use spaceonfire\Type\TypeInterface;
+use Warp\Container\ContainerAwareInterface;
+use Warp\Container\DefinitionAggregateInterface;
+use Warp\Container\Exception\CannotInstantiateAbstractClassException;
+use Warp\Container\Exception\CannotResolveArgumentException;
+use Warp\Container\Exception\ContainerException;
+use Warp\Container\FactoryOptionsInterface;
+use Warp\Container\InstanceOfAliasContainer;
+use Warp\Type\AbstractAggregatedType;
+use Warp\Type\InstanceOfType;
+use Warp\Type\MixedType;
+use Warp\Type\TypeInterface;
 
 /**
  * @template A

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\CommandBus\Middleware\Logger;
+namespace Warp\CommandBus\Middleware\Logger;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use spaceonfire\CommandBus\MiddlewareInterface;
+use Warp\CommandBus\MiddlewareInterface;
 
 final class LoggerMiddleware implements MiddlewareInterface
 {

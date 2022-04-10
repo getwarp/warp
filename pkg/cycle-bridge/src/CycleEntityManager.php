@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle;
+namespace Warp\Bridge\Cycle;
 
 use Cycle\ORM\ORMInterface;
 use Cycle\ORM\TransactionInterface;
-use spaceonfire\DataSource\EntityNotFoundExceptionFactoryInterface;
-use spaceonfire\DataSource\EntityPersisterAggregateInterface;
-use spaceonfire\DataSource\EntityPersisterInterface;
-use spaceonfire\DataSource\EntityReaderAggregateInterface;
-use spaceonfire\DataSource\EntityReaderInterface;
+use Warp\DataSource\EntityNotFoundExceptionFactoryInterface;
+use Warp\DataSource\EntityPersisterAggregateInterface;
+use Warp\DataSource\EntityPersisterInterface;
+use Warp\DataSource\EntityReaderAggregateInterface;
+use Warp\DataSource\EntityReaderInterface;
 
 /**
  * @template E of object

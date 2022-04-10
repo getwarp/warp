@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\Cycle\Collection;
+namespace Warp\Bridge\Cycle\Collection;
 
 use Cycle\ORM\Promise\PromiseInterface;
 use Cycle\ORM\Select\ScopeInterface;

@@ -1,10 +1,10 @@
 # Changelog
 
-All notable changes to `type` will be documented in this file.
+All notable changes to `getwarp/type` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [3.0.0] - Not Released Yet
+## [3.0.0] - 2022-04-22
 
 ### Changed
 
@@ -16,6 +16,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - New static constructor style which allow type objects to be lazy singletons.
 - `UnionType` and `IntersectionType` constructors now accepts variadic arguments.
 - Introduce separate type casters which replace old `BuiltinType::cast()`.
+
+## [2.5.3] - 2022-04-22
+
+Release under a `warp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.1] - 2021-06-13
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\Bridge\LaminasHydrator\Strategy;
+namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\DefaultStrategy;
 use Laminas\Hydrator\Strategy\StrategyInterface;
-use spaceonfire\Clock\ClockInterface;
-use spaceonfire\DataSource\Blame\Blame;
-use spaceonfire\DataSource\Blame\BlameImmutableInterface;
+use Warp\Clock\ClockInterface;
+use Warp\DataSource\Blame\Blame;
+use Warp\DataSource\Blame\BlameImmutableInterface;
 
 /**
  * @template T of object

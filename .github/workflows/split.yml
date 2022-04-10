@@ -1,0 +1,39 @@
+name: Split Monorepo
+
+on:
+  push:
+    branches:
+      - '3.0.x'
+  create:
+    tags:
+      - '3.0.*'
+  delete:
+    tags:
+      - '3.0.*'
+
+jobs:
+  publish_subsplits:
+    if: github.repository_owner == 'getwarp'
+    runs-on: ubuntu-latest
+    name: Split Monorepo
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+          persist-credentials: 'false'
+      - uses: frankdejonge/use-github-token@1.0.1
+        with:
+          authentication: 'hustlahusky:${{ secrets.SPLIT_ACCESS_TOKEN }}'
+          user_name: 'Constantine Karnaukhov'
+          user_email: 'genteelknight@gmail.com'
+      - name: Cache splitsh-lite
+        id: splitsh-cache
+        uses: actions/cache@v2
+        with:
+          path: './.splitsh'
+          key: '${{ runner.os }}-splitsh'
+      - uses: frankdejonge/use-subsplit-publish@1.0.0-beta.3
+        with:
+          source-branch: '3.0.x'
+          config-path: './monorepo.json'
+          splitsh-path: './.splitsh/splitsh-lite'

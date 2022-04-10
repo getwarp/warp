@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spaceonfire\ValueObject;
+namespace Warp\ValueObject;
 
 use PHPUnit\Framework\TestCase;
-use spaceonfire\ValueObject\Fixtures\FixtureEnum;
+use Warp\ValueObject\Fixtures\FixtureEnum;
 
 class EnumValueTest extends TestCase
 {
