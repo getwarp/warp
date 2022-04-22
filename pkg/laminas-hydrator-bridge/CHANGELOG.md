@@ -4,7 +4,7 @@ All notable changes to `getwarp/laminas-hydrator-bridge` will be documented in t
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [3.0.0] - Not Released Yet
+## [3.0.0] - 2022-04-22
 
 ### Changed
 
@@ -24,6 +24,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Removed
 
 - `ScalarStrategy`: can be replaced by `CasterStrategy` with `ScalarCaster`.
+
+## [2.5.3] - 2022-04-22
+
+Release under a `getwarp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.0] - 2021-04-21
 

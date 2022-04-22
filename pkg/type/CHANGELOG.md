@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `getwarp/type` will be documented in this file.
+All notable changes to `warp/type` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -19,7 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## [2.5.3] - 2022-04-22
 
-Release under a `warp` vendor name.
+Release under a `getwarp` vendor name.
 
 ### Changed
 

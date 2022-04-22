@@ -4,7 +4,7 @@ All notable changes to `getwarp/data-source` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [3.0.0] - Not Released Yet
+## [3.0.0] - 2022-04-22
 
 ### Changed
 
@@ -23,6 +23,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Removed query interface
 - Removed entity interface and its default implementation
 - Removed nette-utils integration
+
+## [2.5.3] - 2022-04-22
+
+Release under a `getwarp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
 
 ## [2.5.0] - 2021-04-21
 
