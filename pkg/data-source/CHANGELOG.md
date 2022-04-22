@@ -4,6 +4,14 @@ All notable changes to `getwarp/data-source` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [2.5.3] - 2022-04-22
+
+Release under a `getwarp` vendor name.
+
+### Changed
+
+- Replace first level namespace to `Warp\`.
+
 ## [2.5.0] - 2021-04-21
 
 ### Added
