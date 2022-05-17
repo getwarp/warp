@@ -176,7 +176,7 @@ final class Definition implements DefinitionInterface
         return $this->options->hasArgument($argument);
     }
 
-    public function getArgument(string $argument)
+    public function getArgument(string $argument): Option
     {
         return $this->options->getArgument($argument);
     }

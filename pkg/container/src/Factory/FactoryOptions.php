@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Warp\Container\Factory;
 
+use PhpOption\None;
+use PhpOption\Option;
+use PhpOption\Some;
 use Warp\Common\Factory\StaticConstructorInterface;
 use Warp\Container\Exception\ContainerException;
 use Warp\Container\FactoryOptionsInterface;
@@ -24,7 +27,7 @@ final class FactoryOptions implements FactoryOptionsInterface, StaticConstructor
     private array $argumentTagMap = [];
 
     /**
-     * @var array<string,mixed>
+     * @var array<string,Option<mixed>>
      */
     private array $arguments = [];
 
@@ -112,19 +115,19 @@ final class FactoryOptions implements FactoryOptionsInterface, StaticConstructor
 
     public function addArgument(string $argument, $value): self
     {
-        $this->arguments[$argument] = $value;
+        $this->arguments[$argument] = $value instanceof Option ? $value : new Some($value);
 
         return $this;
     }
 
-    public function getArgument(string $argument)
+    public function getArgument(string $argument): Option
     {
-        return $this->arguments[$argument] ?? null;
+        return $this->arguments[$argument] ?? None::create();
     }
 
     public function hasArgument(string $argument): bool
     {
-        return isset($this->arguments[$argument]) || \array_key_exists($argument, $this->arguments);
+        return $this->getArgument($argument)->isDefined();
     }
 
     public function addMethodCall(string $method, ?InvokerOptionsInterface $options = null): self

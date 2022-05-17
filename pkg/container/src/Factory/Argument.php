@@ -135,7 +135,7 @@ final class Argument implements ContainerAwareInterface
         }
 
         if ($options->hasArgument($this->name)) {
-            return new Some($options->getArgument($this->name));
+            return $options->getArgument($this->name);
         }
 
         if ($this->variadic && null !== $tag = $options->getArgumentTag($this->name)) {

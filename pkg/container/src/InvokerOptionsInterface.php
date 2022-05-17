@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Warp\Container;
 
+use PhpOption\Option;
+
 interface InvokerOptionsInterface
 {
     public function getArgumentAlias(string $argument): ?string;
@@ -16,7 +18,7 @@ interface InvokerOptionsInterface
 
     /**
      * @param string $argument
-     * @param mixed $value
+     * @param Option<mixed>|mixed $value
      * @return $this
      */
     public function addArgument(string $argument, $value): self;
@@ -25,7 +27,7 @@ interface InvokerOptionsInterface
 
     /**
      * @param string $argument
-     * @return mixed|null
+     * @return Option<mixed>
      */
-    public function getArgument(string $argument);
+    public function getArgument(string $argument): Option;
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Warp\Container\Factory;
 
+use PhpOption\Option;
 use PhpOption\Some;
 use PHPUnit\Framework\TestCase;
 use Warp\Container\Exception\ContainerException;
@@ -141,9 +142,16 @@ class DefinitionTest extends TestCase
         self::assertFalse($def->hasArgument('a'));
 
         $def->addArgument('a', $arg = new A());
+        $def->addArgument('bar', Option::fromReturn(static fn () => 'baz'));
+        $def->addArgument('role', 'file');
+        $def->addArgument('null', null);
 
         self::assertTrue($def->hasArgument('a'));
-        self::assertSame($arg, $def->getArgument('a'));
+        self::assertSame($arg, $def->getArgument('a')->get());
+        self::assertSame('baz', $def->getArgument('bar')->get());
+        self::assertSame('file', $def->getArgument('role')->get());
+        self::assertTrue($def->hasArgument('null'));
+        self::assertNull($def->getArgument('null')->get());
 
         self::assertNull($def->getStaticConstructor());
         $def->setStaticConstructor('new');
