@@ -5,7 +5,7 @@ parameters:
     level: 8
     inferPrivatePropertyTypeFromConstructor: true
     bootstrapFiles:
-        - phpstan-bootstrap.php
+        - resources/phpstan.php
     paths:
         - pkg/clock/src/
         - pkg/collection/src/

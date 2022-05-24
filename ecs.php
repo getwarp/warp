@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Warp;
+
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
