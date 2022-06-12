@@ -68,6 +68,15 @@
                 <file>pkg/command-bus/src/Mapping/CommandToHandlerMapping.php</file>
                 <file>pkg/command-bus/src/Middleware.php</file>
                 <file>pkg/type/src/Type.php</file>
+                <file>pkg/common/src/polyfill.php</file>
+                <file>pkg/collection/src/polyfill.php</file>
+                <file>pkg/command-bus/src/polyfill.php</file>
+                <file>pkg/container/src/polyfill.php</file>
+                <file>pkg/criteria/src/polyfill.php</file>
+                <file>pkg/data-source/src/polyfill.php</file>
+                <file>pkg/laminas-hydrator-bridge/src/polyfill.php</file>
+                <file>pkg/type/src/polyfill.php</file>
+                <file>pkg/value-object/src/polyfill.php</file>
             </exclude>
         </whitelist>
     </filter>

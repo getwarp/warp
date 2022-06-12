@@ -39,6 +39,9 @@
     "ramsey/uuid": "To use UuidValue"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\ValueObject\\": "src"
     }
@@ -50,5 +53,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/value-object": "^2.5"
   }
 }

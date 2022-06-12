@@ -26,6 +26,9 @@
     "roave/security-advisories": "dev-latest"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\Type\\": "src"
     }
@@ -37,5 +40,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/type": "^2.5"
   }
 }

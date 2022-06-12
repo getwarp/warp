@@ -40,12 +40,13 @@
     "symfony/polyfill-php80": "^1.22"
   },
   "autoload": {
+    "files": [
+      "functions.php",
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\Common\\": "src"
-    },
-    "files": [
-      "functions.php"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
@@ -54,5 +55,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/common": "^2.5"
   }
 }

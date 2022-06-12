@@ -70,7 +70,16 @@
   },
   "autoload": {
     "files": [
-      "pkg/common/functions.php"
+      "pkg/common/functions.php",
+      "pkg/common/src/polyfill.php",
+      "pkg/collection/src/polyfill.php",
+      "pkg/command-bus/src/polyfill.php",
+      "pkg/container/src/polyfill.php",
+      "pkg/criteria/src/polyfill.php",
+      "pkg/data-source/src/polyfill.php",
+      "pkg/laminas-hydrator-bridge/src/polyfill.php",
+      "pkg/type/src/polyfill.php",
+      "pkg/value-object/src/polyfill.php"
     ],
     "psr-4": {
       "Warp\\Collection\\": "pkg/collection/src",

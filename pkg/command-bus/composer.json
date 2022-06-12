@@ -34,6 +34,9 @@
     "symfony/stopwatch": "Required for ProfilerMiddleware"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\CommandBus\\": "src"
     }
@@ -45,5 +48,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/command-bus": "^2.5"
   }
 }

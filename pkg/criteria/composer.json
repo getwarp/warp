@@ -33,6 +33,9 @@
     "spiral/pagination": ""
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\Criteria\\": "src"
     }
@@ -44,5 +47,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/criteria": "^2.5"
   }
 }

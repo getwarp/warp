@@ -32,5 +32,8 @@
   ],
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/easy-coding-standard-bridge": "^2.5"
   }
 }

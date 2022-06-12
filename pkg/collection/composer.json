@@ -28,6 +28,9 @@
     "symfony/property-access": "^4.4|^5.0"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\Collection\\": "src"
     }
@@ -41,5 +44,8 @@
   "prefer-stable": true,
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/collection": "^2.5"
   }
 }

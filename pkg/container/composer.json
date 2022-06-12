@@ -36,6 +36,9 @@
     "psr/container-implementation": "^1.0"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\Container\\": "src"
     }
@@ -47,5 +50,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/container": "^2.5"
   }
 }

@@ -9,7 +9,7 @@ services:
       XDEBUG_CONFIG: 'idekey=warp client_host=host.docker.internal'
       XDEBUG_MODE: '${XDEBUG_MODE:-debug}'
     volumes:
-      - ./:/home/getwarp/app
+      - ./:/home/warp/app
     restart: unless-stopped
     extra_hosts:
       - host.docker.internal:host-gateway

@@ -30,6 +30,9 @@
     "getwarp/type": "Required to use ScalarStrategy"
   },
   "autoload": {
+    "files": [
+      "src/polyfill.php"
+    ],
     "psr-4": {
       "Warp\\LaminasHydratorBridge\\": "src"
     }
@@ -41,5 +44,8 @@
   },
   "config": {
     "sort-packages": true
+  },
+  "replace": {
+    "spaceonfire/laminas-hydrator-bridge": "^2.5"
   }
 }
