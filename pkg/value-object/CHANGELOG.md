@@ -4,6 +4,13 @@ All notable changes to `getwarp/value-object` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/value-object` on packagist.
+- Adds autoloader polyfill.
+
 ## [2.5.3] - 2022-04-22
 
 Release under a `getwarp` vendor name.

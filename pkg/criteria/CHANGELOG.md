@@ -1,8 +1,15 @@
 # Changelog
 
-All notable changes to `warp/criteria` will be documented in this file.
+All notable changes to `getwarp/criteria` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
+
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/criteria` on packagist.
+- Adds autoloader polyfill.
 
 ## [2.5.3] - 2022-04-22
 
