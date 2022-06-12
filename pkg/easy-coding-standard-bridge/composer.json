@@ -19,10 +19,10 @@
     "roave/security-advisories": "dev-latest",
     "slevomat/coding-standard": "^7.0",
     "symfony/var-exporter": "^5.2|^6.0",
-    "symplify/easy-coding-standard": "^9.4"
+    "symplify/easy-coding-standard": "^10.0"
   },
   "suggest": {
-    "symplify/easy-coding-standard-prefixed": "^9.4",
+    "symplify/easy-coding-standard": "^10.0",
     "slevomat/coding-standard": "^7.0",
     "symfony/var-exporter": "Required for ecs-baseliner"
   },

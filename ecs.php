@@ -6,10 +6,10 @@ namespace Warp;
 
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Strict\StrictComparisonFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (ECSConfig $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     $parameters->set(Option::PARALLEL, true);
@@ -26,7 +26,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
         StrictComparisonFixer::class => [
             __DIR__ . '/pkg/laminas-hydrator-bridge/src/Strategy/BooleanStrategy.php',
-            __DIR__ . '/pkg/cycle-bridge/src/Collection/Relation/NodeHelper.php',
         ],
         'Class LoggerMiddleware contains unused private method compareLogLevel().' => [
             __DIR__ . '/pkg/command-bus/src/Middleware/Logger/LoggerMiddleware.php',

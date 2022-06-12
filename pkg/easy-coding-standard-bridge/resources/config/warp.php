@@ -19,7 +19,6 @@ use PhpCsFixer\Fixer\Casing\MagicConstantCasingFixer;
 use PhpCsFixer\Fixer\CastNotation\CastSpacesFixer;
 use PhpCsFixer\Fixer\CastNotation\LowercaseCastFixer;
 use PhpCsFixer\Fixer\CastNotation\ShortScalarCastFixer;
-use PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
 use PhpCsFixer\Fixer\ClassNotation\NoBlankLinesAfterClassOpeningFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer;
@@ -90,7 +89,10 @@ use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\NoWhitespaceInBlankLineFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use SlevomatCodingStandard\Sniffs\Classes\ConstantSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\MethodSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\PropertySpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DisallowCommentAfterCodeSniff;
@@ -193,16 +195,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(StandaloneLinePromotedPropertyFixer::class);
     $services->set(NewlineServiceDefinitionConfigFixer::class);
     $services->set(MethodChainingIndentationFixer::class);
-    $services->set(ClassAttributesSeparationFixer::class)
-        ->call('configure', [
-            [
-                'elements' => [
-                    'const' => 'one',
-                    'property' => 'one',
-                    'method' => 'one',
-                ],
-            ],
-        ]);
+    $services->set(PropertySpacingSniff::class);
+    $services->set(ConstantSpacingSniff::class);
+    $services->set(MethodSpacingSniff::class);
+
     $services->set(SuperfluousWhitespaceSniff::class)
         ->property('ignoreBlankLines', false);
     $services->set(CastSpacesFixer::class)
