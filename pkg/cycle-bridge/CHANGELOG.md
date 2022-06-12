@@ -4,6 +4,12 @@ All notable changes to `warp/cycle-bridge` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.2] - 2022-06-12
+
+### Misc
+
+- Use `cycle/database` instead of `spiral/database`
+
 ## [3.0.0] - 2022-04-22
 
 ### Added

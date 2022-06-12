@@ -23,11 +23,11 @@
     "laminas/laminas-hydrator": "^4.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
-    "roave/security-advisories": "dev-latest",
     "getwarp/data-source": "^3.0",
     "getwarp/type": "^3.0",
-    "getwarp/value-object": "^3.0"
+    "getwarp/value-object": "^3.0",
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-latest"
   },
   "suggest": {
     "getwarp/type": "Used with CasterStrategy",

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `warp/container` will be documented in this file.
+All notable changes to `getwarp/container` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -19,6 +19,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support `psr/container` v1.1 and v2.0
 - Full refactoring: similar public api, reorganize code, simplify interfaces, introduce factory API, support for union
   and intersection types.
+
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/container` on packagist.
+- Adds autoloader polyfill.
 
 ## [2.5.3] - 2022-04-22
 

@@ -14,6 +14,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Introduce Map API: when you need to operate with key-value data.
 - New static constructor style.
 
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/collection` on packagist.
+- Adds autoloader polyfill.
+
 ## [2.5.3] - 2022-04-22
 
 Release under a `getwarp` vendor name.

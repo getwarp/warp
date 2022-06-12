@@ -24,6 +24,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Removed entity interface and its default implementation
 - Removed nette-utils integration
 
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/data-source` on packagist.
+- Adds autoloader polyfill.
+
 ## [2.5.3] - 2022-04-22
 
 Release under a `getwarp` vendor name.

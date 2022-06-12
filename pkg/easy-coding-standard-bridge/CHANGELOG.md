@@ -4,6 +4,13 @@ All notable changes to `getwarp/easy-coding-standard-bridge` will be documented 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.2] - 2022-06-12
+
+### Misc
+
+- Bump `symplify/easy-coding-standard` up to v10
+- Update class elements spacing rules: allow no blank line between properties/constants without comments
+
 ## [3.0.0] - 2022-04-22
 
 ### Added
@@ -13,6 +20,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Removed
 
 - `BinaryOperatorSpacesFixer` removed from config to support PHP 8 property promotion with union types.
+
+## [2.5.4] - 2022-06-12
+
+### Misc
+
+- Replaces `spaceonfire/easy-coding-standard-bridge` on packagist.
 
 ## [2.5.3] - 2022-04-22
 

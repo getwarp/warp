@@ -17,15 +17,16 @@
     "php": "^7.4|^8.0",
     "ext-json": "*",
     "composer/semver": "^3.0",
-    "gitonomy/gitlib": "^1.2",
-    "nikic/php-parser": "^4.10",
     "getwarp/common": "^3.0",
     "getwarp/container": "^3.0",
     "getwarp/criteria": "^3.0",
     "getwarp/type": "^3.0",
+    "gitonomy/gitlib": "^1.2",
+    "nikic/php-parser": "^4.10",
     "symfony/console": "^5.2|^6.0",
     "symfony/filesystem": "^5.2|^6.0",
-    "symfony/finder": "^5.2|^6.0"
+    "symfony/finder": "^5.2|^6.0",
+    "symfony/mime": "^5.2|^6.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest"
