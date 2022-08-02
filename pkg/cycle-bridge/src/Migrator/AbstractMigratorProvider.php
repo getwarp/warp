@@ -10,7 +10,9 @@ use Cycle\Migrations\FileRepository;
 use Cycle\Migrations\Migrator;
 use Cycle\Schema\Generator\Migrations\GenerateMigrations;
 use Cycle\Schema\Registry;
+use Spiral\Core\FactoryInterface as SpiralFactoryInterface;
 use Symfony\Component\Console\Command\Command;
+use Warp\Bridge\Cycle\Factory\SpiralFactory;
 use Warp\Bridge\Cycle\Migrator\Command\MigratorDownCommand;
 use Warp\Bridge\Cycle\Migrator\Command\MigratorFreshCommand;
 use Warp\Bridge\Cycle\Migrator\Command\MigratorGenerateCommand;
@@ -22,6 +24,9 @@ use Warp\Bridge\Cycle\Migrator\Command\MigratorUpCommand;
 use Warp\Container\DefinitionInterface;
 use Warp\Container\Exception\NotFoundException;
 use Warp\Container\Factory\DefinitionTag;
+use Warp\Container\Factory\Reflection\ReflectionFactoryAggregate;
+use Warp\Container\FactoryAggregateInterface;
+use Warp\Container\InstanceOfAliasContainer;
 use Warp\Container\ServiceProvider\AbstractServiceProvider;
 
 abstract class AbstractMigratorProvider extends AbstractServiceProvider
@@ -72,9 +77,22 @@ abstract class AbstractMigratorProvider extends AbstractServiceProvider
 
     public function makeMigrator(): Migrator
     {
-        $config = $this->getContainer()->get(MigrationConfig::class);
-        $dbal = $this->getContainer()->get(DatabaseManager::class);
-        $migrator = new Migrator($config, $dbal, new FileRepository($config));
+        $container = InstanceOfAliasContainer::wrap($this->getContainer());
+
+        $config = $container->get(MigrationConfig::class);
+        $dbal = $container->get(DatabaseManager::class);
+
+        if ($container->has(SpiralFactoryInterface::class)) {
+            $factory = $container->get(SpiralFactoryInterface::class);
+        } else {
+            $factory = new SpiralFactory(
+                $container->has(FactoryAggregateInterface::class)
+                    ? $container->get(FactoryAggregateInterface::class)
+                    : new ReflectionFactoryAggregate($container)
+            );
+        }
+
+        $migrator = new Migrator($config, $dbal, new FileRepository($config, $factory));
         $migrator->configure();
         return $migrator;
     }
