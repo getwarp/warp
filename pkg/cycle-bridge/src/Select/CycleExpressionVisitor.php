@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Warp\Bridge\Cycle\Select;
 
+use Cycle\Database\Injection\Expression as DBALExpression;
 use Cycle\Database\Injection\Fragment;
 use Cycle\Database\Injection\Parameter;
 use Cycle\ORM\Relation;
@@ -12,6 +13,7 @@ use Cycle\ORM\Select\ScopeInterface;
 use Warp\Bridge\Cycle\Mapper\CyclePropertyExtractor;
 use Warp\Common\Field\FieldInterface;
 use Warp\Criteria\Expression\ExpressionFactory;
+use Warp\Criteria\Expression\Substring;
 use Warp\DataSource\AbstractExpressionVisitor;
 use Warp\DataSource\ExpressionNotSupportedException;
 use Webmozart\Expression\Constraint;
@@ -125,36 +127,33 @@ final class CycleExpressionVisitor extends AbstractExpressionVisitor
             };
         }
 
-        if ($expression instanceof Constraint\Contains) {
+        if ($expression instanceof Substring) {
             return function (QueryBuilder $queryBuilder) use ($field, $expression, $isNegated) {
-                $val = $this->visitValue($field, $expression->getComparedValue());
-                return $queryBuilder->where(
-                    $this->formatField($field),
-                    ($isNegated ? 'not ' : '') . 'like',
-                    new Parameter('%' . $val . '%'),
-                );
-            };
-        }
+                $val = $this->visitValue($field, $expression->getSubstring());
 
-        if ($expression instanceof Constraint\StartsWith) {
-            return function (QueryBuilder $queryBuilder) use ($field, $expression, $isNegated) {
-                $val = $this->visitValue($field, $expression->getAcceptedPrefix());
-                return $queryBuilder->where(
-                    $this->formatField($field),
-                    ($isNegated ? 'not ' : '') . 'like',
-                    new Parameter($val . '%'),
-                );
-            };
-        }
+                if (Substring::STARTS_WITH === $expression->getMode()) {
+                    $param = new Parameter($val . '%');
+                } elseif (Substring::ENDS_WITH === $expression->getMode()) {
+                    $param = new Parameter('%' . $val);
+                } else {
+                    $param = new Parameter('%' . $val . '%');
+                }
 
-        if ($expression instanceof Constraint\EndsWith) {
-            return function (QueryBuilder $queryBuilder) use ($field, $expression, $isNegated) {
-                $val = $this->visitValue($field, $expression->getAcceptedSuffix());
-                return $queryBuilder->where(
-                    $this->formatField($field),
-                    ($isNegated ? 'not ' : '') . 'like',
-                    new Parameter('%' . $val),
-                );
+                $column = $this->formatField($field);
+                $operator = 'like';
+
+                if (!$expression->isCaseSensitive()) {
+                    if (self::supportsIlike($queryBuilder)) {
+                        $operator = 'ilike';
+                    } else {
+                        $column = new DBALExpression(
+                            'LOWER(' . $queryBuilder->getLoader()->getAlias() . '.' . $column . ')',
+                        );
+                        $param->setValue(\strtolower($param->getValue()));
+                    }
+                }
+
+                return $queryBuilder->where($column, ($isNegated ? 'not ' : '') . $operator, $param);
             };
         }
 
@@ -416,5 +415,23 @@ final class CycleExpressionVisitor extends AbstractExpressionVisitor
         }
 
         return new Logic\Not($expression);
+    }
+
+    private static function supportsIlike(QueryBuilder $queryBuilder): bool
+    {
+        $query = $queryBuilder->getQuery();
+        if (null === $query) {
+            return false;
+        }
+
+        $driver = $query->getDriver();
+        if (null === $driver) {
+            return false;
+        }
+
+        $driverType = $driver->getType();
+
+        return 0 === \substr_compare($driverType, 'postgres', 0, 8, true)
+            || 0 === \substr_compare($driverType, 'postgresql', 0, 10, true);
     }
 }

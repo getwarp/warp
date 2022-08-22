@@ -70,6 +70,18 @@ class ExpressionFactoryTest extends TestCase
         self::assertEquals($innerExpr, $expression->getExpression());
     }
 
+    public function testSubstringFactoryMethods(): void
+    {
+        $ef = ExpressionFactory::new();
+
+        self::assertTrue($ef->contains('foo')->equivalentTo(Substring::contains('foo')));
+        self::assertTrue($ef->startsWith('foo')->equivalentTo(Substring::startsWith('foo')));
+        self::assertTrue($ef->endsWith('foo')->equivalentTo(Substring::endsWith('foo')));
+        self::assertTrue($ef->contains('foo', false)->equivalentTo(Substring::contains('foo', false)));
+        self::assertTrue($ef->startsWith('foo', false)->equivalentTo(Substring::startsWith('foo', false)));
+        self::assertTrue($ef->endsWith('foo', false)->equivalentTo(Substring::endsWith('foo', false)));
+    }
+
     public function testMagicCall(): void
     {
         $ef = ExpressionFactory::new();

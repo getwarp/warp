@@ -8,6 +8,7 @@ use Warp\Common\Field\FieldInterface;
 use Warp\Criteria\Expression\AbstractExpressionDecorator;
 use Warp\Criteria\Expression\ExpressionFactory;
 use Warp\Criteria\Expression\Selector;
+use Warp\Criteria\Expression\Substring;
 use Webmozart\Expression\Constraint;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic;
@@ -177,6 +178,7 @@ abstract class AbstractExpressionVisitor
         }
 
         if (
+            $expression instanceof Substring ||
             $expression instanceof Constraint\Contains ||
             $expression instanceof Constraint\EndsWith ||
             $expression instanceof Constraint\StartsWith ||
@@ -198,6 +200,18 @@ abstract class AbstractExpressionVisitor
                     ? $this->expressionFactory->same(\reset($acceptedValues))
                     : $this->expressionFactory->equals(\reset($acceptedValues));
             }
+        }
+
+        if ($expression instanceof Constraint\Contains) {
+            return Substring::contains($expression->getComparedValue());
+        }
+
+        if ($expression instanceof Constraint\StartsWith) {
+            return Substring::startsWith($expression->getAcceptedPrefix());
+        }
+
+        if ($expression instanceof Constraint\EndsWith) {
+            return Substring::endsWith($expression->getAcceptedSuffix());
         }
 
         return $expression;

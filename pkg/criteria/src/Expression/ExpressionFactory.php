@@ -67,9 +67,6 @@ use Webmozart\Expression\Selector\Method;
  * @method LessThanEqual lessThanEqual(mixed $value)
  * @method In in(mixed[] $values)
  * @method Matches matches(string $regExp)
- * @method StartsWith startsWith(string $prefix)
- * @method EndsWith endsWith(string $suffix)
- * @method Contains contains(string $string)
  * @method KeyExists keyExists(string $keyName)
  * @method KeyNotExists keyNotExists(string $keyName)
  */
@@ -210,6 +207,21 @@ final class ExpressionFactory implements StaticConstructorInterface
     public function property($propertyName, Expression $expr): Selector
     {
         return $this->selector($propertyName, $expr);
+    }
+
+    public function startsWith(string $substring, bool $caseSensitive = true): Substring
+    {
+        return Substring::startsWith($substring, $caseSensitive);
+    }
+
+    public function endsWith(string $substring, bool $caseSensitive = true): Substring
+    {
+        return Substring::endsWith($substring, $caseSensitive);
+    }
+
+    public function contains(string $substring, bool $caseSensitive = true): Substring
+    {
+        return Substring::contains($substring, $caseSensitive);
     }
 
     /**

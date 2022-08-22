@@ -1,14 +1,15 @@
 # Changelog
 
-All notable changes to `warp/cycle-bridge` will be documented in this file.
+All notable changes to `getwarp/cycle-bridge` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [3.1.0] - 2022-08-XX
+## [3.1.0] - 2022-08-22
 
 ### Changed
 
 - Provide service factory to migrator's file repository
+- Support case-insensitive `LIKE` filters with `Substring` expression.
 
 ## [3.0.2] - 2022-06-12
 

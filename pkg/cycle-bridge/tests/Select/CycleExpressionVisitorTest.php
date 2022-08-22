@@ -6,8 +6,17 @@ declare(strict_types=1);
 
 namespace Warp\Bridge\Cycle\Select;
 
+use Cycle\Database\Database;
+use Cycle\Database\DatabaseManager;
+use Cycle\Database\Driver\CompilerInterface;
+use Cycle\Database\Driver\Driver;
+use Cycle\Database\Driver\DriverInterface;
+use Cycle\Database\Driver\HandlerInterface;
+use Cycle\Database\Query\BuilderInterface;
+use Cycle\Database\StatementInterface;
 use Cycle\ORM\Heap\Node;
 use Cycle\ORM\Select;
+use DateTimeZone;
 use Warp\Bridge\Cycle\AbstractTestCase;
 use Warp\Bridge\Cycle\Fixtures\OrmCapsule;
 use Warp\Bridge\Cycle\Fixtures\Todo\TodoItem;
@@ -30,6 +39,8 @@ class CycleExpressionVisitorTest extends AbstractTestCase
 
     /**
      * @dataProvider successDataProvider
+     * @dataProvider substringInsensitiveProvider
+     * @dataProvider substringInsensitiveIlikeProvider
      * @param OrmCapsule $capsule
      * @param Expression $expression
      * @param string $expectedSql
@@ -302,6 +313,173 @@ class CycleExpressionVisitorTest extends AbstractTestCase
             $capsule,
             $ef->property('author', $ef->same($todo)),
             \RuntimeException::class,
+        ];
+    }
+
+    public function substringInsensitiveProvider(): \Generator
+    {
+        $capsule = $this->makeOrmCapsule();
+
+        return yield from $this->substringInsensitiveProviderGenerator($capsule, false);
+    }
+
+    public function substringInsensitiveIlikeProvider(): \Generator
+    {
+        $capsule = $this->makeOrmCapsule();
+
+        $db = $capsule->database();
+        $driver = $db->getDriver();
+
+        if (!$db instanceof Database || !$driver instanceof Driver) {
+            return yield from [];
+        }
+
+        $wrappedDriver = new class implements DriverInterface {
+            public DriverInterface $driver;
+
+            public function isReadonly(): bool
+            {
+                return $this->driver->isReadonly();
+            }
+
+            public function getType(): string
+            {
+                return 'Postgres';
+            }
+
+            public function getTimezone(): DateTimeZone
+            {
+                return $this->driver->getTimezone();
+            }
+
+            public function getSchemaHandler(): HandlerInterface
+            {
+                return $this->driver->getSchemaHandler();
+            }
+
+            public function getQueryCompiler(): CompilerInterface
+            {
+                return $this->driver->getQueryCompiler();
+            }
+
+            public function getQueryBuilder(): BuilderInterface
+            {
+                return $this->driver->getQueryBuilder();
+            }
+
+            public function connect(): void
+            {
+                $this->driver->connect();
+            }
+
+            public function isConnected(): bool
+            {
+                return $this->driver->isConnected();
+            }
+
+            public function disconnect(): void
+            {
+                $this->driver->disconnect();
+            }
+
+            public function quote($value, int $type = \PDO::PARAM_STR): string
+            {
+                return $this->driver->quote($value, $type);
+            }
+
+            public function query(string $statement, array $parameters = []): StatementInterface
+            {
+                return $this->driver->query($statement, $parameters);
+            }
+
+            public function execute(string $query, array $parameters = []): int
+            {
+                return $this->driver->execute($query, $parameters);
+            }
+
+            public function lastInsertID(string $sequence = null)
+            {
+                return $this->driver->lastInsertID($sequence);
+            }
+
+            public function beginTransaction(string $isolationLevel = null): bool
+            {
+                return $this->driver->beginTransaction($isolationLevel);
+            }
+
+            public function commitTransaction(): bool
+            {
+                return $this->driver->commitTransaction();
+            }
+
+            public function rollbackTransaction(): bool
+            {
+                return $this->driver->rollbackTransaction();
+            }
+        };
+        $wrappedDriver->driver = $driver;
+
+        \Closure::bind(static fn (Database $db) => $db->driver = $wrappedDriver, null, Database::class)($db);
+        \Closure::bind(static function (DatabaseManager $dbal) use ($wrappedDriver) {
+            foreach ($dbal->drivers as $k => $d) {
+                if ($d === $wrappedDriver->driver) {
+                    $dbal->drivers[$k] = $wrappedDriver;
+                }
+            }
+        }, null, DatabaseManager::class)($capsule->dbal());
+        \Closure::bind(static function (Driver $driver) use ($wrappedDriver) {
+            $driver->schemaHandler = $driver->schemaHandler->withDriver($wrappedDriver);
+            $driver->queryBuilder = $driver->queryBuilder->withDriver($wrappedDriver);
+        }, null, Driver::class)($driver);
+
+        return yield from $this->substringInsensitiveProviderGenerator($capsule, true);
+    }
+
+    private function substringInsensitiveProviderGenerator(OrmCapsule $capsule, bool $supportsIlike): \Generator
+    {
+        $ef = ExpressionFactory::new();
+
+        yield [
+            $capsule,
+            $ef->property('id', $ef->contains('HELLO', false)),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" ILIKE \'%HELLO%\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") LIKE \'%hello%\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->startsWith('HELLO', false)),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" ILIKE \'HELLO%\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") LIKE \'hello%\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->endsWith('HELLO', false)),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" ILIKE \'%HELLO\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") LIKE \'%hello\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->not($ef->contains('HELLO', false))),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" NOT ILIKE \'%HELLO%\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") NOT LIKE \'%hello%\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->not($ef->startsWith('HELLO', false))),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" NOT ILIKE \'HELLO%\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") NOT LIKE \'hello%\'  )',
+        ];
+        yield [
+            $capsule,
+            $ef->property('id', $ef->not($ef->endsWith('HELLO', false))),
+            $supportsIlike
+                ? 'SELECT * FROM "post" AS "post" WHERE ("post"."id" NOT ILIKE \'%HELLO\'  )'
+                : 'SELECT * FROM "post" AS "post" WHERE (LOWER("post"."id") NOT LIKE \'%hello\'  )',
         ];
     }
 }
