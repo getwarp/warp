@@ -11,6 +11,9 @@ trait EntityEventsTrait
      */
     private array $events = [];
 
+    /**
+     * @return object[]
+     */
     public function releaseEvents(): array
     {
         $events = $this->events;

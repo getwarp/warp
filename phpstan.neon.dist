@@ -10,13 +10,16 @@ parameters:
         - pkg/clock/src/
         - pkg/collection/src/
         - pkg/command-bus/src/
+        - pkg/command-bus/.phpstan/
         - pkg/common/src/
         - pkg/container/src/
         - pkg/criteria/src/
         - pkg/cycle-bridge/src/
         - pkg/data-source/src/
+        - pkg/data-source/.phpstan/
         - pkg/dev-tool/src/
         - pkg/exception/src/
         - pkg/laminas-hydrator-bridge/src/
+        - pkg/laminas-hydrator-bridge/.phpstan/
         - pkg/type/src/
         - pkg/value-object/src/
