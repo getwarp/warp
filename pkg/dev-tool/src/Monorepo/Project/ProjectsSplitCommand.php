@@ -96,7 +96,6 @@ final class ProjectsSplitCommand extends Command
 
         $headBranch = $this->findBranchByCommit($rootGit, $headCommit);
         [$headTag] = $rootGit->getReferences()->resolveTags($headCommit) + [null];
-        \assert(null === $headTag || $headTag instanceof Tag);
 
         $token = \trim((string)$input->getOption('token'));
         $tmpDir = \rtrim($input->getOption('tmp'), '/\\');
