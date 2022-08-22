@@ -22,7 +22,7 @@
     "php": "^7.4|^8.0",
     "ext-json": "*"
   },
-  "require-dev": {},
+  "require-dev": [],
   "autoload": {
     "psr-4": {
       "Warp\\Clock\\": "src"

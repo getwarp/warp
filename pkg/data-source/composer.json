@@ -20,11 +20,11 @@
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "getwarp/collection": "^3.0",
-    "getwarp/common": "^3.0",
-    "getwarp/criteria": "^3.0",
-    "getwarp/exception": "^3.0",
-    "getwarp/value-object": "^3.0",
+    "getwarp/collection": "^3.1",
+    "getwarp/common": "^3.1",
+    "getwarp/criteria": "^3.1",
+    "getwarp/exception": "^3.1",
+    "getwarp/value-object": "^3.1",
     "symfony/translation-contracts": "^2.3|^3.0",
     "webmozart/expression": "^1.0",
     "yiisoft/friendly-exception": "^1.0"

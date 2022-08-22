@@ -23,9 +23,9 @@
     "laminas/laminas-hydrator": "^4.0"
   },
   "require-dev": {
-    "getwarp/data-source": "^3.0",
-    "getwarp/type": "^3.0",
-    "getwarp/value-object": "^3.0",
+    "getwarp/data-source": "^3.1",
+    "getwarp/type": "^3.1",
+    "getwarp/value-object": "^3.1",
     "phpunit/phpunit": "^9.5",
     "roave/security-advisories": "dev-latest"
   },

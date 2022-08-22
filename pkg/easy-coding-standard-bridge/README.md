@@ -127,6 +127,6 @@ The MIT License (MIT). Please see [license file](LICENSE.md) for more informatio
 [link-monorepo]: https://github.com/getwarp/warp
 [link-issues]: https://github.com/getwarp/warp/issues
 [link-pulls]: https://github.com/getwarp/warp/pulls
-[link-contributing]: https://github.com/getwarp/warp/blob/3.0.x/CONTRIBUTING.md
+[link-contributing]: https://github.com/getwarp/warp/blob/3.1.x/CONTRIBUTING.md
 [link-code-of-conduct]: https://github.com/getwarp/.github/blob/main/CODE_OF_CONDUCT.md
 [link-ecs]: https://github.com/symplify/easy-coding-standard

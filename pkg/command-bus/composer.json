@@ -21,8 +21,8 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "getwarp/container": "^3.0",
-    "getwarp/exception": "^3.0",
+    "getwarp/container": "^3.1",
+    "getwarp/exception": "^3.1",
     "yiisoft/friendly-exception": "^1.0"
   },
   "require-dev": {

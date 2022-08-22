@@ -4,6 +4,10 @@ All notable changes to `getwarp/easy-coding-standard-bridge` will be documented 
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.1.0] - 2022-08-22
+
+Bump up version.
+
 ## [3.0.2] - 2022-06-12
 
 ### Misc

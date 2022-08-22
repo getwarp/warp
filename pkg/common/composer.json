@@ -22,13 +22,13 @@
   ],
   "require": {
     "php": "^7.4|^8.0",
-    "getwarp/exception": "^3.0",
+    "getwarp/exception": "^3.1",
     "symfony/polyfill-php80": "^1.22",
     "symfony/polyfill-php81": "^1.22"
   },
   "require-dev": {
-    "getwarp/command-bus": "^3.0",
-    "getwarp/container": "^3.0",
+    "getwarp/command-bus": "^3.1",
+    "getwarp/container": "^3.1",
     "phpunit/phpunit": "^9.5",
     "psr/log": "^1.1",
     "roave/security-advisories": "dev-latest",
