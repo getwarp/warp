@@ -77,7 +77,7 @@ interface CollectionInterface extends MutableInterface, FilterableInterface, \It
     public function matching(CriteriaInterface $criteria): self;
 
     /**
-     * @return array<array-key,V>
+     * @return list<V>
      */
     public function all(): array;
 

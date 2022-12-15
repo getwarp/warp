@@ -43,7 +43,7 @@ final class DefaultField implements FieldInterface
     /**
      * Parse extract path like in symfony property-access component.
      * @param string $field
-     * @return string[]
+     * @return list<string>
      */
     public static function parseElements(string $field): array
     {
