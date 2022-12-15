@@ -4,6 +4,12 @@ All notable changes to `getwarp/collection` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.1.1] - 2022-12-15
+
+### Misc
+
+- Fix phpstan notices
+
 ## [3.1.0] - 2022-08-22
 
 Bump up version.
