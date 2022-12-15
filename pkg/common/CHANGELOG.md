@@ -4,6 +4,12 @@ All notable changes to `getwarp/common` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.3] - 2022-12-15
+
+### Misc
+
+- Fix phpstan notices
+
 ## [3.0.0] - 2022-04-22
 
 ### Changed
