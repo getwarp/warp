@@ -17,13 +17,13 @@ final class YiiField implements FieldInterface
     private array $elements;
 
     /**
-     * @var array-key|array<array-key>|\Closure
+     * @var array-key|list<array-key>|\Closure
      */
     private $extractKey;
 
     /**
      * @param string $field
-     * @param array-key|array<array-key>|\Closure|null $extractKey
+     * @param array-key|list<array-key>|\Closure|null $extractKey
      */
     public function __construct(string $field, $extractKey = null)
     {

@@ -18,7 +18,7 @@ jobs:
   codestyle:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/getwarp/warp-php-devcontainer:8.1
+      image: ghcr.io/getwarp/warp-php-devcontainer:8.2
       options: --user 1001
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
         id: composer-cache
         uses: actions/cache@v2
         env:
-          COMPOSER_CACHE_KEY: composer-8.1-prefer-stable
+          COMPOSER_CACHE_KEY: composer-8.2-prefer-stable
         with:
           path: vendor
           key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
@@ -39,7 +39,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 5
-          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
       - name: Check coding standard
         run: vendor/bin/ecs check --no-progress-bar --no-interaction
@@ -47,7 +47,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/getwarp/warp-php-devcontainer:8.1
+      image: ghcr.io/getwarp/warp-php-devcontainer:8.2
       options: --user 1001
     steps:
       - name: Checkout
@@ -57,7 +57,7 @@ jobs:
         id: composer-cache
         uses: actions/cache@v2
         env:
-          COMPOSER_CACHE_KEY: composer-8.1-prefer-stable
+          COMPOSER_CACHE_KEY: composer-8.2-prefer-stable
         with:
           path: vendor
           key: ${{ env.COMPOSER_CACHE_KEY }}-${{ hashFiles('composer.json') }}
@@ -68,7 +68,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 5
-          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction --no-progress
+          command: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
 
       - name: PHPStan
         run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress --no-interaction
@@ -82,6 +82,7 @@ jobs:
           - '7.4'
           - '8.0'
           - '8.1'
+          - '8.2'
         stability:
           - prefer-lowest
           - prefer-stable
@@ -90,7 +91,9 @@ jobs:
       options: --user 1001
     steps:
       - id: excluded
-        if: format('{0}-{1}', matrix.php-version, matrix.stability) == '8.1-prefer-lowest'
+        if: |
+          format('{0}-{1}', matrix.php-version, matrix.stability) == '8.1-prefer-lowest' ||
+          format('{0}-{1}', matrix.php-version, matrix.stability) == '8.2-prefer-lowest'
         run: echo "Exclude incompatible matrix cases"
 
       - if: steps.excluded.conclusion == 'skipped'
@@ -114,7 +117,7 @@ jobs:
         with:
           timeout_minutes: 5
           max_attempts: 5
-          command: composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction --no-progress
+          command: composer update --${{ matrix.stability }} --prefer-dist --no-progress --no-interaction
 
       - if: steps.excluded.conclusion == 'skipped'
         name: PHPUnit
