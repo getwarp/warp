@@ -37,6 +37,7 @@ final class ArrayCacheIterator implements \Iterator, \Countable
 
         if ($iterator instanceof \ArrayIterator) {
             $array = $iterator->getArrayCopy();
+            // @phpstan-ignore-next-line
             $this->keys = \array_keys($array);
             $this->values = \array_values($array);
             $this->iterator = null;
@@ -124,7 +125,7 @@ final class ArrayCacheIterator implements \Iterator, \Countable
 
     public function count(): int
     {
-        if (null !== $this->keys && null === $this->iterator) {
+        if (null === $this->iterator) {
             return \count($this->keys);
         }
 

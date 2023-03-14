@@ -158,7 +158,7 @@ class DefinitionContainerTest extends TestCase
 
         $container->define(A::class);
 
-        self::assertCount(0, $container->getTagged('tag'));
+        self::assertCount(0, [...$container->getTagged('tag')]);
 
         $container->addServiceProvider(MyClassProvider::class);
 
