@@ -1,6 +1,21 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Generator expects key type OK of \\(int\\|string\\), int given\\.$#"
+			count: 1
+			path: pkg/collection/src/Operation/AbstractOperation.php
+
+		-
+			message: "#^Generator expects key type K of \\(int\\|string\\), int given\\.$#"
+			count: 1
+			path: pkg/collection/src/Operation/FirstOperation.php
+
+		-
+			message: "#^Generator expects key type K of \\(int\\|string\\), int given\\.$#"
+			count: 1
+			path: pkg/collection/src/Operation/LastOperation.php
+
+		-
 			message: "#^Method Warp\\\\CommandBus\\\\Mapping\\\\ClassName\\\\ReplacementClassNameMapping\\:\\:getClassName\\(\\) should return class\\-string but returns string\\.$#"
 			count: 1
 			path: pkg/command-bus/src/Mapping/ClassName/ReplacementClassNameMapping.php

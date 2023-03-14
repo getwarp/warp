@@ -19,6 +19,7 @@ abstract class AbstractAggregatedTypeFactory implements TypeFactoryInterface
 
     final public function __construct()
     {
+        // @phpstan-ignore-next-line
         if (!\is_subclass_of(static::TYPE_CLASS, AbstractAggregatedType::class)) {
             throw new \RuntimeException(\sprintf(
                 '%s::TYPE_CLASS should be class-string of %s.',

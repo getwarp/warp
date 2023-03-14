@@ -70,7 +70,7 @@ final class Definition implements DefinitionInterface
         }
 
         if (\is_object($concrete) && !\is_callable($concrete)) {
-            /** @phpstan-var T $concrete */
+            // @phpstan-ignore-next-line
             $this->resolved = new Some($concrete);
             $concrete = null;
             $shared = true;
