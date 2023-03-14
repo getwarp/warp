@@ -78,4 +78,16 @@ class DateValueStrategyTest extends TestCase
         self::assertEquals($system, $strategy->hydrate($system));
         self::assertSame($warp, $strategy->hydrate($warp));
     }
+
+    public function testTimezoneSupport(): void
+    {
+        $utc = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        $winnipeg = $utc->setTimezone(new \DateTimeZone('America/Winnipeg'));
+
+        $strategy = new DateValueStrategy('Y-m-d H:i:s.u', DateTimeImmutableValue::class, new \DateTimeZone('UTC'));
+
+        $hydrateResult = $strategy->hydrate($winnipeg);
+        self::assertEquals($utc, $hydrateResult);
+        self::assertSame($utc->format('Y-m-d H:i:s.u'), $strategy->extract($hydrateResult));
+    }
 }

@@ -6,10 +6,11 @@ namespace Warp\Bridge\LaminasHydrator\Strategy;
 
 use Laminas\Hydrator\Strategy\StrategyInterface;
 use Warp\Clock\DateTimeImmutableValue;
+use Warp\Clock\DateTimeValue;
 use Warp\Clock\DateTimeValueInterface;
 
 /**
- * @template T of DateTimeValueInterface
+ * @template T of DateTimeValue|DateTimeImmutableValue
  */
 final class DateValueStrategy implements StrategyInterface
 {
@@ -17,15 +18,19 @@ final class DateValueStrategy implements StrategyInterface
      * @var class-string<T>
      */
     private string $dateClass;
-
     private string $format;
+    private \DateTimeZone $timezone;
 
     /**
      * @param string $format
      * @param class-string<T> $dateClass
+     * @param \DateTimeZone|string|null $timezone
      */
-    public function __construct(string $format, string $dateClass = DateTimeImmutableValue::class)
-    {
+    public function __construct(
+        string $format,
+        string $dateClass = DateTimeImmutableValue::class,
+        $timezone = null
+    ) {
         if (!\is_subclass_of($dateClass, DateTimeValueInterface::class)) {
             throw new \InvalidArgumentException(\sprintf(
                 'Argument #2 ($dateClass) expected to be subclass of %s. Got: %s.',
@@ -36,6 +41,18 @@ final class DateValueStrategy implements StrategyInterface
 
         $this->dateClass = $dateClass;
         $this->format = $format;
+
+        if ($timezone instanceof \DateTimeZone) {
+            $this->timezone = $timezone;
+        } elseif (\is_string($timezone) || null === $timezone) {
+            $this->timezone = new \DateTimeZone($timezone ?: \date_default_timezone_get());
+        } else {
+            throw new \InvalidArgumentException(\sprintf(
+                'Argument #3 ($timezone) expected to be instance of %s, string or null. Got: %s.',
+                \DateTimeZone::class,
+                \get_debug_type($timezone),
+            ));
+        }
     }
 
     /**
@@ -54,7 +71,7 @@ final class DateValueStrategy implements StrategyInterface
             ));
         }
 
-        return $value->format($this->format);
+        return $this->makeDateValueObject($value)->format($this->format);
     }
 
     /**
@@ -65,24 +82,47 @@ final class DateValueStrategy implements StrategyInterface
     public function hydrate($value, ?array $data = null)
     {
         if ($value instanceof \DateTimeInterface) {
-            return $this->dateClass::from($value);
+            return $this->makeDateValueObject($value);
         }
 
-        if (!\is_string($value) && !\is_numeric($value)) {
-            throw new \InvalidArgumentException(\sprintf(
-                'Expected value to be a string or number. Got: %s.',
-                \get_debug_type($value),
-            ));
+        $date = \DateTimeImmutable::createFromFormat($this->format, (string)$value, $this->timezone);
+        // @phpstan-ignore-next-line
+        return $date ? $this->dateClass::from($date) : $this->makeDateValueObject($value);
+    }
+
+    /**
+     * @param \DateTimeInterface|string|int $value
+     * @return T
+     */
+    private function makeDateValueObject($value): DateTimeValueInterface
+    {
+        if ($value instanceof $this->dateClass && 0 === $this->timezone->getOffset($value)) {
+            return $value;
         }
 
-        $date = DateTimeImmutableValue::createFromFormat($this->format, (string)$value)
-            ?? DateTimeImmutableValue::createFromFormat(
-                $this->format,
-                DateTimeImmutableValue::from($value)->format($this->format)
+        if ($value instanceof \DateTimeInterface) {
+            $date = \DateTimeImmutable::createFromFormat(
+                'Y-m-d H:i:s.u',
+                $value->format('Y-m-d H:i:s.u'),
+                $value->getTimezone()
             );
+            \assert(false !== $date);
+            $date = $date->setTimezone($this->timezone);
 
-        \assert(null !== $date);
+            // @phpstan-ignore-next-line
+            return $this->dateClass::from($date);
+        }
 
-        return $this->dateClass::from($date);
+        $timestamp = \filter_var($value, \FILTER_VALIDATE_INT);
+        if ($timestamp) {
+            return new $this->dateClass('@' . $timestamp, $this->timezone);
+        }
+
+        $value = \trim((string)$value);
+        if ('' === $value) {
+            throw new \InvalidArgumentException('Unable to create date from empty string.');
+        }
+
+        return new $this->dateClass($value, $this->timezone);
     }
 }

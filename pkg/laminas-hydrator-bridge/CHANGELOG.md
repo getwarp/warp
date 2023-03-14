@@ -4,6 +4,12 @@ All notable changes to `getwarp/laminas-hydrator-bridge` will be documented in t
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.1.2] - 2023-02-14
+
+### Changed
+
+- `DateValueStrategy` now supports timezone
+
 ## [3.1.0] - 2022-08-22
 
 Bump up version.
