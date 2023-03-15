@@ -88,6 +88,6 @@ class DateValueStrategyTest extends TestCase
 
         $hydrateResult = $strategy->hydrate($winnipeg);
         self::assertEquals($utc, $hydrateResult);
-        self::assertSame($utc->format('Y-m-d H:i:s.u'), $strategy->extract($hydrateResult));
+        self::assertSame($utc->format('Y-m-d H:i:s.u'), $strategy->extract(DateTimeImmutableValue::from($winnipeg)));
     }
 }
