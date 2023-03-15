@@ -20,6 +20,7 @@ final class DateValueStrategy implements StrategyInterface
     private string $dateClass;
     private string $format;
     private \DateTimeZone $timezone;
+    private string $timezoneOffset;
 
     /**
      * @param string $format
@@ -53,6 +54,8 @@ final class DateValueStrategy implements StrategyInterface
                 \get_debug_type($timezone),
             ));
         }
+
+        $this->timezoneOffset = (new \DateTimeImmutable('now', $this->timezone))->format('Z');
     }
 
     /**
@@ -96,7 +99,7 @@ final class DateValueStrategy implements StrategyInterface
      */
     private function makeDateValueObject($value): DateTimeValueInterface
     {
-        if ($value instanceof $this->dateClass && 0 === $this->timezone->getOffset($value)) {
+        if ($value instanceof $this->dateClass && $this->timezoneOffset === $value->format('Z')) {
             return $value;
         }
 
