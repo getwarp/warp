@@ -22,11 +22,11 @@ jobs:
       options: --user 1001
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           COMPOSER_CACHE_KEY: composer-8.2-prefer-stable
         with:
@@ -51,11 +51,11 @@ jobs:
       options: --user 1001
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           COMPOSER_CACHE_KEY: composer-8.2-prefer-stable
         with:
@@ -98,12 +98,12 @@ jobs:
 
       - if: steps.excluded.conclusion == 'skipped'
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - if: steps.excluded.conclusion == 'skipped'
         name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           COMPOSER_CACHE_KEY: composer-${{ matrix.php-version }}-${{ matrix.stability }}
         with:
