@@ -24,6 +24,7 @@
     "nikic/php-parser": "^4.10",
     "php-http/discovery": "^1.11",
     "phpoption/phpoption": "^1.7",
+    "psr/clock": "^1.0",
     "psr/container": "^1.1|^2.0",
     "psr/http-message": "^1.0",
     "symfony/console": "^5.2|^6.0",
