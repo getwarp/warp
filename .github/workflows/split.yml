@@ -17,22 +17,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Split Monorepo
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
           persist-credentials: 'false'
-      - uses: frankdejonge/use-github-token@1.0.1
+      - uses: frankdejonge/use-github-token@1.0.2
         with:
           authentication: 'hustlahusky:${{ secrets.SPLIT_ACCESS_TOKEN }}'
           user_name: 'Constantine Karnaukhov'
           user_email: 'genteelknight@gmail.com'
       - name: Cache splitsh-lite
         id: splitsh-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: './.splitsh'
           key: '${{ runner.os }}-splitsh'
-      - uses: frankdejonge/use-subsplit-publish@1.0.0-beta.3
+      - uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
         with:
           source-branch: '3.1.x'
           config-path: './monorepo.json'
